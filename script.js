@@ -215,10 +215,13 @@ class WindowManager {
         $('#windows-container').append(winHTML);
         const $win = $(`#win-${id}`);
 
-        // Make interactive
-        $win.draggable({ handle: '.window-header', containment: '#desktop', start: () => this.setActiveWindow(id) })
-            .resizable({ minHeight: 200, minWidth: 250 })
-            .on('mousedown', () => this.setActiveWindow(id));
+        // Make interactive (only on desktop)
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) {
+            $win.draggable({ handle: '.window-header', containment: '#desktop', start: () => this.setActiveWindow(id) })
+                .resizable({ minHeight: 200, minWidth: 250 });
+        }
+        $win.on('mousedown', () => this.setActiveWindow(id));
 
         // Window button events
         $win.find('.close-btn').on('click', (e) => { e.stopPropagation(); this.closeWindow(id); });
@@ -1007,10 +1010,38 @@ function initCanvas() {
         }
     }
 
+    // Mouse events
     canvas.addEventListener('mousedown', startPosition);
     canvas.addEventListener('mouseup', finishedPosition);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseleave', finishedPosition);
+
+    // Touch events for mobile
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    });
+
+    canvas.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        const mouseEvent = new MouseEvent('mouseup', {});
+        canvas.dispatchEvent(mouseEvent);
+    });
+
+    canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousemove', {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    });
 }
 
 window.resizeCanvas = function() {
@@ -1277,9 +1308,13 @@ window.openPreview = function(fileName, fileSrc, fileType) {
     $('#windows-container').append(winHTML);
     const $win = $(`#win-${previewId}`);
 
-    $win.draggable({ handle: '.window-header', containment: '#desktop', start: () => wm.setActiveWindow(previewId) })
-        .resizable({ minHeight: 300, minWidth: 400 })
-        .on('mousedown', () => wm.setActiveWindow(previewId));
+    // Make interactive (only on desktop)
+    const isMobile = window.innerWidth <= 768;
+    if (!isMobile) {
+        $win.draggable({ handle: '.window-header', containment: '#desktop', start: () => wm.setActiveWindow(previewId) })
+            .resizable({ minHeight: 300, minWidth: 400 });
+    }
+    $win.on('mousedown', () => wm.setActiveWindow(previewId));
 
     $win.find('.close-btn').on('click', (e) => {
         e.stopPropagation();

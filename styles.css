@@ -287,6 +287,469 @@ body, html {
 .icon-settings { background: linear-gradient(180deg, #8e8e93 0%, #636366 100%); position: relative; }
 .icon-settings::after { content: '\f013'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #ddd; font-size: 35px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE & TABLETS
+   ======================================== */
+
+/* Tablets (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+    /* Reduce menu bar items */
+    .menu-left .menu-item:nth-child(n+3):nth-child(-n+6) {
+        display: none;
+    }
+
+    /* Smaller windows by default */
+    .window {
+        min-width: 250px;
+        min-height: 180px;
+    }
+
+    /* Adjust dock item sizes */
+    .dock-item {
+        width: 50px;
+        height: 50px;
+    }
+
+    #dock {
+        height: 65px;
+        padding: 4px 8px;
+        gap: 6px;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    /* Menu Bar adjustments */
+    #menubar {
+        height: 40px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .menu-left .menu-item:nth-child(n+3) {
+        display: none;
+    }
+
+    .menu-right .menu-item:first-child {
+        display: none; /* Hide battery on mobile */
+    }
+
+    .apple-icon {
+        font-size: 18px;
+    }
+
+    /* Dock - vertical layout on mobile */
+    #dock-container {
+        bottom: 0;
+        left: 0;
+        right: auto;
+        width: auto;
+        height: 100%;
+        justify-content: flex-end;
+        padding: 10px 5px;
+    }
+
+    #dock {
+        flex-direction: column;
+        height: auto;
+        width: 70px;
+        max-height: calc(100vh - 120px);
+        padding: 8px 5px;
+        border-radius: 15px;
+        overflow-y: auto;
+        gap: 8px;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    .dock-item {
+        width: 55px;
+        height: 55px;
+        margin: 0;
+    }
+
+    .dock-item:hover {
+        transform: scale(1.15);
+        margin: 0;
+    }
+
+    .dock-dot {
+        bottom: auto;
+        right: -5px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Windows - full screen by default on mobile */
+    .window {
+        width: 100% !important;
+        height: calc(100vh - 50px) !important;
+        top: 40px !important;
+        left: 0 !important;
+        border-radius: 0;
+        min-width: 100%;
+        min-height: calc(100vh - 50px);
+    }
+
+    .window-header {
+        height: 40px;
+        touch-action: none;
+    }
+
+    .traffic-lights {
+        margin-left: 10px;
+        gap: 10px;
+    }
+
+    .t-btn {
+        width: 14px;
+        height: 14px;
+        font-size: 9px;
+    }
+
+    .window-title {
+        font-size: 14px;
+    }
+
+    /* Disable dragging and resizing on mobile */
+    .ui-draggable {
+        cursor: default !important;
+    }
+
+    .ui-resizable-handle {
+        display: none !important;
+    }
+
+    /* App-specific mobile adjustments */
+    .portfolio-app,
+    .project-app {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+        font-size: 50px;
+    }
+
+    .profile-info h1 {
+        font-size: 20px;
+    }
+
+    .profile-info h2 {
+        font-size: 13px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .project-app h2 {
+        font-size: 20px;
+    }
+
+    .project-app h3 {
+        font-size: 15px;
+    }
+
+    /* Terminal mobile adjustments */
+    .terminal-app {
+        font-size: 11px;
+        padding: 8px;
+    }
+
+    #term-input {
+        font-size: 11px;
+    }
+
+    /* Calculator mobile adjustments */
+    .calc-app {
+        padding: 8px;
+    }
+
+    #calc-display {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .calc-grid {
+        gap: 6px;
+    }
+
+    .calc-btn {
+        font-size: 16px;
+        min-height: 50px;
+    }
+
+    /* Finder mobile adjustments */
+    .finder-sidebar {
+        width: 100px;
+        padding: 8px;
+    }
+
+    .sidebar-item {
+        font-size: 11px;
+        padding: 6px 8px;
+        gap: 6px;
+    }
+
+    .sidebar-item i {
+        font-size: 12px;
+    }
+
+    .finder-grid {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 12px;
+    }
+
+    .file-icon {
+        font-size: 35px;
+    }
+
+    .file-name {
+        font-size: 11px;
+    }
+
+    /* TextEdit mobile adjustments */
+    .text-toolbar {
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 8px;
+    }
+
+    .text-tool {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+
+    #text-area {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    /* Paint/Sketch mobile adjustments */
+    .paint-toolbar {
+        flex-wrap: wrap;
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .paint-toolbar label {
+        font-size: 10px;
+    }
+
+    #paint-canvas {
+        cursor: crosshair;
+        touch-action: none;
+    }
+
+    /* Safari mobile adjustments */
+    .safari-bar {
+        padding: 6px;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .url-bar {
+        font-size: 11px;
+        padding: 6px 8px;
+    }
+
+    /* Settings mobile adjustments */
+    .settings-app {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .wall-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Context menu mobile adjustments */
+    #context-menu,
+    .finder-context-menu {
+        width: 200px;
+        font-size: 14px;
+    }
+
+    .ctx-item {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    /* Boot screen mobile adjustments */
+    .apple-logo {
+        font-size: 60px;
+        margin-bottom: 30px;
+    }
+
+    .loading-bar {
+        width: 150px;
+    }
+}
+
+/* Small Mobile Devices (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    #menubar {
+        height: 35px;
+        font-size: 11px;
+        padding: 0 8px;
+    }
+
+    #clock {
+        font-size: 10px;
+    }
+
+    #dock {
+        width: 60px;
+    }
+
+    .dock-item {
+        width: 48px;
+        height: 48px;
+    }
+
+    .portfolio-app,
+    .project-app {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    .profile-pic {
+        width: 80px;
+        height: 80px;
+        font-size: 40px;
+    }
+
+    .profile-info h1 {
+        font-size: 18px;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .finder-sidebar {
+        width: 80px;
+        padding: 5px;
+    }
+
+    .sidebar-item {
+        font-size: 10px;
+        padding: 5px;
+    }
+
+    .sidebar-item span {
+        display: none; /* Hide text labels on very small screens */
+    }
+
+    .finder-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 10px;
+    }
+
+    .file-icon {
+        font-size: 30px;
+    }
+
+    .file-name {
+        font-size: 10px;
+    }
+
+    .calc-btn {
+        font-size: 14px;
+        min-height: 45px;
+    }
+
+    #calc-display {
+        font-size: 24px;
+    }
+
+    .wall-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Landscape orientation for mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    #dock-container {
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        height: auto;
+    }
+
+    #dock {
+        flex-direction: row;
+        width: auto;
+        height: 60px;
+        max-height: 60px;
+        padding: 5px 10px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .dock-item {
+        width: 48px;
+        height: 48px;
+    }
+
+    .dock-dot {
+        bottom: -5px;
+        right: auto;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .window {
+        height: calc(100vh - 45px) !important;
+        min-height: calc(100vh - 45px);
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Increase touch target sizes */
+    .menu-item {
+        padding: 5px 10px;
+        min-height: 30px;
+    }
+
+    .dock-item {
+        min-width: 55px;
+        min-height: 55px;
+    }
+
+    .t-btn {
+        min-width: 16px;
+        min-height: 16px;
+    }
+
+    .ctx-item,
+    .sidebar-item,
+    .file-item {
+        min-height: 40px;
+    }
+
+    /* Disable hover effects on touch devices */
+    .dock-item:hover {
+        transform: scale(1.05) translateY(-5px);
+    }
+
+    .menu-item:hover {
+        background: none;
+    }
+}
+
 /* Preview Window */
 .preview-app {
     display: flex;
