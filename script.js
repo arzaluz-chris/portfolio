@@ -235,9 +235,6 @@ class WindowManager {
         $('#windows-container').append(winHTML);
         const $win = $(`#win-${id}`);
 
-        // Make interactive (desktop and mobile)
-        const isMobile = window.innerWidth <= 768;
-
         // Enable dragging on both desktop and mobile
         $win.draggable({
             handle: '.window-header',
@@ -1424,7 +1421,7 @@ window.openPreview = function(fileName, fileSrc, fileType) {
 };
 
 // Mobile Touch Enhancements
-$(document).ready(() => {
+function setupMobileTouchEnhancements() {
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
@@ -1464,13 +1461,15 @@ $(document).ready(() => {
             lastTouchEnd = now;
         }, false);
     }
-});
+}
 
 // Boot Sequence
 $(window).on('load', () => {
     $('.loading-progress').css('width', '100%');
     setTimeout(() => {
         $('#boot-screen').fadeOut(500, function(){ $(this).remove(); });
+        // Setup mobile touch enhancements after boot
+        setupMobileTouchEnhancements();
         // Auto abrir 'Sobre Mí' (que usa el id 'aboutme')
         setTimeout(() => wm.openApp('aboutme'), 600);
     }, 3200); // 3.2 segundos de arranque
