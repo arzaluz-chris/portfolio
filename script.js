@@ -186,17 +186,37 @@ class WindowManager {
     createWindow(id, config) {
         this.windows[id] = config;
 
-        // Default dimensions based on app type
-        let w = 640, h = 440; // Tamaño para 'Sobre Mí'
-        if(id === 'calculator') { w = 250; h = 350; }
-        if(id === 'terminal') { w = 500; h = 300; }
-        if(id === 'safari') { w = 800; h = 600; }
-        if(config.isProject) { w = 600; h = 500; } // Tamaño para ventanas de proyecto
+        const isMobile = window.innerWidth <= 768;
 
+        // Default dimensions based on app type and device
+        let w, h, top, left;
 
-        // Random position placement
-        const top = 60 + (Object.keys(this.windows).length * 20);
-        const left = 100 + (Object.keys(this.windows).length * 20);
+        if (isMobile) {
+            // Mobile: responsive sizes
+            w = Math.min(window.innerWidth * 0.9, 450);
+            h = Math.min(window.innerHeight * 0.7, 600);
+            // Center on screen
+            top = (window.innerHeight - h) / 2;
+            left = (window.innerWidth - w) / 2;
+
+            // Adjust specific apps for mobile
+            if(id === 'calculator') {
+                w = 300;
+                h = 450;
+            }
+        } else {
+            // Desktop: fixed sizes
+            w = 640;
+            h = 440;
+            if(id === 'calculator') { w = 250; h = 350; }
+            if(id === 'terminal') { w = 500; h = 300; }
+            if(id === 'safari') { w = 800; h = 600; }
+            if(config.isProject) { w = 600; h = 500; }
+
+            // Random position placement for desktop
+            top = 60 + (Object.keys(this.windows).length * 20);
+            left = 100 + (Object.keys(this.windows).length * 20);
+        }
 
         const winHTML = `
             <div class="window opening" id="win-${id}" style="width:${w}px; height:${h}px; top:${top}px; left:${left}px; z-index:${++this.zIndexCounter}">
@@ -215,13 +235,34 @@ class WindowManager {
         $('#windows-container').append(winHTML);
         const $win = $(`#win-${id}`);
 
-        // Make interactive (only on desktop)
+        // Make interactive (desktop and mobile)
         const isMobile = window.innerWidth <= 768;
-        if (!isMobile) {
-            $win.draggable({ handle: '.window-header', containment: '#desktop', start: () => this.setActiveWindow(id) })
-                .resizable({ minHeight: 200, minWidth: 250 });
+
+        // Enable dragging on both desktop and mobile
+        $win.draggable({
+            handle: '.window-header',
+            containment: '#desktop',
+            start: () => this.setActiveWindow(id),
+            // Add touch support for mobile
+            cancel: '.t-btn'
+        });
+
+        // Enable resizing with adjusted settings for mobile
+        if (isMobile) {
+            $win.resizable({
+                minHeight: 300,
+                minWidth: 280,
+                maxHeight: window.innerHeight - 50,
+                maxWidth: window.innerWidth - 20
+            });
+        } else {
+            $win.resizable({
+                minHeight: 200,
+                minWidth: 250
+            });
         }
-        $win.on('mousedown', () => this.setActiveWindow(id));
+
+        $win.on('mousedown touchstart', () => this.setActiveWindow(id));
 
         // Window button events
         $win.find('.close-btn').on('click', (e) => { e.stopPropagation(); this.closeWindow(id); });
@@ -260,11 +301,41 @@ class WindowManager {
 
     maximizeWindow(id) {
         const $win = $(`#win-${id}`);
+        const isMobile = window.innerWidth <= 768;
+
         if ($win.hasClass('maximized')) {
-            $win.css({ top: $win.data('top'), left: $win.data('left'), width: $win.data('width'), height: $win.data('height') }).removeClass('maximized');
+            // Restore to original size
+            $win.css({
+                top: $win.data('top'),
+                left: $win.data('left'),
+                width: $win.data('width'),
+                height: $win.data('height')
+            }).removeClass('maximized');
         } else {
-            $win.data({ top: $win.css('top'), left: $win.css('left'), width: $win.css('width'), height: $win.css('height') });
-            $win.css({ top: '30px', left: '0', width: '100%', height: 'calc(100vh - 110px)' }).addClass('maximized');
+            // Save current dimensions
+            $win.data({
+                top: $win.css('top'),
+                left: $win.css('left'),
+                width: $win.css('width'),
+                height: $win.css('height')
+            });
+
+            // Maximize with appropriate dimensions for device
+            if (isMobile) {
+                $win.css({
+                    top: '40px',
+                    left: '5px',
+                    width: 'calc(100vw - 10px)',
+                    height: 'calc(100vh - 130px)'
+                }).addClass('maximized');
+            } else {
+                $win.css({
+                    top: '30px',
+                    left: '0',
+                    width: '100%',
+                    height: 'calc(100vh - 110px)'
+                }).addClass('maximized');
+            }
         }
     }
 
@@ -1351,6 +1422,49 @@ window.openPreview = function(fileName, fileSrc, fileType) {
         `);
     }
 };
+
+// Mobile Touch Enhancements
+$(document).ready(() => {
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        // Enable smooth scrolling for dock
+        const dock = document.getElementById('dock');
+        if (dock) {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            dock.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - dock.offsetLeft;
+                scrollLeft = dock.scrollLeft;
+            });
+
+            dock.addEventListener('touchend', () => {
+                isDown = false;
+            });
+
+            dock.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.touches[0].pageX - dock.offsetLeft;
+                const walk = (x - startX) * 2;
+                dock.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        // Prevent zoom on double tap for better UX
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    }
+});
 
 // Boot Sequence
 $(window).on('load', () => {

@@ -338,86 +338,126 @@ body, html {
         font-size: 18px;
     }
 
-    /* Dock - vertical layout on mobile */
+    /* Dock - horizontal layout at bottom on mobile */
     #dock-container {
-        bottom: 0;
-        left: 0;
-        right: auto;
-        width: auto;
-        height: 100%;
-        justify-content: flex-end;
-        padding: 10px 5px;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 20px);
+        max-width: 600px;
+        height: auto;
+        justify-content: center;
     }
 
     #dock {
-        flex-direction: column;
-        height: auto;
-        width: 70px;
-        max-height: calc(100vh - 120px);
-        padding: 8px 5px;
-        border-radius: 15px;
-        overflow-y: auto;
+        flex-direction: row;
+        height: 70px;
+        width: 100%;
+        max-width: 100%;
+        padding: 5px 10px;
+        border-radius: 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
         gap: 8px;
-        align-items: center;
-        margin-left: 5px;
+        align-items: flex-end;
+        /* Enable smooth horizontal scrolling */
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Hide scrollbar but keep functionality */
+    #dock::-webkit-scrollbar {
+        display: none;
+    }
+
+    #dock {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
     .dock-item {
         width: 55px;
         height: 55px;
         margin: 0;
+        flex-shrink: 0; /* Prevent items from shrinking */
     }
 
     .dock-item:hover {
-        transform: scale(1.15);
+        transform: scale(1.15) translateY(-5px);
         margin: 0;
     }
 
+    /* Keep dot indicator at bottom like desktop */
     .dock-dot {
-        bottom: auto;
-        right: -5px;
-        top: 50%;
-        transform: translateY(-50%);
+        bottom: -8px;
+        right: auto;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
-    /* Windows - full screen by default on mobile */
+    /* Windows - smaller, draggable windows on mobile */
     .window {
-        width: 100% !important;
-        height: calc(100vh - 50px) !important;
-        top: 40px !important;
-        left: 0 !important;
-        border-radius: 0;
-        min-width: 100%;
-        min-height: calc(100vh - 50px);
+        /* Remove fixed positioning - allow JS to control */
+        min-width: 280px;
+        min-height: 300px;
+        border-radius: 12px;
     }
 
     .window-header {
         height: 40px;
+        cursor: grab;
         touch-action: none;
+    }
+
+    .window-header:active {
+        cursor: grabbing;
     }
 
     .traffic-lights {
         margin-left: 10px;
-        gap: 10px;
+        gap: 12px;
     }
 
     .t-btn {
-        width: 14px;
-        height: 14px;
-        font-size: 9px;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        /* Increase touch target area */
+        padding: 4px;
+        margin: -4px;
+    }
+
+    /* Always show icons on mobile for better UX */
+    .traffic-lights .t-btn {
+        color: rgba(0,0,0,0.6) !important;
     }
 
     .window-title {
         font-size: 14px;
     }
 
-    /* Disable dragging and resizing on mobile */
+    /* Enable dragging and resizing on mobile */
     .ui-draggable {
-        cursor: default !important;
+        cursor: grab !important;
+    }
+
+    .ui-draggable-dragging {
+        cursor: grabbing !important;
     }
 
     .ui-resizable-handle {
-        display: none !important;
+        display: block !important;
+    }
+
+    .ui-resizable-se {
+        width: 25px;
+        height: 25px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 0 0 12px 0;
+        cursor: nwse-resize;
+        /* Add visual indicator */
+        background-image: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0.3) 60%, transparent 60%);
     }
 
     /* App-specific mobile adjustments */
