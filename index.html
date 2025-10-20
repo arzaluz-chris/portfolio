@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Christian Arzaluz - iOS Developer</title>
+  <meta name="description" content="Portfolio interactivo de Christian Arzaluz, desarrollador iOS especializado en Swift, SwiftUI y aplicaciones móviles innovadoras">
+  <meta name="author" content="Christian Arzaluz">
+
+  <!-- External Dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="boot-screen">
+        <i class="fab fa-apple apple-logo"></i>
+        <div class="loading-bar"><div class="loading-progress"></div></div>
+    </div>
+
+    <div id="desktop">
+
+        <div id="menubar">
+            <div class="menu-left">
+                <div class="menu-item"><i class="fab fa-apple apple-icon"></i></div>
+                <div class="menu-item" id="active-app-name">Finder</div>
+                <div class="menu-item">Archivo</div>
+                <div class="menu-item">Editar</div>
+                <div class="menu-item">Ver</div>
+                <div class="menu-item">Ventana</div>
+            </div>
+            <div class="menu-right">
+                <div class="menu-item"><i class="fas fa-battery-three-quarters"></i> <span id="battery-level">100%</span></div>
+                <div class="menu-item"><i class="fas fa-wifi"></i></div>
+                <div class="menu-item" id="clock">Cargando...</div>
+            </div>
+        </div>
+
+        <div id="windows-container"></div>
+
+        <div id="context-menu">
+            <div class="ctx-item" onclick="wm.openApp('finder')">Sobre Mí</div>
+            <div class="ctx-hr"></div>
+            <div class="ctx-item" onclick="wm.openApp('terminal')">Abrir Terminal</div>
+        </div>
+
+        <div id="dock-container">
+            <div id="dock">
+                <!-- Apps will be loaded dynamically via script.js -->
+            </div>
+        </div>
+    </div>
+
+<!-- jQuery and jQuery UI -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>
