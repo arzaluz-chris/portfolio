@@ -194,8 +194,8 @@ class WindowManager {
         if (isMobile) {
             // Mobile: responsive sizes
             w = Math.min(window.innerWidth * 0.9, 450);
-            h = Math.min(window.innerHeight * 0.7, 600);
-            // Center on screen
+            h = Math.min(window.innerHeight * 0.75, 650);
+            // Center on screen (no menu bar on mobile)
             top = (window.innerHeight - h) / 2;
             left = (window.innerWidth - w) / 2;
 
@@ -320,10 +320,10 @@ class WindowManager {
             // Maximize with appropriate dimensions for device
             if (isMobile) {
                 $win.css({
-                    top: '40px',
+                    top: '5px',
                     left: '5px',
                     width: 'calc(100vw - 10px)',
-                    height: 'calc(100vh - 130px)'
+                    height: 'calc(100vh - 100px)'
                 }).addClass('maximized');
             } else {
                 $win.css({

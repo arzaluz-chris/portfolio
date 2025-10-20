@@ -319,23 +319,9 @@ body, html {
 
 /* Mobile Devices (max-width: 768px) */
 @media screen and (max-width: 768px) {
-    /* Menu Bar adjustments */
+    /* Hide menu bar on mobile */
     #menubar {
-        height: 40px;
-        padding: 0 10px;
-        font-size: 12px;
-    }
-
-    .menu-left .menu-item:nth-child(n+3) {
         display: none;
-    }
-
-    .menu-right .menu-item:first-child {
-        display: none; /* Hide battery on mobile */
-    }
-
-    .apple-icon {
-        font-size: 18px;
     }
 
     /* Dock - horizontal layout at bottom on mobile */
@@ -354,12 +340,12 @@ body, html {
         height: 70px;
         width: 100%;
         max-width: 100%;
-        padding: 5px 10px;
+        padding: 10px;
         border-radius: 20px;
         overflow-x: auto;
         overflow-y: hidden;
         gap: 8px;
-        align-items: flex-end;
+        align-items: center; /* Center items vertically */
         /* Enable smooth horizontal scrolling */
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
@@ -380,6 +366,9 @@ body, html {
         height: 55px;
         margin: 0;
         flex-shrink: 0; /* Prevent items from shrinking */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .dock-item:hover {
@@ -389,7 +378,7 @@ body, html {
 
     /* Keep dot indicator at bottom like desktop */
     .dock-dot {
-        bottom: -8px;
+        bottom: -12px;
         right: auto;
         top: auto;
         left: 50%;
