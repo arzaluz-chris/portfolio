@@ -1355,9 +1355,23 @@ window.openPreview = function(fileName, fileSrc, fileType) {
         name: fileName
     };
 
-    let w = 600, h = 500;
-    const top = 80 + (Object.keys(wm.windows).length * 20);
-    const left = 120 + (Object.keys(wm.windows).length * 20);
+    const isMobile = window.innerWidth <= 768;
+    let w, h, top, left;
+
+    if (isMobile) {
+        // Mobile: responsive sizes
+        w = Math.min(window.innerWidth * 0.9, 450);
+        h = Math.min(window.innerHeight * 0.75, 650);
+        // Center on screen
+        top = (window.innerHeight - h) / 2;
+        left = (window.innerWidth - w) / 2;
+    } else {
+        // Desktop: fixed sizes
+        w = 600;
+        h = 500;
+        top = 80 + (Object.keys(wm.windows).length * 20);
+        left = 120 + (Object.keys(wm.windows).length * 20);
+    }
 
     const winHTML = `
         <div class="window opening" id="win-${previewId}" style="width:${w}px; height:${h}px; top:${top}px; left:${left}px; z-index:${++wm.zIndexCounter}">
@@ -1376,13 +1390,30 @@ window.openPreview = function(fileName, fileSrc, fileType) {
     $('#windows-container').append(winHTML);
     const $win = $(`#win-${previewId}`);
 
-    // Make interactive (only on desktop)
-    const isMobile = window.innerWidth <= 768;
-    if (!isMobile) {
-        $win.draggable({ handle: '.window-header', containment: '#desktop', start: () => wm.setActiveWindow(previewId) })
-            .resizable({ minHeight: 300, minWidth: 400 });
+    // Enable dragging on both desktop and mobile
+    $win.draggable({
+        handle: '.window-header',
+        containment: '#desktop',
+        start: () => wm.setActiveWindow(previewId),
+        cancel: '.t-btn'
+    });
+
+    // Enable resizing with adjusted settings for mobile
+    if (isMobile) {
+        $win.resizable({
+            minHeight: 300,
+            minWidth: 280,
+            maxHeight: window.innerHeight - 50,
+            maxWidth: window.innerWidth - 20
+        });
+    } else {
+        $win.resizable({
+            minHeight: 300,
+            minWidth: 400
+        });
     }
-    $win.on('mousedown', () => wm.setActiveWindow(previewId));
+
+    $win.on('mousedown touchstart', () => wm.setActiveWindow(previewId));
 
     $win.find('.close-btn').on('click', (e) => {
         e.stopPropagation();
@@ -1396,7 +1427,13 @@ window.openPreview = function(fileName, fileSrc, fileType) {
             $win.css({ top: $win.data('top'), left: $win.data('left'), width: $win.data('width'), height: $win.data('height') }).removeClass('maximized');
         } else {
             $win.data({ top: $win.css('top'), left: $win.css('left'), width: $win.css('width'), height: $win.css('height') });
-            $win.css({ top: '30px', left: '0', width: '100%', height: 'calc(100vh - 110px)' }).addClass('maximized');
+
+            // Maximize with appropriate dimensions for device
+            if (isMobile) {
+                $win.css({ top: '5px', left: '5px', width: 'calc(100vw - 10px)', height: 'calc(100vh - 100px)' }).addClass('maximized');
+            } else {
+                $win.css({ top: '30px', left: '0', width: '100%', height: 'calc(100vh - 110px)' }).addClass('maximized');
+            }
         }
     });
 
