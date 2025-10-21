@@ -29,10 +29,10 @@
             <div class="menu-left">
                 <div class="menu-item"><i class="fab fa-apple apple-icon"></i></div>
                 <div class="menu-item" id="active-app-name">Finder</div>
-                <div class="menu-item">Archivo</div>
-                <div class="menu-item">Editar</div>
-                <div class="menu-item">Ver</div>
-                <div class="menu-item">Ventana</div>
+                <div class="menu-item" data-i18n="menuFile">Archivo</div>
+                <div class="menu-item" data-i18n="menuEdit">Editar</div>
+                <div class="menu-item" data-i18n="menuView">Ver</div>
+                <div class="menu-item" data-i18n="menuWindow">Ventana</div>
             </div>
             <div class="menu-right">
                 <div class="menu-item"><i class="fas fa-battery-three-quarters"></i> <span id="battery-level">100%</span></div>
@@ -44,9 +44,9 @@
         <div id="windows-container"></div>
 
         <div id="context-menu">
-            <div class="ctx-item" onclick="wm.openApp('finder')">Sobre Mí</div>
+            <div class="ctx-item" onclick="wm.openApp('finder')" data-i18n="aboutMe">Sobre Mí</div>
             <div class="ctx-hr"></div>
-            <div class="ctx-item" onclick="wm.openApp('terminal')">Abrir Terminal</div>
+            <div class="ctx-item" onclick="wm.openApp('terminal')" data-i18n="openTerminal">Abrir Terminal</div>
         </div>
 
         <div id="dock-container">

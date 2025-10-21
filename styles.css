@@ -842,3 +842,4 @@ body, html {
 .wall-thumb { height: 70px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: 0.2s;}
 .wall-thumb:hover { transform: scale(1.02); }
 .wall-thumb.selected { border-color: var(--accent); }
+.lang-btn.active { background: var(--accent) !important; color: white !important; }

@@ -6,6 +6,271 @@
 
 // --- System Config & State ---
 
+// Internationalization (i18n) - Language Support
+const translations = {
+    es: {
+        // Menu Bar
+        menuFile: 'Archivo',
+        menuEdit: 'Editar',
+        menuView: 'Ver',
+        menuWindow: 'Ventana',
+
+        // Context Menu
+        aboutMe: 'Sobre Mí',
+        openTerminal: 'Abrir Terminal',
+
+        // Dock Apps
+        finder: 'Finder',
+        aboutMeApp: 'Sobre Mí',
+        safari: 'Safari',
+        terminal: 'Terminal',
+        textEdit: 'TextEdit',
+        sketch: 'Sketch',
+        calculator: 'Calculator',
+        settings: 'Settings',
+        mail: 'Mail',
+        bin: 'Bin',
+
+        // Portfolio
+        portfolioTitle: 'iOS Developer | Computer Science Student | General Physician',
+        portfolioIntro: '¡Hola! Soy un desarrollador iOS apasionado por crear aplicaciones móviles que mejoran la vida de las personas. Actualmente estudio Ingeniería en Sistemas Computacionales en México y me especializo en desarrollo móvil con Swift y SwiftUI.',
+        portfolioIntro2: 'Como médico general, combino mi experiencia clínica con el desarrollo de software para crear aplicaciones que resuelven problemas reales en salud y bienestar. Me encanta construir apps minimalistas, funcionales y con excelente experiencia de usuario.',
+        languagesFrameworks: 'Lenguajes & Frameworks',
+        architecturePatterns: 'Arquitectura & Patrones',
+
+        // Finder
+        favorites: 'Favoritos',
+        desktop: 'Desktop',
+        documents: 'Documents',
+        downloads: 'Downloads',
+        newFolder: 'Nueva Carpeta',
+        newFile: 'Nuevo Archivo',
+        open: 'Abrir',
+        rename: 'Renombrar',
+        duplicate: 'Duplicar',
+        moveToTrash: 'Mover a Papelera',
+
+        // Terminal
+        terminalLastLogin: 'Last login',
+        terminalVersion: 'macOS Portfolio Edition [Version 1.0]',
+        availableCommands: 'Comandos disponibles: help, clear, ls, whoami, date, echo, linkedin, mail',
+        commandNotFound: 'zsh: command not found',
+        openingLinkedIn: 'Abriendo LinkedIn...',
+
+        // TextEdit
+        save: 'Guardar',
+        new: 'Nuevo',
+        createNewDoc: '¿Crear nuevo documento? Los cambios no guardados se perderán.',
+        startTyping: 'Comienza a escribir...',
+
+        // Paint
+        brush: 'Pincel',
+        eraser: 'Borrador',
+        rectangle: 'Rectángulo',
+        circle: 'Círculo',
+        line: 'Línea',
+        clean: 'Limpiar',
+
+        // Settings
+        wallpapers: 'Fondos de Pantalla',
+        appearance: 'Apariencia',
+        light: 'Claro',
+        dark: 'Oscuro',
+        auto: 'Auto',
+        systemInfo: 'Información del Sistema',
+        macOSVersion: 'Versión macOS',
+        browser: 'Navegador',
+        resolution: 'Resolución',
+        memory: 'Memoria',
+        unknown: 'Desconocida',
+        language: 'Idioma',
+
+        // Trash
+        trashEmpty: 'La Papelera está Vacía',
+        trashEmptyDesc: 'Los archivos eliminados aparecerán aquí',
+        itemsInTrash: 'elemento(s) en la Papelera',
+        emptyTrash: 'Vaciar Papelera',
+        restore: 'Restaurar',
+        deletePermanently: 'Eliminar Permanentemente',
+        confirmEmptyTrash: '¿Vaciar la Papelera? Esto eliminará permanentemente todos los elementos.',
+        confirmDelete: '¿Eliminar permanentemente "{item}"? Esta acción no se puede deshacer.',
+        inTrash: '"{item}" está en la Papelera. Restáuralo para abrirlo.',
+
+        // Mail
+        contact: 'Contacto',
+        sendEmail: 'Enviar Correo',
+
+        // Projects
+        mainFeatures: 'Características Principales',
+        techStack: 'Stack Tecnológico',
+        viewOnGitHub: 'Ver en GitHub',
+
+        // Alerts
+        folderExists: 'Ya existe una carpeta con este nombre.',
+        fileExists: 'Ya existe un archivo con este nombre.',
+        folderName: 'Nombre de la carpeta:',
+        fileName: 'Nombre del archivo (con extensión):',
+        newName: 'Nuevo nombre:'
+    },
+    en: {
+        // Menu Bar
+        menuFile: 'File',
+        menuEdit: 'Edit',
+        menuView: 'View',
+        menuWindow: 'Window',
+
+        // Context Menu
+        aboutMe: 'About Me',
+        openTerminal: 'Open Terminal',
+
+        // Dock Apps
+        finder: 'Finder',
+        aboutMeApp: 'About Me',
+        safari: 'Safari',
+        terminal: 'Terminal',
+        textEdit: 'TextEdit',
+        sketch: 'Sketch',
+        calculator: 'Calculator',
+        settings: 'Settings',
+        mail: 'Mail',
+        bin: 'Bin',
+
+        // Portfolio
+        portfolioTitle: 'iOS Developer | Computer Science Student | General Physician',
+        portfolioIntro: 'Hello! I\'m an iOS developer passionate about creating mobile applications that improve people\'s lives. I\'m currently studying Computer Systems Engineering in Mexico and specialize in mobile development with Swift and SwiftUI.',
+        portfolioIntro2: 'As a general physician, I combine my clinical experience with software development to create applications that solve real problems in health and wellness. I love building minimalist, functional apps with excellent user experience.',
+        languagesFrameworks: 'Languages & Frameworks',
+        architecturePatterns: 'Architecture & Patterns',
+
+        // Finder
+        favorites: 'Favorites',
+        desktop: 'Desktop',
+        documents: 'Documents',
+        downloads: 'Downloads',
+        newFolder: 'New Folder',
+        newFile: 'New File',
+        open: 'Open',
+        rename: 'Rename',
+        duplicate: 'Duplicate',
+        moveToTrash: 'Move to Trash',
+
+        // Terminal
+        terminalLastLogin: 'Last login',
+        terminalVersion: 'macOS Portfolio Edition [Version 1.0]',
+        availableCommands: 'Available commands: help, clear, ls, whoami, date, echo, linkedin, mail',
+        commandNotFound: 'zsh: command not found',
+        openingLinkedIn: 'Opening LinkedIn...',
+
+        // TextEdit
+        save: 'Save',
+        new: 'New',
+        createNewDoc: 'Create new document? Unsaved changes will be lost.',
+        startTyping: 'Start typing...',
+
+        // Paint
+        brush: 'Brush',
+        eraser: 'Eraser',
+        rectangle: 'Rectangle',
+        circle: 'Circle',
+        line: 'Line',
+        clean: 'Clean',
+
+        // Settings
+        wallpapers: 'Wallpapers',
+        appearance: 'Appearance',
+        light: 'Light',
+        dark: 'Dark',
+        auto: 'Auto',
+        systemInfo: 'System Information',
+        macOSVersion: 'macOS Version',
+        browser: 'Browser',
+        resolution: 'Resolution',
+        memory: 'Memory',
+        unknown: 'Unknown',
+        language: 'Language',
+
+        // Trash
+        trashEmpty: 'Trash is Empty',
+        trashEmptyDesc: 'Deleted files will appear here',
+        itemsInTrash: 'item(s) in Trash',
+        emptyTrash: 'Empty Trash',
+        restore: 'Restore',
+        deletePermanently: 'Delete Permanently',
+        confirmEmptyTrash: 'Empty Trash? This will permanently delete all items.',
+        confirmDelete: 'Permanently delete "{item}"? This action cannot be undone.',
+        inTrash: '"{item}" is in Trash. Restore it to open.',
+
+        // Mail
+        contact: 'Contact',
+        sendEmail: 'Send Email',
+
+        // Projects
+        mainFeatures: 'Main Features',
+        techStack: 'Tech Stack',
+        viewOnGitHub: 'View on GitHub',
+
+        // Alerts
+        folderExists: 'A folder with this name already exists.',
+        fileExists: 'A file with this name already exists.',
+        folderName: 'Folder name:',
+        fileName: 'File name (with extension):',
+        newName: 'New name:'
+    }
+};
+
+// Current language (default: Spanish, will be auto-detected)
+let currentLang = 'es';
+
+// Helper function to get translation
+function t(key) {
+    return translations[currentLang][key] || translations['es'][key] || key;
+}
+
+// Function to update all UI text when language changes
+function updateLanguage(lang) {
+    currentLang = lang;
+
+    // Save language preference
+    localStorage.setItem('preferredLanguage', lang);
+
+    // Update all elements with data-i18n attribute
+    $('[data-i18n]').each(function() {
+        const key = $(this).attr('data-i18n');
+        $(this).text(t(key));
+    });
+
+    // Re-render all open windows
+    Object.keys(wm.windows).forEach(winId => {
+        const config = wm.windows[winId];
+        const container = $(`#content-${winId}`);
+        if (container.length) {
+            wm.loadAppContent(winId, config);
+        }
+    });
+
+    // Update HTML lang attribute
+    $('html').attr('lang', lang === 'es' ? 'es' : 'en');
+}
+
+// Auto-detect browser language on first visit
+function detectLanguage() {
+    // Check if user has a saved preference
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang) {
+        return savedLang;
+    }
+
+    // Detect browser language
+    const browserLang = navigator.language || navigator.userLanguage;
+
+    // If browser is in English, set to English; otherwise default to Spanish
+    if (browserLang.startsWith('en')) {
+        return 'en';
+    }
+
+    return 'es';
+}
+
 // DATOS DE TUS PROYECTOS (Extraídos del video y tus links)
 const projects = {
     'pomo': {
@@ -76,8 +341,12 @@ const apps = [
 // Simulated File System
 const fileSystem = {
     'Desktop': { type: 'folder', children: {
-        'Welcome.txt': { type: 'text', content: 'Bienvenido a mi portafolio!\nEsta es una simulación de macOS construida con HTML, CSS y JavaScript.'},
-        'Projects': { type: 'folder', children: {} },
+        'Welcome.txt': { type: 'text', content: '¡Bienvenido a mi portafolio! Esta página web es una simulación de macOS construida con HTML, CSS y JavaScript. Siéntete libre de interactuar con todas las aplicaciones. Puedes usar la línea de comandos, navegar por el Finder y en internet, hacer operaciones con calculadora e incluso hacer un bonito dibujo. También puedes revisar las aplicaciones que he creado para iOS.'},
+        'Projects': { type: 'folder', children: {
+            'Pomo.txt': { type: 'text', content: 'Pomo - Temporizador Pomodoro\n\nUna aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso.\n\nCaracterísticas:\n• Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)\n• Flujo automático entre sesiones de trabajo y descanso\n• Soporte para temporizador en segundo plano\n• Notificaciones push y alertas de sonido\n• Seguimiento de productividad diario y semanal con gráficas\n• Contador de rachas para mantener la motivación\n• Modo claro y oscuro automático\n• Soporte para español e inglés\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo'},
+            'WaldenVibes.txt': { type: 'text', content: 'WaldenVibes - Meditación y Bienestar\n\nUna aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional.\n\nCaracterísticas:\n• Interfaz minimalista y zen con SwiftUI\n• Seguimiento de emociones y estados de ánimo\n• Ejercicios de meditación guiada\n• Registro diario de bienestar personal\n• Diseño enfocado en el bienestar mental\n• Experiencia de usuario serena y relajante\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes'},
+            'BishopTest.txt': { type: 'text', content: 'BishopTest - Herramienta Médica\n\nAplicación médica para iOS diseñada para profesionales de obstetricia que permite calcular e interpretar la Puntuación de Bishop.\n\nCaracterísticas:\n• Cálculo de puntuación Bishop basado en parámetros cervicales\n• Modificadores clínicos de puntuación\n• Recomendaciones médicas personalizadas\n• Seguimiento del historial de pacientes\n• Referencia de métodos de inducción del parto\n\nStack: Swift, SwiftUI, MVVM, FileManager, iOS 17.0+, Xcode 15+\n\nGitHub: https://github.com/arzaluz-chris/BishopTest'}
+        } },
         'MyPhoto.jpg': { type: 'img', src: 'assets/profile.png'}
     }},
     'Documents': { type: 'folder', children: {
@@ -85,8 +354,8 @@ const fileSystem = {
         'Notes.txt': { type: 'text', content: 'Ideas para nuevos proyectos:\n- App de salud\n- Calculadora científica\n- Rastreador de hábitos'}
     }},
     'Downloads': { type: 'folder', children: {
-        'README.txt': { type: 'text', content: 'Archivos descargados aparecerán aquí'},
-        'Screenshot.jpg': { type: 'img', src: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%235dade2" width="100" height="100"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="12"%3EScreenshot%3C/text%3E%3C/svg%3E'}
+        'README.txt': { type: 'text', content: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, BishopTest)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHosted en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'},
+        'Screenshot.jpg': { type: 'img', src: 'assets/screenshot.jpg'}
     }}
 };
 let currentPath = ['Desktop'];
@@ -354,7 +623,20 @@ class WindowManager {
             case 'safari': renderSafari(container); break;
             case 'settings': renderSettings(container); break;
             case 'trash': renderTrash(container); break;
-            case 'mail': container.html('<div style="padding:20px; text-align:center; color:#aaa; font-size: 14px;">Contacto: <br><b style="color:white; font-size: 16px;">christian.arzaluz@gmail.com</b></div>'); break;
+            case 'mail':
+                container.html(`
+                    <div style="padding:40px; text-align:center; color:#aaa; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                        <i class="fas fa-envelope" style="font-size: 60px; color: #3481F8;"></i>
+                        <div>
+                            <div style="margin-bottom: 10px; color: #888;">${t('contact')}:</div>
+                            <b style="color:white; font-size: 18px;">christian.arzaluz@gmail.com</b>
+                        </div>
+                        <a href="mailto:christian.arzaluz@gmail.com" style="background: #3481F8; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s; display: inline-block;">
+                            <i class="fas fa-paper-plane"></i> ${t('sendEmail')}
+                        </a>
+                    </div>
+                `);
+                break;
         }
     }
 }
@@ -371,14 +653,14 @@ function renderPortfolio(container) {
                 <div class="profile-pic"><span class="initial">CA</span></div>
                 <div class="profile-info">
                     <h1>Christian Arzaluz</h1>
-                    <h2>iOS Developer | Computer Science Student | General Physician</h2>
+                    <h2>${t('portfolioTitle')}</h2>
                 </div>
             </div>
             <div class="profile-body">
-                <p>¡Hola! Soy un desarrollador iOS apasionado por crear aplicaciones móviles que mejoran la vida de las personas. Actualmente estudio Ingeniería en Ciencias de la Computación en México y me especializo en desarrollo móvil con Swift y SwiftUI.</p>
-                <p>Como médico general, combino mi experiencia clínica con el desarrollo de software para crear aplicaciones que resuelven problemas reales en salud y bienestar. Me encanta construir apps minimalistas, funcionales y con excelente experiencia de usuario.</p>
+                <p>${t('portfolioIntro')}</p>
+                <p>${t('portfolioIntro2')}</p>
 
-                <h3><i class="fas fa-code"></i> Lenguajes & Frameworks</h3>
+                <h3><i class="fas fa-code"></i> ${t('languagesFrameworks')}</h3>
                 <ul class="skills-grid">
                     <li>Swift 5.0+</li>
                     <li>SwiftUI</li>
@@ -393,7 +675,7 @@ function renderPortfolio(container) {
                     <li>Git & GitHub</li>
                 </ul>
 
-                <h3><i class="fas fa-sitemap"></i> Arquitectura & Patrones</h3>
+                <h3><i class="fas fa-sitemap"></i> ${t('architecturePatterns')}</h3>
                 <ul class="skills-grid">
                     <li>MVVM</li>
                     <li>MVC</li>
@@ -416,18 +698,18 @@ function renderProject(container, projectId) {
             <h2><i class="fas fa-${project.icon}" style="color: var(--accent);"></i> ${project.name}</h2>
             <p>${project.description}</p>
 
-            <h3><i class="fas fa-star"></i> Características Principales</h3>
+            <h3><i class="fas fa-star"></i> ${t('mainFeatures')}</h3>
             <ul>
                 ${project.features.map(f => `<li>${f}</li>`).join('')}
             </ul>
 
-            <h3><i class="fas fa-microchip"></i> Stack Tecnológico</h3>
+            <h3><i class="fas fa-microchip"></i> ${t('techStack')}</h3>
             <ul class="tech-stack">
                 ${project.stack.map(t => `<li>${t}</li>`).join('')}
             </ul>
 
             <a href="${project.url}" target="_blank" class="github-link">
-                <i class="fab fa-github"></i> Ver en GitHub
+                <i class="fab fa-github"></i> ${t('viewOnGitHub')}
             </a>
         </div>
     `);
@@ -464,23 +746,29 @@ function renderTerminal(container) {
         }
     });
 
+    // Auto-ejecutar comando 'help' al abrir la terminal
+    setTimeout(() => {
+        processCommand('help');
+        output.scrollTop(output[0].scrollHeight);
+    }, 100);
+
     function processCommand(cmd) {
         const args = cmd.split(' ');
         let response = '';
         switch(args[0].toLowerCase()) {
-            case 'help': response = 'Comandos disponibles: help, clear, ls, whoami, date, echo, linkedin, mail'; break;
+            case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
             case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>BishopTest'; break;
             case 'whoami': response = 'Christian Arzaluz - iOS Developer'; break;
             case 'date': response = new Date().toString(); break;
             case 'echo': response = args.slice(1).join(' '); break;
             case 'linkedin':
-                response = 'Abriendo LinkedIn...';
+                response = t('openingLinkedIn');
                 window.open('https://www.linkedin.com/in/christian-arzaluz/', '_blank');
                 break;
             case 'mail': response = 'christian.arzaluz@gmail.com'; break;
             case '': return;
-            default: response = `zsh: command not found: ${args[0]}`;
+            default: response = `${t('commandNotFound')}: ${args[0]}`;
         }
         history.append(`<div class="term-line">${response}</div>`);
     }
@@ -614,10 +902,10 @@ function renderFinder(container) {
     container.html(`
         <div class="finder-layout">
             <div class="finder-sidebar">
-                <div style="font-size:10px; color:#888; padding-left:10px; margin-top:10px;">Favoritos</div>
-                <div class="sidebar-item" onclick="navFinder(['Desktop'])"><i class="fas fa-desktop"></i> Desktop</div>
-                <div class="sidebar-item" onclick="navFinder(['Documents'])"><i class="fas fa-file-alt"></i> Documents</div>
-                <div class="sidebar-item" onclick="navFinder(['Downloads'])"><i class="fas fa-download"></i> Downloads</div>
+                <div style="font-size:10px; color:#888; padding-left:10px; margin-top:10px;">${t('favorites')}</div>
+                <div class="sidebar-item" onclick="navFinder(['Desktop'])"><i class="fas fa-desktop"></i> ${t('desktop')}</div>
+                <div class="sidebar-item" onclick="navFinder(['Documents'])"><i class="fas fa-file-alt"></i> ${t('documents')}</div>
+                <div class="sidebar-item" onclick="navFinder(['Downloads'])"><i class="fas fa-download"></i> ${t('downloads')}</div>
             </div>
             <div class="finder-main">
                 <div style="margin-bottom:10px; display: flex; justify-content: space-between; align-items: center;">
@@ -628,10 +916,10 @@ function renderFinder(container) {
                     </div>
                     <div style="display: flex; gap: 5px;">
                         <button class="text-tool" onclick="createNewFolder()" style="font-size: 11px; padding: 3px 8px;">
-                            <i class="fas fa-folder-plus"></i> Nueva Carpeta
+                            <i class="fas fa-folder-plus"></i> ${t('newFolder')}
                         </button>
                         <button class="text-tool" onclick="createNewFile()" style="font-size: 11px; padding: 3px 8px;">
-                            <i class="fas fa-file-plus"></i> Nuevo Archivo
+                            <i class="fas fa-file-plus"></i> ${t('newFile')}
                         </button>
                     </div>
                 </div>
@@ -700,18 +988,18 @@ function showFinderContextMenu(x, y, fileName, item) {
     const menu = $(`
         <div class="finder-context-menu" style="position: absolute; background: rgba(40,40,40,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 5px 0; width: 180px; z-index: 99999; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
             <div class="ctx-item" style="padding: 6px 15px; font-size: 13px; cursor: pointer;">
-                <i class="fas fa-folder-open"></i> Abrir
+                <i class="fas fa-folder-open"></i> ${t('open')}
             </div>
             <div class="ctx-hr" style="border-top: 1px solid rgba(255,255,255,0.1); margin: 4px 0;"></div>
             <div class="ctx-item" style="padding: 6px 15px; font-size: 13px; cursor: pointer;">
-                <i class="fas fa-edit"></i> Renombrar
+                <i class="fas fa-edit"></i> ${t('rename')}
             </div>
             <div class="ctx-item" style="padding: 6px 15px; font-size: 13px; cursor: pointer;">
-                <i class="fas fa-copy"></i> Duplicar
+                <i class="fas fa-copy"></i> ${t('duplicate')}
             </div>
             <div class="ctx-hr" style="border-top: 1px solid rgba(255,255,255,0.1); margin: 4px 0;"></div>
             <div class="ctx-item" style="padding: 6px 15px; font-size: 13px; cursor: pointer; color: #ff5f56;">
-                <i class="fas fa-trash"></i> Mover a Papelera
+                <i class="fas fa-trash"></i> ${t('moveToTrash')}
             </div>
         </div>
     `).css({ top: y + 'px', left: x + 'px' });
@@ -730,7 +1018,7 @@ function showFinderContextMenu(x, y, fileName, item) {
     });
 
     menu.find('.ctx-item:eq(1)').on('click', () => {
-        const newName = prompt('Nuevo nombre:', fileName);
+        const newName = prompt(t('newName'), fileName);
         if(newName && newName !== fileName) {
             renameFile(fileName, newName);
         }
@@ -764,14 +1052,14 @@ window.navigateBack = function() {
 };
 
 window.createNewFolder = function() {
-    const folderName = prompt('Nombre de la carpeta:');
+    const folderName = prompt(t('folderName'));
     if(!folderName) return;
 
     let target = fileSystem;
     currentPath.forEach(p => target = target[p].children);
 
     if(target[folderName]) {
-        alert('Ya existe una carpeta con este nombre.');
+        alert(t('folderExists'));
         return;
     }
 
@@ -780,14 +1068,14 @@ window.createNewFolder = function() {
 };
 
 window.createNewFile = function() {
-    const fileName = prompt('Nombre del archivo (con extensión):');
+    const fileName = prompt(t('fileName'));
     if(!fileName) return;
 
     let target = fileSystem;
     currentPath.forEach(p => target = target[p].children);
 
     if(target[fileName]) {
-        alert('Ya existe un archivo con este nombre.');
+        alert(t('fileExists'));
         return;
     }
 
@@ -810,7 +1098,7 @@ function renameFile(oldName, newName) {
     currentPath.forEach(p => target = target[p].children);
 
     if(target[newName]) {
-        alert('Ya existe un archivo con este nombre.');
+        alert(t('fileExists'));
         return;
     }
 
@@ -865,10 +1153,10 @@ function renderTextEdit(container) {
                 <button class="text-tool" id="btn-italic"><i class="fas fa-italic"></i></button>
                 <button class="text-tool" id="btn-underline"><i class="fas fa-underline"></i></button>
                 <span style="border-left: 1px solid #555; height: 20px; margin: 0 5px;"></span>
-                <button class="text-tool" id="btn-save"><i class="fas fa-save"></i> Guardar</button>
-                <button class="text-tool" id="btn-new"><i class="fas fa-file"></i> Nuevo</button>
+                <button class="text-tool" id="btn-save"><i class="fas fa-save"></i> ${t('save')}</button>
+                <button class="text-tool" id="btn-new"><i class="fas fa-file"></i> ${t('new')}</button>
             </div>
-            <textarea id="text-area" placeholder="Comienza a escribir..." style="font-family: Inter; font-size: 14px;"></textarea>
+            <textarea id="text-area" placeholder="${t('startTyping')}" style="font-family: Inter; font-size: 14px;"></textarea>
         </div>
     `);
 
@@ -901,7 +1189,7 @@ function renderTextEdit(container) {
     });
 
     $('#btn-new').on('click', function() {
-        if(confirm('¿Crear nuevo documento? Los cambios no guardados se perderán.')) {
+        if(confirm(t('createNewDoc'))) {
             $('#text-area').val('');
         }
     });
@@ -932,15 +1220,15 @@ function renderPaint(container) {
                     Tamaño: <span id="size-label">5</span>px
                     <input type="range" id="p-size" min="1" max="50" value="5" style="width:80px;">
                 </label>
-                <button class="text-tool" id="p-brush"><i class="fas fa-paintbrush"></i> Pincel</button>
-                <button class="text-tool" id="p-eraser"><i class="fas fa-eraser"></i> Borrador</button>
+                <button class="text-tool" id="p-brush"><i class="fas fa-paintbrush"></i> ${t('brush')}</button>
+                <button class="text-tool" id="p-eraser"><i class="fas fa-eraser"></i> ${t('eraser')}</button>
                 <span style="border-left: 1px solid #ccc; height: 20px; margin: 0 5px;"></span>
-                <button class="text-tool" id="p-rectangle"><i class="fas fa-square"></i> Rectángulo</button>
-                <button class="text-tool" id="p-circle"><i class="fas fa-circle"></i> Círculo</button>
-                <button class="text-tool" id="p-line"><i class="fas fa-minus"></i> Línea</button>
+                <button class="text-tool" id="p-rectangle"><i class="fas fa-square"></i> ${t('rectangle')}</button>
+                <button class="text-tool" id="p-circle"><i class="fas fa-circle"></i> ${t('circle')}</button>
+                <button class="text-tool" id="p-line"><i class="fas fa-minus"></i> ${t('line')}</button>
                 <span style="border-left: 1px solid #ccc; height: 20px; margin: 0 5px;"></span>
-                <button class="text-tool" onclick="clearCanvas()"><i class="fas fa-trash"></i> Limpiar</button>
-                <button class="text-tool" id="p-download"><i class="fas fa-download"></i> Guardar</button>
+                <button class="text-tool" onclick="clearCanvas()"><i class="fas fa-trash"></i> ${t('clean')}</button>
+                <button class="text-tool" id="p-download"><i class="fas fa-download"></i> ${t('save')}</button>
             </div>
             <div style="flex:1; overflow:hidden; position:relative;">
                 <canvas id="paint-canvas"></canvas>
@@ -1137,7 +1425,17 @@ function renderSettings(container) {
                 <div><div style="font-weight:600; font-size:16px;">Christian Arzaluz</div><div style="font-size:12px; color:#aaa;">iOS Developer</div></div>
             </div>
 
-            <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">Fondos de Pantalla</div>
+            <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">${t('language')}</div>
+            <div style="width: 100%; display: flex; gap: 10px; margin-bottom: 20px;">
+                <button class="text-tool lang-btn ${currentLang === 'es' ? 'active' : ''}" style="flex: 1;" onclick="updateLanguage('es')" data-lang="es">
+                    <i class="fas fa-globe"></i> Español
+                </button>
+                <button class="text-tool lang-btn ${currentLang === 'en' ? 'active' : ''}" style="flex: 1;" onclick="updateLanguage('en')" data-lang="en">
+                    <i class="fas fa-globe"></i> English
+                </button>
+            </div>
+
+            <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">${t('wallpapers')}</div>
             <div class="wall-grid" style="margin-bottom: 20px;">
                 <div class="wall-thumb selected" style="background: linear-gradient(200deg, #a729f5, #5823d6, #092775, #1d6f9c);" onclick="changeWall(this)"></div>
                 <div class="wall-thumb" style="background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);" onclick="changeWall(this)"></div>
@@ -1147,19 +1445,19 @@ function renderSettings(container) {
                 <div class="wall-thumb" style="background: #000;" onclick="changeWall(this)"></div>
             </div>
 
-            <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">Apariencia</div>
+            <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">${t('appearance')}</div>
             <div style="width: 100%; display: flex; gap: 10px; margin-bottom: 20px;">
-                <button class="text-tool" style="flex: 1;" onclick="setAppearance('light')"><i class="fas fa-sun"></i> Claro</button>
-                <button class="text-tool" style="flex: 1;" onclick="setAppearance('dark')"><i class="fas fa-moon"></i> Oscuro</button>
-                <button class="text-tool" style="flex: 1;" onclick="setAppearance('auto')"><i class="fas fa-adjust"></i> Auto</button>
+                <button class="text-tool" style="flex: 1;" onclick="setAppearance('light')"><i class="fas fa-sun"></i> ${t('light')}</button>
+                <button class="text-tool" style="flex: 1;" onclick="setAppearance('dark')"><i class="fas fa-moon"></i> ${t('dark')}</button>
+                <button class="text-tool" style="flex: 1;" onclick="setAppearance('auto')"><i class="fas fa-adjust"></i> ${t('auto')}</button>
             </div>
 
-            <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">Información del Sistema</div>
+            <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">${t('systemInfo')}</div>
             <div style="width: 100%; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; font-size: 12px; color: #aaa;">
-                <div style="margin-bottom: 8px;"><strong>Versión macOS:</strong> Portfolio Edition 1.0</div>
-                <div style="margin-bottom: 8px;"><strong>Navegador:</strong> <span id="browser-info"></span></div>
-                <div style="margin-bottom: 8px;"><strong>Resolución:</strong> <span id="screen-info"></span></div>
-                <div><strong>Memoria:</strong> <span id="memory-info">Desconocida</span></div>
+                <div style="margin-bottom: 8px;"><strong>${t('macOSVersion')}:</strong> Portfolio Edition 1.0</div>
+                <div style="margin-bottom: 8px;"><strong>${t('browser')}:</strong> <span id="browser-info"></span></div>
+                <div style="margin-bottom: 8px;"><strong>${t('resolution')}:</strong> <span id="screen-info"></span></div>
+                <div><strong>${t('memory')}:</strong> <span id="memory-info">${t('unknown')}</span></div>
             </div>
         </div>
     `);
@@ -1205,8 +1503,8 @@ function renderTrash(container) {
         container.html(`
             <div style="padding: 40px; text-align: center; color: #aaa;">
                 <i class="fas fa-trash fa-4x" style="margin-bottom: 20px; opacity: 0.3;"></i>
-                <div style="font-size: 18px; font-weight: 500;">La Papelera está Vacía</div>
-                <div style="font-size: 12px; margin-top: 10px;">Los archivos eliminados aparecerán aquí</div>
+                <div style="font-size: 18px; font-weight: 500;">${t('trashEmpty')}</div>
+                <div style="font-size: 12px; margin-top: 10px;">${t('trashEmptyDesc')}</div>
             </div>
         `);
         return;
@@ -1215,9 +1513,9 @@ function renderTrash(container) {
     container.html(`
         <div class="finder-layout">
             <div style="padding: 15px; background: rgba(50,50,50,0.3); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
-                <div style="color: #aaa; font-size: 12px;">${itemCount} elemento(s) en la Papelera</div>
+                <div style="color: #aaa; font-size: 12px;">${itemCount} ${t('itemsInTrash')}</div>
                 <button class="text-tool" onclick="emptyTrash()" style="background: #ff5f56; color: white;">
-                    <i class="fas fa-trash"></i> Vaciar Papelera
+                    <i class="fas fa-trash"></i> ${t('emptyTrash')}
                 </button>
             </div>
             <div class="finder-main">
@@ -1253,7 +1551,7 @@ function updateTrashGrid() {
         });
 
         el.on('dblclick', () => {
-            alert(`"${itemName}" está en la Papelera. Restáuralo para abrirlo.`);
+            alert(t('inTrash').replace('{item}', itemName));
         });
 
         grid.append(el);
@@ -1264,11 +1562,11 @@ function showTrashContextMenu(x, y, itemName) {
     const menu = $(`
         <div style="position: absolute; background: rgba(40,40,40,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 5px 0; width: 180px; z-index: 99999; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
             <div class="ctx-item" style="padding: 6px 15px; font-size: 13px; cursor: pointer;" id="restore-item">
-                <i class="fas fa-undo"></i> Restaurar
+                <i class="fas fa-undo"></i> ${t('restore')}
             </div>
             <div class="ctx-hr" style="border-top: 1px solid rgba(255,255,255,0.1); margin: 4px 0;"></div>
             <div class="ctx-item" style="padding: 6px 15px; font-size: 13px; cursor: pointer; color: #ff5f56;" id="delete-permanent">
-                <i class="fas fa-times"></i> Eliminar Permanentemente
+                <i class="fas fa-times"></i> ${t('deletePermanently')}
             </div>
         </div>
     `).css({ top: y + 'px', left: x + 'px' });
@@ -1281,7 +1579,7 @@ function showTrashContextMenu(x, y, itemName) {
     });
 
     menu.find('#delete-permanent').on('click', () => {
-        if(confirm(`¿Eliminar permanentemente "${itemName}"? Esta acción no se puede deshacer.`)) {
+        if(confirm(t('confirmDelete').replace('{item}', itemName))) {
             delete trashItems[itemName];
             renderTrash($('#content-trash'));
         }
@@ -1298,7 +1596,7 @@ function showTrashContextMenu(x, y, itemName) {
 }
 
 window.emptyTrash = function() {
-    if(confirm('¿Vaciar la Papelera? Esto eliminará permanentemente todos los elementos.')) {
+    if(confirm(t('confirmEmptyTrash'))) {
         trashItems = {};
         renderTrash($('#content-trash'));
     }
@@ -1502,6 +1800,10 @@ function setupMobileTouchEnhancements() {
 
 // Boot Sequence
 $(window).on('load', () => {
+    // Detect and set initial language
+    currentLang = detectLanguage();
+    updateLanguage(currentLang);
+
     $('.loading-progress').css('width', '100%');
     setTimeout(() => {
         $('#boot-screen').fadeOut(500, function(){ $(this).remove(); });
