@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VORTH — Discover Your Life Purpose</title>
+  <meta name="description" content="VORTH uses AI coaching, the PERMA well-being model, and smart journaling to help you discover your life purpose.">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">VORTH</a>
+
+      <ul class="nav-links">
+        <li><a href="#features" data-i18n="nav.features">Features</a></li>
+        <li><a href="#perma" data-i18n="nav.perma">PERMA</a></li>
+        <li><a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a></li>
+        <li><a href="#download" data-i18n="nav.download">Download</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+        </div>
+        <button class="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="#perma" data-i18n="nav.perma">PERMA</a>
+    <a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a>
+    <a href="#download" data-i18n="nav.download">Download</a>
+    <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+    <a href="support.html" data-i18n="nav.support">Support</a>
+    <div class="mobile-lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+    </div>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#x2728;</span>
+          <span data-i18n="hero.badge">AI-Powered Personal Growth</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title.1">Discover Your</span><br>
+          <span class="gradient-text" data-i18n="hero.title.2">Life Purpose</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          VORTH uses AI coaching, the PERMA well-being model, and smart journaling to help you uncover what truly matters and build a purposeful life.
+        </p>
+        <a href="#" class="hero-cta">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <span data-i18n="hero.cta">Download on the App Store</span>
+        </a>
+      </div>
+      <div class="hero-device">
+        <div class="device-iphone">
+          <img
+            src="Screenshots/VORTH iPhone English/1.png"
+            alt="VORTH Dashboard"
+            data-screenshot-device="iPhone"
+            data-screenshot-num="1"
+            data-screenshot-alt="gallery.dashboard"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features" class="section section-darker">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="features.title">Everything You Need to Thrive</h2>
+      <p class="section-subtitle fade-in" data-i18n="features.subtitle">
+        Powerful AI-driven tools designed to guide your journey of self-discovery and personal growth.
+      </p>
+
+      <div class="features-grid">
+        <!-- Live AI Coach -->
+        <div class="feature-card fade-in fade-in-delay-1">
+          <div class="feature-icon">&#x1F399;</div>
+          <h3 data-i18n="feature.coach.title">Live AI Coach</h3>
+          <p data-i18n="feature.coach.desc">Real-time voice coaching sessions powered by Gemini AI. Talk through your thoughts and receive personalized guidance instantly.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/VORTH iPhone English/2.png"
+              alt="Live Coach"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="2"
+              data-screenshot-alt="gallery.coach"
+            >
+          </div>
+        </div>
+
+        <!-- PERMA Journal -->
+        <div class="feature-card fade-in fade-in-delay-2">
+          <div class="feature-icon">&#x1F4D3;</div>
+          <h3 data-i18n="feature.journal.title">PERMA Journal</h3>
+          <p data-i18n="feature.journal.desc">Reflect on your day through the lens of the five pillars of well-being. Track patterns and growth over time.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/VORTH iPhone English/3.png"
+              alt="Journal"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="3"
+              data-screenshot-alt="gallery.journal"
+            >
+          </div>
+        </div>
+
+        <!-- Smart Goals -->
+        <div class="feature-card fade-in fade-in-delay-3">
+          <div class="feature-icon">&#x1F3AF;</div>
+          <h3 data-i18n="feature.goals.title">Smart Goals</h3>
+          <p data-i18n="feature.goals.desc">AI-suggested goals tailored to your purpose statement. Break down big ambitions into actionable steps.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/VORTH iPhone English/4.png"
+              alt="Goals"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="4"
+              data-screenshot-alt="gallery.goals"
+            >
+          </div>
+        </div>
+
+        <!-- AI Assistant -->
+        <div class="feature-card fade-in fade-in-delay-4">
+          <div class="feature-icon">&#x1F4AC;</div>
+          <h3 data-i18n="feature.assistant.title">AI Assistant</h3>
+          <p data-i18n="feature.assistant.desc">Chat with a purpose-aware AI that knows your journey. Get insights, motivation, and clarity on demand.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/VORTH iPhone English/5.png"
+              alt="Assistant"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="5"
+              data-screenshot-alt="gallery.assistant"
+            >
+          </div>
+        </div>
+
+        <!-- Emotional Alchemy -->
+        <div class="feature-card fade-in fade-in-delay-5">
+          <div class="feature-icon">&#x1F525;</div>
+          <h3 data-i18n="feature.alchemy.title">Emotional Alchemy</h3>
+          <p data-i18n="feature.alchemy.desc">Transform challenging emotions into growth opportunities with guided exercises and reflective prompts.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/VORTH iPhone English/6.png"
+              alt="Emotional Alchemy"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="6"
+              data-screenshot-alt="gallery.brand"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PERMA ========== -->
+  <section id="perma" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="perma.title">The PERMA Well-Being Model</h2>
+      <p class="section-subtitle fade-in" data-i18n="perma.subtitle">
+        Grounded in positive psychology research by Dr. Martin Seligman, PERMA identifies five pillars of lasting well-being.
+      </p>
+
+      <div class="perma-grid">
+        <div class="perma-card fade-in fade-in-delay-1">
+          <div class="perma-letter">P</div>
+          <h3 data-i18n="perma.p.name">Positive Emotion</h3>
+          <p data-i18n="perma.p.desc">Cultivate joy, gratitude, and hope in your daily life.</p>
+        </div>
+        <div class="perma-card fade-in fade-in-delay-2">
+          <div class="perma-letter">E</div>
+          <h3 data-i18n="perma.e.name">Engagement</h3>
+          <p data-i18n="perma.e.desc">Find flow states and deep involvement in meaningful activities.</p>
+        </div>
+        <div class="perma-card fade-in fade-in-delay-3">
+          <div class="perma-letter">R</div>
+          <h3 data-i18n="perma.r.name">Relationships</h3>
+          <p data-i18n="perma.r.desc">Build and nurture authentic connections with others.</p>
+        </div>
+        <div class="perma-card fade-in fade-in-delay-4">
+          <div class="perma-letter">M</div>
+          <h3 data-i18n="perma.m.name">Meaning</h3>
+          <p data-i18n="perma.m.desc">Discover purpose by serving something greater than yourself.</p>
+        </div>
+        <div class="perma-card fade-in fade-in-delay-5">
+          <div class="perma-letter">A</div>
+          <h3 data-i18n="perma.a.name">Achievement</h3>
+          <p data-i18n="perma.a.desc">Set goals, build mastery, and celebrate your accomplishments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREENSHOT GALLERY ========== -->
+  <section id="screenshots" class="section section-darker">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="gallery.title">See VORTH in Action</h2>
+      <p class="section-subtitle fade-in" data-i18n="gallery.subtitle">
+        Designed for iPhone and iPad with adaptive layouts that feel right on every screen.
+      </p>
+    </div>
+
+    <div class="gallery-wrapper">
+      <div class="gallery-track">
+        <!-- iPhone Screenshots -->
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/VORTH iPhone English/1.png" alt="Dashboard"
+              data-screenshot-device="iPhone" data-screenshot-num="1" data-screenshot-alt="gallery.dashboard">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.dashboard">Dashboard</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/VORTH iPhone English/2.png" alt="Live Coach"
+              data-screenshot-device="iPhone" data-screenshot-num="2" data-screenshot-alt="gallery.coach">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.coach">Live Coach</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/VORTH iPhone English/3.png" alt="Journal"
+              data-screenshot-device="iPhone" data-screenshot-num="3" data-screenshot-alt="gallery.journal">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.journal">Journal</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/VORTH iPhone English/4.png" alt="Goals"
+              data-screenshot-device="iPhone" data-screenshot-num="4" data-screenshot-alt="gallery.goals">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.goals">Goals</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/VORTH iPhone English/5.png" alt="Assistant"
+              data-screenshot-device="iPhone" data-screenshot-num="5" data-screenshot-alt="gallery.assistant">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.assistant">Assistant</p>
+        </div>
+
+        <!-- iPad Screenshots -->
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/VORTH iPad English/1.png" alt="iPad Dashboard"
+              data-screenshot-device="iPad" data-screenshot-num="1" data-screenshot-alt="gallery.dashboard">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.dashboard">Dashboard</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/VORTH iPad English/2.png" alt="iPad Coach"
+              data-screenshot-device="iPad" data-screenshot-num="2" data-screenshot-alt="gallery.coach">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.coach">Live Coach</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/VORTH iPad English/3.png" alt="iPad Journal"
+              data-screenshot-device="iPad" data-screenshot-num="3" data-screenshot-alt="gallery.journal">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.journal">Journal</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/VORTH iPad English/4.png" alt="iPad Goals"
+              data-screenshot-device="iPad" data-screenshot-num="4" data-screenshot-alt="gallery.goals">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.goals">Goals</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/VORTH iPad English/5.png" alt="iPad Assistant"
+              data-screenshot-device="iPad" data-screenshot-num="5" data-screenshot-alt="gallery.assistant">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.assistant">Assistant</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DOWNLOAD CTA ========== -->
+  <section id="download" class="cta-section section-dark">
+    <div class="container">
+      <h2 class="cta-title fade-in">
+        <span data-i18n="cta.title.1">Start Your Journey</span><br>
+        <span class="gradient-text" data-i18n="cta.title.2">Today</span>
+      </h2>
+      <p class="cta-subtitle fade-in" data-i18n="cta.subtitle">
+        Download VORTH and take the first step toward discovering your life purpose.
+      </p>
+      <a href="#" class="cta-button fade-in">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span data-i18n="cta.button">Download on the App Store</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-logo">VORTH</span>
+      <div class="footer-links">
+        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+        <a href="support.html" data-i18n="nav.support">Support</a>
+      </div>
+      <span class="footer-copy">&copy; <span data-i18n="footer.copy">2026 VORTH. All rights reserved.</span></span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
