@@ -80,23 +80,38 @@ const translations = {
 <h2>2. How We Use Your Information</h2>
 <p>We use your information exclusively to:</p>
 <ul>
-  <li>Display your heart rate entries and stress level classifications</li>
+  <li>Display your heart rate entries and wellness level classifications</li>
   <li>Generate personalized statistics and charts</li>
   <li>Provide context-aware responses in the Health Assistant</li>
   <li>Remember your preferences (name, age group, theme, reminders)</li>
 </ul>
 
-<h2>3. Data Storage and Security</h2>
-<p>All your personal data is stored locally on your device using Apple's SwiftData framework. Cordis does not transmit your health data, BPM entries, or personal information to any external server.</p>
-<p>Guided meditation audio files are delivered via Apple's CloudKit (iCloud) infrastructure. Only the audio content is stored in CloudKit — no personal data is uploaded.</p>
+<h2>3. Health Information Disclaimer</h2>
+<p><strong>Cordis is not a medical device.</strong> The app is designed solely for general wellness and educational purposes. It does not provide medical advice, medical diagnoses, or treatment recommendations of any kind.</p>
+<p>The heart rate data, wellness level classifications (such as "relaxed," "normal," "elevated," or "high"), and any information displayed within the app \u2014 including responses from the Health Assistant \u2014 are <strong>not</strong> intended to be used as a substitute for professional medical advice, diagnosis, or treatment. These classifications are general wellness indicators based on publicly available age-group ranges and should not be interpreted as clinical assessments.</p>
+<p>The Health Assistant feature provides pre-written educational responses to frequently asked questions about general wellness topics. It does <strong>not</strong> use artificial intelligence, machine learning, or any algorithmic analysis to generate personalized medical recommendations. All responses are static, informational, and general in nature.</p>
+<p>Cordis does <strong>not</strong>:</p>
+<ul>
+  <li>Diagnose, treat, cure, or prevent any disease or medical condition</li>
+  <li>Provide clinical or medical-grade heart rate monitoring</li>
+  <li>Replace the advice of a qualified healthcare professional</li>
+  <li>Make any claims about detecting, predicting, or managing medical conditions</li>
+  <li>Use algorithms to assess individual health risk or provide personalized medical guidance</li>
+</ul>
+<p>The breathing exercises and guided meditation content offered in Cordis are intended for general relaxation and wellness purposes only. They are not therapeutic interventions and are not intended to treat anxiety, stress disorders, or any other medical or psychological condition.</p>
+<p><strong>Always consult a qualified healthcare provider</strong> with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of information presented in this app. If you are experiencing a medical emergency, call your local emergency number immediately.</p>
 
-<h2>4. Third-Party Services</h2>
+<h2>4. Data Storage and Security</h2>
+<p>All your personal data is stored locally on your device using Apple's SwiftData framework. Cordis does not transmit your health data, BPM entries, or personal information to any external server.</p>
+<p>Guided meditation audio files are delivered via Apple's CloudKit (iCloud) infrastructure. Only the audio content is stored in CloudKit \u2014 no personal data is uploaded.</p>
+
+<h2>5. Third-Party Services</h2>
 <p>Cordis does not use any third-party analytics, advertising, or AI processing services. There is no external data processing of your personal information.</p>
 
-<h2>5. Data Sharing</h2>
+<h2>6. Data Sharing</h2>
 <p>We do not sell, share, or transmit your personal information to any third party. Your data stays on your device.</p>
 
-<h2>6. Your Rights</h2>
+<h2>7. Your Rights</h2>
 <p>You can:</p>
 <ul>
   <li>Delete all your BPM entries and chat history from within the app's Settings</li>
@@ -104,13 +119,13 @@ const translations = {
   <li>Delete the app to remove all locally stored data</li>
 </ul>
 
-<h2>7. Children's Privacy</h2>
-<p>Cordis is designed for users ages 4–21 and may be used by children with parental guidance. The app does not collect personal information from children beyond what is stored locally on the device. No data is transmitted to external servers.</p>
+<h2>8. Age Requirement</h2>
+<p>Cordis is intended for users aged 13 and older. The app is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you are under 13, please do not use this app. If we become aware that we have inadvertently collected information from a user under 13, we will take steps to delete that information promptly.</p>
 
-<h2>8. Changes to This Policy</h2>
+<h2>9. Changes to This Policy</h2>
 <p>We may update this policy from time to time. We will notify you of significant changes through the app.</p>
 
-<h2>9. Contact Us</h2>
+<h2>10. Contact Us</h2>
 <p>If you have questions about this privacy policy, please contact us at <a href="mailto:christian.arzaluz@gmail.com">christian.arzaluz@gmail.com</a>.</p>`,
 
     // Support Page
@@ -122,11 +137,11 @@ const translations = {
     'faq.title': 'Frequently Asked Questions',
 
     'faq.q1': 'What is Cordis?',
-    'faq.a1': 'Cordis is a heart rate wellness app designed for young people ages 4\u201321. It helps you track your heart rate, understand stress levels, practice breathing exercises, and listen to guided meditations \u2014 all in a beautiful, easy-to-use interface.',
+    'faq.a1': 'Cordis is a heart rate wellness app designed for users aged 13 and older. It helps you track your heart rate, understand your wellness levels, practice breathing exercises, and listen to guided meditations \u2014 all in a beautiful, easy-to-use interface.',
     'faq.q2': 'How do I measure my heart rate?',
     'faq.a2': 'You have three options: enter your BPM manually on the Home screen, use the Manual Measurement feature with a guided 15-second pulse timer, or sync your heart rate data from Apple Health if you have an Apple Watch or compatible device.',
     'faq.q3': 'What do the stress levels mean?',
-    'faq.a3': 'Cordis classifies your heart rate into stress levels (relaxed, normal, elevated, high) based on age-appropriate ranges. These are general wellness indicators to help you be more aware of your body \u2014 they are not medical diagnoses.',
+    'faq.a3': 'Cordis classifies your heart rate into wellness levels (relaxed, normal, elevated, high) based on general age-appropriate ranges. These are general wellness indicators to help you be more aware of your body \u2014 they are not medical diagnoses and should not be used as a substitute for professional medical advice.',
     'faq.q4': 'Is my data private?',
     'faq.a4': 'Yes. All your data is stored locally on your device. Cordis does not require an account, does not use third-party analytics or AI services, and never transmits your personal or health data to external servers.',
     'faq.q5': 'Does Cordis sync across devices?',
@@ -215,23 +230,38 @@ const translations = {
 <h2>2. C\u00f3mo usamos tu informaci\u00f3n</h2>
 <p>Usamos tu informaci\u00f3n exclusivamente para:</p>
 <ul>
-  <li>Mostrar tus entradas de frecuencia card\u00edaca y clasificaciones de nivel de estr\u00e9s</li>
+  <li>Mostrar tus entradas de frecuencia card\u00edaca y clasificaciones de nivel de bienestar</li>
   <li>Generar estad\u00edsticas y gr\u00e1ficas personalizadas</li>
   <li>Proporcionar respuestas contextuales en el Asistente de Salud</li>
   <li>Recordar tus preferencias (nombre, grupo de edad, tema, recordatorios)</li>
 </ul>
 
-<h2>3. Almacenamiento y seguridad de datos</h2>
+<h2>3. Aviso sobre informaci\u00f3n de salud</h2>
+<p><strong>Cordis no es un dispositivo m\u00e9dico.</strong> La app est\u00e1 dise\u00f1ada \u00fanicamente con fines de bienestar general y educativos. No proporciona consejos m\u00e9dicos, diagn\u00f3sticos m\u00e9dicos ni recomendaciones de tratamiento de ning\u00fan tipo.</p>
+<p>Los datos de frecuencia card\u00edaca, las clasificaciones de nivel de bienestar (como \u201crelajado\u201d, \u201cnormal\u201d, \u201celevado\u201d o \u201calto\u201d) y cualquier informaci\u00f3n mostrada en la app \u2014 incluyendo las respuestas del Asistente de Salud \u2014 <strong>no</strong> est\u00e1n destinados a sustituir el consejo m\u00e9dico profesional, el diagn\u00f3stico o el tratamiento. Estas clasificaciones son indicadores generales de bienestar basados en rangos de edad p\u00fablicamente disponibles y no deben interpretarse como evaluaciones cl\u00ednicas.</p>
+<p>La funci\u00f3n de Asistente de Salud proporciona respuestas educativas preescritas a preguntas frecuentes sobre temas de bienestar general. <strong>No</strong> utiliza inteligencia artificial, aprendizaje autom\u00e1tico ni ning\u00fan an\u00e1lisis algor\u00edtmico para generar recomendaciones m\u00e9dicas personalizadas. Todas las respuestas son est\u00e1ticas, informativas y de car\u00e1cter general.</p>
+<p>Cordis <strong>no</strong>:</p>
+<ul>
+  <li>Diagnostica, trata, cura ni previene ninguna enfermedad o condici\u00f3n m\u00e9dica</li>
+  <li>Proporciona monitoreo de frecuencia card\u00edaca de grado cl\u00ednico o m\u00e9dico</li>
+  <li>Reemplaza el consejo de un profesional de salud calificado</li>
+  <li>Hace afirmaciones sobre detectar, predecir o manejar condiciones m\u00e9dicas</li>
+  <li>Usa algoritmos para evaluar riesgo de salud individual o proporcionar orientaci\u00f3n m\u00e9dica personalizada</li>
+</ul>
+<p>Los ejercicios de respiraci\u00f3n y el contenido de meditaci\u00f3n guiada ofrecidos en Cordis est\u00e1n destinados \u00fanicamente a fines de relajaci\u00f3n y bienestar general. No son intervenciones terap\u00e9uticas y no est\u00e1n destinados a tratar ansiedad, trastornos de estr\u00e9s ni ninguna otra condici\u00f3n m\u00e9dica o psicol\u00f3gica.</p>
+<p><strong>Siempre consulta a un profesional de salud calificado</strong> si tienes preguntas sobre una condici\u00f3n m\u00e9dica. Nunca ignores el consejo m\u00e9dico profesional ni demores en buscarlo por informaci\u00f3n presentada en esta app. Si est\u00e1s experimentando una emergencia m\u00e9dica, llama a tu n\u00famero de emergencias local inmediatamente.</p>
+
+<h2>4. Almacenamiento y seguridad de datos</h2>
 <p>Todos tus datos personales se almacenan localmente en tu dispositivo usando el framework SwiftData de Apple. Cordis no transmite tus datos de salud, entradas de BPM ni informaci\u00f3n personal a ning\u00fan servidor externo.</p>
 <p>Los archivos de audio de meditaci\u00f3n guiada se entregan a trav\u00e9s de la infraestructura CloudKit (iCloud) de Apple. Solo el contenido de audio se almacena en CloudKit \u2014 no se sube informaci\u00f3n personal.</p>
 
-<h2>4. Servicios de terceros</h2>
+<h2>5. Servicios de terceros</h2>
 <p>Cordis no usa servicios de an\u00e1lisis, publicidad ni procesamiento de IA de terceros. No hay procesamiento externo de tu informaci\u00f3n personal.</p>
 
-<h2>5. Compartici\u00f3n de datos</h2>
+<h2>6. Compartici\u00f3n de datos</h2>
 <p>No vendemos, compartimos ni transmitimos tu informaci\u00f3n personal a terceros. Tus datos permanecen en tu dispositivo.</p>
 
-<h2>6. Tus derechos</h2>
+<h2>7. Tus derechos</h2>
 <p>Puedes:</p>
 <ul>
   <li>Eliminar todas tus entradas de BPM e historial de chat desde la Configuraci\u00f3n de la app</li>
@@ -239,13 +269,13 @@ const translations = {
   <li>Eliminar la app para borrar todos los datos almacenados localmente</li>
 </ul>
 
-<h2>7. Privacidad de menores</h2>
-<p>Cordis est\u00e1 dise\u00f1ado para usuarios de 4 a 21 a\u00f1os y puede ser usado por menores con orientaci\u00f3n de los padres. La app no recopila informaci\u00f3n personal de menores m\u00e1s all\u00e1 de lo que se almacena localmente en el dispositivo. No se transmiten datos a servidores externos.</p>
+<h2>8. Requisito de edad</h2>
+<p>Cordis est\u00e1 destinado a usuarios de 13 a\u00f1os en adelante. La app no est\u00e1 dirigida a menores de 13 a\u00f1os y no recopilamos intencionalmente informaci\u00f3n personal de menores de 13 a\u00f1os. Si eres menor de 13 a\u00f1os, por favor no uses esta app. Si nos enteramos de que hemos recopilado informaci\u00f3n inadvertidamente de un usuario menor de 13 a\u00f1os, tomaremos medidas para eliminar esa informaci\u00f3n de inmediato.</p>
 
-<h2>8. Cambios a esta pol\u00edtica</h2>
+<h2>9. Cambios a esta pol\u00edtica</h2>
 <p>Podemos actualizar esta pol\u00edtica de vez en cuando. Te notificaremos de cambios significativos a trav\u00e9s de la app.</p>
 
-<h2>9. Cont\u00e1ctanos</h2>
+<h2>10. Cont\u00e1ctanos</h2>
 <p>Si tienes preguntas sobre esta pol\u00edtica de privacidad, cont\u00e1ctanos en <a href="mailto:christian.arzaluz@gmail.com">christian.arzaluz@gmail.com</a>.</p>`,
 
     // Support Page
@@ -257,11 +287,11 @@ const translations = {
     'faq.title': 'Preguntas Frecuentes',
 
     'faq.q1': '\u00bfQu\u00e9 es Cordis?',
-    'faq.a1': 'Cordis es una app de bienestar card\u00edaco dise\u00f1ada para j\u00f3venes de 4 a 21 a\u00f1os. Te ayuda a registrar tu frecuencia card\u00edaca, entender niveles de estr\u00e9s, practicar ejercicios de respiraci\u00f3n y escuchar meditaciones guiadas \u2014 todo en una interfaz hermosa y f\u00e1cil de usar.',
+    'faq.a1': 'Cordis es una app de bienestar card\u00edaco dise\u00f1ada para usuarios de 13 a\u00f1os en adelante. Te ayuda a registrar tu frecuencia card\u00edaca, entender tus niveles de bienestar, practicar ejercicios de respiraci\u00f3n y escuchar meditaciones guiadas \u2014 todo en una interfaz hermosa y f\u00e1cil de usar.',
     'faq.q2': '\u00bfC\u00f3mo mido mi frecuencia card\u00edaca?',
     'faq.a2': 'Tienes tres opciones: ingresar tu BPM manualmente en la pantalla de Inicio, usar la funci\u00f3n de Medici\u00f3n Manual con un temporizador de pulso guiado de 15 segundos, o sincronizar tus datos de frecuencia card\u00edaca desde Apple Health si tienes un Apple Watch o dispositivo compatible.',
     'faq.q3': '\u00bfQu\u00e9 significan los niveles de estr\u00e9s?',
-    'faq.a3': 'Cordis clasifica tu frecuencia card\u00edaca en niveles de estr\u00e9s (relajado, normal, elevado, alto) basados en rangos apropiados para tu edad. Son indicadores generales de bienestar para ayudarte a ser m\u00e1s consciente de tu cuerpo \u2014 no son diagn\u00f3sticos m\u00e9dicos.',
+    'faq.a3': 'Cordis clasifica tu frecuencia card\u00edaca en niveles de bienestar (relajado, normal, elevado, alto) basados en rangos generales apropiados para tu edad. Son indicadores generales de bienestar para ayudarte a ser m\u00e1s consciente de tu cuerpo \u2014 no son diagn\u00f3sticos m\u00e9dicos y no deben usarse como sustituto del consejo m\u00e9dico profesional.',
     'faq.q4': '\u00bfMis datos son privados?',
     'faq.a4': 'S\u00ed. Todos tus datos se almacenan localmente en tu dispositivo. Cordis no requiere cuenta, no usa an\u00e1lisis ni servicios de IA de terceros, y nunca transmite tus datos personales o de salud a servidores externos.',
     'faq.q5': '\u00bfCordis se sincroniza entre dispositivos?',
