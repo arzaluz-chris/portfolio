@@ -436,6 +436,62 @@ ul {
   z-index: 2;
 }
 
+/* iPad Device Frame */
+.device-ipad {
+  position: relative;
+  width: 380px;
+  background: #000;
+  border-radius: 28px;
+  padding: 14px;
+  box-shadow:
+    0 0 0 2px #333,
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(139, 92, 246, 0.15);
+}
+
+.device-ipad img {
+  border-radius: 16px;
+  width: 100%;
+}
+
+/* Device Toggle */
+.device-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 0;
+}
+
+.device-btn {
+  padding: 10px 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.device-btn:first-child {
+  border-radius: 20px 0 0 20px;
+}
+
+.device-btn:last-child {
+  border-radius: 0 20px 20px 0;
+  border-left: none;
+}
+
+.device-btn.active {
+  background: var(--gradient-accent);
+  color: white;
+  border-color: transparent;
+}
+
+.gallery-hidden {
+  display: none;
+}
+
 /* ============================================
    FEATURES
    ============================================ */
@@ -604,6 +660,10 @@ ul {
 
 .gallery-item .device-iphone {
   width: 220px;
+}
+
+.gallery-item .device-ipad {
+  width: 340px;
 }
 
 .gallery-label {
@@ -1006,6 +1066,10 @@ ul {
 
   .gallery-item .device-iphone {
     width: 180px;
+  }
+
+  .gallery-item .device-ipad {
+    width: 260px;
   }
 
   .cta-title {

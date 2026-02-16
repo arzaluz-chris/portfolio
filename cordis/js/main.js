@@ -151,7 +151,7 @@ const translations = {
     'faq.q7': 'How do I delete my data?',
     'faq.a7': 'You can delete your BPM entries individually by swiping in the History screen, or delete all chat history from Settings. To remove all data completely, simply delete the app from your device.',
     'faq.q8': 'What devices and languages are supported?',
-    'faq.a8': 'Cordis is available on iPhone running iOS 18 or later. The app fully supports English and Spanish (Latin American), with all interface text and Health Assistant content available in both languages.',
+    'faq.a8': 'Cordis is available on iPhone and iPad running iOS 18 or later. The app fully supports English and Spanish (Latin American), with all interface text and Health Assistant content available in both languages.',
   },
 
   es: {
@@ -301,7 +301,7 @@ const translations = {
     'faq.q7': '\u00bfC\u00f3mo elimino mis datos?',
     'faq.a7': 'Puedes eliminar tus entradas de BPM individualmente deslizando en la pantalla de Historial, o eliminar todo el historial de chat desde Configuraci\u00f3n. Para borrar todos los datos completamente, simplemente elimina la app de tu dispositivo.',
     'faq.q8': '\u00bfQu\u00e9 dispositivos e idiomas son compatibles?',
-    'faq.a8': 'Cordis est\u00e1 disponible en iPhone con iOS 18 o posterior. La app es totalmente compatible con ingl\u00e9s y espa\u00f1ol (latinoamericano), con todo el texto de la interfaz y contenido del Asistente de Salud disponible en ambos idiomas.',
+    'faq.a8': 'Cordis est\u00e1 disponible en iPhone y iPad con iOS 18 o posterior. La app es totalmente compatible con ingl\u00e9s y espa\u00f1ol (latinoamericano), con todo el texto de la interfaz y contenido del Asistente de Salud disponible en ambos idiomas.',
   }
 };
 
@@ -350,11 +350,21 @@ function applyLanguage(lang) {
     }
   });
 
-  // Update screenshot paths
+  // Update iPhone screenshot paths
   const langDir = lang === 'es' ? 'Spanish' : 'English';
   document.querySelectorAll('[data-screenshot-num]').forEach(img => {
     const num = img.getAttribute('data-screenshot-num');
     img.src = `Screenshots/Cordis ${langDir}/${num}.png`;
+    const altKey = img.getAttribute('data-screenshot-alt');
+    if (altKey && translations[lang][altKey]) {
+      img.alt = translations[lang][altKey];
+    }
+  });
+
+  // Update iPad screenshot paths
+  document.querySelectorAll('[data-ipad-screenshot-num]').forEach(img => {
+    const num = img.getAttribute('data-ipad-screenshot-num');
+    img.src = `Screenshots/iPad ${langDir}/${num}.png`;
     const altKey = img.getAttribute('data-screenshot-alt');
     if (altKey && translations[lang][altKey]) {
       img.alt = translations[lang][altKey];
@@ -372,6 +382,25 @@ function applyLanguage(lang) {
 
 function toggleLanguage(lang) {
   applyLanguage(lang);
+}
+
+// --- Device Toggle (iPhone / iPad) ---
+function toggleDevice(device) {
+  const iphoneGallery = document.getElementById('gallery-iphone');
+  const ipadGallery = document.getElementById('gallery-ipad');
+  if (!iphoneGallery || !ipadGallery) return;
+
+  if (device === 'ipad') {
+    iphoneGallery.classList.add('gallery-hidden');
+    ipadGallery.classList.remove('gallery-hidden');
+  } else {
+    ipadGallery.classList.add('gallery-hidden');
+    iphoneGallery.classList.remove('gallery-hidden');
+  }
+
+  document.querySelectorAll('.device-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-device') === device);
+  });
 }
 
 // --- Nav Scroll ---

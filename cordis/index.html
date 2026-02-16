@@ -220,9 +220,16 @@
       <p class="section-subtitle fade-in" data-i18n="gallery.subtitle">
         A beautiful, intuitive interface designed for everyone.
       </p>
+
+      <!-- Device toggle -->
+      <div class="device-toggle fade-in">
+        <button class="device-btn active" data-device="iphone" onclick="toggleDevice('iphone')">iPhone</button>
+        <button class="device-btn" data-device="ipad" onclick="toggleDevice('ipad')">iPad</button>
+      </div>
     </div>
 
-    <div class="gallery-wrapper">
+    <!-- iPhone Gallery -->
+    <div class="gallery-wrapper" id="gallery-iphone">
       <div class="gallery-track">
         <div class="gallery-item">
           <div class="device-iphone">
@@ -263,6 +270,54 @@
           <div class="device-iphone">
             <img src="Screenshots/Cordis English/6.png" alt="Meditation"
               data-screenshot-num="6" data-screenshot-alt="gallery.meditation">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.meditation">Meditation</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- iPad Gallery -->
+    <div class="gallery-wrapper gallery-hidden" id="gallery-ipad">
+      <div class="gallery-track gallery-track-ipad">
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/iPad English/1.png" alt="Home"
+              data-ipad-screenshot-num="1" data-screenshot-alt="gallery.home">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.home">Home</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/iPad English/2.png" alt="Manual Measurement"
+              data-ipad-screenshot-num="2" data-screenshot-alt="gallery.manual">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.manual">Manual Measurement</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/iPad English/3.png" alt="Statistics"
+              data-ipad-screenshot-num="3" data-screenshot-alt="gallery.stats">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.stats">Statistics</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/iPad English/4.png" alt="Health Assistant"
+              data-ipad-screenshot-num="4" data-screenshot-alt="gallery.assistant">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.assistant">Health Assistant</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/iPad English/5.png" alt="Breathing"
+              data-ipad-screenshot-num="5" data-screenshot-alt="gallery.breathing">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.breathing">Breathing</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/iPad English/6.png" alt="Meditation"
+              data-ipad-screenshot-num="6" data-screenshot-alt="gallery.meditation">
           </div>
           <p class="gallery-label" data-i18n="gallery.meditation">Meditation</p>
         </div>
