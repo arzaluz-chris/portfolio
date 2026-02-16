@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CORDIS — Heart Rate Wellness</title>
+  <meta name="description" content="Cordis helps you monitor your heart rate, understand stress levels, and relax with guided meditations and breathing exercises.">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">CORDIS</a>
+
+      <ul class="nav-links">
+        <li><a href="#features" data-i18n="nav.features">Features</a></li>
+        <li><a href="#how-it-works" data-i18n="nav.howItWorks">How It Works</a></li>
+        <li><a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a></li>
+        <li><a href="#download" data-i18n="nav.download">Download</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+        </div>
+        <button class="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="#how-it-works" data-i18n="nav.howItWorks">How It Works</a>
+    <a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a>
+    <a href="#download" data-i18n="nav.download">Download</a>
+    <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+    <a href="support.html" data-i18n="nav.support">Support</a>
+    <div class="mobile-lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+    </div>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#x1F49C;</span>
+          <span data-i18n="hero.badge">Heart Rate Wellness</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title.1">Monitor Your</span><br>
+          <span class="gradient-text" data-i18n="hero.title.2">Heart Rate</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          Cordis helps you track your heart rate, understand your stress levels, and find calm with guided meditations and breathing exercises.
+        </p>
+        <a href="#" class="hero-cta">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <span data-i18n="hero.cta">Download on the App Store</span>
+        </a>
+      </div>
+      <div class="hero-device">
+        <div class="device-iphone">
+          <img
+            src="Screenshots/Cordis English/1.png"
+            alt="Cordis Home Screen"
+            data-screenshot-num="1"
+            data-screenshot-alt="gallery.home"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features" class="section section-darker">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="features.title">Everything You Need for Your Well-Being</h2>
+      <p class="section-subtitle fade-in" data-i18n="features.subtitle">
+        Simple, powerful tools designed to help you understand and take care of your heart health.
+      </p>
+
+      <div class="features-grid">
+        <!-- BPM Tracking -->
+        <div class="feature-card fade-in fade-in-delay-1">
+          <div class="feature-icon">&#x1F493;</div>
+          <h3 data-i18n="feature.bpm.title">BPM Tracking</h3>
+          <p data-i18n="feature.bpm.desc">Log your heart rate manually or sync from Apple Health. Get instant stress level feedback based on your age group.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/Cordis English/1.png"
+              alt="BPM Tracking"
+              data-screenshot-num="1"
+              data-screenshot-alt="gallery.home"
+            >
+          </div>
+        </div>
+
+        <!-- Manual Measurement -->
+        <div class="feature-card fade-in fade-in-delay-2">
+          <div class="feature-icon">&#x270B;</div>
+          <h3 data-i18n="feature.manual.title">Manual Measurement</h3>
+          <p data-i18n="feature.manual.desc">Measure your pulse with a guided 15-second timer. Just find your radial artery and tap along with your heartbeat.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/Cordis English/2.png"
+              alt="Manual Measurement"
+              data-screenshot-num="2"
+              data-screenshot-alt="gallery.manual"
+            >
+          </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="feature-card fade-in fade-in-delay-3">
+          <div class="feature-icon">&#x1F4CA;</div>
+          <h3 data-i18n="feature.stats.title">Statistics & Charts</h3>
+          <p data-i18n="feature.stats.desc">Visualize your heart rate trends over time with interactive charts. Track your average, minimum, and maximum BPM.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/Cordis English/3.png"
+              alt="Statistics"
+              data-screenshot-num="3"
+              data-screenshot-alt="gallery.stats"
+            >
+          </div>
+        </div>
+
+        <!-- Health Assistant -->
+        <div class="feature-card fade-in fade-in-delay-4">
+          <div class="feature-icon">&#x1F4AC;</div>
+          <h3 data-i18n="feature.assistant.title">Health Assistant</h3>
+          <p data-i18n="feature.assistant.desc">Get answers to 50+ questions about heart health, stress, and wellness. Personalized responses based on your data.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/Cordis English/4.png"
+              alt="Health Assistant"
+              data-screenshot-num="4"
+              data-screenshot-alt="gallery.assistant"
+            >
+          </div>
+        </div>
+
+        <!-- Breathing Exercises -->
+        <div class="feature-card fade-in fade-in-delay-5">
+          <div class="feature-icon">&#x1F32C;</div>
+          <h3 data-i18n="feature.breathing.title">Breathing Exercises</h3>
+          <p data-i18n="feature.breathing.desc">Practice the 4-7-8 breathing technique with guided visual cues. Calm your mind and lower your heart rate naturally.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/Cordis English/5.png"
+              alt="Breathing Exercises"
+              data-screenshot-num="5"
+              data-screenshot-alt="gallery.breathing"
+            >
+          </div>
+        </div>
+
+        <!-- Guided Meditations -->
+        <div class="feature-card fade-in fade-in-delay-6">
+          <div class="feature-icon">&#x1F3B5;</div>
+          <h3 data-i18n="feature.meditation.title">Guided Meditations</h3>
+          <p data-i18n="feature.meditation.desc">Listen to guided meditation sessions with haptic feedback and audio visualization. Relax anytime, anywhere.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/Cordis English/6.png"
+              alt="Guided Meditations"
+              data-screenshot-num="6"
+              data-screenshot-alt="gallery.meditation"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section id="how-it-works" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="steps.title">How It Works</h2>
+      <p class="section-subtitle fade-in" data-i18n="steps.subtitle">
+        Three simple steps to better understand and manage your heart health.
+      </p>
+
+      <div class="steps-grid">
+        <div class="step-card fade-in fade-in-delay-1">
+          <div class="step-number">1</div>
+          <h3 data-i18n="steps.1.name">Track</h3>
+          <p data-i18n="steps.1.desc">Record your heart rate manually, with the pulse timer, or sync from Apple Health.</p>
+        </div>
+        <div class="step-card fade-in fade-in-delay-2">
+          <div class="step-number">2</div>
+          <h3 data-i18n="steps.2.name">Understand</h3>
+          <p data-i18n="steps.2.desc">See your stress levels, trends, and statistics to understand your body better.</p>
+        </div>
+        <div class="step-card fade-in fade-in-delay-3">
+          <div class="step-number">3</div>
+          <h3 data-i18n="steps.3.name">Relax</h3>
+          <p data-i18n="steps.3.desc">Use breathing exercises and guided meditations to calm your mind and lower stress.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREENSHOT GALLERY ========== -->
+  <section id="screenshots" class="section section-darker">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="gallery.title">See Cordis in Action</h2>
+      <p class="section-subtitle fade-in" data-i18n="gallery.subtitle">
+        A beautiful, intuitive interface designed for everyone.
+      </p>
+    </div>
+
+    <div class="gallery-wrapper">
+      <div class="gallery-track">
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/Cordis English/1.png" alt="Home"
+              data-screenshot-num="1" data-screenshot-alt="gallery.home">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.home">Home</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/Cordis English/2.png" alt="Manual Measurement"
+              data-screenshot-num="2" data-screenshot-alt="gallery.manual">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.manual">Manual Measurement</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/Cordis English/3.png" alt="Statistics"
+              data-screenshot-num="3" data-screenshot-alt="gallery.stats">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.stats">Statistics</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/Cordis English/4.png" alt="Health Assistant"
+              data-screenshot-num="4" data-screenshot-alt="gallery.assistant">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.assistant">Health Assistant</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/Cordis English/5.png" alt="Breathing"
+              data-screenshot-num="5" data-screenshot-alt="gallery.breathing">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.breathing">Breathing</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/Cordis English/6.png" alt="Meditation"
+              data-screenshot-num="6" data-screenshot-alt="gallery.meditation">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.meditation">Meditation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DOWNLOAD CTA ========== -->
+  <section id="download" class="cta-section section-dark">
+    <div class="container">
+      <h2 class="cta-title fade-in">
+        <span data-i18n="cta.title.1">Start Taking Care</span><br>
+        <span class="gradient-text" data-i18n="cta.title.2">Today</span>
+      </h2>
+      <p class="cta-subtitle fade-in" data-i18n="cta.subtitle">
+        Download Cordis and take the first step toward understanding your heart health.
+      </p>
+      <a href="#" class="cta-button fade-in">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span data-i18n="cta.button">Download on the App Store</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-logo">CORDIS</span>
+      <div class="footer-links">
+        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+        <a href="support.html" data-i18n="nav.support">Support</a>
+      </div>
+      <span class="footer-copy">&copy; <span data-i18n="footer.copy">2026 Cordis. All rights reserved.</span></span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
