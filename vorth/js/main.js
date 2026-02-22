@@ -6,6 +6,7 @@
 const translations = {
   en: {
     // Nav
+    'nav.home': 'Portfolio',
     'nav.features': 'Features',
     'nav.perma': 'PERMA',
     'nav.screenshots': 'Screenshots',
@@ -145,6 +146,7 @@ const translations = {
 
   es: {
     // Nav
+    'nav.home': 'Portafolio',
     'nav.features': 'Funciones',
     'nav.perma': 'PERMA',
     'nav.screenshots': 'Capturas',

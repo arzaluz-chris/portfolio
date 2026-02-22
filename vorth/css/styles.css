@@ -1105,3 +1105,33 @@ ul {
   border-radius: 20px;
   border: 1px solid var(--glass-border);
 }
+
+/* Back to Portfolio */
+.nav-home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.nav-home:hover {
+  color: var(--text-primary);
+  border-color: var(--primary-400);
+}
+
+.mobile-home-link {
+  font-size: 1rem !important;
+  color: var(--text-secondary) !important;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--glass-border);
+  width: 60%;
+  text-align: center;
+}
