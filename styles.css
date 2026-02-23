@@ -179,6 +179,11 @@ body, html {
     border-radius: 8px; transition: 0.2s; font-weight: 500;
 }
 .github-link:hover { background: #444; }
+.appstore-link {
+    display: inline-block; margin-top: 20px; margin-left: 10px; padding: 10px 15px; background: #0071e3; color: white; text-decoration: none;
+    border-radius: 8px; transition: 0.2s; font-weight: 500;
+}
+.appstore-link:hover { background: #0077ed; }
 
 /* Portfolio (Sobre Mí) */
 .portfolio-app { padding: 25px; line-height: 1.6; }
@@ -266,8 +271,8 @@ body, html {
 .icon-walden { background: linear-gradient(135deg, #2e7d32, #66bb6a); }
 .icon-walden::after { content: '\f06c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-.icon-bishop { background: linear-gradient(135deg, #0277bd, #4fc3f7); }
-.icon-bishop::after { content: '\f0fa'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.icon-vorth { background: linear-gradient(135deg, #6a1b9a, #ab47bc); }
+.icon-vorth::after { content: '\f14e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
 .icon-mail { background: #3481F8; }
 .icon-mail::after { content: '\f0e0'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }

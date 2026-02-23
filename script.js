@@ -104,6 +104,7 @@ const translations = {
         mainFeatures: 'Características Principales',
         techStack: 'Stack Tecnológico',
         viewOnGitHub: 'Ver en GitHub',
+        viewOnAppStore: 'Ver en App Store',
 
         // Alerts
         folderExists: 'Ya existe una carpeta con este nombre.',
@@ -208,6 +209,7 @@ const translations = {
         mainFeatures: 'Main Features',
         techStack: 'Tech Stack',
         viewOnGitHub: 'View on GitHub',
+        viewOnAppStore: 'View on App Store',
 
         // Alerts
         folderExists: 'A folder with this name already exists.',
@@ -288,7 +290,8 @@ const projects = {
             'Soporte para español e inglés'
         ],
         stack: ['Swift 5.0', 'SwiftUI', 'MVVM', 'SwiftData', 'Combine', 'UserNotifications', 'AVFoundation', 'Charts'],
-        url: 'https://github.com/arzaluz-chris/Pomo'
+        url: 'https://github.com/arzaluz-chris/Pomo',
+        appStoreUrl: 'https://apps.apple.com/us/app/pomo-simple-timer/id6746705227'
     },
     'waldenvibes': {
         name: 'WaldenVibes',
@@ -303,21 +306,24 @@ const projects = {
             'Experiencia de usuario serena y relajante'
         ],
         stack: ['Swift', 'SwiftUI', 'iOS', 'Xcode'],
-        url: 'https://github.com/arzaluz-chris/WaldenVibes'
+        url: 'https://github.com/arzaluz-chris/WaldenVibes',
+        appStoreUrl: 'https://apps.apple.com/us/app/waldenvibes-emotion-tracker/id6748090601'
     },
-    'bishoptest': {
-        name: 'BishopTest',
-        icon: 'f0fa',
-        description: 'Aplicación médica para iOS diseñada para profesionales de obstetricia que permite calcular e interpretar la Puntuación de Bishop, una herramienta clínica que ayuda a predecir la probabilidad de éxito en la inducción del parto.',
+    'vorth': {
+        name: 'VORTH',
+        icon: 'f14e',
+        description: 'VORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.',
         features: [
-            'Cálculo de puntuación Bishop basado en parámetros cervicales',
-            'Modificadores clínicos de puntuación',
-            'Recomendaciones médicas personalizadas',
-            'Seguimiento del historial de pacientes',
-            'Referencia de métodos de inducción del parto'
+            'Coach de voz en vivo con Gemini AI',
+            'Diario PERMA para seguimiento de bienestar',
+            'Metas inteligentes sugeridas por IA',
+            'Asistente IA consciente de tu propósito',
+            'Alquimia emocional con ejercicios guiados',
+            'Sincronización entre iPhone y iPad via iCloud'
         ],
-        stack: ['Swift', 'SwiftUI', 'MVVM', 'FileManager', 'iOS 17.0+', 'Xcode 15+'],
-        url: 'https://github.com/arzaluz-chris/BishopTest'
+        stack: ['Swift', 'SwiftUI', 'MVVM', 'Gemini AI', 'SwiftData', 'AVFoundation', 'Speech'],
+        url: 'https://github.com/arzaluz-chris/Journify',
+        appStoreUrl: 'https://apps.apple.com/mx/app/vorth/id6759020391'
     }
 };
 
@@ -333,7 +339,7 @@ const apps = [
     { id: 'settings', name: 'Settings', iconClass: 'icon-settings' },
     { id: 'pomo', name: 'Pomo', iconClass: 'icon-pomo' },
     { id: 'waldenvibes', name: 'WaldenVibes', iconClass: 'icon-walden' },
-    { id: 'bishoptest', name: 'BishopTest', iconClass: 'icon-bishop' },
+    { id: 'vorth', name: 'VORTH', iconClass: 'icon-vorth' },
     { id: 'mail', name: 'Mail', iconClass: 'icon-mail' },
     { id: 'trash', name: 'Bin', iconClass: 'icon-trash', separator: true }
 ];
@@ -345,7 +351,7 @@ const fileSystem = {
         'Projects': { type: 'folder', children: {
             'Pomo.txt': { type: 'text', content: 'Pomo - Temporizador Pomodoro\n\nUna aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso.\n\nCaracterísticas:\n• Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)\n• Flujo automático entre sesiones de trabajo y descanso\n• Soporte para temporizador en segundo plano\n• Notificaciones push y alertas de sonido\n• Seguimiento de productividad diario y semanal con gráficas\n• Contador de rachas para mantener la motivación\n• Modo claro y oscuro automático\n• Soporte para español e inglés\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo'},
             'WaldenVibes.txt': { type: 'text', content: 'WaldenVibes - Meditación y Bienestar\n\nUna aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional.\n\nCaracterísticas:\n• Interfaz minimalista y zen con SwiftUI\n• Seguimiento de emociones y estados de ánimo\n• Ejercicios de meditación guiada\n• Registro diario de bienestar personal\n• Diseño enfocado en el bienestar mental\n• Experiencia de usuario serena y relajante\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes'},
-            'BishopTest.txt': { type: 'text', content: 'BishopTest - Herramienta Médica\n\nAplicación médica para iOS diseñada para profesionales de obstetricia que permite calcular e interpretar la Puntuación de Bishop.\n\nCaracterísticas:\n• Cálculo de puntuación Bishop basado en parámetros cervicales\n• Modificadores clínicos de puntuación\n• Recomendaciones médicas personalizadas\n• Seguimiento del historial de pacientes\n• Referencia de métodos de inducción del parto\n\nStack: Swift, SwiftUI, MVVM, FileManager, iOS 17.0+, Xcode 15+\n\nGitHub: https://github.com/arzaluz-chris/BishopTest'}
+            'VORTH.txt': { type: 'text', content: 'VORTH - Descubre Tu Propósito de Vida\n\nVORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.\n\nCaracterísticas:\n• Coach de voz en vivo con Gemini AI\n• Diario PERMA para seguimiento de bienestar\n• Metas inteligentes sugeridas por IA\n• Asistente IA consciente de tu propósito\n• Alquimia emocional con ejercicios guiados\n• Sincronización entre iPhone y iPad via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391'}
         } },
         'MyPhoto.jpg': { type: 'img', src: 'assets/profile.png'}
     }},
@@ -354,7 +360,7 @@ const fileSystem = {
         'Notes.txt': { type: 'text', content: 'Ideas para nuevos proyectos:\n- App de salud\n- Calculadora científica\n- Rastreador de hábitos'}
     }},
     'Downloads': { type: 'folder', children: {
-        'README.txt': { type: 'text', content: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, BishopTest)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHosted en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'},
+        'README.txt': { type: 'text', content: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, VORTH)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHosted en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'},
         'Screenshot.jpg': { type: 'img', src: 'assets/screenshot.jpg'}
     }}
 };
@@ -711,6 +717,11 @@ function renderProject(container, projectId) {
             <a href="${project.url}" target="_blank" class="github-link">
                 <i class="fab fa-github"></i> ${t('viewOnGitHub')}
             </a>
+            ${project.appStoreUrl ? `
+            <a href="${project.appStoreUrl}" target="_blank" class="appstore-link">
+                <i class="fab fa-apple"></i> ${t('viewOnAppStore')}
+            </a>
+            ` : ''}
         </div>
     `);
 }
@@ -758,7 +769,7 @@ function renderTerminal(container) {
         switch(args[0].toLowerCase()) {
             case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
-            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>BishopTest'; break;
+            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH'; break;
             case 'whoami': response = 'Christian Arzaluz - iOS Developer'; break;
             case 'date': response = new Date().toString(); break;
             case 'echo': response = args.slice(1).join(' '); break;
