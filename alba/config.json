@@ -1,0 +1,8 @@
+{
+  "geminiModel": "gemini-2.5-flash",
+  "maxDailyChatMessages": 50,
+  "chatEnabled": true,
+  "albaTestEnabled": true,
+  "journalEnabled": true,
+  "blocksEnabled": true
+}
