@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeddyFeels — Emotional Wellness Companion for Kids</title>
+  <meta name="description" content="TeddyFeels helps children ages 6-12 identify, express, and manage their emotions through a friendly teddy bear companion. Built with SwiftUI and SwiftData.">
+  <meta name="keywords" content="emotional wellness, children, kids, emotions, journaling, teddy bear, iOS app, SwiftUI, mental health, TeddyFeels, Christian Arzaluz">
+  <meta name="author" content="Christian Arzaluz">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#6C63FF">
+  <link rel="canonical" href="https://chrisarzaluz.dev/teddyfeels/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chrisarzaluz.dev/teddyfeels/">
+  <meta property="og:title" content="TeddyFeels — Emotional Wellness Companion for Kids">
+  <meta property="og:description" content="TeddyFeels helps children ages 6-12 identify, express, and manage their emotions through a friendly teddy bear companion.">
+  <meta property="og:image" content="https://chrisarzaluz.dev/teddyfeels/Screenshots/TeddyFeels iPhone English/2.png">
+  <meta property="og:site_name" content="TeddyFeels App">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TeddyFeels — Emotional Wellness Companion for Kids">
+  <meta name="twitter:description" content="TeddyFeels helps children ages 6-12 identify, express, and manage their emotions through a friendly teddy bear companion.">
+  <meta name="twitter:image" content="https://chrisarzaluz.dev/teddyfeels/Screenshots/TeddyFeels iPhone English/2.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "TeddyFeels",
+    "operatingSystem": "iOS",
+    "applicationCategory": "Education",
+    "description": "TeddyFeels helps children ages 6-12 identify, express, and manage their emotions through a friendly teddy bear companion.",
+    "url": "https://chrisarzaluz.dev/teddyfeels/",
+    "author": { "@type": "Person", "name": "Christian Arzaluz" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="nav-home" title="Back to Portfolio">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </a>
+      <a href="index.html" class="nav-logo">TeddyFeels</a>
+
+      <ul class="nav-links">
+        <li><a href="#features" data-i18n="nav.features">Features</a></li>
+        <li><a href="#emotions" data-i18n="nav.emotions">Emotions</a></li>
+        <li><a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a></li>
+        <li><a href="#download" data-i18n="nav.download">Download</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+        </div>
+        <button class="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="/" class="mobile-home-link" data-i18n="nav.home">Portfolio</a>
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="#emotions" data-i18n="nav.emotions">Emotions</a>
+    <a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a>
+    <a href="#download" data-i18n="nav.download">Download</a>
+    <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+    <a href="support.html" data-i18n="nav.support">Support</a>
+    <div class="mobile-lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+    </div>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#x1F9F8;</span>
+          <span data-i18n="hero.badge">Emotional Wellness for Kids</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title.1">Helping Kids</span><br>
+          <span class="gradient-text" data-i18n="hero.title.2">Understand Emotions</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          TeddyFeels helps children ages 6-12 identify, express, and manage their emotions through a friendly teddy bear companion, private journaling, and guided activities.
+        </p>
+        <a href="https://github.com/arzaluz-chris/TeddyFeels" class="hero-cta">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span data-i18n="hero.cta">Coming Soon to the App Store</span>
+        </a>
+      </div>
+      <div class="hero-device">
+        <div class="device-iphone">
+          <img
+            src="Screenshots/TeddyFeels iPhone English/2.png"
+            alt="TeddyFeels Emotions Home"
+            data-screenshot-device="iPhone"
+            data-screenshot-num="2"
+            data-screenshot-alt="gallery.home"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features" class="section section-darker">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="features.title">Everything Kids Need to Feel Safe</h2>
+      <p class="section-subtitle fade-in" data-i18n="features.subtitle">
+        Friendly tools designed to help children explore their feelings and build emotional resilience.
+      </p>
+
+      <div class="features-grid">
+        <!-- Emotion Check-In -->
+        <div class="feature-card fade-in fade-in-delay-1">
+          <div class="feature-icon">&#x1F3AD;</div>
+          <h3 data-i18n="feature.checkin.title">Emotion Check-In</h3>
+          <p data-i18n="feature.checkin.desc">Kids choose how they feel from a friendly grid of emotions, guided by their teddy bear companion. A simple, visual way to start understanding feelings.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/TeddyFeels iPhone English/2.png"
+              alt="Emotion Check-In"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="2"
+              data-screenshot-alt="gallery.home"
+            >
+          </div>
+        </div>
+
+        <!-- Private Journal -->
+        <div class="feature-card fade-in fade-in-delay-2">
+          <div class="feature-icon">&#x1F4D4;</div>
+          <h3 data-i18n="feature.journal.title">Private Journal</h3>
+          <p data-i18n="feature.journal.desc">A PIN-protected diary where children can write about their day, express their thoughts, and reflect on their emotions in a safe, private space.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/TeddyFeels iPhone English/4.png"
+              alt="Private Journal"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="4"
+              data-screenshot-alt="gallery.diary"
+            >
+          </div>
+        </div>
+
+        <!-- Goal Tracker -->
+        <div class="feature-card fade-in fade-in-delay-3">
+          <div class="feature-icon">&#x1F3AF;</div>
+          <h3 data-i18n="feature.goals.title">Goal Tracker</h3>
+          <p data-i18n="feature.goals.desc">Fun, achievable emotional goals that help kids build healthy habits. Track progress and celebrate milestones along the way.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/TeddyFeels iPhone English/5.png"
+              alt="Goal Tracker"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="5"
+              data-screenshot-alt="gallery.goals"
+            >
+          </div>
+        </div>
+
+        <!-- SOS Rescue Mode -->
+        <div class="feature-card fade-in fade-in-delay-4">
+          <div class="feature-icon">&#x1F198;</div>
+          <h3 data-i18n="feature.sos.title">SOS Rescue Mode</h3>
+          <p data-i18n="feature.sos.desc">When emotions feel overwhelming, the SOS button provides immediate calming exercises like breathing techniques and grounding activities.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/TeddyFeels iPhone English/8.png"
+              alt="SOS Rescue Mode"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="8"
+              data-screenshot-alt="gallery.sos"
+            >
+          </div>
+        </div>
+
+        <!-- Progress Dashboard -->
+        <div class="feature-card fade-in fade-in-delay-5">
+          <div class="feature-icon">&#x1F4CA;</div>
+          <h3 data-i18n="feature.progress.title">Progress Dashboard</h3>
+          <p data-i18n="feature.progress.desc">Visual charts and streaks that show kids (and parents) how emotional awareness grows over time. Celebrate consistency and growth.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/TeddyFeels iPhone English/7.png"
+              alt="Progress Dashboard"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="7"
+              data-screenshot-alt="gallery.progress"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EMOTIONS ========== -->
+  <section id="emotions" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="emotions.title">Nine Emotions Kids Can Explore</h2>
+      <p class="section-subtitle fade-in" data-i18n="emotions.subtitle">
+        TeddyFeels uses a carefully chosen set of emotions that children can easily recognize and relate to in their daily lives.
+      </p>
+
+      <div class="emotions-grid">
+        <div class="emotion-card fade-in fade-in-delay-1">
+          <div class="emotion-letter">&#x1F60A;</div>
+          <h3 data-i18n="emotion.happy.name">Happy</h3>
+          <p data-i18n="emotion.happy.desc">Feeling joyful, cheerful, and full of smiles.</p>
+        </div>
+        <div class="emotion-card fade-in fade-in-delay-2">
+          <div class="emotion-letter">&#x1F622;</div>
+          <h3 data-i18n="emotion.sad.name">Sad</h3>
+          <p data-i18n="emotion.sad.desc">Feeling down, lonely, or like crying.</p>
+        </div>
+        <div class="emotion-card fade-in fade-in-delay-3">
+          <div class="emotion-letter">&#x1F620;</div>
+          <h3 data-i18n="emotion.angry.name">Angry</h3>
+          <p data-i18n="emotion.angry.desc">Feeling frustrated, mad, or like things are unfair.</p>
+        </div>
+        <div class="emotion-card fade-in fade-in-delay-4">
+          <div class="emotion-letter">&#x1F630;</div>
+          <h3 data-i18n="emotion.anxious.name">Anxious</h3>
+          <p data-i18n="emotion.anxious.desc">Feeling worried, nervous, or uneasy inside.</p>
+        </div>
+        <div class="emotion-card fade-in fade-in-delay-5">
+          <div class="emotion-letter">&#x1F62B;</div>
+          <h3 data-i18n="emotion.stressed.name">Stressed</h3>
+          <p data-i18n="emotion.stressed.desc">Feeling overwhelmed, pressured, or too busy.</p>
+        </div>
+        <div class="emotion-card fade-in fade-in-delay-1">
+          <div class="emotion-letter">&#x1F615;</div>
+          <h3 data-i18n="emotion.confused.name">Confused</h3>
+          <p data-i18n="emotion.confused.desc">Feeling unsure, mixed up, or not understanding.</p>
+        </div>
+        <div class="emotion-card fade-in fade-in-delay-2">
+          <div class="emotion-letter">&#x1F31F;</div>
+          <h3 data-i18n="emotion.hopeful.name">Hopeful</h3>
+          <p data-i18n="emotion.hopeful.desc">Feeling positive that good things are coming.</p>
+        </div>
+        <div class="emotion-card fade-in fade-in-delay-3">
+          <div class="emotion-letter">&#x1F64F;</div>
+          <h3 data-i18n="emotion.grateful.name">Grateful</h3>
+          <p data-i18n="emotion.grateful.desc">Feeling thankful for the people and things in your life.</p>
+        </div>
+        <div class="emotion-card fade-in fade-in-delay-4">
+          <div class="emotion-letter">&#x1F4AA;</div>
+          <h3 data-i18n="emotion.proud.name">Proud</h3>
+          <p data-i18n="emotion.proud.desc">Feeling good about something you did or achieved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREENSHOT GALLERY ========== -->
+  <section id="screenshots" class="section section-darker">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="gallery.title">See TeddyFeels in Action</h2>
+      <p class="section-subtitle fade-in" data-i18n="gallery.subtitle">
+        Designed for iPhone and iPad with colorful, kid-friendly layouts that feel right on every screen.
+      </p>
+    </div>
+
+    <div class="gallery-wrapper">
+      <div class="gallery-track">
+        <!-- iPhone Screenshots -->
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/TeddyFeels iPhone English/1.png" alt="Character Selection"
+              data-screenshot-device="iPhone" data-screenshot-num="1" data-screenshot-alt="gallery.character">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.character">Character Selection</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/TeddyFeels iPhone English/2.png" alt="Emotions Home"
+              data-screenshot-device="iPhone" data-screenshot-num="2" data-screenshot-alt="gallery.home">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.home">Emotions Home</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/TeddyFeels iPhone English/3.png" alt="PIN Lock"
+              data-screenshot-device="iPhone" data-screenshot-num="3" data-screenshot-alt="gallery.pin">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.pin">PIN Lock</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/TeddyFeels iPhone English/4.png" alt="Diary"
+              data-screenshot-device="iPhone" data-screenshot-num="4" data-screenshot-alt="gallery.diary">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.diary">Diary</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/TeddyFeels iPhone English/5.png" alt="Goals"
+              data-screenshot-device="iPhone" data-screenshot-num="5" data-screenshot-alt="gallery.goals">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.goals">Goals</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/TeddyFeels iPhone English/6.png" alt="Family Rule"
+              data-screenshot-device="iPhone" data-screenshot-num="6" data-screenshot-alt="gallery.rule">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.rule">Family Rule</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/TeddyFeels iPhone English/7.png" alt="Progress"
+              data-screenshot-device="iPhone" data-screenshot-num="7" data-screenshot-alt="gallery.progress">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.progress">Progress</p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-iphone">
+            <img src="Screenshots/TeddyFeels iPhone English/8.png" alt="SOS"
+              data-screenshot-device="iPhone" data-screenshot-num="8" data-screenshot-alt="gallery.sos">
+          </div>
+          <p class="gallery-label" data-i18n="gallery.sos">SOS</p>
+        </div>
+
+        <!-- iPad Screenshots -->
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/TeddyFeels iPad English/1.png" alt="iPad Character Selection"
+              data-screenshot-device="iPad" data-screenshot-num="1" data-screenshot-alt="gallery.character">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.character">Character Selection</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/TeddyFeels iPad English/2.png" alt="iPad Emotions Home"
+              data-screenshot-device="iPad" data-screenshot-num="2" data-screenshot-alt="gallery.home">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.home">Emotions Home</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/TeddyFeels iPad English/3.png" alt="iPad PIN Lock"
+              data-screenshot-device="iPad" data-screenshot-num="3" data-screenshot-alt="gallery.pin">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.pin">PIN Lock</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/TeddyFeels iPad English/4.png" alt="iPad Diary"
+              data-screenshot-device="iPad" data-screenshot-num="4" data-screenshot-alt="gallery.diary">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.diary">Diary</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/TeddyFeels iPad English/5.png" alt="iPad Goals"
+              data-screenshot-device="iPad" data-screenshot-num="5" data-screenshot-alt="gallery.goals">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.goals">Goals</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/TeddyFeels iPad English/6.png" alt="iPad Family Rule"
+              data-screenshot-device="iPad" data-screenshot-num="6" data-screenshot-alt="gallery.rule">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.rule">Family Rule</span></p>
+        </div>
+        <div class="gallery-item">
+          <div class="device-ipad">
+            <img src="Screenshots/TeddyFeels iPad English/7.png" alt="iPad SOS"
+              data-screenshot-device="iPad" data-screenshot-num="7" data-screenshot-alt="gallery.sos">
+          </div>
+          <p class="gallery-label">iPad — <span data-i18n="gallery.sos">SOS</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DOWNLOAD CTA ========== -->
+  <section id="download" class="cta-section section-dark">
+    <div class="container">
+      <h2 class="cta-title fade-in">
+        <span data-i18n="cta.title.1">Your Child's Emotional</span><br>
+        <span class="gradient-text" data-i18n="cta.title.2">Safe Space</span>
+      </h2>
+      <p class="cta-subtitle fade-in" data-i18n="cta.subtitle">
+        TeddyFeels is coming soon to the App Store. Follow the project on GitHub to stay updated.
+      </p>
+      <a href="https://github.com/arzaluz-chris/TeddyFeels" class="cta-button fade-in">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span data-i18n="cta.button">View on GitHub</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-logo">TeddyFeels</span>
+      <div class="footer-links">
+        <a href="/" data-i18n="nav.home">Portfolio</a>
+        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+        <a href="support.html" data-i18n="nav.support">Support</a>
+      </div>
+      <span class="footer-copy">&copy; <span data-i18n="footer.copy">2026 TeddyFeels. All rights reserved.</span></span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

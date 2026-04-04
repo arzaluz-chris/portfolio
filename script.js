@@ -324,6 +324,23 @@ const projects = {
         stack: ['Swift', 'SwiftUI', 'MVVM', 'Gemini AI', 'SwiftData', 'AVFoundation', 'Speech'],
         url: 'https://github.com/arzaluz-chris/Journify',
         appStoreUrl: 'https://apps.apple.com/mx/app/vorth/id6759020391'
+    },
+    'teddyfeels': {
+        name: 'TeddyFeels',
+        icon: 'f1b0',
+        description: 'Una app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche, un diario privado protegido con PIN y actividades guiadas.',
+        features: [
+            'Check-in emocional con 9 emociones y oso animado',
+            'Diario privado protegido con PIN de 4 dígitos',
+            'Grabación de voz con transcripción local',
+            'Metas personales con celebraciones de confeti',
+            'Modo SOS de rescate con ejercicios de respiración',
+            'Dashboard de progreso con gráficas semanales',
+            'Todos los datos 100% locales — sin internet ni recopilación de datos'
+        ],
+        stack: ['Swift', 'SwiftUI', 'MVVM', 'SwiftData', 'Speech', 'AVFoundation', 'Vortex', 'Lottie'],
+        url: 'https://github.com/arzaluz-chris/TeddyFeels',
+        appStoreUrl: ''
     }
 };
 
@@ -340,6 +357,7 @@ const apps = [
     { id: 'pomo', name: 'Pomo', iconClass: 'icon-pomo' },
     { id: 'waldenvibes', name: 'WaldenVibes', iconClass: 'icon-walden' },
     { id: 'vorth', name: 'VORTH', iconClass: 'icon-vorth' },
+    { id: 'teddyfeels', name: 'TeddyFeels', iconClass: 'icon-teddyfeels' },
     { id: 'mail', name: 'Mail', iconClass: 'icon-mail' },
     { id: 'trash', name: 'Bin', iconClass: 'icon-trash', separator: true }
 ];
@@ -351,7 +369,8 @@ const fileSystem = {
         'Projects': { type: 'folder', children: {
             'Pomo.txt': { type: 'text', content: 'Pomo - Temporizador Pomodoro\n\nUna aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso.\n\nCaracterísticas:\n• Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)\n• Flujo automático entre sesiones de trabajo y descanso\n• Soporte para temporizador en segundo plano\n• Notificaciones push y alertas de sonido\n• Seguimiento de productividad diario y semanal con gráficas\n• Contador de rachas para mantener la motivación\n• Modo claro y oscuro automático\n• Soporte para español e inglés\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo'},
             'WaldenVibes.txt': { type: 'text', content: 'WaldenVibes - Meditación y Bienestar\n\nUna aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional.\n\nCaracterísticas:\n• Interfaz minimalista y zen con SwiftUI\n• Seguimiento de emociones y estados de ánimo\n• Ejercicios de meditación guiada\n• Registro diario de bienestar personal\n• Diseño enfocado en el bienestar mental\n• Experiencia de usuario serena y relajante\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes'},
-            'VORTH.txt': { type: 'text', content: 'VORTH - Descubre Tu Propósito de Vida\n\nVORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.\n\nCaracterísticas:\n• Coach de voz en vivo con Gemini AI\n• Diario PERMA para seguimiento de bienestar\n• Metas inteligentes sugeridas por IA\n• Asistente IA consciente de tu propósito\n• Alquimia emocional con ejercicios guiados\n• Sincronización entre iPhone y iPad via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391'}
+            'VORTH.txt': { type: 'text', content: 'VORTH - Descubre Tu Propósito de Vida\n\nVORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.\n\nCaracterísticas:\n• Coach de voz en vivo con Gemini AI\n• Diario PERMA para seguimiento de bienestar\n• Metas inteligentes sugeridas por IA\n• Asistente IA consciente de tu propósito\n• Alquimia emocional con ejercicios guiados\n• Sincronización entre iPhone y iPad via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391'},
+            'TeddyFeels.txt': { type: 'text', content: 'TeddyFeels - Bienestar Emocional para Niños\n\nUna app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche.\n\nCaracterísticas:\n• Check-in emocional con 9 emociones y oso animado\n• Diario privado protegido con PIN de 4 dígitos\n• Grabación de voz con transcripción local\n• Metas personales con celebraciones de confeti\n• Modo SOS de rescate con ejercicios de respiración\n• Dashboard de progreso con gráficas semanales\n• Todos los datos 100% locales — sin internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels'}
         } },
         'MyPhoto.jpg': { type: 'img', src: 'assets/profile.png'}
     }},
@@ -769,7 +788,7 @@ function renderTerminal(container) {
         switch(args[0].toLowerCase()) {
             case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
-            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH'; break;
+            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels'; break;
             case 'whoami': response = 'Christian Arzaluz - iOS Developer'; break;
             case 'date': response = new Date().toString(); break;
             case 'echo': response = args.slice(1).join(' '); break;

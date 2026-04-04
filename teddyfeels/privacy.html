@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — TeddyFeels</title>
+  <meta name="description" content="TeddyFeels Privacy Policy — A children's app that stores all data locally with zero data collection.">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar scrolled">
+    <div class="container">
+      <a href="/" class="nav-home" title="Back to Portfolio">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </a>
+      <a href="index.html" class="nav-logo">TeddyFeels</a>
+
+      <ul class="nav-links">
+        <li><a href="index.html#features" data-i18n="nav.features">Features</a></li>
+        <li><a href="index.html#emotions" data-i18n="nav.emotions">Emotions</a></li>
+        <li><a href="index.html#screenshots" data-i18n="nav.screenshots">Screenshots</a></li>
+        <li><a href="index.html#download" data-i18n="nav.download">Download</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+        </div>
+        <button class="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="/" class="mobile-home-link" data-i18n="nav.home">Portfolio</a>
+    <a href="index.html" data-i18n="nav.features">Features</a>
+    <a href="index.html#emotions" data-i18n="nav.emotions">Emotions</a>
+    <a href="index.html#screenshots" data-i18n="nav.screenshots">Screenshots</a>
+    <a href="index.html#download" data-i18n="nav.download">Download</a>
+    <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+    <a href="support.html" data-i18n="nav.support">Support</a>
+    <div class="mobile-lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+    </div>
+  </div>
+
+  <!-- ========== PAGE HEADER ========== -->
+  <div class="page-header">
+    <div class="container">
+      <h1 data-i18n="privacy.title">Privacy Policy</h1>
+      <p data-i18n="privacy.updated">Last updated: April 2026</p>
+    </div>
+  </div>
+
+  <!-- ========== CONTENT ========== -->
+  <div class="page-content section-dark">
+    <div class="container">
+      <div class="policy-text" data-i18n-html="privacy.body">
+        <h2>TeddyFeels Privacy Policy</h2>
+        <p>Your child's privacy is our top priority. TeddyFeels is designed with a privacy-first approach — all data stays on the device and nothing is collected or transmitted.</p>
+
+        <h2>1. Information We Collect</h2>
+        <p><strong>We collect no personal information.</strong> TeddyFeels does not require an account, login, or any personal data to use. All journal entries, emotion check-ins, goals, and settings are stored locally on the device using SwiftData.</p>
+
+        <h2>2. Data Storage</h2>
+        <p>All data is stored exclusively on the user's device. TeddyFeels does not use cloud storage, servers, or any external databases. If the app is deleted, all data is permanently removed.</p>
+
+        <h2>3. No Network Communication</h2>
+        <p>TeddyFeels does not connect to the internet. There are no analytics, tracking, advertising, or third-party services embedded in the app. No data is sent to or received from any server.</p>
+
+        <h2>4. Children's Privacy (COPPA Compliance)</h2>
+        <p>TeddyFeels is designed for children ages 6-12. Because we collect zero data — no personal information, no usage analytics, no device identifiers — the app fully complies with the Children's Online Privacy Protection Act (COPPA) and similar regulations worldwide.</p>
+
+        <h2>5. Third-Party Services</h2>
+        <p>TeddyFeels does not integrate with any third-party services, APIs, SDKs, or advertising networks. There are no external dependencies that could access user data.</p>
+
+        <h2>6. Parental Controls</h2>
+        <p>The app includes a PIN-protected diary feature to give children a sense of ownership over their private space. Parents can manage or reset this PIN through the app settings.</p>
+
+        <h2>7. Changes to This Policy</h2>
+        <p>If we make changes to this privacy policy in the future, we will update this page and note the date of the most recent revision above.</p>
+
+        <h2>8. Contact Us</h2>
+        <p>If you have questions about this privacy policy, please contact us at <a href="mailto:eduardogarcia@waldendos.edu.mx">eduardogarcia@waldendos.edu.mx</a> or <a href="mailto:christian.arzaluz@gmail.com">christian.arzaluz@gmail.com</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-logo">TeddyFeels</span>
+      <div class="footer-links">
+        <a href="/" data-i18n="nav.home">Portfolio</a>
+        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+        <a href="support.html" data-i18n="nav.support">Support</a>
+      </div>
+      <span class="footer-copy">&copy; <span data-i18n="footer.copy">2026 TeddyFeels. All rights reserved.</span></span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
