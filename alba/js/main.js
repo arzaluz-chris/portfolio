@@ -36,6 +36,8 @@ const translations = {
     'feature.music.desc': 'Listen to music while you chat with AlbaIA. Set the mood and make your conversations even more meaningful.',
     'feature.personalization.title': 'AI Personalization',
     'feature.personalization.desc': 'Customize how Alba communicates with you. Adjust her tone, style, and personality to match your preferences.',
+    'feature.security.title': 'Privacy & Security',
+    'feature.security.desc': 'Your journal is protected with a 4-digit PIN and Face ID. Your data stays on your device — always private, always yours.',
 
     // How It Works
     'howItWorks.title': 'How It Works',
@@ -50,15 +52,14 @@ const translations = {
     // Gallery
     'gallery.title': 'See Alba in Action',
     'gallery.subtitle': 'Designed for iPhone and iPad with adaptive layouts that feel right on every screen.',
-    'gallery.chat': 'Chat',
+    'gallery.home': 'Home',
     'gallery.test': 'Test',
+    'gallery.results': 'Results',
+    'gallery.chat': 'Chat',
+    'gallery.security': 'Security',
     'gallery.journal': 'Journal',
     'gallery.blocks': 'Blocks',
     'gallery.music': 'Music',
-    'gallery.settings': 'Settings',
-    'gallery.home': 'Home',
-    'gallery.results': 'Results',
-    'gallery.brand': 'Alba',
 
     // CTA
     'cta.title.1': 'Start Building',
@@ -176,6 +177,8 @@ const translations = {
     'feature.music.desc': 'Escucha música mientras platicas con AlbaIA. Crea el ambiente perfecto y haz tus conversaciones aún más significativas.',
     'feature.personalization.title': 'Personalización IA',
     'feature.personalization.desc': 'Personaliza cómo se comunica Alba contigo. Ajusta su tono, estilo y personalidad según tus preferencias.',
+    'feature.security.title': 'Privacidad y Seguridad',
+    'feature.security.desc': 'Tu diario está protegido con un PIN de 4 dígitos y Face ID. Tus datos se quedan en tu dispositivo — siempre privados, siempre tuyos.',
 
     // How It Works
     'howItWorks.title': 'Cómo Funciona',
@@ -190,15 +193,14 @@ const translations = {
     // Gallery
     'gallery.title': 'Mira Alba en Acción',
     'gallery.subtitle': 'Diseñado para iPhone y iPad con diseños adaptables que se sienten bien en cada pantalla.',
-    'gallery.chat': 'Chat',
+    'gallery.home': 'Inicio',
     'gallery.test': 'Test',
+    'gallery.results': 'Resultados',
+    'gallery.chat': 'Chat',
+    'gallery.security': 'Seguridad',
     'gallery.journal': 'Diario',
     'gallery.blocks': 'Bloques',
     'gallery.music': 'Música',
-    'gallery.settings': 'Ajustes',
-    'gallery.home': 'Inicio',
-    'gallery.results': 'Resultados',
-    'gallery.brand': 'Alba',
 
     // CTA
     'cta.title.1': 'Comienza a Construir',
