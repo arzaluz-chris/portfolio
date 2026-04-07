@@ -341,6 +341,23 @@ const projects = {
         stack: ['Swift', 'SwiftUI', 'MVVM', 'SwiftData', 'Speech', 'AVFoundation', 'Vortex', 'Lottie'],
         url: 'https://github.com/arzaluz-chris/TeddyFeels',
         appStoreUrl: ''
+    },
+    'alba': {
+        name: 'Alba',
+        icon: 'f4be',
+        description: 'Alba es tu guía para mejorar tus amistades. Basada en psicología positiva, Alba te ayuda a evaluar, entender y fortalecer tus relaciones a través de consejos personalizados con IA, un test científico y un diario privado.',
+        features: [
+            'Chat con IA basado en psicología positiva (Gemini)',
+            'Test de amistad con evaluación de confianza, apoyo, límites y asertividad',
+            'Diario de amistades protegido con PIN y Face ID',
+            'Artículos de psicología positiva (Alba Blocks)',
+            'Integración con Apple Music',
+            'Personalización del estilo de comunicación de la IA',
+            'Soporte para español e inglés'
+        ],
+        stack: ['Swift', 'SwiftUI', 'MVVM', 'Gemini AI', 'MusicKit', 'CryptoKit', 'LocalAuthentication', 'Combine'],
+        url: 'https://github.com/arzaluz-chris/Alba',
+        appStoreUrl: ''
     }
 };
 
@@ -358,6 +375,7 @@ const apps = [
     { id: 'waldenvibes', name: 'WaldenVibes', iconClass: 'icon-walden' },
     { id: 'vorth', name: 'VORTH', iconClass: 'icon-vorth' },
     { id: 'teddyfeels', name: 'TeddyFeels', iconClass: 'icon-teddyfeels' },
+    { id: 'alba', name: 'Alba', iconClass: 'icon-alba' },
     { id: 'mail', name: 'Mail', iconClass: 'icon-mail' },
     { id: 'trash', name: 'Bin', iconClass: 'icon-trash', separator: true }
 ];
@@ -370,6 +388,7 @@ const fileSystem = {
             'Pomo.txt': { type: 'text', content: 'Pomo - Temporizador Pomodoro\n\nUna aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso.\n\nCaracterísticas:\n• Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)\n• Flujo automático entre sesiones de trabajo y descanso\n• Soporte para temporizador en segundo plano\n• Notificaciones push y alertas de sonido\n• Seguimiento de productividad diario y semanal con gráficas\n• Contador de rachas para mantener la motivación\n• Modo claro y oscuro automático\n• Soporte para español e inglés\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo'},
             'WaldenVibes.txt': { type: 'text', content: 'WaldenVibes - Meditación y Bienestar\n\nUna aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional.\n\nCaracterísticas:\n• Interfaz minimalista y zen con SwiftUI\n• Seguimiento de emociones y estados de ánimo\n• Ejercicios de meditación guiada\n• Registro diario de bienestar personal\n• Diseño enfocado en el bienestar mental\n• Experiencia de usuario serena y relajante\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes'},
             'VORTH.txt': { type: 'text', content: 'VORTH - Descubre Tu Propósito de Vida\n\nVORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.\n\nCaracterísticas:\n• Coach de voz en vivo con Gemini AI\n• Diario PERMA para seguimiento de bienestar\n• Metas inteligentes sugeridas por IA\n• Asistente IA consciente de tu propósito\n• Alquimia emocional con ejercicios guiados\n• Sincronización entre iPhone y iPad via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391'},
+            'Alba.txt': { type: 'text', content: 'Alba - Tu Guía para Mejores Amistades\n\nAlba es tu guía para mejorar tus amistades, basada en psicología positiva.\n\nCaracterísticas:\n• Chat con IA basado en psicología positiva (Gemini)\n• Test de amistad con evaluación de confianza, apoyo, límites y asertividad\n• Diario de amistades protegido con PIN y Face ID\n• Artículos de psicología positiva (Alba Blocks)\n• Integración con Apple Music\n• Personalización del estilo de comunicación de la IA\n• Soporte para español e inglés\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, MusicKit, CryptoKit, LocalAuthentication, Combine\n\nGitHub: https://github.com/arzaluz-chris/Alba'},
             'TeddyFeels.txt': { type: 'text', content: 'TeddyFeels - Bienestar Emocional para Niños\n\nUna app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche.\n\nCaracterísticas:\n• Check-in emocional con 9 emociones y oso animado\n• Diario privado protegido con PIN de 4 dígitos\n• Grabación de voz con transcripción local\n• Metas personales con celebraciones de confeti\n• Modo SOS de rescate con ejercicios de respiración\n• Dashboard de progreso con gráficas semanales\n• Todos los datos 100% locales — sin internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels'}
         } },
         'MyPhoto.jpg': { type: 'img', src: 'assets/profile.png'}
@@ -788,7 +807,7 @@ function renderTerminal(container) {
         switch(args[0].toLowerCase()) {
             case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
-            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels'; break;
+            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels<span class="Apple-converted-space">  </span>Alba'; break;
             case 'whoami': response = 'Christian Arzaluz - iOS Developer'; break;
             case 'date': response = new Date().toString(); break;
             case 'echo': response = args.slice(1).join(' '); break;

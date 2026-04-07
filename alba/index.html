@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alba — Your Guide to Better Friendships</title>
+  <meta name="description" content="Alba is your friendship guide powered by positive psychology and AI. Take the Alba Test, chat with AlbaIA, keep a friendship journal, and grow meaningful connections.">
+  <meta name="keywords" content="friendship, positive psychology, AI advisor, friendship test, journal, iPhone, iPad, SwiftUI, iOS app, Alba">
+  <meta name="author" content="Christian Arzaluz">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#D98C72">
+  <link rel="canonical" href="https://chrisarzaluz.dev/alba/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chrisarzaluz.dev/alba/">
+  <meta property="og:title" content="Alba — Your Guide to Better Friendships">
+  <meta property="og:description" content="A friendship guide powered by positive psychology and AI. Evaluate your friendships, chat with AlbaIA, and grow meaningful connections.">
+  <meta property="og:image" content="https://chrisarzaluz.dev/alba/Screenshots/iPhone ES/1.png">
+  <meta property="og:site_name" content="Alba App">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alba — Your Guide to Better Friendships">
+  <meta name="twitter:description" content="A friendship guide powered by positive psychology and AI. Evaluate your friendships, chat with AlbaIA, and grow meaningful connections.">
+  <meta name="twitter:image" content="https://chrisarzaluz.dev/alba/Screenshots/iPhone ES/1.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Alba",
+    "operatingSystem": "iOS",
+    "applicationCategory": "Lifestyle",
+    "description": "A friendship guide powered by positive psychology and AI. Evaluate your friendships with the Alba Test, chat with AlbaIA, and grow meaningful connections.",
+    "url": "https://chrisarzaluz.dev/alba/",
+    "author": { "@type": "Person", "name": "Christian Arzaluz" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="nav-home" title="Back to Portfolio">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </a>
+      <a href="index.html" class="nav-logo">Alba</a>
+
+      <ul class="nav-links">
+        <li><a href="#features" data-i18n="nav.features">Features</a></li>
+        <li><a href="#how-it-works" data-i18n="nav.howItWorks">How It Works</a></li>
+        <li><a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a></li>
+        <li><a href="#download" data-i18n="nav.download">Download</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+        </div>
+        <button class="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="/" class="mobile-home-link" data-i18n="nav.home">Portfolio</a>
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="#how-it-works" data-i18n="nav.howItWorks">How It Works</a>
+    <a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a>
+    <a href="#download" data-i18n="nav.download">Download</a>
+    <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+    <a href="support.html" data-i18n="nav.support">Support</a>
+    <div class="mobile-lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+    </div>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#x1F91D;</span>
+          <span data-i18n="hero.badge">Friendship Guide</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title.1">Your Guide to</span><br>
+          <span class="gradient-text" data-i18n="hero.title.2">Better Friendships</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          Alba combines positive psychology, AI-powered advice, and thoughtful journaling to help you build and nurture the friendships that matter most.
+        </p>
+        <a href="#download" class="hero-cta">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <span data-i18n="hero.cta">Coming Soon on the App Store</span>
+        </a>
+      </div>
+      <div class="hero-device">
+        <div class="device-mockup">
+          <img
+            class="hero-screenshot"
+            src="Screenshots/iPhone ES/1.png"
+            alt="Alba Home"
+            data-screenshot-device="iPhone"
+            data-screenshot-num="1"
+            data-screenshot-alt="gallery.home"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features" class="section section-darker">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="features.title">Everything You Need to Build Better Friendships</h2>
+      <p class="section-subtitle fade-in" data-i18n="features.subtitle">
+        Powerful tools grounded in positive psychology to help you understand, nurture, and grow your friendships.
+      </p>
+
+      <div class="features-grid">
+        <!-- AlbaIA -->
+        <div class="feature-card fade-in fade-in-delay-1">
+          <div class="feature-icon">&#x1F4AC;</div>
+          <h3 data-i18n="feature.albaIA.title">AlbaIA</h3>
+          <p data-i18n="feature.albaIA.desc">Your personal AI friendship advisor. Get thoughtful, context-aware guidance on any friendship situation, powered by positive psychology.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/iPhone ES/2.png"
+              alt="AlbaIA"
+              class="screenshot-img"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="2"
+              data-screenshot-alt="gallery.albaIA"
+            >
+          </div>
+        </div>
+
+        <!-- Alba Test -->
+        <div class="feature-card fade-in fade-in-delay-2">
+          <div class="feature-icon">&#x1F4CB;</div>
+          <h3 data-i18n="feature.albaTest.title">Alba Test</h3>
+          <p data-i18n="feature.albaTest.desc">Evaluate the health of your friendships with a scientifically inspired assessment. Discover strengths and areas for growth in each relationship.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/iPhone ES/3.png"
+              alt="Alba Test"
+              class="screenshot-img"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="3"
+              data-screenshot-alt="gallery.albaTest"
+            >
+          </div>
+        </div>
+
+        <!-- Friendship Journal -->
+        <div class="feature-card fade-in fade-in-delay-3">
+          <div class="feature-icon">&#x1F4D3;</div>
+          <h3 data-i18n="feature.journal.title">Friendship Journal</h3>
+          <p data-i18n="feature.journal.desc">Keep a private diary of your friendship journey. Reflect on meaningful moments, track progress, and build a record of growth over time.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/iPhone ES/4.png"
+              alt="Friendship Journal"
+              class="screenshot-img"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="4"
+              data-screenshot-alt="gallery.journal"
+            >
+          </div>
+        </div>
+
+        <!-- Alba Blocks -->
+        <div class="feature-card fade-in fade-in-delay-4">
+          <div class="feature-icon">&#x1F4DA;</div>
+          <h3 data-i18n="feature.blocks.title">Alba Blocks</h3>
+          <p data-i18n="feature.blocks.desc">Bite-sized learning modules on friendship skills, communication, and positive psychology. Practical knowledge you can apply right away.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/iPhone ES/5.png"
+              alt="Alba Blocks"
+              class="screenshot-img"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="5"
+              data-screenshot-alt="gallery.blocks"
+            >
+          </div>
+        </div>
+
+        <!-- Apple Music -->
+        <div class="feature-card fade-in fade-in-delay-5">
+          <div class="feature-icon">&#x1F3B5;</div>
+          <h3 data-i18n="feature.music.title">Apple Music</h3>
+          <p data-i18n="feature.music.desc">Curated playlists and ambient soundscapes to set the mood for reflection, journaling, or simply enjoying a moment of calm.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/iPhone ES/6.png"
+              alt="Apple Music"
+              class="screenshot-img"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="6"
+              data-screenshot-alt="gallery.music"
+            >
+          </div>
+        </div>
+
+        <!-- AI Personalization -->
+        <div class="feature-card fade-in fade-in-delay-6">
+          <div class="feature-icon">&#x2728;</div>
+          <h3 data-i18n="feature.personalization.title">AI Personalization</h3>
+          <p data-i18n="feature.personalization.desc">Alba learns your communication style, friendship goals, and personal context to deliver advice that feels truly tailored to you.</p>
+          <div class="feature-screenshot">
+            <img
+              src="Screenshots/iPhone ES/7.png"
+              alt="AI Personalization"
+              class="screenshot-img"
+              data-screenshot-device="iPhone"
+              data-screenshot-num="7"
+              data-screenshot-alt="gallery.personalization"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section id="how-it-works" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="howItWorks.title">How It Works</h2>
+      <p class="section-subtitle fade-in" data-i18n="howItWorks.subtitle">
+        Three simple steps to start building stronger, more meaningful friendships.
+      </p>
+
+      <div class="perma-grid">
+        <div class="perma-card fade-in fade-in-delay-1">
+          <div class="perma-letter">1</div>
+          <h3 data-i18n="howItWorks.step1.title">Evaluate</h3>
+          <p data-i18n="howItWorks.step1.desc">Take the Alba Test to assess the health of your friendships. Get a clear picture of where each relationship stands and what needs attention.</p>
+        </div>
+        <div class="perma-card fade-in fade-in-delay-2">
+          <div class="perma-letter">2</div>
+          <h3 data-i18n="howItWorks.step2.title">Chat</h3>
+          <p data-i18n="howItWorks.step2.desc">Talk to AlbaIA about any friendship challenge. Receive personalized, psychology-backed advice that considers your unique situation.</p>
+        </div>
+        <div class="perma-card fade-in fade-in-delay-3">
+          <div class="perma-letter">3</div>
+          <h3 data-i18n="howItWorks.step3.title">Grow</h3>
+          <p data-i18n="howItWorks.step3.desc">Use the Friendship Journal to track your progress, reflect on key moments, and watch your relationships strengthen over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREENSHOT GALLERY ========== -->
+  <section id="screenshots" class="section section-darker">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="gallery.title">See Alba in Action</h2>
+      <p class="section-subtitle fade-in" data-i18n="gallery.subtitle">
+        Designed for iPhone and iPad with adaptive layouts that feel right on every screen.
+      </p>
+
+      <!-- Device Toggle -->
+      <div class="device-toggle fade-in">
+        <button class="device-btn active" data-device="iPhone" data-i18n="gallery.iphone">iPhone</button>
+        <button class="device-btn" data-device="iPad" data-i18n="gallery.ipad">iPad</button>
+      </div>
+    </div>
+
+    <div class="gallery-wrapper">
+      <button class="gallery-btn gallery-btn-prev" aria-label="Previous">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <div class="gallery-track">
+        <!-- iPhone Screenshots -->
+        <div class="gallery-item" data-device="iPhone">
+          <img src="Screenshots/iPhone ES/1.png" alt="Home" class="screenshot-img"
+            data-screenshot-device="iPhone" data-screenshot-num="1" data-screenshot-alt="gallery.home">
+          <p class="gallery-label" data-i18n="gallery.home">Home</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="Screenshots/iPhone ES/2.png" alt="AlbaIA" class="screenshot-img"
+            data-screenshot-device="iPhone" data-screenshot-num="2" data-screenshot-alt="gallery.albaIA">
+          <p class="gallery-label" data-i18n="gallery.albaIA">AlbaIA</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="Screenshots/iPhone ES/3.png" alt="Alba Test" class="screenshot-img"
+            data-screenshot-device="iPhone" data-screenshot-num="3" data-screenshot-alt="gallery.albaTest">
+          <p class="gallery-label" data-i18n="gallery.albaTest">Alba Test</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="Screenshots/iPhone ES/4.png" alt="Journal" class="screenshot-img"
+            data-screenshot-device="iPhone" data-screenshot-num="4" data-screenshot-alt="gallery.journal">
+          <p class="gallery-label" data-i18n="gallery.journal">Journal</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="Screenshots/iPhone ES/5.png" alt="Blocks" class="screenshot-img"
+            data-screenshot-device="iPhone" data-screenshot-num="5" data-screenshot-alt="gallery.blocks">
+          <p class="gallery-label" data-i18n="gallery.blocks">Blocks</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="Screenshots/iPhone ES/6.png" alt="Music" class="screenshot-img"
+            data-screenshot-device="iPhone" data-screenshot-num="6" data-screenshot-alt="gallery.music">
+          <p class="gallery-label" data-i18n="gallery.music">Music</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="Screenshots/iPhone ES/7.png" alt="Personalization" class="screenshot-img"
+            data-screenshot-device="iPhone" data-screenshot-num="7" data-screenshot-alt="gallery.personalization">
+          <p class="gallery-label" data-i18n="gallery.personalization">Personalization</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="Screenshots/iPhone ES/8.png" alt="Settings" class="screenshot-img"
+            data-screenshot-device="iPhone" data-screenshot-num="8" data-screenshot-alt="gallery.settings">
+          <p class="gallery-label" data-i18n="gallery.settings">Settings</p>
+        </div>
+
+        <!-- iPad Screenshots -->
+        <div class="gallery-item" data-device="iPad" style="display:none;">
+          <img src="Screenshots/iPad ES/1.png" alt="iPad Home" class="screenshot-img ipad"
+            data-screenshot-device="iPad" data-screenshot-num="1" data-screenshot-alt="gallery.home">
+          <p class="gallery-label">iPad — <span data-i18n="gallery.home">Home</span></p>
+        </div>
+        <div class="gallery-item" data-device="iPad" style="display:none;">
+          <img src="Screenshots/iPad ES/2.png" alt="iPad AlbaIA" class="screenshot-img ipad"
+            data-screenshot-device="iPad" data-screenshot-num="2" data-screenshot-alt="gallery.albaIA">
+          <p class="gallery-label">iPad — <span data-i18n="gallery.albaIA">AlbaIA</span></p>
+        </div>
+        <div class="gallery-item" data-device="iPad" style="display:none;">
+          <img src="Screenshots/iPad ES/3.png" alt="iPad Alba Test" class="screenshot-img ipad"
+            data-screenshot-device="iPad" data-screenshot-num="3" data-screenshot-alt="gallery.albaTest">
+          <p class="gallery-label">iPad — <span data-i18n="gallery.albaTest">Alba Test</span></p>
+        </div>
+        <div class="gallery-item" data-device="iPad" style="display:none;">
+          <img src="Screenshots/iPad ES/4.png" alt="iPad Journal" class="screenshot-img ipad"
+            data-screenshot-device="iPad" data-screenshot-num="4" data-screenshot-alt="gallery.journal">
+          <p class="gallery-label">iPad — <span data-i18n="gallery.journal">Journal</span></p>
+        </div>
+        <div class="gallery-item" data-device="iPad" style="display:none;">
+          <img src="Screenshots/iPad ES/5.png" alt="iPad Blocks" class="screenshot-img ipad"
+            data-screenshot-device="iPad" data-screenshot-num="5" data-screenshot-alt="gallery.blocks">
+          <p class="gallery-label">iPad — <span data-i18n="gallery.blocks">Blocks</span></p>
+        </div>
+        <div class="gallery-item" data-device="iPad" style="display:none;">
+          <img src="Screenshots/iPad ES/6.png" alt="iPad Music" class="screenshot-img ipad"
+            data-screenshot-device="iPad" data-screenshot-num="6" data-screenshot-alt="gallery.music">
+          <p class="gallery-label">iPad — <span data-i18n="gallery.music">Music</span></p>
+        </div>
+        <div class="gallery-item" data-device="iPad" style="display:none;">
+          <img src="Screenshots/iPad ES/7.png" alt="iPad Personalization" class="screenshot-img ipad"
+            data-screenshot-device="iPad" data-screenshot-num="7" data-screenshot-alt="gallery.personalization">
+          <p class="gallery-label">iPad — <span data-i18n="gallery.personalization">Personalization</span></p>
+        </div>
+        <div class="gallery-item" data-device="iPad" style="display:none;">
+          <img src="Screenshots/iPad ES/8.png" alt="iPad Settings" class="screenshot-img ipad"
+            data-screenshot-device="iPad" data-screenshot-num="8" data-screenshot-alt="gallery.settings">
+          <p class="gallery-label">iPad — <span data-i18n="gallery.settings">Settings</span></p>
+        </div>
+      </div>
+
+      <button class="gallery-btn gallery-btn-next" aria-label="Next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ========== DOWNLOAD CTA ========== -->
+  <section id="download" class="cta-section section-dark">
+    <div class="container">
+      <h2 class="cta-title fade-in">
+        <span data-i18n="cta.title.1">Start Improving Your</span><br>
+        <span class="gradient-text" data-i18n="cta.title.2">Friendships</span>
+      </h2>
+      <p class="cta-subtitle fade-in" data-i18n="cta.subtitle">
+        Alba is coming soon. Be ready to take the first step toward stronger, more meaningful friendships.
+      </p>
+      <a href="#download" class="cta-button fade-in">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span data-i18n="cta.button">Coming Soon on the App Store</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-logo">Alba</span>
+      <div class="footer-links">
+        <a href="/" data-i18n="nav.home">Portfolio</a>
+        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+        <a href="support.html" data-i18n="nav.support">Support</a>
+      </div>
+      <span class="footer-copy">&copy; <span data-i18n="footer.copy">2026 Alba. All rights reserved.</span></span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
