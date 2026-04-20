@@ -105,6 +105,7 @@ const translations = {
         techStack: 'Stack Tecnológico',
         viewOnGitHub: 'Ver en GitHub',
         viewOnAppStore: 'Ver en App Store',
+        visitWebsite: 'Visitar sitio web',
 
         // Alerts
         folderExists: 'Ya existe una carpeta con este nombre.',
@@ -210,6 +211,7 @@ const translations = {
         techStack: 'Tech Stack',
         viewOnGitHub: 'View on GitHub',
         viewOnAppStore: 'View on App Store',
+        visitWebsite: 'Visit website',
 
         // Alerts
         folderExists: 'A folder with this name already exists.',
@@ -357,7 +359,28 @@ const projects = {
         ],
         stack: ['Swift', 'SwiftUI', 'MVVM', 'Gemini AI', 'MusicKit', 'CryptoKit', 'LocalAuthentication', 'Combine'],
         url: 'https://github.com/arzaluz-chris/Alba',
-        appStoreUrl: ''
+        appStoreUrl: '',
+        websiteUrl: '/alba/'
+    },
+    'lumina': {
+        name: 'Lumina',
+        icon: '185',
+        description: 'Lumina es la app de fortalezas de carácter del Colegio Walden Dos de México. Basada en la clasificación VIA Character Strengths, combina un test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias de carácter y Buddy, un compañero conversacional. Cero datos recolectados, todo procesado en tu dispositivo.',
+        features: [
+            'Test VIA con 24 fortalezas agrupadas en 6 virtudes',
+            'Análisis personalizado con Apple Intelligence (Foundation Models on-device)',
+            'Buddy: compañero conversacional con IA, 100% en el dispositivo',
+            'Historias: bitácora de carácter con fotos y recordatorios de aniversario',
+            'Evolución: gráficas interactivas del cambio de fortalezas en el tiempo',
+            'Accesibilidad: lectura en voz alta con AVSpeechSynthesizer',
+            'Notificaciones locales (tips diarios, aniversarios, re-test)',
+            'Quick Actions + Review prompt inteligente',
+            'Privacy manifest: 0 tracking, 0 datos recolectados'
+        ],
+        stack: ['Swift 6', 'SwiftUI', 'iOS 26', 'Foundation Models', 'Apple Intelligence', 'SwiftData', 'UserNotifications', 'AVFoundation', 'PhotosPicker'],
+        url: '',
+        appStoreUrl: '',
+        websiteUrl: '/lumina/'
     }
 };
 
@@ -376,6 +399,7 @@ const apps = [
     { id: 'vorth', name: 'VORTH', iconClass: 'icon-vorth' },
     { id: 'teddyfeels', name: 'TeddyFeels', iconClass: 'icon-teddyfeels' },
     { id: 'alba', name: 'Alba', iconClass: 'icon-alba' },
+    { id: 'lumina', name: 'Lumina', iconClass: 'icon-lumina' },
     { id: 'mail', name: 'Mail', iconClass: 'icon-mail' },
     { id: 'trash', name: 'Bin', iconClass: 'icon-trash', separator: true }
 ];
@@ -389,7 +413,8 @@ const fileSystem = {
             'WaldenVibes.txt': { type: 'text', content: 'WaldenVibes - Meditación y Bienestar\n\nUna aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional.\n\nCaracterísticas:\n• Interfaz minimalista y zen con SwiftUI\n• Seguimiento de emociones y estados de ánimo\n• Ejercicios de meditación guiada\n• Registro diario de bienestar personal\n• Diseño enfocado en el bienestar mental\n• Experiencia de usuario serena y relajante\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes'},
             'VORTH.txt': { type: 'text', content: 'VORTH - Descubre Tu Propósito de Vida\n\nVORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.\n\nCaracterísticas:\n• Coach de voz en vivo con Gemini AI\n• Diario PERMA para seguimiento de bienestar\n• Metas inteligentes sugeridas por IA\n• Asistente IA consciente de tu propósito\n• Alquimia emocional con ejercicios guiados\n• Sincronización entre iPhone y iPad via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391'},
             'Alba.txt': { type: 'text', content: 'Alba - Tu Guía para Mejores Amistades\n\nAlba es tu guía para mejorar tus amistades, basada en psicología positiva.\n\nCaracterísticas:\n• Chat con IA basado en psicología positiva (Gemini)\n• Test de amistad con evaluación de confianza, apoyo, límites y asertividad\n• Diario de amistades protegido con PIN y Face ID\n• Artículos de psicología positiva (Alba Blocks)\n• Integración con Apple Music\n• Personalización del estilo de comunicación de la IA\n• Soporte para español e inglés\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, MusicKit, CryptoKit, LocalAuthentication, Combine\n\nGitHub: https://github.com/arzaluz-chris/Alba'},
-            'TeddyFeels.txt': { type: 'text', content: 'TeddyFeels - Bienestar Emocional para Niños\n\nUna app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche.\n\nCaracterísticas:\n• Check-in emocional con 9 emociones y oso animado\n• Diario privado protegido con PIN de 4 dígitos\n• Grabación de voz con transcripción local\n• Metas personales con celebraciones de confeti\n• Modo SOS de rescate con ejercicios de respiración\n• Dashboard de progreso con gráficas semanales\n• Todos los datos 100% locales — sin internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels'}
+            'TeddyFeels.txt': { type: 'text', content: 'TeddyFeels - Bienestar Emocional para Niños\n\nUna app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche.\n\nCaracterísticas:\n• Check-in emocional con 9 emociones y oso animado\n• Diario privado protegido con PIN de 4 dígitos\n• Grabación de voz con transcripción local\n• Metas personales con celebraciones de confeti\n• Modo SOS de rescate con ejercicios de respiración\n• Dashboard de progreso con gráficas semanales\n• Todos los datos 100% locales — sin internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels'},
+            'Lumina.txt': { type: 'text', content: 'Lumina - Descubre tus 24 fortalezas\n\nApp de fortalezas de carácter para el Colegio Walden Dos de México, basada en la clasificación VIA Character Strengths. Combina test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias y Buddy (compañero conversacional). Cero datos recolectados.\n\nCaracterísticas:\n• Test VIA con 24 fortalezas agrupadas en 6 virtudes\n• Análisis personalizado con Apple Intelligence (Foundation Models on-device)\n• Buddy: compañero conversacional con IA, 100% en el dispositivo\n• Historias: bitácora de carácter con fotos y recordatorios de aniversario\n• Evolución: gráficas interactivas del cambio de fortalezas en el tiempo\n• Accesibilidad: lectura en voz alta\n• Quick Actions + Review prompt inteligente\n• Privacy manifest: 0 tracking, 0 datos recolectados\n\nStack: Swift 6, SwiftUI, iOS 26, Foundation Models, Apple Intelligence, SwiftData, UserNotifications, AVFoundation, PhotosPicker\n\nSitio: https://chrisarzaluz.dev/lumina/'}
         } },
         'MyPhoto.jpg': { type: 'img', src: 'assets/profile.png'}
     }},
@@ -752,12 +777,19 @@ function renderProject(container, projectId) {
                 ${project.stack.map(t => `<li>${t}</li>`).join('')}
             </ul>
 
+            ${project.url ? `
             <a href="${project.url}" target="_blank" class="github-link">
                 <i class="fab fa-github"></i> ${t('viewOnGitHub')}
             </a>
+            ` : ''}
             ${project.appStoreUrl ? `
             <a href="${project.appStoreUrl}" target="_blank" class="appstore-link">
                 <i class="fab fa-apple"></i> ${t('viewOnAppStore')}
+            </a>
+            ` : ''}
+            ${project.websiteUrl ? `
+            <a href="${project.websiteUrl}" target="_blank" class="website-link">
+                <i class="fas fa-globe"></i> ${t('visitWebsite')}
             </a>
             ` : ''}
         </div>
@@ -807,7 +839,7 @@ function renderTerminal(container) {
         switch(args[0].toLowerCase()) {
             case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
-            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels<span class="Apple-converted-space">  </span>Alba'; break;
+            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels<span class="Apple-converted-space">  </span>Alba<span class="Apple-converted-space">  </span>Lumina'; break;
             case 'whoami': response = 'Christian Arzaluz - iOS Developer'; break;
             case 'date': response = new Date().toString(); break;
             case 'echo': response = args.slice(1).join(' '); break;

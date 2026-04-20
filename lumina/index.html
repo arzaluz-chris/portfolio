@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumina — Descubre tus 24 fortalezas</title>
+  <meta name="description" content="Lumina es la app del Colegio Walden Dos de México basada en las 24 fortalezas VIA. Test de carácter, análisis personalizado con Apple Intelligence on-device, Buddy e historias — con privacidad total.">
+  <meta name="keywords" content="Lumina, VIA, fortalezas de carácter, psicología positiva, Walden Dos, Apple Intelligence, Foundation Models, iPhone, iPad, SwiftUI">
+  <meta name="author" content="Christian Arzaluz">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#11706F">
+  <link rel="canonical" href="https://chrisarzaluz.dev/lumina/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chrisarzaluz.dev/lumina/">
+  <meta property="og:title" content="Lumina — Descubre tus 24 fortalezas">
+  <meta property="og:description" content="App de fortalezas de carácter VIA con Apple Intelligence on-device. Test, análisis, historias y Buddy — todo privado, todo en tu dispositivo.">
+  <meta property="og:image" content="https://chrisarzaluz.dev/lumina/screenshots/iPhone/01_MisFortalezas.png">
+  <meta property="og:site_name" content="Lumina App">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lumina — Descubre tus 24 fortalezas">
+  <meta name="twitter:description" content="App de fortalezas de carácter VIA con Apple Intelligence on-device.">
+  <meta name="twitter:image" content="https://chrisarzaluz.dev/lumina/screenshots/iPhone/01_MisFortalezas.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Lumina",
+    "operatingSystem": "iOS 26+",
+    "applicationCategory": "HealthApplication",
+    "description": "App de fortalezas de carácter VIA para el Colegio Walden Dos de México. Test, análisis personalizado con Apple Intelligence on-device, historias, Buddy y evolución.",
+    "url": "https://chrisarzaluz.dev/lumina/",
+    "author": { "@type": "Person", "name": "Christian Arzaluz" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="nav-home" title="Volver al portafolio">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </a>
+      <a href="index.html" class="nav-logo">
+        <span class="nav-spark" aria-hidden="true"></span>
+        Lumina
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#features" data-i18n="nav.features">Características</a></li>
+        <li><a href="#how-it-works" data-i18n="nav.howItWorks">Cómo funciona</a></li>
+        <li><a href="#screenshots" data-i18n="nav.screenshots">Capturas</a></li>
+        <li><a href="#download" data-i18n="nav.download">Descargar</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+          <button class="lang-btn" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+        </div>
+        <button class="hamburger" aria-label="Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="/" class="mobile-home-link" data-i18n="nav.home">Portafolio</a>
+    <a href="#features" data-i18n="nav.features">Características</a>
+    <a href="#how-it-works" data-i18n="nav.howItWorks">Cómo funciona</a>
+    <a href="#screenshots" data-i18n="nav.screenshots">Capturas</a>
+    <a href="#download" data-i18n="nav.download">Descargar</a>
+    <a href="privacy.html" data-i18n="nav.privacy">Privacidad</a>
+    <a href="support.html" data-i18n="nav.support">Soporte</a>
+    <div class="mobile-lang-toggle">
+      <button class="lang-btn active" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+      <button class="lang-btn" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+    </div>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span data-i18n="hero.badge">Colegio Walden Dos de México</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title.1">Descubre tus</span>
+          <span class="gradient-text" data-i18n="hero.title.2">24 fortalezas</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          Lumina es una app de psicología positiva basada en la clasificación VIA Character Strengths. Toma el test, recibe un análisis personalizado con Apple Intelligence on-device y cultiva tu carácter — sin recolección de datos.
+        </p>
+        <div class="hero-ctas">
+          <a href="#download" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span data-i18n="hero.cta">Próximamente en la App Store</span>
+          </a>
+          <a href="#features" class="btn btn-ghost" data-i18n="hero.secondary">Conoce las funciones</a>
+        </div>
+
+        <ul class="hero-highlights">
+          <li>
+            <span class="hl-icon">&#x2728;</span>
+            <span data-i18n="hero.hl.1">Apple Intelligence on-device</span>
+          </li>
+          <li>
+            <span class="hl-icon">&#x1F512;</span>
+            <span data-i18n="hero.hl.2">Cero datos recolectados</span>
+          </li>
+          <li>
+            <span class="hl-icon">&#x1F4D6;</span>
+            <span data-i18n="hero.hl.3">VIA Character Strengths</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero-device">
+        <div class="device-mockup">
+          <img
+            class="hero-screenshot"
+            src="screenshots/iPhone/01_MisFortalezas.png"
+            alt="Pantalla principal de Lumina mostrando las 24 fortalezas"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features" class="section section-cream">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="features.title">Todo tu viaje de carácter, en una app</h2>
+      <p class="section-subtitle fade-in" data-i18n="features.subtitle">
+        Lumina combina ciencia, diseño y privacidad para acompañarte en el descubrimiento de lo mejor de ti.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card fade-in fade-in-delay-1">
+          <div class="feature-icon icon-test">&#x1F4CB;</div>
+          <h3 data-i18n="feature.test.title">Test VIA</h3>
+          <p data-i18n="feature.test.desc">96 preguntas respaldadas por la clasificación VIA Character Strengths de Peterson, Seligman y Niemiec. Mide tus 24 fortalezas agrupadas en 6 virtudes.</p>
+          <div class="feature-screenshot">
+            <img src="screenshots/iPhone/09_Test.png" alt="Test de fortalezas">
+          </div>
+        </div>
+
+        <div class="feature-card fade-in fade-in-delay-2">
+          <div class="feature-icon icon-top">&#x1F31F;</div>
+          <h3 data-i18n="feature.top.title">Tu top 3</h3>
+          <p data-i18n="feature.top.desc">Conoce tus fortalezas más expresadas y una reflexión diaria inspirada en ellas. Explora las 24, ordenadas de la más fuerte a la menos expresada.</p>
+          <div class="feature-screenshot">
+            <img src="screenshots/iPhone/01_MisFortalezas.png" alt="Mis 24 fortalezas">
+          </div>
+        </div>
+
+        <div class="feature-card fade-in fade-in-delay-3">
+          <div class="feature-icon icon-analysis">&#x2728;</div>
+          <h3 data-i18n="feature.analysis.title">Análisis personalizado</h3>
+          <p data-i18n="feature.analysis.desc">Apple Intelligence genera un análisis único de tu perfil, directamente en tu iPhone o iPad. Sin servidores, sin que nadie más vea tus resultados.</p>
+          <div class="feature-screenshot">
+            <img src="screenshots/iPhone/02_AnalisisPersonalizado.png" alt="Análisis personalizado">
+          </div>
+        </div>
+
+        <div class="feature-card fade-in fade-in-delay-4">
+          <div class="feature-icon icon-evolution">&#x1F4C8;</div>
+          <h3 data-i18n="feature.evolution.title">Evolución</h3>
+          <p data-i18n="feature.evolution.desc">Retoma el test cuantas veces quieras. Visualiza cómo cambian tus fortalezas a lo largo del tiempo con gráficas interactivas.</p>
+          <div class="feature-screenshot">
+            <img src="screenshots/iPhone/03_Evolucion.png" alt="Evolución del test">
+          </div>
+        </div>
+
+        <div class="feature-card fade-in fade-in-delay-5">
+          <div class="feature-icon icon-stories">&#x1F4D3;</div>
+          <h3 data-i18n="feature.stories.title">Historias</h3>
+          <p data-i18n="feature.stories.desc">Registra los momentos en los que ejercitaste una fortaleza — con foto, fecha y recordatorios de aniversario. Tu bitácora de carácter, privada en tu dispositivo.</p>
+          <div class="feature-screenshot">
+            <img src="screenshots/iPhone/04_Historias.png" alt="Historias">
+          </div>
+        </div>
+
+        <div class="feature-card fade-in fade-in-delay-6">
+          <div class="feature-icon icon-buddy">&#x1F43B;</div>
+          <h3 data-i18n="feature.buddy.title">Buddy</h3>
+          <p data-i18n="feature.buddy.desc">Un compañero conversacional que te ayuda a reflexionar sobre tus fortalezas. Todo se procesa con Foundation Models en tu dispositivo — nada sale de ahí.</p>
+          <div class="feature-screenshot">
+            <img src="screenshots/iPhone/06_Buddy.png" alt="Buddy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VIRTUES ========== -->
+  <section id="virtues" class="section section-white">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="virtues.title">Las 6 virtudes de VIA</h2>
+      <p class="section-subtitle fade-in" data-i18n="virtues.subtitle">
+        24 fortalezas de carácter, agrupadas en 6 virtudes universales documentadas por la psicología positiva.
+      </p>
+
+      <div class="virtues-grid">
+        <div class="virtue-card fade-in fade-in-delay-1" style="--virtue: #545EB8;">
+          <span class="virtue-dot"></span>
+          <h3 data-i18n="virtue.wisdom">Sabiduría</h3>
+          <p data-i18n="virtue.wisdom.desc">Creatividad · Curiosidad · Juicio · Amor por el aprendizaje · Perspectiva</p>
+        </div>
+        <div class="virtue-card fade-in fade-in-delay-2" style="--virtue: #D96B61;">
+          <span class="virtue-dot"></span>
+          <h3 data-i18n="virtue.courage">Coraje</h3>
+          <p data-i18n="virtue.courage.desc">Valentía · Perseverancia · Honestidad · Vitalidad</p>
+        </div>
+        <div class="virtue-card fade-in fade-in-delay-3" style="--virtue: #D67094;">
+          <span class="virtue-dot"></span>
+          <h3 data-i18n="virtue.humanity">Humanidad</h3>
+          <p data-i18n="virtue.humanity.desc">Amor · Bondad · Inteligencia social</p>
+        </div>
+        <div class="virtue-card fade-in fade-in-delay-4" style="--virtue: #CC9E45;">
+          <span class="virtue-dot"></span>
+          <h3 data-i18n="virtue.justice">Justicia</h3>
+          <p data-i18n="virtue.justice.desc">Trabajo en equipo · Imparcialidad · Liderazgo</p>
+        </div>
+        <div class="virtue-card fade-in fade-in-delay-5" style="--virtue: #6BA37D;">
+          <span class="virtue-dot"></span>
+          <h3 data-i18n="virtue.temperance">Templanza</h3>
+          <p data-i18n="virtue.temperance.desc">Perdón · Humildad · Prudencia · Autorregulación</p>
+        </div>
+        <div class="virtue-card fade-in fade-in-delay-6" style="--virtue: #9471C2;">
+          <span class="virtue-dot"></span>
+          <h3 data-i18n="virtue.transcendence">Trascendencia</h3>
+          <p data-i18n="virtue.transcendence.desc">Apreciación de la belleza · Gratitud · Esperanza · Humor · Espiritualidad</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section id="how-it-works" class="section section-cream">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="howItWorks.title">Cómo funciona</h2>
+      <p class="section-subtitle fade-in" data-i18n="howItWorks.subtitle">
+        Tres pasos simples para empezar a trabajar con tus fortalezas de carácter.
+      </p>
+
+      <div class="steps-grid">
+        <div class="step-card fade-in fade-in-delay-1">
+          <div class="step-number">1</div>
+          <h3 data-i18n="step.1.title">Haz el test</h3>
+          <p data-i18n="step.1.desc">Responde las preguntas a tu ritmo. Puedes pausarlo y retomarlo cuando quieras — y activar la lectura en voz alta si lo prefieres.</p>
+        </div>
+        <div class="step-card fade-in fade-in-delay-2">
+          <div class="step-number">2</div>
+          <h3 data-i18n="step.2.title">Recibe tu análisis</h3>
+          <p data-i18n="step.2.desc">Apple Intelligence genera un análisis único de tu top 3 sin enviar nada fuera de tu dispositivo. Lee reflexiones diarias inspiradas en ti.</p>
+        </div>
+        <div class="step-card fade-in fade-in-delay-3">
+          <div class="step-number">3</div>
+          <h3 data-i18n="step.3.title">Cultiva tu carácter</h3>
+          <p data-i18n="step.3.desc">Registra historias, conversa con Buddy y retoma el test para ver tu evolución. Tus fortalezas se expresan practicándolas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREENSHOT GALLERY ========== -->
+  <section id="screenshots" class="section section-white">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="gallery.title">Lumina en acción</h2>
+      <p class="section-subtitle fade-in" data-i18n="gallery.subtitle">
+        Diseñada para iPhone y iPad, con layouts adaptativos que aprovechan cada pantalla.
+      </p>
+
+      <div class="device-toggle-wrapper fade-in">
+        <div class="device-toggle">
+          <button class="device-btn active" data-device="iPhone" data-i18n="gallery.iphone">iPhone</button>
+          <button class="device-btn" data-device="iPad" data-i18n="gallery.ipad">iPad</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-wrapper">
+      <div class="gallery-track">
+        <!-- iPhone -->
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/01_MisFortalezas.png" alt="Mis 24 fortalezas">
+          <p class="gallery-label" data-i18n="gallery.label.home">Mis 24</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/02_AnalisisPersonalizado.png" alt="Análisis personalizado">
+          <p class="gallery-label" data-i18n="gallery.label.analysis">Análisis</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/03_Evolucion.png" alt="Evolución">
+          <p class="gallery-label" data-i18n="gallery.label.evolution">Evolución</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/04_Historias.png" alt="Historias">
+          <p class="gallery-label" data-i18n="gallery.label.stories">Historias</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/05_HistoriaDetalle.png" alt="Detalle de historia">
+          <p class="gallery-label" data-i18n="gallery.label.storyDetail">Detalle</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/06_Buddy.png" alt="Buddy">
+          <p class="gallery-label" data-i18n="gallery.label.buddy">Buddy</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/07_Conversaciones.png" alt="Conversaciones">
+          <p class="gallery-label" data-i18n="gallery.label.conversations">Conversaciones</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/09_Test.png" alt="Test">
+          <p class="gallery-label" data-i18n="gallery.label.test">Test</p>
+        </div>
+        <div class="gallery-item" data-device="iPhone">
+          <img src="screenshots/iPhone/08_Ajustes.png" alt="Ajustes">
+          <p class="gallery-label" data-i18n="gallery.label.settings">Ajustes</p>
+        </div>
+
+        <!-- iPad -->
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/01_MisFortalezas.png" alt="iPad — Mis 24">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.home">Mis 24</span></p>
+        </div>
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/02_AnalisisPersonalizado.png" alt="iPad — Análisis">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.analysis">Análisis</span></p>
+        </div>
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/03_Evolucion.png" alt="iPad — Evolución">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.evolution">Evolución</span></p>
+        </div>
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/04_Historias.png" alt="iPad — Historias">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.stories">Historias</span></p>
+        </div>
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/05_HistoriaDetalle.png" alt="iPad — Detalle">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.storyDetail">Detalle</span></p>
+        </div>
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/06_Buddy.png" alt="iPad — Buddy">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.buddy">Buddy</span></p>
+        </div>
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/07_Conversaciones.png" alt="iPad — Conversaciones">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.conversations">Conversaciones</span></p>
+        </div>
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/09_Test.png" alt="iPad — Test">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.test">Test</span></p>
+        </div>
+        <div class="gallery-item ipad" data-device="iPad" style="display:none;">
+          <img src="screenshots/iPad/08_Ajustes.png" alt="iPad — Ajustes">
+          <p class="gallery-label">iPad · <span data-i18n="gallery.label.settings">Ajustes</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRIVACY BANNER ========== -->
+  <section class="section section-cream privacy-banner">
+    <div class="container">
+      <div class="privacy-card fade-in">
+        <div class="privacy-left">
+          <div class="privacy-icon">&#x1F512;</div>
+          <h2 data-i18n="privacy.banner.title">Privacidad por diseño</h2>
+          <p data-i18n="privacy.banner.desc">
+            Lumina no recolecta datos. Ninguno. El test, tus historias, tus conversaciones con Buddy y tus fotos viven dentro del sandbox de la app en tu dispositivo. Todo el procesamiento de IA ocurre localmente con Foundation Models.
+          </p>
+        </div>
+        <ul class="privacy-bullets">
+          <li><span class="chk">&#x2713;</span><span data-i18n="privacy.banner.b1">0 datos recolectados</span></li>
+          <li><span class="chk">&#x2713;</span><span data-i18n="privacy.banner.b2">0 rastreadores</span></li>
+          <li><span class="chk">&#x2713;</span><span data-i18n="privacy.banner.b3">0 servidores externos</span></li>
+          <li><span class="chk">&#x2713;</span><span data-i18n="privacy.banner.b4">100% procesamiento on-device</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DOWNLOAD CTA ========== -->
+  <section id="download" class="cta-section section-white">
+    <div class="container">
+      <h2 class="cta-title fade-in">
+        <span data-i18n="cta.title.1">Ilumina</span>
+        <span class="gradient-text" data-i18n="cta.title.2">tus fortalezas</span>
+      </h2>
+      <p class="cta-subtitle fade-in" data-i18n="cta.subtitle">
+        Lumina llega pronto a la App Store. Diseñada para estudiantes y familias del Colegio Walden Dos de México — y para cualquiera que quiera conocerse mejor.
+      </p>
+      <a href="#download" class="btn btn-primary btn-large fade-in">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span data-i18n="cta.button">Próximamente en la App Store</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-logo">Lumina</span>
+      <div class="footer-links">
+        <a href="/" data-i18n="nav.home">Portafolio</a>
+        <a href="privacy.html" data-i18n="nav.privacy">Privacidad</a>
+        <a href="support.html" data-i18n="nav.support">Soporte</a>
+      </div>
+      <span class="footer-copy">&copy; <span data-i18n="footer.copy">2026 Lumina · Colegio Walden Dos de México</span></span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

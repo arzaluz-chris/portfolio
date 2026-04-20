@@ -184,6 +184,11 @@ body, html {
     border-radius: 8px; transition: 0.2s; font-weight: 500;
 }
 .appstore-link:hover { background: #0077ed; }
+.website-link {
+    display: inline-block; margin-top: 20px; margin-left: 10px; padding: 10px 15px; background: #11706F; color: white; text-decoration: none;
+    border-radius: 8px; transition: 0.2s; font-weight: 500;
+}
+.website-link:hover { background: #0D5D5C; }
 
 /* Portfolio (Sobre Mí) */
 .portfolio-app { padding: 25px; line-height: 1.6; }
@@ -279,6 +284,9 @@ body, html {
 
 .icon-alba { background: linear-gradient(135deg, #D98C72, #EB956F); }
 .icon-alba::after { content: '\f4be'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+.icon-lumina { background: linear-gradient(135deg, #11706F, #2FC3D1); }
+.icon-lumina::after { content: '\f185'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
 .icon-mail { background: #3481F8; }
 .icon-mail::after { content: '\f0e0'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
