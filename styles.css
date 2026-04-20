@@ -83,8 +83,9 @@ body, html {
     transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); position: relative;
     cursor: pointer;
 }
-/* SVG Icon Styles */
-.dock-icon-svg { width: 100%; height: 100%; border-radius: 14px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;}
+/* Dock Icon Image */
+.dock-icon-svg { width: 100%; height: 100%; position: relative; display: flex; justify-content: center; align-items: center; }
+.dock-icon-img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; user-select: none; -webkit-user-drag: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25)); }
 
 .dock-item:hover { transform: scale(1.2) translateY(-10px); margin: 0 5px; }
 .dock-dot {
@@ -226,85 +227,6 @@ body, html {
 .safari-bar { padding: 8px; background: #f0f0f0; border-bottom: 1px solid #ccc; display: flex; gap: 10px; align-items: center; }
 .url-bar { flex: 1; background: #ddd; border: none; padding: 5px 10px; border-radius: 8px; text-align: center; font-size: 12px; color: #333; outline: none;}
 .safari-frame { flex: 1; border: none; width: 100%; background: white; }
-
-/* --- SVGs for Icons (Data URIs for single file) --- */
-.icon-common-fa::after {
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    color: white;
-    font-size: 30px;
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-.icon-finder { background: linear-gradient(180deg, #e3e3e3 0%, #c7c7c7 100%); position: relative; overflow: hidden; }
-.icon-finder::after { content: ':)'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(90deg); font-size: 30px; font-weight: bold; color: #2a62b3; font-family: monospace;}
-
-.icon-safari { background: white; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23fff'/%3E%3Ccircle cx='50' cy='50' r='45' fill='%231facfd'/%3E%3Cpath d='M50 5 L50 95 M5 50 L95 50' stroke='rgba(255,255,255,0.3)' stroke-width='1'/%3E%3Cpolygon points='50,10 60,45 90,50 55,60 50,90 40,55 10,50 45,40' fill='white'/%3E%3Cpolygon points='50,10 55,45 50,50 45,45' fill='%23ea4335'/%3E%3C/svg%3E"); background-size: cover;}
-
-.icon-terminal { background: #222; position: relative; }
-.icon-terminal::after { content: '>'; color: #fff; position: absolute; top: 10px; left: 10px; font-family: monospace; font-size: 24px; font-weight: bold;}
-
-.icon-calc {
-    background: #333;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    padding: 8px;
-    gap: 4px;
-    position: relative;
-    align-items: stretch;
-    justify-items: stretch;
-}
-.icon-calc div {
-    background: #ff9f0a;
-    border-radius: 4px;
-    min-height: 0;
-    min-width: 0;
-}
-.icon-calc div:nth-child(1),
-.icon-calc div:nth-child(2) {
-    background: #555;
-}
-
-/* NUEVOS ICONOS DE PROYECTOS */
-.icon-pomo { background: linear-gradient(135deg, #d32f2f, #ff7043); }
-.icon-pomo::after { content: '\f2f2'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-walden { background: linear-gradient(135deg, #2e7d32, #66bb6a); }
-.icon-walden::after { content: '\f06c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-vorth { background: linear-gradient(135deg, #6a1b9a, #ab47bc); }
-.icon-vorth::after { content: '\f14e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-teddyfeels { background: linear-gradient(135deg, #6C63FF, #FF6B6B); }
-.icon-teddyfeels::after { content: '\f1b0'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-alba { background: linear-gradient(135deg, #D98C72, #EB956F); }
-.icon-alba::after { content: '\f4be'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-lumina { background: linear-gradient(135deg, #11706F, #2FC3D1); }
-.icon-lumina::after { content: '\f185'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-mail { background: #3481F8; }
-.icon-mail::after { content: '\f0e0'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-trash { background: linear-gradient(180deg, #f2f2f7 0%, #d1d1d6 100%); position: relative; }
-.icon-trash::after { content: '\f1f8'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #777; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-aboutme { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; }
-.icon-aboutme::after { content: '\f007'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-.icon-text { background: linear-gradient(180deg, #fdfdfd 0%, #dcdcdc 100%); position: relative; }
-.icon-text::after { content: ''; position: absolute; top: 15px; left: 10px; right: 10px; height: 2px; background: #999; box-shadow: 0 5px 0 #999, 0 10px 0 #999, 0 15px 0 #999; }
-
-.icon-paint { background: linear-gradient(45deg, #ff3b30, #ff9500, #ffcc00, #4cd964, #5ac8fa, #007aff, #5856d6, #ff2d55); }
-.icon-paint::after { content: '\f1fc'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: white; font-size: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-shadow: 0 2px 5px rgba(0,0,0,0.3);}
-
-.icon-settings { background: linear-gradient(180deg, #8e8e93 0%, #636366 100%); position: relative; }
-.icon-settings::after { content: '\f013'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #ddd; font-size: 35px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
 /* ========================================
    RESPONSIVE DESIGN - MOBILE & TABLETS

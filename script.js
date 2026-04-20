@@ -386,22 +386,22 @@ const projects = {
 
 // APPS DEL DOCK (como en tu video)
 const apps = [
-    { id: 'finder', name: 'Finder', iconClass: 'icon-finder' },
-    { id: 'aboutme', name: 'Sobre Mí', iconClass: 'icon-aboutme' },
-    { id: 'safari', name: 'Safari', iconClass: 'icon-safari' },
-    { id: 'terminal', name: 'Terminal', iconClass: 'icon-terminal' },
-    { id: 'textedit', name: 'TextEdit', iconClass: 'icon-text' },
-    { id: 'paint', name: 'Sketch', iconClass: 'icon-paint' },
-    { id: 'calculator', name: 'Calculator', iconClass: 'icon-calc', htmlIcon: '<div></div><div></div><div></div><div></div>' },
-    { id: 'settings', name: 'Settings', iconClass: 'icon-settings' },
-    { id: 'pomo', name: 'Pomo', iconClass: 'icon-pomo' },
-    { id: 'waldenvibes', name: 'WaldenVibes', iconClass: 'icon-walden' },
-    { id: 'vorth', name: 'VORTH', iconClass: 'icon-vorth' },
-    { id: 'teddyfeels', name: 'TeddyFeels', iconClass: 'icon-teddyfeels' },
-    { id: 'alba', name: 'Alba', iconClass: 'icon-alba' },
-    { id: 'lumina', name: 'Lumina', iconClass: 'icon-lumina' },
-    { id: 'mail', name: 'Mail', iconClass: 'icon-mail' },
-    { id: 'trash', name: 'Bin', iconClass: 'icon-trash', separator: true }
+    { id: 'finder',      name: 'Finder',      icon: 'assets/dock-icons/processed/finder.png' },
+    { id: 'aboutme',     name: 'Sobre Mí',    icon: 'assets/dock-icons/processed/contacts.png' },
+    { id: 'safari',      name: 'Safari',      icon: 'assets/dock-icons/processed/safari.png' },
+    { id: 'terminal',    name: 'Terminal',    icon: 'assets/dock-icons/processed/terminal.png' },
+    { id: 'textedit',    name: 'TextEdit',    icon: 'assets/dock-icons/processed/textedit.png' },
+    { id: 'paint',       name: 'Sketch',      icon: 'assets/dock-icons/processed/paint.png' },
+    { id: 'calculator',  name: 'Calculator',  icon: 'assets/dock-icons/processed/calculator.png' },
+    { id: 'settings',    name: 'Settings',    icon: 'assets/dock-icons/processed/settings.png' },
+    { id: 'pomo',        name: 'Pomo',        icon: 'assets/dock-icons/processed/pomo.png' },
+    { id: 'waldenvibes', name: 'WaldenVibes', icon: 'assets/dock-icons/processed/waldenvibes.png' },
+    { id: 'vorth',       name: 'VORTH',       icon: 'assets/dock-icons/processed/vorth.png' },
+    { id: 'teddyfeels',  name: 'TeddyFeels',  icon: 'assets/dock-icons/processed/teddyfeels.png' },
+    { id: 'alba',        name: 'Alba',        icon: 'assets/dock-icons/processed/alba.png' },
+    { id: 'lumina',      name: 'Lumina',      icon: 'assets/dock-icons/processed/lumina.png' },
+    { id: 'mail',        name: 'Mail',        icon: 'assets/dock-icons/processed/mail.png' },
+    { id: 'trash',       name: 'Bin',         icon: 'assets/dock-icons/processed/trash-empty.png', separator: true }
 ];
 
 // Simulated File System
@@ -445,16 +445,26 @@ class WindowManager {
         apps.forEach(app => {
             if(app.separator) dock.append('<div style="width:1px; height:40px; background:rgba(255,255,255,0.2); margin: 0 5px;"></div>');
 
-            let iconHtml = app.htmlIcon ? app.htmlIcon : '';
             let el = $(`
                 <div class="dock-item" id="dock-${app.id}" title="${app.name}">
-                    <div class="dock-icon-svg ${app.iconClass}">${iconHtml}</div>
+                    <div class="dock-icon-svg">
+                        <img class="dock-icon-img" src="${app.icon}" alt="${app.name}" draggable="false">
+                    </div>
                     <div class="dock-dot"></div>
                 </div>
             `);
             el.on('click', () => this.openApp(app.id));
             dock.append(el);
         });
+        this.updateTrashIcon();
+    }
+
+    updateTrashIcon() {
+        const isEmpty = Object.keys(trashItems).length === 0;
+        const src = isEmpty
+            ? 'assets/dock-icons/processed/trash-empty.png'
+            : 'assets/dock-icons/processed/trash-full.png';
+        $('#dock-trash .dock-icon-img').attr('src', src);
     }
 
     setupDesktop() {
@@ -1663,6 +1673,7 @@ function showTrashContextMenu(x, y, itemName) {
         if(confirm(t('confirmDelete').replace('{item}', itemName))) {
             delete trashItems[itemName];
             renderTrash($('#content-trash'));
+            wm.updateTrashIcon();
         }
         menu.remove();
     });
@@ -1680,6 +1691,7 @@ window.emptyTrash = function() {
     if(confirm(t('confirmEmptyTrash'))) {
         trashItems = {};
         renderTrash($('#content-trash'));
+        wm.updateTrashIcon();
     }
 };
 
@@ -1696,6 +1708,7 @@ window.deleteFile = function(fileName, path) {
     if($('#content-finder').length) {
         updateFinderGrid();
     }
+    wm.updateTrashIcon();
 };
 
 function restoreFromTrash(itemName) {
@@ -1717,6 +1730,7 @@ function restoreFromTrash(itemName) {
     if($('#content-finder').length) {
         updateFinderGrid();
     }
+    wm.updateTrashIcon();
 }
 
 function getFileFromPath(path, fileName) {
