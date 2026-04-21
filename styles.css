@@ -16,7 +16,7 @@
 
 * { box-sizing: border-box; user-select: none; }
 body, html {
-    margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden;
+    margin: 0; padding: 0; width: 100vw; height: 100vh; height: 100dvh; overflow: hidden;
     font-family: var(--system-font); color: var(--text-color);
     /* Default Wallpaper - Monterey style */
     background: linear-gradient(200deg, #a729f5, #5823d6, #092775, #1d6f9c);
@@ -267,7 +267,7 @@ body, html {
 
     /* Dock - horizontal layout at bottom on mobile */
     #dock-container {
-        bottom: 10px;
+        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
         left: 50%;
         transform: translateX(-50%);
         width: auto;
