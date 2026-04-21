@@ -431,19 +431,26 @@ function wallpaperThumbUrl(w, mode) {
     const url = wallpaperUrl(w, mode);
     return url ? url.replace('/full/', '/thumbs/') : '';
 }
+let wallpaperLayerIdx = 0;
 function applyWallpaper(id, persist) {
     const w = wallpapers.find(x => x.id === id);
     if (!w) return;
     currentWallpaperId = id;
     const url = wallpaperUrl(w, getEffectiveAppearance());
-    $('body').css({
-        'background-image': `url('${url}')`,
-        'background-size': 'cover',
-        'background-position': 'center',
-        'background-attachment': 'fixed',
-        'background-repeat': 'no-repeat',
-        'animation': 'none'
-    });
+    const layers = $('#wallpaper .wallpaper-layer');
+    const incoming = layers.eq(wallpaperLayerIdx);
+    const outgoing = layers.eq(1 - wallpaperLayerIdx);
+    // Preload, then crossfade.
+    const img = new Image();
+    img.onload = () => {
+        incoming.css('background-image', `url('${url}')`);
+        incoming.css('opacity', 1);
+        outgoing.css('opacity', 0);
+        wallpaperLayerIdx = 1 - wallpaperLayerIdx;
+    };
+    img.src = url;
+    // Stop the gradient animation behind the wallpaper for cleanliness.
+    $('body').css('animation', 'none');
     if (persist) localStorage.setItem('wallpaper', id);
     $('.wall-thumb').removeClass('selected');
     $(`.wall-thumb[data-wall-id="${id}"]`).addClass('selected');
@@ -508,7 +515,74 @@ class WindowManager {
         this.zIndexCounter = 100;
         this.activeApp = 'Finder';
         this.initDock();
+        this.setupDockMagnification();
+        this.setupTrashDropTarget();
         this.setupDesktop();
+    }
+
+    setupDockMagnification() {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        const dock = document.getElementById('dock');
+        const BASE_SIZE = 55;
+        const MAX_SCALE = 1.65;
+        const REACH = 220;   // px from cursor where magnification decays to 1.0
+        const MAX_LIFT = 18;
+        let pendingX = null, rafId = null;
+
+        // Cosine bell curve: 1.0 at the cursor, 0.0 at REACH.
+        const scaleFor = (dist) => {
+            if (dist >= REACH) return 1;
+            return 1 + (MAX_SCALE - 1) * Math.cos(dist / REACH * Math.PI / 2);
+        };
+
+        const update = (x) => {
+            dock.querySelectorAll('.dock-item').forEach(item => {
+                if (item.classList.contains('bouncing')) return;
+                item.classList.remove('animate-reset');
+                const r = item.getBoundingClientRect();
+                const dist = Math.abs(x - (r.left + r.width / 2));
+                const s = scaleFor(dist);
+                const size = BASE_SIZE * s;
+                item.style.width = `${size}px`;
+                item.style.height = `${size}px`;
+                // Lift peaks at MAX_LIFT when fully scaled; 0 at base size.
+                const lift = -(s - 1) / (MAX_SCALE - 1) * MAX_LIFT;
+                item.style.transform = `translateY(${lift}px)`;
+            });
+        };
+
+        dock.addEventListener('mousemove', (e) => {
+            pendingX = e.clientX;
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => { update(pendingX); rafId = null; });
+        });
+        dock.addEventListener('mouseleave', () => {
+            dock.querySelectorAll('.dock-item').forEach(item => {
+                item.classList.add('animate-reset');
+                item.style.width = '';
+                item.style.height = '';
+                item.style.transform = '';
+            });
+        });
+    }
+
+    setupTrashDropTarget() {
+        const trash = document.getElementById('dock-trash');
+        if (!trash) return;
+        trash.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            trash.classList.add('drag-over');
+        });
+        trash.addEventListener('dragleave', () => trash.classList.remove('drag-over'));
+        trash.addEventListener('drop', (e) => {
+            e.preventDefault();
+            trash.classList.remove('drag-over');
+            const data = e.dataTransfer.getData('application/x-finder-file');
+            if (!data) return;
+            const { fileName, path } = JSON.parse(data);
+            deleteFile(fileName, path);
+        });
     }
 
     initDock() {
@@ -1114,11 +1188,19 @@ function updateFinderGrid() {
         if(item.type === 'pdf') icon = 'fa-file-pdf text';
 
         const el = $(`
-            <div class="file-item">
+            <div class="file-item" draggable="true">
                 <i class="fas ${icon} file-icon"></i>
                 <div class="file-name">${key}</div>
             </div>
         `);
+
+        el[0].addEventListener('dragstart', (e) => {
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('application/x-finder-file',
+                JSON.stringify({ fileName: key, path: [...currentPath] }));
+            el.addClass('dragging');
+        });
+        el[0].addEventListener('dragend', () => el.removeClass('dragging'));
 
         el.on('dblclick', () => {
             if(item.type === 'folder') {

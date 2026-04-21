@@ -31,6 +31,16 @@ body, html {
     100% { background-position: 0% 50%; }
 }
 
+/* Wallpaper layers — two stacked divs, crossfade for smooth transitions */
+#wallpaper { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.wallpaper-layer {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+#desktop { z-index: 1; }
+
 /* --- Boot Screen --- */
 #boot-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -80,14 +90,25 @@ body, html {
 .dock-item {
     width: 55px; height: 55px; border-radius: 12px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); position: relative;
+    position: relative;
     cursor: pointer;
+    flex-shrink: 0;
+    transform-origin: bottom center;
+    will-change: width, height, transform;
+}
+/* Return-to-base transition. Added only when cursor leaves the dock,
+   so live magnification updates during hover feel instant (no lag). */
+.dock-item.animate-reset {
+    transition: width 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+                height 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
 /* Dock Icon Image */
 .dock-icon-svg { width: 100%; height: 100%; position: relative; display: flex; justify-content: center; align-items: center; }
 .dock-icon-img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; user-select: none; -webkit-user-drag: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25)); }
 
-.dock-item:hover { transform: scale(1.2) translateY(-10px); margin: 0 5px; }
+/* Drag-over highlight for the dock trash */
+#dock-trash.drag-over { transform: scale(1.35) translateY(-14px) !important; }
 .dock-dot {
     width: 5px; height: 5px; background: rgba(255,255,255,0.4); border-radius: 50%;
     position: absolute; bottom: -8px; display: none;
@@ -757,7 +778,8 @@ body, html {
 .sidebar-item i { color: var(--accent); width: 15px; text-align: center;}
 .finder-main { flex: 1; padding: 10px; overflow-y: auto; }
 .finder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px; }
-.file-item { display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; }
+.file-item { display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: opacity 0.15s; }
+.file-item.dragging { opacity: 0.4; }
 .file-icon { font-size: 40px; color: #5dade2; margin-bottom: 5px; }
 .file-icon.folder { color: #5dade2; }
 .file-icon.text { color: #ddd; }
