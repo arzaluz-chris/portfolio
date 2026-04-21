@@ -404,6 +404,77 @@ const apps = [
     { id: 'trash',       name: 'Bin',         icon: 'assets/dock-icons/processed/trash-empty.png', separator: true }
 ];
 
+// WALLPAPERS — dynamic, with light/dark variants
+const wallpapers = [
+    { id: 'tahoe',        name: 'Tahoe',        light: 'assets/wallpapers/full/tahoe-light.webp',        dark: 'assets/wallpapers/full/tahoe-dark.webp' },
+    { id: 'sequoia',      name: 'Sequoia',      light: 'assets/wallpapers/full/sequoia-light.webp',      dark: 'assets/wallpapers/full/sequoia-dark.webp' },
+    { id: 'sonoma',       name: 'Sonoma',       light: 'assets/wallpapers/full/sonoma-light.webp' },
+    { id: 'monterey',     name: 'Monterey',     light: 'assets/wallpapers/full/monterey-light.webp',     dark: 'assets/wallpapers/full/monterey-dark.webp' },
+    { id: 'lion',         name: 'Lion',         light: 'assets/wallpapers/full/lion-light.webp' },
+    { id: 'mountain',     name: 'Mountain',     dark:  'assets/wallpapers/full/mountain-dark.webp' },
+    { id: 'snow-leopard', name: 'Snow Leopard', light: 'assets/wallpapers/full/snow-leopard-light.webp', dark: 'assets/wallpapers/full/snow-leopard-dark.webp' },
+    { id: 'tiger',        name: 'Tiger',        light: 'assets/wallpapers/full/tiger.webp' }
+];
+const WALLPAPER_ROTATION_MS = 10 * 1000;
+let currentWallpaperId = null;
+let currentAppearance = localStorage.getItem('appearance') || 'dark';
+let wallpaperRotationTimer = null;
+
+function getEffectiveAppearance() {
+    if (currentAppearance === 'auto') {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return currentAppearance;
+}
+function wallpaperUrl(w, mode) { return w[mode] || w.light || w.dark; }
+function wallpaperThumbUrl(w, mode) {
+    const url = wallpaperUrl(w, mode);
+    return url ? url.replace('/full/', '/thumbs/') : '';
+}
+function applyWallpaper(id, persist) {
+    const w = wallpapers.find(x => x.id === id);
+    if (!w) return;
+    currentWallpaperId = id;
+    const url = wallpaperUrl(w, getEffectiveAppearance());
+    $('body').css({
+        'background-image': `url('${url}')`,
+        'background-size': 'cover',
+        'background-position': 'center',
+        'background-attachment': 'fixed',
+        'background-repeat': 'no-repeat',
+        'animation': 'none'
+    });
+    if (persist) localStorage.setItem('wallpaper', id);
+    $('.wall-thumb').removeClass('selected');
+    $(`.wall-thumb[data-wall-id="${id}"]`).addClass('selected');
+}
+function startWallpaperRotation() {
+    clearInterval(wallpaperRotationTimer);
+    wallpaperRotationTimer = setInterval(() => {
+        // Only rotate through wallpapers that have a variant for the
+        // current mode — keeps rotation visually consistent in dark/light.
+        const mode = getEffectiveAppearance();
+        const eligible = wallpapers.filter(w => w[mode]);
+        if (eligible.length === 0) return;
+        const idx = eligible.findIndex(w => w.id === currentWallpaperId);
+        const next = eligible[(idx + 1) % eligible.length];
+        applyWallpaper(next.id, false);
+    }, WALLPAPER_ROTATION_MS);
+}
+function stopWallpaperRotation() {
+    clearInterval(wallpaperRotationTimer);
+    wallpaperRotationTimer = null;
+}
+function initWallpaper() {
+    const savedId = localStorage.getItem('wallpaper');
+    if (savedId && wallpapers.find(w => w.id === savedId)) {
+        applyWallpaper(savedId, false);
+    } else {
+        applyWallpaper('monterey', false);  // default start
+        startWallpaperRotation();
+    }
+}
+
 // Simulated File System
 const fileSystem = {
     'Desktop': { type: 'folder', children: {
@@ -1528,12 +1599,11 @@ function renderSettings(container) {
 
             <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">${t('wallpapers')}</div>
             <div class="wall-grid" style="margin-bottom: 20px;">
-                <div class="wall-thumb selected" style="background: linear-gradient(200deg, #a729f5, #5823d6, #092775, #1d6f9c);" onclick="changeWall(this)"></div>
-                <div class="wall-thumb" style="background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);" onclick="changeWall(this)"></div>
-                <div class="wall-thumb" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" onclick="changeWall(this)"></div>
-                <div class="wall-thumb" style="background: linear-gradient(to right, #243949 0%, #517fa4 100%);" onclick="changeWall(this)"></div>
-                <div class="wall-thumb" style="background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);" onclick="changeWall(this)"></div>
-                <div class="wall-thumb" style="background: #000;" onclick="changeWall(this)"></div>
+                ${wallpapers.map(w => {
+                    const thumb = wallpaperThumbUrl(w, getEffectiveAppearance());
+                    const selected = w.id === currentWallpaperId ? 'selected' : '';
+                    return `<div class="wall-thumb ${selected}" data-wall-id="${w.id}" title="${w.name}" style="background-image: url('${thumb}'); background-size: cover; background-position: center;" onclick="changeWall('${w.id}')"></div>`;
+                }).join('')}
             </div>
 
             <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">${t('appearance')}</div>
@@ -1561,29 +1631,29 @@ function renderSettings(container) {
     }
 }
 
-window.changeWall = function(el) {
-    $('.wall-thumb').removeClass('selected');
-    $(el).addClass('selected');
-    $('body').css('background', $(el).css('background'));
+window.changeWall = function(id) {
+    applyWallpaper(id, true);
+    stopWallpaperRotation();
 };
 
 window.setAppearance = function(mode) {
-    if(mode === 'light') {
+    currentAppearance = mode;
+    localStorage.setItem('appearance', mode);
+    const eff = getEffectiveAppearance();
+    if (eff === 'light') {
         $(':root').css({
             '--window-bg': 'rgba(240, 240, 245, 0.85)',
             '--window-header': '#f0f0f5',
             '--text-color': '#000000'
         });
-    } else if(mode === 'dark') {
+    } else {
         $(':root').css({
             '--window-bg': 'rgba(30, 30, 32, 0.85)',
             '--window-header': '#2d2d2d',
             '--text-color': '#ffffff'
         });
-    } else {
-        const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setAppearance(darkMode ? 'dark' : 'light');
     }
+    if (currentWallpaperId) applyWallpaper(currentWallpaperId, false);
 };
 
 // TRASH APP
@@ -1892,6 +1962,13 @@ function setupMobileTouchEnhancements() {
         }, false);
     }
 }
+
+// Initial appearance + wallpaper (must run after window.setAppearance is defined)
+setAppearance(currentAppearance);
+initWallpaper();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (currentAppearance === 'auto') setAppearance('auto');
+});
 
 // Boot Sequence
 $(window).on('load', () => {
