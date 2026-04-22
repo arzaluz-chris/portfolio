@@ -112,7 +112,16 @@ const translations = {
         fileExists: 'Ya existe un archivo con este nombre.',
         folderName: 'Nombre de la carpeta:',
         fileName: 'Nombre del archivo (con extensión):',
-        newName: 'Nuevo nombre:'
+        newName: 'Nuevo nombre:',
+
+        // TextEdit / Paint / Misc UI
+        textEditDefaultFileName: 'documento.txt',
+        paintSizeLabel: 'Tamaño',
+        duplicateSuffix: 'copia',
+        iosDeveloperTitle: 'Desarrollador iOS',
+
+        // Clock locale (for toLocaleDateString / toLocaleTimeString)
+        clockLocale: 'es-MX'
     },
     en: {
         // Menu Bar
@@ -218,7 +227,16 @@ const translations = {
         fileExists: 'A file with this name already exists.',
         folderName: 'Folder name:',
         fileName: 'File name (with extension):',
-        newName: 'New name:'
+        newName: 'New name:',
+
+        // TextEdit / Paint / Misc UI
+        textEditDefaultFileName: 'document.txt',
+        paintSizeLabel: 'Size',
+        duplicateSuffix: 'copy',
+        iosDeveloperTitle: 'iOS Developer',
+
+        // Clock locale (for toLocaleDateString / toLocaleTimeString)
+        clockLocale: 'en-US'
     }
 };
 
@@ -243,14 +261,41 @@ function updateLanguage(lang) {
         $(this).text(t(key));
     });
 
-    // Re-render all open windows
-    Object.keys(wm.windows).forEach(winId => {
-        const config = wm.windows[winId];
-        const container = $(`#content-${winId}`);
-        if (container.length) {
-            wm.loadAppContent(winId, config);
-        }
-    });
+    // Refresh dock tooltips/alt text and menu-bar active app label.
+    if (typeof wm !== 'undefined' && wm) {
+        wm.refreshDockLabels();
+
+        // Find the active window BEFORE mutating names, so we can
+        // re-localize the menubar after the update.
+        const activeWinId = Object.keys(wm.windows).find(
+            wid => wm.windows[wid].name === wm.activeApp
+        );
+
+        // Re-render all open windows (content + window title)
+        Object.keys(wm.windows).forEach(winId => {
+            const config = wm.windows[winId];
+
+            // For non-project apps, recompute the localized name.
+            if (!config.isProject) {
+                const appConfig = apps.find(a => a.id === config.id);
+                if (appConfig) config.name = appDisplayName(appConfig);
+            }
+
+            $(`#win-${winId} .window-title`).text(config.name);
+
+            const container = $(`#content-${winId}`);
+            if (container.length) {
+                wm.loadAppContent(winId, config);
+            }
+        });
+
+        // Update the menu bar's active-app label with the new name.
+        const activeConfig = activeWinId ? wm.windows[activeWinId] : null;
+        wm.updateMenubar(activeConfig ? activeConfig.name : t('finder'));
+    }
+
+    // Update clock so it uses the new locale right away.
+    if (typeof updateClock === 'function') updateClock();
 
     // Update HTML lang attribute
     $('html').attr('lang', lang === 'es' ? 'es' : 'en');
@@ -276,21 +321,37 @@ function detectLanguage() {
 }
 
 // DATOS DE TUS PROYECTOS (Extraídos del video y tus links)
+// description / features son objetos { es, en } y se resuelven en render según currentLang.
 const projects = {
     'pomo': {
         name: 'Pomo',
         icon: 'f2f2',
-        description: 'Una aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso. Pomo te ayuda a mantener el enfoque y gestionar tu tiempo de manera efectiva con una interfaz elegante y funcional.',
-        features: [
-            'Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)',
-            'Flujo automático entre sesiones de trabajo y descanso',
-            'Soporte para temporizador en segundo plano',
-            'Notificaciones push y alertas de sonido',
-            'Seguimiento de productividad diario y semanal con gráficas',
-            'Contador de rachas para mantener la motivación',
-            'Modo claro y oscuro automático',
-            'Soporte para español e inglés'
-        ],
+        description: {
+            es: 'Una aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso. Pomo te ayuda a mantener el enfoque y gestionar tu tiempo de manera efectiva con una interfaz elegante y funcional.',
+            en: 'A minimalist Pomodoro timer app designed to boost your productivity through structured work and break sessions. Pomo helps you stay focused and manage your time effectively with an elegant, functional interface.'
+        },
+        features: {
+            es: [
+                'Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)',
+                'Flujo automático entre sesiones de trabajo y descanso',
+                'Soporte para temporizador en segundo plano',
+                'Notificaciones push y alertas de sonido',
+                'Seguimiento de productividad diario y semanal con gráficas',
+                'Contador de rachas para mantener la motivación',
+                'Modo claro y oscuro automático',
+                'Soporte para español e inglés'
+            ],
+            en: [
+                'Customizable timers (10-60 min for work, 3-15 min for breaks)',
+                'Automatic flow between work and break sessions',
+                'Background timer support',
+                'Push notifications and sound alerts',
+                'Daily and weekly productivity tracking with charts',
+                'Streak counter to keep you motivated',
+                'Automatic light and dark mode',
+                'Spanish and English support'
+            ]
+        },
         stack: ['Swift 5.0', 'SwiftUI', 'MVVM', 'SwiftData', 'Combine', 'UserNotifications', 'AVFoundation', 'Charts'],
         url: 'https://github.com/arzaluz-chris/Pomo',
         appStoreUrl: 'https://apps.apple.com/us/app/pomo-simple-timer/id6746705227'
@@ -298,15 +359,28 @@ const projects = {
     'waldenvibes': {
         name: 'WaldenVibes',
         icon: 'f06c',
-        description: 'Una aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional. WaldenVibes te ayuda a mantener un equilibrio mental y emocional a través de prácticas de mindfulness y registro de estados de ánimo.',
-        features: [
-            'Interfaz minimalista y zen con SwiftUI',
-            'Seguimiento de emociones y estados de ánimo',
-            'Ejercicios de meditación guiada',
-            'Registro diario de bienestar personal',
-            'Diseño enfocado en el bienestar mental',
-            'Experiencia de usuario serena y relajante'
-        ],
+        description: {
+            es: 'Una aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional. WaldenVibes te ayuda a mantener un equilibrio mental y emocional a través de prácticas de mindfulness y registro de estados de ánimo.',
+            en: 'A minimalist SwiftUI app that combines meditation and mood tracking. WaldenVibes helps you maintain mental and emotional balance through mindfulness practices and mood logging.'
+        },
+        features: {
+            es: [
+                'Interfaz minimalista y zen con SwiftUI',
+                'Seguimiento de emociones y estados de ánimo',
+                'Ejercicios de meditación guiada',
+                'Registro diario de bienestar personal',
+                'Diseño enfocado en el bienestar mental',
+                'Experiencia de usuario serena y relajante'
+            ],
+            en: [
+                'Minimalist, zen SwiftUI interface',
+                'Emotion and mood tracking',
+                'Guided meditation exercises',
+                'Daily personal well-being log',
+                'Design focused on mental well-being',
+                'Calm, relaxing user experience'
+            ]
+        },
         stack: ['Swift', 'SwiftUI', 'iOS', 'Xcode'],
         url: 'https://github.com/arzaluz-chris/WaldenVibes',
         appStoreUrl: 'https://apps.apple.com/us/app/waldenvibes-emotion-tracker/id6748090601'
@@ -314,15 +388,28 @@ const projects = {
     'vorth': {
         name: 'VORTH',
         icon: 'f14e',
-        description: 'VORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.',
-        features: [
-            'Coach de voz en vivo con Gemini AI',
-            'Diario PERMA para seguimiento de bienestar',
-            'Metas inteligentes sugeridas por IA',
-            'Asistente IA consciente de tu propósito',
-            'Alquimia emocional con ejercicios guiados',
-            'Sincronización entre iPhone y iPad via iCloud'
-        ],
+        description: {
+            es: 'VORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.',
+            en: 'VORTH uses AI coaching, the PERMA well-being model, and an intelligent journal to help you discover what truly matters and build a life of purpose.'
+        },
+        features: {
+            es: [
+                'Coach de voz en vivo con Gemini AI',
+                'Diario PERMA para seguimiento de bienestar',
+                'Metas inteligentes sugeridas por IA',
+                'Asistente IA consciente de tu propósito',
+                'Alquimia emocional con ejercicios guiados',
+                'Sincronización entre iPhone y iPad via iCloud'
+            ],
+            en: [
+                'Live voice coach powered by Gemini AI',
+                'PERMA journal for well-being tracking',
+                'AI-suggested smart goals',
+                'AI assistant aware of your purpose',
+                'Emotional alchemy with guided exercises',
+                'iPhone and iPad sync via iCloud'
+            ]
+        },
         stack: ['Swift', 'SwiftUI', 'MVVM', 'Gemini AI', 'SwiftData', 'AVFoundation', 'Speech'],
         url: 'https://github.com/arzaluz-chris/Journify',
         appStoreUrl: 'https://apps.apple.com/mx/app/vorth/id6759020391'
@@ -330,16 +417,30 @@ const projects = {
     'teddyfeels': {
         name: 'TeddyFeels',
         icon: 'f1b0',
-        description: 'Una app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche, un diario privado protegido con PIN y actividades guiadas.',
-        features: [
-            'Check-in emocional con 9 emociones y oso animado',
-            'Diario privado protegido con PIN de 4 dígitos',
-            'Grabación de voz con transcripción local',
-            'Metas personales con celebraciones de confeti',
-            'Modo SOS de rescate con ejercicios de respiración',
-            'Dashboard de progreso con gráficas semanales',
-            'Todos los datos 100% locales — sin internet ni recopilación de datos'
-        ],
+        description: {
+            es: 'Una app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche, un diario privado protegido con PIN y actividades guiadas.',
+            en: 'An emotional well-being app for kids aged 6 to 12. TeddyFeels helps children identify, express, and manage their emotions through a teddy bear companion, a PIN-protected private journal, and guided activities.'
+        },
+        features: {
+            es: [
+                'Check-in emocional con 9 emociones y oso animado',
+                'Diario privado protegido con PIN de 4 dígitos',
+                'Grabación de voz con transcripción local',
+                'Metas personales con celebraciones de confeti',
+                'Modo SOS de rescate con ejercicios de respiración',
+                'Dashboard de progreso con gráficas semanales',
+                'Todos los datos 100% locales — sin internet ni recopilación de datos'
+            ],
+            en: [
+                'Emotional check-in with 9 emotions and an animated bear',
+                'Private journal protected with a 4-digit PIN',
+                'Voice recording with on-device transcription',
+                'Personal goals with confetti celebrations',
+                'SOS rescue mode with breathing exercises',
+                'Progress dashboard with weekly charts',
+                'All data 100% local — no internet, no data collection'
+            ]
+        },
         stack: ['Swift', 'SwiftUI', 'MVVM', 'SwiftData', 'Speech', 'AVFoundation', 'Vortex', 'Lottie'],
         url: 'https://github.com/arzaluz-chris/TeddyFeels',
         appStoreUrl: ''
@@ -347,16 +448,30 @@ const projects = {
     'alba': {
         name: 'Alba',
         icon: 'f4be',
-        description: 'Alba es tu guía para mejorar tus amistades. Basada en psicología positiva, Alba te ayuda a evaluar, entender y fortalecer tus relaciones a través de consejos personalizados con IA, un test científico y un diario privado.',
-        features: [
-            'Chat con IA basado en psicología positiva (Gemini)',
-            'Test de amistad con evaluación de confianza, apoyo, límites y asertividad',
-            'Diario de amistades protegido con PIN y Face ID',
-            'Artículos de psicología positiva (Alba Blocks)',
-            'Integración con Apple Music',
-            'Personalización del estilo de comunicación de la IA',
-            'Soporte para español e inglés'
-        ],
+        description: {
+            es: 'Alba es tu guía para mejorar tus amistades. Basada en psicología positiva, Alba te ayuda a evaluar, entender y fortalecer tus relaciones a través de consejos personalizados con IA, un test científico y un diario privado.',
+            en: 'Alba is your guide to better friendships. Grounded in positive psychology, Alba helps you assess, understand, and strengthen your relationships through AI-personalized advice, a scientific test, and a private journal.'
+        },
+        features: {
+            es: [
+                'Chat con IA basado en psicología positiva (Gemini)',
+                'Test de amistad con evaluación de confianza, apoyo, límites y asertividad',
+                'Diario de amistades protegido con PIN y Face ID',
+                'Artículos de psicología positiva (Alba Blocks)',
+                'Integración con Apple Music',
+                'Personalización del estilo de comunicación de la IA',
+                'Soporte para español e inglés'
+            ],
+            en: [
+                'AI chat grounded in positive psychology (Gemini)',
+                'Friendship test measuring trust, support, boundaries, and assertiveness',
+                'Friendship journal protected with PIN and Face ID',
+                'Positive psychology articles (Alba Blocks)',
+                'Apple Music integration',
+                'Customizable AI communication style',
+                'Spanish and English support'
+            ]
+        },
         stack: ['Swift', 'SwiftUI', 'MVVM', 'Gemini AI', 'MusicKit', 'CryptoKit', 'LocalAuthentication', 'Combine'],
         url: 'https://github.com/arzaluz-chris/Alba',
         appStoreUrl: '',
@@ -365,18 +480,34 @@ const projects = {
     'lumina': {
         name: 'Lumina',
         icon: '185',
-        description: 'Lumina es la app de fortalezas de carácter del Colegio Walden Dos de México. Basada en la clasificación VIA Character Strengths, combina un test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias de carácter y Buddy, un compañero conversacional. Cero datos recolectados, todo procesado en tu dispositivo.',
-        features: [
-            'Test VIA con 24 fortalezas agrupadas en 6 virtudes',
-            'Análisis personalizado con Apple Intelligence (Foundation Models on-device)',
-            'Buddy: compañero conversacional con IA, 100% en el dispositivo',
-            'Historias: bitácora de carácter con fotos y recordatorios de aniversario',
-            'Evolución: gráficas interactivas del cambio de fortalezas en el tiempo',
-            'Accesibilidad: lectura en voz alta con AVSpeechSynthesizer',
-            'Notificaciones locales (tips diarios, aniversarios, re-test)',
-            'Quick Actions + Review prompt inteligente',
-            'Privacy manifest: 0 tracking, 0 datos recolectados'
-        ],
+        description: {
+            es: 'Lumina es la app de fortalezas de carácter del Colegio Walden Dos de México. Basada en la clasificación VIA Character Strengths, combina un test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias de carácter y Buddy, un compañero conversacional. Cero datos recolectados, todo procesado en tu dispositivo.',
+            en: 'Lumina is the character-strengths app for Colegio Walden Dos in Mexico. Based on the VIA Character Strengths classification, it combines a 96-question test, personalized analysis with on-device Apple Intelligence, character stories, and Buddy, a conversational companion. Zero data collected — everything runs on your device.'
+        },
+        features: {
+            es: [
+                'Test VIA con 24 fortalezas agrupadas en 6 virtudes',
+                'Análisis personalizado con Apple Intelligence (Foundation Models on-device)',
+                'Buddy: compañero conversacional con IA, 100% en el dispositivo',
+                'Historias: bitácora de carácter con fotos y recordatorios de aniversario',
+                'Evolución: gráficas interactivas del cambio de fortalezas en el tiempo',
+                'Accesibilidad: lectura en voz alta con AVSpeechSynthesizer',
+                'Notificaciones locales (tips diarios, aniversarios, re-test)',
+                'Quick Actions + Review prompt inteligente',
+                'Privacy manifest: 0 tracking, 0 datos recolectados'
+            ],
+            en: [
+                'VIA test with 24 strengths grouped into 6 virtues',
+                'Personalized analysis with Apple Intelligence (on-device Foundation Models)',
+                'Buddy: conversational AI companion, 100% on-device',
+                'Stories: character log with photos and anniversary reminders',
+                'Evolution: interactive charts of how strengths change over time',
+                'Accessibility: read-aloud with AVSpeechSynthesizer',
+                'Local notifications (daily tips, anniversaries, re-test)',
+                'Quick Actions + smart review prompt',
+                'Privacy manifest: 0 tracking, 0 data collected'
+            ]
+        },
         stack: ['Swift 6', 'SwiftUI', 'iOS 26', 'Foundation Models', 'Apple Intelligence', 'SwiftData', 'UserNotifications', 'AVFoundation', 'PhotosPicker'],
         url: '',
         appStoreUrl: '',
@@ -384,25 +515,38 @@ const projects = {
     }
 };
 
-// APPS DEL DOCK (como en tu video)
+// Helper: pick localized field (string or { es, en }) for the current language.
+function localized(field) {
+    if (field == null) return '';
+    if (typeof field === 'string') return field;
+    return field[currentLang] || field['es'] || field['en'] || '';
+}
+
+// APPS DEL DOCK. Use nameKey for apps whose label depends on language;
+// proper nouns keep a fixed name.
 const apps = [
-    { id: 'finder',      name: 'Finder',      icon: 'assets/dock-icons/processed/finder.png' },
-    { id: 'aboutme',     name: 'Sobre Mí',    icon: 'assets/dock-icons/processed/contacts.png' },
-    { id: 'safari',      name: 'Safari',      icon: 'assets/dock-icons/processed/safari.png' },
-    { id: 'terminal',    name: 'Terminal',    icon: 'assets/dock-icons/processed/terminal.png' },
-    { id: 'textedit',    name: 'TextEdit',    icon: 'assets/dock-icons/processed/textedit.png' },
-    { id: 'paint',       name: 'Sketch',      icon: 'assets/dock-icons/processed/paint.png' },
-    { id: 'calculator',  name: 'Calculator',  icon: 'assets/dock-icons/processed/calculator.png' },
-    { id: 'settings',    name: 'Settings',    icon: 'assets/dock-icons/processed/settings.png' },
-    { id: 'pomo',        name: 'Pomo',        icon: 'assets/dock-icons/processed/pomo.png' },
-    { id: 'waldenvibes', name: 'WaldenVibes', icon: 'assets/dock-icons/processed/waldenvibes.png' },
-    { id: 'vorth',       name: 'VORTH',       icon: 'assets/dock-icons/processed/vorth.png' },
-    { id: 'teddyfeels',  name: 'TeddyFeels',  icon: 'assets/dock-icons/processed/teddyfeels.png' },
-    { id: 'alba',        name: 'Alba',        icon: 'assets/dock-icons/processed/alba.png' },
-    { id: 'lumina',      name: 'Lumina',      icon: 'assets/dock-icons/processed/lumina.png' },
-    { id: 'mail',        name: 'Mail',        icon: 'assets/dock-icons/processed/mail.png' },
-    { id: 'trash',       name: 'Bin',         icon: 'assets/dock-icons/processed/trash-empty.png', separator: true }
+    { id: 'finder',      nameKey: 'finder',      icon: 'assets/dock-icons/processed/finder.png' },
+    { id: 'aboutme',     nameKey: 'aboutMeApp',  icon: 'assets/dock-icons/processed/contacts.png' },
+    { id: 'safari',      nameKey: 'safari',      icon: 'assets/dock-icons/processed/safari.png' },
+    { id: 'terminal',    nameKey: 'terminal',    icon: 'assets/dock-icons/processed/terminal.png' },
+    { id: 'textedit',    nameKey: 'textEdit',    icon: 'assets/dock-icons/processed/textedit.png' },
+    { id: 'paint',       nameKey: 'sketch',      icon: 'assets/dock-icons/processed/paint.png' },
+    { id: 'calculator',  nameKey: 'calculator',  icon: 'assets/dock-icons/processed/calculator.png' },
+    { id: 'settings',    nameKey: 'settings',    icon: 'assets/dock-icons/processed/settings.png' },
+    { id: 'pomo',        name: 'Pomo',           icon: 'assets/dock-icons/processed/pomo.png' },
+    { id: 'waldenvibes', name: 'WaldenVibes',    icon: 'assets/dock-icons/processed/waldenvibes.png' },
+    { id: 'vorth',       name: 'VORTH',          icon: 'assets/dock-icons/processed/vorth.png' },
+    { id: 'teddyfeels',  name: 'TeddyFeels',     icon: 'assets/dock-icons/processed/teddyfeels.png' },
+    { id: 'alba',        name: 'Alba',           icon: 'assets/dock-icons/processed/alba.png' },
+    { id: 'lumina',      name: 'Lumina',         icon: 'assets/dock-icons/processed/lumina.png' },
+    { id: 'mail',        nameKey: 'mail',        icon: 'assets/dock-icons/processed/mail.png' },
+    { id: 'trash',       nameKey: 'bin',         icon: 'assets/dock-icons/processed/trash-empty.png', separator: true }
 ];
+
+function appDisplayName(app) {
+    if (!app) return '';
+    return app.nameKey ? t(app.nameKey) : app.name;
+}
 
 // WALLPAPERS — dynamic, with light/dark variants
 const wallpapers = [
@@ -483,25 +627,53 @@ function initWallpaper() {
 }
 
 // Simulated File System
+// Text contents use { es, en } so they update live when the language changes.
 const fileSystem = {
     'Desktop': { type: 'folder', children: {
-        'Welcome.txt': { type: 'text', content: '¡Bienvenido a mi portafolio! Esta página web es una simulación de macOS construida con HTML, CSS y JavaScript. Siéntete libre de interactuar con todas las aplicaciones. Puedes usar la línea de comandos, navegar por el Finder y en internet, hacer operaciones con calculadora e incluso hacer un bonito dibujo. También puedes revisar las aplicaciones que he creado para iOS.'},
+        'Welcome.txt': { type: 'text', content: {
+            es: '¡Bienvenido a mi portafolio! Esta página web es una simulación de macOS construida con HTML, CSS y JavaScript. Siéntete libre de interactuar con todas las aplicaciones. Puedes usar la línea de comandos, navegar por el Finder y en internet, hacer operaciones con calculadora e incluso hacer un bonito dibujo. También puedes revisar las aplicaciones que he creado para iOS.',
+            en: 'Welcome to my portfolio! This website is a macOS simulation built with HTML, CSS, and JavaScript. Feel free to interact with every app. You can use the command line, browse the Finder and the internet, run calculations, and even make a nice drawing. You can also check out the apps I have built for iOS.'
+        }},
         'Projects': { type: 'folder', children: {
-            'Pomo.txt': { type: 'text', content: 'Pomo - Temporizador Pomodoro\n\nUna aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso.\n\nCaracterísticas:\n• Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)\n• Flujo automático entre sesiones de trabajo y descanso\n• Soporte para temporizador en segundo plano\n• Notificaciones push y alertas de sonido\n• Seguimiento de productividad diario y semanal con gráficas\n• Contador de rachas para mantener la motivación\n• Modo claro y oscuro automático\n• Soporte para español e inglés\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo'},
-            'WaldenVibes.txt': { type: 'text', content: 'WaldenVibes - Meditación y Bienestar\n\nUna aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional.\n\nCaracterísticas:\n• Interfaz minimalista y zen con SwiftUI\n• Seguimiento de emociones y estados de ánimo\n• Ejercicios de meditación guiada\n• Registro diario de bienestar personal\n• Diseño enfocado en el bienestar mental\n• Experiencia de usuario serena y relajante\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes'},
-            'VORTH.txt': { type: 'text', content: 'VORTH - Descubre Tu Propósito de Vida\n\nVORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.\n\nCaracterísticas:\n• Coach de voz en vivo con Gemini AI\n• Diario PERMA para seguimiento de bienestar\n• Metas inteligentes sugeridas por IA\n• Asistente IA consciente de tu propósito\n• Alquimia emocional con ejercicios guiados\n• Sincronización entre iPhone y iPad via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391'},
-            'Alba.txt': { type: 'text', content: 'Alba - Tu Guía para Mejores Amistades\n\nAlba es tu guía para mejorar tus amistades, basada en psicología positiva.\n\nCaracterísticas:\n• Chat con IA basado en psicología positiva (Gemini)\n• Test de amistad con evaluación de confianza, apoyo, límites y asertividad\n• Diario de amistades protegido con PIN y Face ID\n• Artículos de psicología positiva (Alba Blocks)\n• Integración con Apple Music\n• Personalización del estilo de comunicación de la IA\n• Soporte para español e inglés\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, MusicKit, CryptoKit, LocalAuthentication, Combine\n\nGitHub: https://github.com/arzaluz-chris/Alba'},
-            'TeddyFeels.txt': { type: 'text', content: 'TeddyFeels - Bienestar Emocional para Niños\n\nUna app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche.\n\nCaracterísticas:\n• Check-in emocional con 9 emociones y oso animado\n• Diario privado protegido con PIN de 4 dígitos\n• Grabación de voz con transcripción local\n• Metas personales con celebraciones de confeti\n• Modo SOS de rescate con ejercicios de respiración\n• Dashboard de progreso con gráficas semanales\n• Todos los datos 100% locales — sin internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels'},
-            'Lumina.txt': { type: 'text', content: 'Lumina - Descubre tus 24 fortalezas\n\nApp de fortalezas de carácter para el Colegio Walden Dos de México, basada en la clasificación VIA Character Strengths. Combina test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias y Buddy (compañero conversacional). Cero datos recolectados.\n\nCaracterísticas:\n• Test VIA con 24 fortalezas agrupadas en 6 virtudes\n• Análisis personalizado con Apple Intelligence (Foundation Models on-device)\n• Buddy: compañero conversacional con IA, 100% en el dispositivo\n• Historias: bitácora de carácter con fotos y recordatorios de aniversario\n• Evolución: gráficas interactivas del cambio de fortalezas en el tiempo\n• Accesibilidad: lectura en voz alta\n• Quick Actions + Review prompt inteligente\n• Privacy manifest: 0 tracking, 0 datos recolectados\n\nStack: Swift 6, SwiftUI, iOS 26, Foundation Models, Apple Intelligence, SwiftData, UserNotifications, AVFoundation, PhotosPicker\n\nSitio: https://chrisarzaluz.dev/lumina/'}
+            'Pomo.txt': { type: 'text', content: {
+                es: 'Pomo - Temporizador Pomodoro\n\nUna aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso.\n\nCaracterísticas:\n• Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)\n• Flujo automático entre sesiones de trabajo y descanso\n• Soporte para temporizador en segundo plano\n• Notificaciones push y alertas de sonido\n• Seguimiento de productividad diario y semanal con gráficas\n• Contador de rachas para mantener la motivación\n• Modo claro y oscuro automático\n• Soporte para español e inglés\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo',
+                en: 'Pomo - Pomodoro Timer\n\nA minimalist Pomodoro timer app designed to boost your productivity through structured work and break sessions.\n\nFeatures:\n• Customizable timers (10-60 min for work, 3-15 min for breaks)\n• Automatic flow between work and break sessions\n• Background timer support\n• Push notifications and sound alerts\n• Daily and weekly productivity tracking with charts\n• Streak counter to keep you motivated\n• Automatic light and dark mode\n• Spanish and English support\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo'
+            }},
+            'WaldenVibes.txt': { type: 'text', content: {
+                es: 'WaldenVibes - Meditación y Bienestar\n\nUna aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional.\n\nCaracterísticas:\n• Interfaz minimalista y zen con SwiftUI\n• Seguimiento de emociones y estados de ánimo\n• Ejercicios de meditación guiada\n• Registro diario de bienestar personal\n• Diseño enfocado en el bienestar mental\n• Experiencia de usuario serena y relajante\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes',
+                en: 'WaldenVibes - Meditation & Well-being\n\nA minimalist SwiftUI app that combines meditation and mood tracking.\n\nFeatures:\n• Minimalist, zen SwiftUI interface\n• Emotion and mood tracking\n• Guided meditation exercises\n• Daily personal well-being log\n• Design focused on mental well-being\n• Calm, relaxing user experience\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes'
+            }},
+            'VORTH.txt': { type: 'text', content: {
+                es: 'VORTH - Descubre Tu Propósito de Vida\n\nVORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.\n\nCaracterísticas:\n• Coach de voz en vivo con Gemini AI\n• Diario PERMA para seguimiento de bienestar\n• Metas inteligentes sugeridas por IA\n• Asistente IA consciente de tu propósito\n• Alquimia emocional con ejercicios guiados\n• Sincronización entre iPhone y iPad via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391',
+                en: 'VORTH - Discover Your Life Purpose\n\nVORTH uses AI coaching, the PERMA well-being model, and an intelligent journal to help you discover what truly matters and build a life of purpose.\n\nFeatures:\n• Live voice coach powered by Gemini AI\n• PERMA journal for well-being tracking\n• AI-suggested smart goals\n• AI assistant aware of your purpose\n• Emotional alchemy with guided exercises\n• iPhone and iPad sync via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391'
+            }},
+            'Alba.txt': { type: 'text', content: {
+                es: 'Alba - Tu Guía para Mejores Amistades\n\nAlba es tu guía para mejorar tus amistades, basada en psicología positiva.\n\nCaracterísticas:\n• Chat con IA basado en psicología positiva (Gemini)\n• Test de amistad con evaluación de confianza, apoyo, límites y asertividad\n• Diario de amistades protegido con PIN y Face ID\n• Artículos de psicología positiva (Alba Blocks)\n• Integración con Apple Music\n• Personalización del estilo de comunicación de la IA\n• Soporte para español e inglés\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, MusicKit, CryptoKit, LocalAuthentication, Combine\n\nGitHub: https://github.com/arzaluz-chris/Alba',
+                en: 'Alba - Your Guide to Better Friendships\n\nAlba is your guide to better friendships, grounded in positive psychology.\n\nFeatures:\n• AI chat grounded in positive psychology (Gemini)\n• Friendship test measuring trust, support, boundaries, and assertiveness\n• Friendship journal protected with PIN and Face ID\n• Positive psychology articles (Alba Blocks)\n• Apple Music integration\n• Customizable AI communication style\n• Spanish and English support\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, MusicKit, CryptoKit, LocalAuthentication, Combine\n\nGitHub: https://github.com/arzaluz-chris/Alba'
+            }},
+            'TeddyFeels.txt': { type: 'text', content: {
+                es: 'TeddyFeels - Bienestar Emocional para Niños\n\nUna app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche.\n\nCaracterísticas:\n• Check-in emocional con 9 emociones y oso animado\n• Diario privado protegido con PIN de 4 dígitos\n• Grabación de voz con transcripción local\n• Metas personales con celebraciones de confeti\n• Modo SOS de rescate con ejercicios de respiración\n• Dashboard de progreso con gráficas semanales\n• Todos los datos 100% locales — sin internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels',
+                en: 'TeddyFeels - Emotional Well-being for Kids\n\nAn emotional well-being app for kids aged 6 to 12. TeddyFeels helps children identify, express, and manage their emotions through a teddy bear companion.\n\nFeatures:\n• Emotional check-in with 9 emotions and an animated bear\n• Private journal protected with a 4-digit PIN\n• Voice recording with on-device transcription\n• Personal goals with confetti celebrations\n• SOS rescue mode with breathing exercises\n• Progress dashboard with weekly charts\n• All data 100% local — no internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels'
+            }},
+            'Lumina.txt': { type: 'text', content: {
+                es: 'Lumina - Descubre tus 24 fortalezas\n\nApp de fortalezas de carácter para el Colegio Walden Dos de México, basada en la clasificación VIA Character Strengths. Combina test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias y Buddy (compañero conversacional). Cero datos recolectados.\n\nCaracterísticas:\n• Test VIA con 24 fortalezas agrupadas en 6 virtudes\n• Análisis personalizado con Apple Intelligence (Foundation Models on-device)\n• Buddy: compañero conversacional con IA, 100% en el dispositivo\n• Historias: bitácora de carácter con fotos y recordatorios de aniversario\n• Evolución: gráficas interactivas del cambio de fortalezas en el tiempo\n• Accesibilidad: lectura en voz alta\n• Quick Actions + Review prompt inteligente\n• Privacy manifest: 0 tracking, 0 datos recolectados\n\nStack: Swift 6, SwiftUI, iOS 26, Foundation Models, Apple Intelligence, SwiftData, UserNotifications, AVFoundation, PhotosPicker\n\nSitio: https://chrisarzaluz.dev/lumina/',
+                en: 'Lumina - Discover Your 24 Strengths\n\nCharacter-strengths app for Colegio Walden Dos in Mexico, based on the VIA Character Strengths classification. It combines a 96-question test, personalized analysis with on-device Apple Intelligence, stories, and Buddy (conversational companion). Zero data collected.\n\nFeatures:\n• VIA test with 24 strengths grouped into 6 virtues\n• Personalized analysis with Apple Intelligence (on-device Foundation Models)\n• Buddy: conversational AI companion, 100% on-device\n• Stories: character log with photos and anniversary reminders\n• Evolution: interactive charts of how strengths change over time\n• Accessibility: read-aloud support\n• Quick Actions + smart review prompt\n• Privacy manifest: 0 tracking, 0 data collected\n\nStack: Swift 6, SwiftUI, iOS 26, Foundation Models, Apple Intelligence, SwiftData, UserNotifications, AVFoundation, PhotosPicker\n\nWebsite: https://chrisarzaluz.dev/lumina/'
+            }}
         } },
         'MyPhoto.jpg': { type: 'img', src: 'assets/profile.png'}
     }},
     'Documents': { type: 'folder', children: {
         'CV.pdf': { type: 'pdf', src: 'assets/cv.pdf'},
-        'Notes.txt': { type: 'text', content: 'Ideas para nuevos proyectos:\n- App de salud\n- Calculadora científica\n- Rastreador de hábitos'}
+        'Notes.txt': { type: 'text', content: {
+            es: 'Ideas para nuevos proyectos:\n- App de salud\n- Calculadora científica\n- Rastreador de hábitos',
+            en: 'Ideas for new projects:\n- Health app\n- Scientific calculator\n- Habit tracker'
+        }}
     }},
     'Downloads': { type: 'folder', children: {
-        'README.txt': { type: 'text', content: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, VORTH)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHosted en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'},
+        'README.txt': { type: 'text', content: {
+            es: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, VORTH)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHospedado en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\nDesarrollador iOS | Estudiante de Ingeniería en Sistemas\ncontact: christian.arzaluz@gmail.com',
+            en: '# macOS Portfolio - Christian Arzaluz\n\n## Description\nAn interactive macOS simulator built entirely with vanilla HTML, CSS, and JavaScript. This portfolio presents a full macOS desktop experience, including the dock, draggable and resizable windows, and multiple working applications.\n\n## Technologies Used\n• HTML5 - Semantic structure\n• CSS3 - Styling and animations (glassmorphism, gradients)\n• JavaScript (ES6+) - App logic\n• jQuery & jQuery UI - Drag & drop window system\n• Font Awesome - Iconography\n• Google Fonts (Inter) - System typography\n\n## Main Features\n✓ Full window system (minimize, maximize, close)\n✓ Animated dock with hover effects\n✓ Finder with folder navigation\n✓ Working Terminal with real commands\n✓ Full Calculator\n✓ Embedded Safari browser (iframe)\n✓ Rich-text editor\n✓ Drawing / Sketch app\n✓ Settings app\n✓ iOS project apps (Pomo, WaldenVibes, VORTH)\n✓ Responsive design for mobile and tablets\n✓ Multi-language support (Spanish/English)\n\n## Project Structure\n/portfolio/\n├── index.html          # Main document\n├── script.js           # App logic\n├── styles.css          # Styling and responsive design\n├── assets/             # Media resources\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Custom domain configuration\n\n## Deployment\nHosted on GitHub Pages\nDomain: chrisarzaluz.dev\n\n## Built by\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'
+        }},
         'Screenshot.jpg': { type: 'img', src: 'assets/screenshot.jpg'}
     }}
 };
@@ -590,10 +762,11 @@ class WindowManager {
         apps.forEach(app => {
             if(app.separator) dock.append('<div style="width:1px; height:40px; background:rgba(255,255,255,0.2); margin: 0 5px;"></div>');
 
+            const label = appDisplayName(app);
             let el = $(`
-                <div class="dock-item" id="dock-${app.id}" title="${app.name}">
+                <div class="dock-item" id="dock-${app.id}" title="${label}">
                     <div class="dock-icon-svg">
-                        <img class="dock-icon-img" src="${app.icon}" alt="${app.name}" draggable="false">
+                        <img class="dock-icon-img" src="${app.icon}" alt="${label}" draggable="false">
                     </div>
                     <div class="dock-dot"></div>
                 </div>
@@ -602,6 +775,15 @@ class WindowManager {
             dock.append(el);
         });
         this.updateTrashIcon();
+    }
+
+    refreshDockLabels() {
+        apps.forEach(app => {
+            const label = appDisplayName(app);
+            const $el = $(`#dock-${app.id}`);
+            $el.attr('title', label);
+            $el.find('.dock-icon-img').attr('alt', label);
+        });
     }
 
     updateTrashIcon() {
@@ -644,7 +826,7 @@ class WindowManager {
         if (!appConfig) return; // No hacer nada si la app no existe
 
         let windowId = appId;
-        let config = appConfig;
+        let config = { ...appConfig, name: appDisplayName(appConfig) };
 
         // Lógica para proyectos
         if (projects[appId]) {
@@ -917,14 +1099,15 @@ function renderProject(container, projectId) {
     const project = projects[projectId];
     if (!project) return;
 
+    const features = Array.isArray(project.features) ? project.features : (project.features[currentLang] || project.features['es'] || []);
     container.html(`
         <div class="project-app">
             <h2><i class="fas fa-${project.icon}" style="color: var(--accent);"></i> ${project.name}</h2>
-            <p>${project.description}</p>
+            <p>${localized(project.description)}</p>
 
             <h3><i class="fas fa-star"></i> ${t('mainFeatures')}</h3>
             <ul>
-                ${project.features.map(f => `<li>${f}</li>`).join('')}
+                ${features.map(f => `<li>${f}</li>`).join('')}
             </ul>
 
             <h3><i class="fas fa-microchip"></i> ${t('techStack')}</h3>
@@ -955,8 +1138,8 @@ function renderProject(container, projectId) {
 function renderTerminal(container) {
     container.html(`
         <div class="terminal-app" id="term-output">
-            <div class="term-line">Last login: ${new Date().toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'})} on ttys000</div>
-            <div class="term-line">macOS Portfolio Edition [Version 1.0]</div>
+            <div class="term-line">${t('terminalLastLogin')}: ${new Date().toLocaleString(t('clockLocale'), {weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'})} on ttys000</div>
+            <div class="term-line">${t('terminalVersion')}</div>
             <br>
             <div id="term-history"></div>
             <div class="term-input-line">
@@ -995,7 +1178,7 @@ function renderTerminal(container) {
             case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
             case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels<span class="Apple-converted-space">  </span>Alba<span class="Apple-converted-space">  </span>Lumina'; break;
-            case 'whoami': response = 'Christian Arzaluz - iOS Developer'; break;
+            case 'whoami': response = `Christian Arzaluz - ${t('iosDeveloperTitle')}`; break;
             case 'date': response = new Date().toString(); break;
             case 'echo': response = args.slice(1).join(' '); break;
             case 'linkedin':
@@ -1119,8 +1302,8 @@ function renderSafari(container) {
 // Clock
 function updateClock() {
     const now = new Date();
-    const dateStr = now.toLocaleDateString('es-MX', { weekday: 'short', month: 'short', day: 'numeric' });
-    const timeStr = now.toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit', hour12: true });
+    const dateStr = now.toLocaleDateString(t('clockLocale'), { weekday: 'short', month: 'short', day: 'numeric' });
+    const timeStr = now.toLocaleTimeString(t('clockLocale'), { hour: 'numeric', minute: '2-digit', hour12: true });
     $('#clock').text(`${dateStr} ${timeStr}`);
 }
 setInterval(updateClock, 1000);
@@ -1208,7 +1391,7 @@ function updateFinderGrid() {
                 renderFinder($('#content-finder'));
             } else if (item.type === 'text') {
                 wm.openApp('textedit');
-                setTimeout(() => $('#text-area').val(item.content), 200);
+                setTimeout(() => $('#text-area').val(localized(item.content)), 200);
             } else if (item.type === 'img') {
                 openPreview(key, item.src, 'img');
             } else if (item.type === 'pdf') {
@@ -1256,7 +1439,7 @@ function showFinderContextMenu(x, y, fileName, item) {
             renderFinder($('#content-finder'));
         } else if (item.type === 'text') {
             wm.openApp('textedit');
-            setTimeout(() => $('#text-area').val(item.content), 200);
+            setTimeout(() => $('#text-area').val(localized(item.content)), 200);
         }
         menu.remove();
     });
@@ -1362,9 +1545,9 @@ function duplicateFile(fileName, item) {
         const parts = fileName.split('.');
         if(parts.length > 1) {
             const ext = parts.pop();
-            copyName = parts.join('.') + ' copia' + (counter > 1 ? ' ' + counter : '') + '.' + ext;
+            copyName = parts.join('.') + ' ' + t('duplicateSuffix') + (counter > 1 ? ' ' + counter : '') + '.' + ext;
         } else {
-            copyName = fileName + ' copia' + (counter > 1 ? ' ' + counter : '');
+            copyName = fileName + ' ' + t('duplicateSuffix') + (counter > 1 ? ' ' + counter : '');
         }
         counter++;
     }
@@ -1444,7 +1627,7 @@ function renderTextEdit(container) {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'documento.txt';
+        a.download = t('textEditDefaultFileName');
         a.click();
         URL.revokeObjectURL(url);
     });
@@ -1461,7 +1644,7 @@ function renderPaint(container) {
                     <input type="color" id="p-color" value="#000000" style="width:40px; height:25px; border:none; border-radius:4px; cursor:pointer;">
                 </label>
                 <label style="color:#333; font-size:11px; display:flex; align-items:center; gap:5px;">
-                    Tamaño: <span id="size-label">5</span>px
+                    ${t('paintSizeLabel')}: <span id="size-label">5</span>px
                     <input type="range" id="p-size" min="1" max="50" value="5" style="width:80px;">
                 </label>
                 <button class="text-tool" id="p-brush"><i class="fas fa-paintbrush"></i> ${t('brush')}</button>
@@ -1666,7 +1849,7 @@ function renderSettings(container) {
         <div class="settings-app">
             <div style="display:flex; align-items:center; gap:15px; width:100%; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:15px; margin-bottom: 20px;">
                 <div style="width:60px; height:60px; background:#ccc; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:30px; color:#555;"><i class="fas fa-user"></i></div>
-                <div><div style="font-weight:600; font-size:16px;">Christian Arzaluz</div><div style="font-size:12px; color:#aaa;">iOS Developer</div></div>
+                <div><div style="font-weight:600; font-size:16px;">Christian Arzaluz</div><div style="font-size:12px; color:#aaa;">${t('iosDeveloperTitle')}</div></div>
             </div>
 
             <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">${t('language')}</div>
