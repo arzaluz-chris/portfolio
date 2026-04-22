@@ -19,7 +19,7 @@ const translations = {
     'hero.title.1': 'Your Guide to',
     'hero.title.2': 'Better Friendships',
     'hero.subtitle': 'Alba is an AI-powered friendship advisor grounded in positive psychology. Take the friendship test, chat with AlbaIA, journal your reflections, and listen to music — all in one place.',
-    'hero.cta': 'Coming Soon on the App Store',
+    'hero.cta': 'Download on the App Store',
 
     // Features
     'features.title': 'Everything You Need for Healthier Friendships',
@@ -65,7 +65,7 @@ const translations = {
     'cta.title.1': 'Start Building',
     'cta.title.2': 'Better Friendships',
     'cta.subtitle': 'Download Alba and take the first step toward understanding and strengthening your closest relationships.',
-    'cta.button': 'Coming Soon on the App Store',
+    'cta.button': 'Download on the App Store',
 
     // Footer
     'footer.copy': '2026 Alba. All rights reserved.',
@@ -160,7 +160,7 @@ const translations = {
     'hero.title.1': 'Tu Guía para',
     'hero.title.2': 'Mejores Amistades',
     'hero.subtitle': 'Alba es una asesora de amistades impulsada por IA y basada en la psicología positiva. Toma el test de amistad, platica con AlbaIA, escribe en tu diario y escucha música — todo en un solo lugar.',
-    'hero.cta': 'Próximamente en la App Store',
+    'hero.cta': 'Descargar en la App Store',
 
     // Features
     'features.title': 'Todo lo Que Necesitas para Amistades Más Sanas',
@@ -206,7 +206,7 @@ const translations = {
     'cta.title.1': 'Comienza a Construir',
     'cta.title.2': 'Mejores Amistades',
     'cta.subtitle': 'Descarga Alba y da el primer paso para entender y fortalecer tus relaciones más cercanas.',
-    'cta.button': 'Próximamente en la App Store',
+    'cta.button': 'Descargar en la App Store',
 
     // Footer
     'footer.copy': '2026 Alba. Todos los derechos reservados.',

@@ -12,6 +12,17 @@
   <meta name="theme-color" content="#5823d6">
   <link rel="canonical" href="https://chrisarzaluz.dev/">
 
+  <!-- Language alternates (the simulator serves both ES and EN from one URL) -->
+  <link rel="alternate" hreflang="es" href="https://chrisarzaluz.dev/">
+  <link rel="alternate" hreflang="en" href="https://chrisarzaluz.dev/">
+  <link rel="alternate" hreflang="x-default" href="https://chrisarzaluz.dev/">
+
+  <!-- Preconnect to critical third-party origins -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
@@ -50,6 +61,76 @@
     "knowsAbout": ["Swift", "SwiftUI", "iOS Development", "MVVM", "CloudKit", "SwiftData", "Gemini AI"]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://chrisarzaluz.dev/",
+    "name": "Christian Arzaluz Portfolio",
+    "inLanguage": ["es", "en"],
+    "author": { "@type": "Person", "name": "Christian Arzaluz" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MobileApplication",
+        "name": "Pomo",
+        "operatingSystem": "iOS",
+        "applicationCategory": "ProductivityApplication",
+        "url": "https://chrisarzaluz.dev/pomo/",
+        "downloadUrl": "https://apps.apple.com/us/app/pomo-simple-timer/id6746705227",
+        "author": { "@type": "Person", "name": "Christian Arzaluz" }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "VORTH",
+        "operatingSystem": "iOS",
+        "applicationCategory": "LifestyleApplication",
+        "url": "https://chrisarzaluz.dev/vorth/",
+        "downloadUrl": "https://apps.apple.com/mx/app/vorth/id6759020391",
+        "author": { "@type": "Person", "name": "Christian Arzaluz" }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Alba",
+        "operatingSystem": "iOS",
+        "applicationCategory": "LifestyleApplication",
+        "url": "https://chrisarzaluz.dev/alba/",
+        "downloadUrl": "https://apps.apple.com/us/app/alba-ai-relationship-advisor/id6761395418",
+        "author": { "@type": "Person", "name": "Christian Arzaluz" }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "TeddyFeels",
+        "operatingSystem": "iOS",
+        "applicationCategory": "HealthApplication",
+        "url": "https://chrisarzaluz.dev/teddyfeels/",
+        "downloadUrl": "https://apps.apple.com/us/app/teddyfeels/id6761302473",
+        "author": { "@type": "Person", "name": "Christian Arzaluz" }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Cordis",
+        "operatingSystem": "iOS",
+        "applicationCategory": "HealthApplication",
+        "url": "https://chrisarzaluz.dev/cordis/",
+        "downloadUrl": "https://apps.apple.com/app/id6759006467",
+        "author": { "@type": "Person", "name": "Christian Arzaluz" }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Lumina",
+        "operatingSystem": "iOS",
+        "applicationCategory": "EducationApplication",
+        "url": "https://chrisarzaluz.dev/lumina/",
+        "author": { "@type": "Person", "name": "Christian Arzaluz" }
+      }
+    ]
+  }
+  </script>
 
   <!-- External Dependencies -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,6 +141,37 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <noscript>
+        <div class="noscript-fallback" style="max-width:720px;margin:40px auto;padding:24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#f5f5f7;background:#1c1c1e;border-radius:12px;line-height:1.5;">
+            <h1 style="margin-top:0;font-size:28px;">Christian Arzaluz — iOS Developer</h1>
+            <p><em>This site is an interactive macOS simulator. Enable JavaScript for the full experience, or read the summary below. / Este sitio es un simulador interactivo de macOS. Activa JavaScript para la experiencia completa, o lee el resumen a continuación.</em></p>
+
+            <h2 style="font-size:20px;margin-top:24px;">About / Sobre mí</h2>
+            <p lang="en"><strong>English:</strong> Hello! I'm an iOS developer passionate about building mobile apps that improve people's lives. I'm a Computer Systems Engineering student in Mexico, specializing in Swift, SwiftUI, and AI-powered apps. As a general physician, I combine clinical experience with software development to create apps that solve real problems in health and well-being.</p>
+            <p lang="es"><strong>Español:</strong> ¡Hola! Soy un desarrollador iOS apasionado por crear aplicaciones móviles que mejoran la vida de las personas. Estudio Ingeniería en Sistemas Computacionales en México y me especializo en Swift, SwiftUI y apps con IA. Como médico general, combino mi experiencia clínica con el desarrollo de software para crear aplicaciones que resuelven problemas reales en salud y bienestar.</p>
+
+            <h2 style="font-size:20px;margin-top:24px;">Apps</h2>
+            <ul>
+                <li><a href="/pomo/" style="color:#6e9fff;">Pomo</a> — Pomodoro timer for iPhone &amp; Apple Watch</li>
+                <li><a href="/vorth/" style="color:#6e9fff;">VORTH</a> — AI Life Purpose Coach &amp; PERMA Journal</li>
+                <li><a href="/alba/" style="color:#6e9fff;">Alba</a> — AI Friendship Advisor</li>
+                <li><a href="/teddyfeels/" style="color:#6e9fff;">TeddyFeels</a> — Emotional wellness for kids 6–12</li>
+                <li><a href="/lumina/" style="color:#6e9fff;">Lumina</a> — VIA Character Strengths with Apple Intelligence</li>
+                <li><a href="/cordis/" style="color:#6e9fff;">Cordis</a> — Heart-rate monitoring &amp; guided meditation</li>
+            </ul>
+
+            <h2 style="font-size:20px;margin-top:24px;">Skills</h2>
+            <p>Swift 6 · SwiftUI · UIKit · Combine · MVVM · Clean Architecture · SwiftData · Core Data · CloudKit · Apple Intelligence (Foundation Models) · Gemini AI · AVFoundation · UserNotifications · Charts · HealthKit · MusicKit · CryptoKit · LocalAuthentication</p>
+
+            <h2 style="font-size:20px;margin-top:24px;">Contact</h2>
+            <p>
+                Email: <a href="mailto:christian.arzaluz@gmail.com" style="color:#6e9fff;">christian.arzaluz@gmail.com</a><br>
+                GitHub: <a href="https://github.com/arzaluz-chris" style="color:#6e9fff;">github.com/arzaluz-chris</a><br>
+                LinkedIn: <a href="https://www.linkedin.com/in/christian-arzaluz/" style="color:#6e9fff;">linkedin.com/in/christian-arzaluz</a>
+            </p>
+        </div>
+    </noscript>
 
     <div id="wallpaper">
         <div class="wallpaper-layer"></div>

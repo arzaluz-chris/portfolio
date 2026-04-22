@@ -19,7 +19,7 @@ const translations = {
     'hero.title.1': 'Helping Kids',
     'hero.title.2': 'Understand Emotions',
     'hero.subtitle': 'TeddyFeels is a warm, safe companion that helps children ages 6–12 identify, express, and manage their emotions through guided activities, a private journal, goal tracking, and a friendly teddy bear buddy.',
-    'hero.cta': 'Coming Soon to the App Store',
+    'hero.cta': 'Download on the App Store',
 
     // Features
     'features.title': 'Everything Your Child Needs',
@@ -72,8 +72,8 @@ const translations = {
     // CTA
     'cta.title.1': 'Your Child\'s Emotional',
     'cta.title.2': 'Safe Space',
-    'cta.subtitle': 'TeddyFeels is coming soon to the App Store. A warm, private companion for your child\'s emotional journey.',
-    'cta.button': 'View on GitHub',
+    'cta.subtitle': 'TeddyFeels is now on the App Store. Give your child a private, caring companion for their emotional journey.',
+    'cta.button': 'Download on the App Store',
 
     // Footer
     'footer.copy': '2026 TeddyFeels. All rights reserved.',
@@ -200,7 +200,7 @@ const translations = {
     'hero.title.1': 'Ayudando a los Niños a',
     'hero.title.2': 'Entender sus Emociones',
     'hero.subtitle': 'TeddyFeels es un compañero cálido y seguro que ayuda a niños de 6 a 12 años a identificar, expresar y manejar sus emociones a través de actividades guiadas, un diario privado, seguimiento de metas y un amigable osito de peluche.',
-    'hero.cta': 'Próximamente en la App Store',
+    'hero.cta': 'Descargar en la App Store',
 
     // Features
     'features.title': 'Todo lo que tu Hijo Necesita',
@@ -253,8 +253,8 @@ const translations = {
     // CTA
     'cta.title.1': 'El Espacio Seguro',
     'cta.title.2': 'Emocional de tu Hijo',
-    'cta.subtitle': 'TeddyFeels llegará próximamente a la App Store. Un compañero cálido y privado para el viaje emocional de tu hijo.',
-    'cta.button': 'Ver en GitHub',
+    'cta.subtitle': 'TeddyFeels ya está en la App Store. Dale a tu hijo un compañero privado y cariñoso para su viaje emocional.',
+    'cta.button': 'Descargar en la App Store',
 
     // Footer
     'footer.copy': '2026 TeddyFeels. Todos los derechos reservados.',
