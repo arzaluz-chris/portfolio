@@ -336,11 +336,6 @@ body, html {
         position: relative;
     }
 
-    .dock-item:hover {
-        transform: scale(1.15) translateY(-5px);
-        margin: 0;
-    }
-
     /* Keep dot indicator at bottom like desktop */
     .dock-dot {
         bottom: -8px;
@@ -737,7 +732,7 @@ body, html {
 
     /* Disable hover effects on touch devices */
     .dock-item:hover {
-        transform: scale(1.05) translateY(-5px);
+        transform: none;
     }
 
     .menu-item:hover {
