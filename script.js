@@ -696,9 +696,9 @@ class WindowManager {
         if (!window.matchMedia('(hover: hover)').matches) return;
         const dock = document.getElementById('dock');
         const BASE_SIZE = 55;
-        const MAX_SCALE = 1.65;
-        const REACH = 220;   // px from cursor where magnification decays to 1.0
-        const MAX_LIFT = 18;
+        const MAX_SCALE = 1.3;
+        const REACH = 170;   // px from cursor where magnification decays to 1.0
+        const MAX_LIFT = 8;
         let pendingX = null, rafId = null;
 
         // Cosine bell curve: 1.0 at the cursor, 0.0 at REACH.
