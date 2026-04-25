@@ -688,6 +688,7 @@ class WindowManager {
         this.activeApp = 'Finder';
         this.initDock();
         this.setupDockMagnification();
+        this.setupDockTooltips();
         this.setupTrashDropTarget();
         this.setupDesktop();
     }
@@ -738,6 +739,64 @@ class WindowManager {
         });
     }
 
+    setupDockTooltips() {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        const dock = document.getElementById('dock');
+        const tooltip = document.getElementById('dock-tooltip');
+        if (!dock || !tooltip) return;
+
+        let activeItem = null;
+        let posRaf = null;
+
+        const positionTooltip = () => {
+            posRaf = null;
+            if (!activeItem) return;
+            const r = activeItem.getBoundingClientRect();
+            const tw = tooltip.offsetWidth;
+            const th = tooltip.offsetHeight;
+            const left = r.left + r.width / 2 - tw / 2;
+            const top = r.top - th - 10;
+            tooltip.style.left = `${Math.round(left)}px`;
+            tooltip.style.top = `${Math.round(top)}px`;
+        };
+
+        const schedulePosition = () => {
+            if (posRaf) return;
+            posRaf = requestAnimationFrame(positionTooltip);
+        };
+
+        const showFor = (item) => {
+            if (item === activeItem) return;
+            activeItem = item;
+            tooltip.textContent = item.getAttribute('aria-label') || '';
+            tooltip.setAttribute('aria-hidden', 'false');
+            tooltip.classList.add('visible');
+            schedulePosition();
+        };
+
+        const hide = () => {
+            activeItem = null;
+            tooltip.classList.remove('visible');
+            tooltip.setAttribute('aria-hidden', 'true');
+        };
+
+        dock.addEventListener('mouseover', (e) => {
+            const item = e.target.closest('.dock-item');
+            if (!item || !dock.contains(item)) return;
+            showFor(item);
+        });
+
+        dock.addEventListener('mousemove', () => {
+            if (activeItem) schedulePosition();
+        });
+
+        dock.addEventListener('mouseleave', hide);
+
+        dock.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.dock-item')) hide();
+        });
+    }
+
     setupTrashDropTarget() {
         const trash = document.getElementById('dock-trash');
         if (!trash) return;
@@ -764,7 +823,7 @@ class WindowManager {
 
             const label = appDisplayName(app);
             let el = $(`
-                <div class="dock-item" id="dock-${app.id}" title="${label}">
+                <div class="dock-item" id="dock-${app.id}" aria-label="${label}">
                     <div class="dock-icon-svg">
                         <img class="dock-icon-img" src="${app.icon}" alt="${label}" draggable="false">
                     </div>
@@ -781,7 +840,7 @@ class WindowManager {
         apps.forEach(app => {
             const label = appDisplayName(app);
             const $el = $(`#dock-${app.id}`);
-            $el.attr('title', label);
+            $el.attr('aria-label', label);
             $el.find('.dock-icon-img').attr('alt', label);
         });
     }

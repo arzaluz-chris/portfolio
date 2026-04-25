@@ -115,6 +115,50 @@ body, html {
 }
 .dock-item.active .dock-dot { display: block; }
 
+/* macOS-style hover tooltip for dock items (desktop only) */
+.dock-tooltip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 6100;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 120ms ease, transform 120ms ease;
+    background: rgba(245, 245, 247, 0.78);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 0.5px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.12);
+    padding: 5px 12px;
+    border-radius: 999px;
+    color: rgba(0, 0, 0, 0.85);
+    font-family: var(--system-font);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+.dock-tooltip::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    margin-top: -1px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(245, 245, 247, 0.78);
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.08));
+}
+.dock-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (hover: none) and (pointer: coarse) {
+    .dock-tooltip { display: none !important; }
+}
+
 /* Bounce Animation */
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
