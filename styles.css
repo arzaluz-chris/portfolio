@@ -539,8 +539,8 @@ body, html {
     }
 
     .finder-grid {
-        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 10px;
     }
 
     .file-icon {
@@ -685,8 +685,8 @@ body, html {
     }
 
     .finder-grid {
-        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-        gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 8px;
     }
 
     .file-icon {
@@ -816,14 +816,26 @@ body, html {
 .sidebar-item:hover { background: rgba(255,255,255,0.1); }
 .sidebar-item i { color: var(--accent); width: 15px; text-align: center;}
 .finder-main { flex: 1; padding: 10px; overflow-y: auto; }
-.finder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px; }
+.finder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
 .file-item { display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: opacity 0.15s; }
 .file-item.dragging { opacity: 0.4; }
 .file-icon { font-size: 40px; color: #5dade2; margin-bottom: 5px; }
 .file-icon.folder { color: #5dade2; }
 .file-icon.text { color: #ddd; }
 .file-icon.img { color: #58d68d; }
-.file-name { font-size: 12px; word-break: break-all; padding: 2px 4px; border-radius: 3px;}
+.file-name {
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    max-width: 100%;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 .file-item:hover .file-name { background: var(--accent); }
 
 /* TextEdit */
