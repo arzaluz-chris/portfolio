@@ -18,7 +18,7 @@ const translations = {
     'hero.title.1': 'Descubre tus',
     'hero.title.2': '24 fortalezas',
     'hero.subtitle': 'Lumina es una app de psicología positiva basada en la clasificación VIA Character Strengths. Toma el test, recibe un análisis personalizado con Apple Intelligence on-device y cultiva tu carácter — sin recolección de datos.',
-    'hero.cta': 'Próximamente en la App Store',
+    'hero.cta': 'Descargar en la App Store',
     'hero.secondary': 'Conoce las funciones',
     'hero.hl.1': 'Apple Intelligence on-device',
     'hero.hl.2': 'Cero datos recolectados',
@@ -92,8 +92,8 @@ const translations = {
     // CTA
     'cta.title.1': 'Ilumina',
     'cta.title.2': 'tus fortalezas',
-    'cta.subtitle': 'Lumina llega pronto a la App Store. Diseñada para estudiantes y familias del Colegio Walden Dos de México — y para cualquiera que quiera conocerse mejor.',
-    'cta.button': 'Próximamente en la App Store',
+    'cta.subtitle': 'Lumina ya está disponible en la App Store. Diseñada para estudiantes y familias del Colegio Walden Dos de México — y para cualquiera que quiera conocerse mejor.',
+    'cta.button': 'Descargar en la App Store',
 
     // Footer
     'footer.copy': '2026 Lumina · Colegio Walden Dos de México',
@@ -188,7 +188,7 @@ const translations = {
     'hero.title.1': 'Discover your',
     'hero.title.2': '24 strengths',
     'hero.subtitle': 'Lumina is a positive-psychology app based on the VIA Character Strengths classification. Take the test, receive a personalized analysis powered by on-device Apple Intelligence, and cultivate your character — with zero data collection.',
-    'hero.cta': 'Coming Soon on the App Store',
+    'hero.cta': 'Download on the App Store',
     'hero.secondary': 'Explore the features',
     'hero.hl.1': 'On-device Apple Intelligence',
     'hero.hl.2': 'Zero data collected',
@@ -262,8 +262,8 @@ const translations = {
     // CTA
     'cta.title.1': 'Illuminate',
     'cta.title.2': 'your strengths',
-    'cta.subtitle': 'Lumina is coming soon to the App Store. Designed for students and families of Colegio Walden Dos de México — and for anyone who wants to know themselves better.',
-    'cta.button': 'Coming Soon on the App Store',
+    'cta.subtitle': 'Lumina is now available on the App Store. Designed for students and families of Colegio Walden Dos de México — and for anyone who wants to know themselves better.',
+    'cta.button': 'Download on the App Store',
 
     // Footer
     'footer.copy': '2026 Lumina · Colegio Walden Dos de México',
