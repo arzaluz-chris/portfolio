@@ -50,6 +50,9 @@ const translations = {
         duplicate: 'Duplicar',
         moveToTrash: 'Mover a Papelera',
 
+        // Calculator
+        calcUndefined: 'Sin definir',
+
         // Terminal
         terminalLastLogin: 'Last login',
         terminalVersion: 'macOS Portfolio Edition [Version 1.0]',
@@ -164,6 +167,9 @@ const translations = {
         rename: 'Rename',
         duplicate: 'Duplicate',
         moveToTrash: 'Move to Trash',
+
+        // Calculator
+        calcUndefined: 'Undefined',
 
         // Terminal
         terminalLastLogin: 'Last login',
@@ -1293,14 +1299,19 @@ function renderCalculator(container) {
     `);
 }
 
-let calcCur = '0', calcPrev = null, calcOper = null, newNum = true;
+let calcCur = '0', calcPrev = null, calcOper = null, newNum = true, calcError = false;
 const updateDisp = () => {
+    if (calcError) {
+        $('#calc-display').val(t('calcUndefined'));
+        return;
+    }
     // Formatear la salida
     let parts = calcCur.split('.');
     parts[0] = parseFloat(parts[0]).toLocaleString();
     $('#calc-display').val(parts.join('.'));
 };
 window.calcNum = (num) => {
+    if (calcError) calcClear();
     if (num === '.' && calcCur.includes('.')) return;
     if(newNum) { calcCur = num.toString(); newNum = false; } else { calcCur = calcCur === '0' ? num.toString() : calcCur + num; }
     // Limitar longitud para que no se desborde
@@ -1308,6 +1319,7 @@ window.calcNum = (num) => {
     updateDisp();
 };
 window.calcOp = (op) => {
+    if (calcError) return;
     if (op === '+-') {
         calcCur = (parseFloat(calcCur) * -1).toString();
         updateDisp();
@@ -1325,7 +1337,7 @@ window.calcOp = (op) => {
     calcOper = op;
     newNum = true;
 };
-window.calcClear = () => { calcCur='0'; calcPrev=null; calcOper=null; newNum=true; updateDisp(); };
+window.calcClear = () => { calcCur='0'; calcPrev=null; calcOper=null; newNum=true; calcError=false; updateDisp(); };
 window.calcEq = () => {
     if(calcOper && !newNum) {
         const cur = parseFloat(calcCur);
@@ -1335,6 +1347,12 @@ window.calcEq = () => {
             case '-': result = calcPrev - cur; break;
             case '*': result = calcPrev * cur; break;
             case '/': result = calcPrev / cur; break;
+        }
+        if (!isFinite(result)) {
+            calcError = true;
+            calcOper = null; newNum = true;
+            updateDisp();
+            return;
         }
         calcCur = result.toString();
         calcOper = null; newNum = true; updateDisp();
