@@ -1203,7 +1203,9 @@ function renderTerminal(container) {
             <div id="term-history"></div>
             <div class="term-input-line">
                 <span class="term-prompt">guest@portfolio ~ %</span>
-                <input type="text" id="term-input" autocomplete="off" autofocus>
+                <span id="term-input" contenteditable="true" spellcheck="false"
+                      autocorrect="off" autocapitalize="off"
+                      role="textbox" aria-label="Terminal command" tabindex="0"></span>
             </div>
         </div>
     `);
@@ -1212,16 +1214,25 @@ function renderTerminal(container) {
     const input = $('#term-input');
     const output = $('#term-output');
 
-    container.on('click', () => input.focus());
+    container.on('click', () => input[0].focus());
+    setTimeout(() => input[0].focus(), 60);
 
     input.on('keydown', function(e) {
         if(e.key === 'Enter') {
-            const cmd = this.value.trim();
+            e.preventDefault();
+            const cmd = (this.textContent || '').trim();
             history.append(`<div class="term-line"><span class="term-prompt">guest@portfolio ~ %</span> ${cmd}</div>`);
-            this.value = '';
+            this.textContent = '';
             processCommand(cmd);
             output.scrollTop(output[0].scrollHeight);
         }
+    });
+
+    // Strip formatting from pastes so we get plain text only
+    input.on('paste', function(e) {
+        e.preventDefault();
+        const text = (e.originalEvent || e).clipboardData.getData('text/plain').replace(/\r?\n/g, ' ');
+        document.execCommand('insertText', false, text);
     });
 
     // Auto-ejecutar comando 'help' al abrir la terminal
