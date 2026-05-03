@@ -1,5 +1,5 @@
 {
-  "geminiTextModel": "gemini-2.0-flash",
+  "geminiTextModel": "gemini-2.5-flash-lite",
   "geminiLiveModel": "gemini-2.5-flash-native-audio-preview-09-2025",
   "maxDailyCoachSessions": 10,
   "maxDailyChatQuestions": 20,
