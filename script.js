@@ -27,6 +27,7 @@ const translations = {
         textEdit: 'TextEdit',
         sketch: 'Sketch',
         calculator: 'Calculator',
+        appsPage: 'Apps',
         settings: 'Settings',
         mail: 'Mail',
         bin: 'Bin',
@@ -145,6 +146,7 @@ const translations = {
         textEdit: 'TextEdit',
         sketch: 'Sketch',
         calculator: 'Calculator',
+        appsPage: 'Apps',
         settings: 'Settings',
         mail: 'Mail',
         bin: 'Bin',
@@ -533,6 +535,7 @@ function localized(field) {
 const apps = [
     { id: 'finder',      nameKey: 'finder',      icon: 'assets/dock-icons/processed/finder.png' },
     { id: 'aboutme',     nameKey: 'aboutMeApp',  icon: 'assets/dock-icons/processed/contacts.png' },
+    { id: 'appspage',    nameKey: 'appsPage',    icon: 'assets/dock-icons/processed/apps.webp', url: 'https://chrisarzaluz.dev/portfolio/#apps' },
     { id: 'safari',      nameKey: 'safari',      icon: 'assets/dock-icons/processed/safari.png' },
     { id: 'terminal',    nameKey: 'terminal',    icon: 'assets/dock-icons/processed/terminal.png' },
     { id: 'textedit',    nameKey: 'textEdit',    icon: 'assets/dock-icons/processed/textedit.png' },
@@ -889,6 +892,17 @@ class WindowManager {
     openApp(appId) {
         const appConfig = apps.find(a => a.id === appId);
         if (!appConfig) return; // No hacer nada si la app no existe
+
+        // If the app has a direct URL, navigate to it instead of opening a window
+        if (appConfig.url) {
+            const dockItem = $(`#dock-${appId}`);
+            if (!dockItem.hasClass('bouncing')) {
+                dockItem.addClass('bouncing');
+                setTimeout(() => dockItem.removeClass('bouncing'), 600);
+            }
+            window.open(appConfig.url, '_blank');
+            return;
+        }
 
         let windowId = appId;
         let config = { ...appConfig, name: appDisplayName(appConfig) };
