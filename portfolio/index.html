@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christian Arzaluz — iOS Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Christian Arzaluz, an iOS Developer building apps that improve people's lives using Swift, SwiftUI, and Artificial Intelligence.">
+  <meta name="keywords" content="iOS Developer, Swift, SwiftUI, Apple Intelligence, Gemini AI, Portfolio, Christian Arzaluz, App Developer">
+  <meta name="author" content="Christian Arzaluz">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#000000">
+
+  <link rel="canonical" href="https://chrisarzaluz.dev/portfolio/">
+
+  <!-- Language alternates -->
+  <link rel="alternate" hreflang="es" href="https://chrisarzaluz.dev/portfolio/?lang=es">
+  <link rel="alternate" hreflang="en" href="https://chrisarzaluz.dev/portfolio/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://chrisarzaluz.dev/portfolio/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chrisarzaluz.dev/portfolio/">
+  <meta property="og:title" content="Christian Arzaluz — iOS Developer Portfolio">
+  <meta property="og:description" content="7 published iOS apps built with Swift, SwiftUI, and AI. Designed, developed, and shipped to the App Store.">
+  <meta property="og:image" content="https://chrisarzaluz.dev/assets/og.jpg">
+  <meta property="og:site_name" content="Christian Arzaluz Portfolio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Christian Arzaluz — iOS Developer">
+  <meta name="twitter:description" content="7 published iOS apps built with Swift, SwiftUI, and AI. Designed, developed, and shipped to the App Store.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-left">
+        <a href="../" class="nav-home" title="Back to main page">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </a>
+        <a href="#" class="nav-logo">CHRIS ARZALUZ</a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#apps" data-i18n="nav.apps">Apps</a></li>
+        <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
+        </div>
+        <button class="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="../" data-i18n="nav.home">Home</a>
+    <a href="#apps" data-i18n="nav.apps">Apps</a>
+    <a href="#skills" data-i18n="nav.skills">Skills</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <header class="hero fade-in">
+    <div class="container">
+      <div class="hero-eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span data-i18n="hero.eyebrow">iOS Developer Portfolio</span>
+      </div>
+      <h1 class="hero-title">
+        <span data-i18n="hero.title.1">Apps That Improve</span><br>
+        <span class="gradient" data-i18n="hero.title.2">People's Lives</span>
+      </h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">7 published iOS apps built with Swift, SwiftUI, and AI. From on-device Apple Intelligence to Gemini-powered coaching — designed, developed, and shipped to the App Store.</p>
+      
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-value">7</div>
+          <div class="stat-label" data-i18n="stat.apps">Published Apps</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">3</div>
+          <div class="stat-label" data-i18n="stat.ai">AI-Powered</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">Universal</div>
+          <div class="stat-label" data-i18n="stat.platforms">iPhone & iPad</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== APPS SECTION ========== -->
+  <section id="apps" class="section apps-section">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="apps.title">My Applications</h2>
+      <p class="section-subtitle fade-in" data-i18n="apps.subtitle">Each app is designed with a focus on user experience, privacy, and modern iOS best practices.</p>
+
+      <div class="apps-grid">
+
+        <!-- 1. LUMINA (Featured) -->
+        <article class="app-card featured fade-in">
+          <div class="card-left">
+            <div class="featured-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span data-i18n="featured.badge">Latest Release</span>
+            </div>
+            <div class="card-header">
+              <img src="../assets/dock-icons/processed/lumina.png" alt="Lumina Icon" class="app-icon">
+              <div class="card-header-text">
+                <h3 class="app-name">Lumina</h3>
+                <p class="app-tagline" data-i18n="lumina.tagline">Discover Your 24 Character Strengths</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="app-description" data-i18n="lumina.desc">Character-strengths app for Colegio Walden Dos. Combines a 96-question VIA test with on-device Apple Intelligence analysis, a conversational AI companion (Buddy), and interactive evolution charts. Zero data collected.</p>
+            </div>
+            <div class="tech-stack">
+              <span class="tech-pill highlight">Apple Intelligence</span>
+              <span class="tech-pill">SwiftUI</span>
+              <span class="tech-pill">SwiftData</span>
+              <span class="tech-pill">Charts</span>
+            </div>
+            <div class="card-footer">
+              <a href="../lumina/" class="btn btn-secondary" data-i18n="btn.details">Details</a>
+            </div>
+          </div>
+          <div class="card-right">
+            <div class="screenshots-scroll-container">
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/01_MisFortalezas (1).png" alt="Lumina Screenshot 1" data-screenshot-en="assets/screenshots/Lumina Spanish/01_MisFortalezas (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/01_MisFortalezas (1).png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/02_AnalisisPersonalizado (1).png" alt="Lumina Screenshot 2" data-screenshot-en="assets/screenshots/Lumina Spanish/02_AnalisisPersonalizado (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/02_AnalisisPersonalizado (1).png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/03_Evolucion (1).png" alt="Lumina Screenshot 3" data-screenshot-en="assets/screenshots/Lumina Spanish/03_Evolucion (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/03_Evolucion (1).png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/04_Historias (1).png" alt="Lumina Screenshot 4" data-screenshot-en="assets/screenshots/Lumina Spanish/04_Historias (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/04_Historias (1).png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/05_HistoriaDetalle (1).png" alt="Lumina Screenshot 5" data-screenshot-en="assets/screenshots/Lumina Spanish/05_HistoriaDetalle (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/05_HistoriaDetalle (1).png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/06_Buddy (1).png" alt="Lumina Screenshot 6" data-screenshot-en="assets/screenshots/Lumina Spanish/06_Buddy (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/06_Buddy (1).png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/07_Conversaciones (1).png" alt="Lumina Screenshot 7" data-screenshot-en="assets/screenshots/Lumina Spanish/07_Conversaciones (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/07_Conversaciones (1).png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/08_Ajustes (1).png" alt="Lumina Screenshot 8" data-screenshot-en="assets/screenshots/Lumina Spanish/08_Ajustes (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/08_Ajustes (1).png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Lumina Spanish/09_Test (1).png" alt="Lumina Screenshot 9" data-screenshot-en="assets/screenshots/Lumina Spanish/09_Test (1).png" data-screenshot-es="assets/screenshots/Lumina Spanish/09_Test (1).png"></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. ALBA -->
+        <article class="app-card fade-in">
+          <div class="card-header">
+            <img src="../assets/dock-icons/processed/alba.png" alt="Alba Icon" class="app-icon">
+            <div class="card-header-text">
+              <h3 class="app-name">Alba</h3>
+              <p class="app-tagline" data-i18n="alba.tagline">AI-Powered Friendship Advisor</p>
+            </div>
+          </div>
+          <div class="card-screenshot">
+            <div class="screenshots-scroll-container">
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Alba English/1.png" alt="Alba Screenshot 1" data-screenshot-en="assets/screenshots/Alba English/1.png" data-screenshot-es="assets/screenshots/Alba Spanish/1.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Alba English/2.png" alt="Alba Screenshot 2" data-screenshot-en="assets/screenshots/Alba English/2.png" data-screenshot-es="assets/screenshots/Alba Spanish/2.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Alba English/3.png" alt="Alba Screenshot 3" data-screenshot-en="assets/screenshots/Alba English/3.png" data-screenshot-es="assets/screenshots/Alba Spanish/3.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Alba English/4.png" alt="Alba Screenshot 4" data-screenshot-en="assets/screenshots/Alba English/4.png" data-screenshot-es="assets/screenshots/Alba Spanish/4.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Alba English/5.png" alt="Alba Screenshot 5" data-screenshot-en="assets/screenshots/Alba English/5.png" data-screenshot-es="assets/screenshots/Alba Spanish/5.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Alba English/6.png" alt="Alba Screenshot 6" data-screenshot-en="assets/screenshots/Alba English/6.png" data-screenshot-es="assets/screenshots/Alba Spanish/6.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Alba English/7.png" alt="Alba Screenshot 7" data-screenshot-en="assets/screenshots/Alba English/7.png" data-screenshot-es="assets/screenshots/Alba Spanish/7.png"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="app-description" data-i18n="alba.desc">Your guide to better friendships, grounded in positive psychology. Features AI chat powered by Gemini, a scientific friendship test, a PIN & Face ID-protected journal, and Apple Music integration.</p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-pill highlight">Gemini AI</span>
+            <span class="tech-pill">SwiftUI</span>
+            <span class="tech-pill">FaceID</span>
+            <span class="tech-pill">Apple Music API</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://apps.apple.com/us/app/alba/id6740685023" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="btn.appstore">App Store</a>
+            <a href="https://github.com/christian-arzaluz/Alba" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.github">GitHub</a>
+            <a href="../alba/" class="card-detail-link" data-i18n="btn.details">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+          </div>
+        </article>
+
+        <!-- 3. TEDDYFEELS -->
+        <article class="app-card fade-in">
+          <div class="card-header">
+            <img src="../assets/dock-icons/processed/teddyfeels.png" alt="TeddyFeels Icon" class="app-icon">
+            <div class="card-header-text">
+              <h3 class="app-name">TeddyFeels</h3>
+              <p class="app-tagline" data-i18n="teddyfeels.tagline">Emotional Well-being for Kids</p>
+            </div>
+          </div>
+          <div class="card-screenshot">
+            <div class="screenshots-scroll-container">
+              <div class="screenshot-wrapper"><img src="assets/screenshots/TeddyFeels Spanish/1.png" alt="TeddyFeels Screenshot 1" data-screenshot-en="assets/screenshots/TeddyFeels Spanish/1.png" data-screenshot-es="assets/screenshots/TeddyFeels Spanish/1.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/TeddyFeels Spanish/2.png" alt="TeddyFeels Screenshot 2" data-screenshot-en="assets/screenshots/TeddyFeels Spanish/2.png" data-screenshot-es="assets/screenshots/TeddyFeels Spanish/2.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/TeddyFeels Spanish/3.png" alt="TeddyFeels Screenshot 3" data-screenshot-en="assets/screenshots/TeddyFeels Spanish/3.png" data-screenshot-es="assets/screenshots/TeddyFeels Spanish/3.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/TeddyFeels Spanish/4.png" alt="TeddyFeels Screenshot 4" data-screenshot-en="assets/screenshots/TeddyFeels Spanish/4.png" data-screenshot-es="assets/screenshots/TeddyFeels Spanish/4.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/TeddyFeels Spanish/5.png" alt="TeddyFeels Screenshot 5" data-screenshot-en="assets/screenshots/TeddyFeels Spanish/5.png" data-screenshot-es="assets/screenshots/TeddyFeels Spanish/5.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/TeddyFeels Spanish/6.png" alt="TeddyFeels Screenshot 6" data-screenshot-en="assets/screenshots/TeddyFeels Spanish/6.png" data-screenshot-es="assets/screenshots/TeddyFeels Spanish/6.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/TeddyFeels Spanish/7.png" alt="TeddyFeels Screenshot 7" data-screenshot-en="assets/screenshots/TeddyFeels Spanish/7.png" data-screenshot-es="assets/screenshots/TeddyFeels Spanish/7.png"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="app-description" data-i18n="teddyfeels.desc">Helps children aged 6–12 identify, express, and manage emotions through a teddy bear companion. Includes voice journaling, breathing exercises, and a progress dashboard. 100% offline — zero data collected.</p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-pill">SwiftUI</span>
+            <span class="tech-pill">SwiftData</span>
+            <span class="tech-pill">AVFoundation</span>
+            <span class="tech-pill">Lottie</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://apps.apple.com/us/app/teddyfeels/id6741130638" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="btn.appstore">App Store</a>
+            <a href="https://github.com/christian-arzaluz/TeddyFeels" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.github">GitHub</a>
+            <a href="../teddyfeels/" class="card-detail-link" data-i18n="btn.details">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+          </div>
+        </article>
+
+        <!-- 4. VORTH -->
+        <article class="app-card fade-in">
+          <div class="card-header">
+            <img src="../assets/dock-icons/processed/vorth.png" alt="VORTH Icon" class="app-icon">
+            <div class="card-header-text">
+              <h3 class="app-name">VORTH</h3>
+              <p class="app-tagline" data-i18n="vorth.tagline">Discover Your Life Purpose</p>
+            </div>
+          </div>
+          <div class="card-screenshot">
+            <div class="screenshots-scroll-container">
+              <div class="screenshot-wrapper"><img src="assets/screenshots/VORTH English/1.png" alt="VORTH Screenshot 1" data-screenshot-en="assets/screenshots/VORTH English/1.png" data-screenshot-es="assets/screenshots/VORTH Spanish/1.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/VORTH English/2.png" alt="VORTH Screenshot 2" data-screenshot-en="assets/screenshots/VORTH English/2.png" data-screenshot-es="assets/screenshots/VORTH Spanish/2.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/VORTH English/3.png" alt="VORTH Screenshot 3" data-screenshot-en="assets/screenshots/VORTH English/3.png" data-screenshot-es="assets/screenshots/VORTH Spanish/3.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/VORTH English/4.png" alt="VORTH Screenshot 4" data-screenshot-en="assets/screenshots/VORTH English/4.png" data-screenshot-es="assets/screenshots/VORTH Spanish/4.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/VORTH English/5.png" alt="VORTH Screenshot 5" data-screenshot-en="assets/screenshots/VORTH English/5.png" data-screenshot-es="assets/screenshots/VORTH Spanish/5.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/VORTH English/6.png" alt="VORTH Screenshot 6" data-screenshot-en="assets/screenshots/VORTH English/6.png" data-screenshot-es="assets/screenshots/VORTH Spanish/6.png"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="app-description" data-i18n="vorth.desc">AI life-coaching app using the PERMA well-being model. Features a live voice coach powered by Gemini AI, a PERMA journal, AI-suggested goals, and iPhone/iPad sync via iCloud.</p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-pill highlight">Gemini AI (Voice)</span>
+            <span class="tech-pill">SwiftUI</span>
+            <span class="tech-pill">CloudKit</span>
+            <span class="tech-pill">Speech</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://apps.apple.com/us/app/vorth/id6741870638" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="btn.appstore">App Store</a>
+            <a href="https://github.com/christian-arzaluz/VORTH" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.github">GitHub</a>
+            <a href="../vorth/" class="card-detail-link" data-i18n="btn.details">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+          </div>
+        </article>
+
+        <!-- 5. CORDIS -->
+        <article class="app-card fade-in">
+          <div class="card-header">
+            <img src="../cordis/assets/apple-touch-icon.png" alt="Cordis Icon" class="app-icon">
+            <div class="card-header-text">
+              <h3 class="app-name">Cordis</h3>
+              <p class="app-tagline" data-i18n="cordis.tagline">Heart Rate Monitoring & Meditation</p>
+            </div>
+          </div>
+          <div class="card-screenshot">
+            <div class="screenshots-scroll-container">
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Cordis English/1.png" alt="Cordis Screenshot 1" data-screenshot-en="assets/screenshots/Cordis English/1.png" data-screenshot-es="assets/screenshots/Cordis Spanish/1.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Cordis English/2.png" alt="Cordis Screenshot 2" data-screenshot-en="assets/screenshots/Cordis English/2.png" data-screenshot-es="assets/screenshots/Cordis Spanish/2.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Cordis English/3.png" alt="Cordis Screenshot 3" data-screenshot-en="assets/screenshots/Cordis English/3.png" data-screenshot-es="assets/screenshots/Cordis Spanish/3.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Cordis English/4.png" alt="Cordis Screenshot 4" data-screenshot-en="assets/screenshots/Cordis English/4.png" data-screenshot-es="assets/screenshots/Cordis Spanish/4.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Cordis English/5.png" alt="Cordis Screenshot 5" data-screenshot-en="assets/screenshots/Cordis English/5.png" data-screenshot-es="assets/screenshots/Cordis Spanish/5.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Cordis English/6.png" alt="Cordis Screenshot 6" data-screenshot-en="assets/screenshots/Cordis English/6.png" data-screenshot-es="assets/screenshots/Cordis Spanish/6.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Cordis English/7.png" alt="Cordis Screenshot 7" data-screenshot-en="assets/screenshots/Cordis English/7.png" data-screenshot-es="assets/screenshots/Cordis Spanish/7.png"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="app-description" data-i18n="cordis.desc">Track your heart rate, understand stress levels, and find calm with guided meditations and breathing exercises. Integrates with Apple Health via HealthKit. All data stays on-device.</p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-pill highlight">HealthKit</span>
+            <span class="tech-pill">SwiftUI</span>
+            <span class="tech-pill">SwiftData</span>
+            <span class="tech-pill">Charts</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://apps.apple.com/us/app/cordis/id6759006467" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="btn.appstore">App Store</a>
+            <a href="https://github.com/christian-arzaluz/Cordis" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.github">GitHub</a>
+            <a href="../cordis/" class="card-detail-link" data-i18n="btn.details">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+          </div>
+        </article>
+
+        <!-- 6. POMO -->
+        <article class="app-card fade-in">
+          <div class="card-header">
+            <img src="../assets/dock-icons/processed/pomo.png" alt="Pomo Icon" class="app-icon">
+            <div class="card-header-text">
+              <h3 class="app-name">Pomo</h3>
+              <p class="app-tagline" data-i18n="pomo.tagline">Minimalist Pomodoro Timer</p>
+            </div>
+          </div>
+          <div class="card-screenshot">
+            <div class="screenshots-scroll-container">
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Pomo English/1.png" alt="Pomo Screenshot 1" data-screenshot-en="assets/screenshots/Pomo English/1.png" data-screenshot-es="assets/screenshots/Pomo Spanish/1.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Pomo English/2.png" alt="Pomo Screenshot 2" data-screenshot-en="assets/screenshots/Pomo English/2.png" data-screenshot-es="assets/screenshots/Pomo Spanish/2.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Pomo English/3.png" alt="Pomo Screenshot 3" data-screenshot-en="assets/screenshots/Pomo English/3.png" data-screenshot-es="assets/screenshots/Pomo Spanish/3.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Pomo English/4.png" alt="Pomo Screenshot 4" data-screenshot-en="assets/screenshots/Pomo English/4.png" data-screenshot-es="assets/screenshots/Pomo Spanish/4.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/Pomo English/5.png" alt="Pomo Screenshot 5" data-screenshot-en="assets/screenshots/Pomo English/5.png" data-screenshot-es="assets/screenshots/Pomo Spanish/5.png"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="app-description" data-i18n="pomo.desc">Boost productivity through structured work and break sessions. Features customizable timers, background support, push notifications, streak tracking, and daily/weekly charts.</p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-pill">SwiftUI</span>
+            <span class="tech-pill">UserNotifications</span>
+            <span class="tech-pill">AppStorage</span>
+            <span class="tech-pill">Charts</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://apps.apple.com/us/app/pomo/id6741549495" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="btn.appstore">App Store</a>
+            <a href="https://github.com/christian-arzaluz/Pomo" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.github">GitHub</a>
+            <a href="../pomo/" class="card-detail-link" data-i18n="btn.details">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+          </div>
+        </article>
+
+        <!-- 7. WALDENVIBES -->
+        <article class="app-card fade-in">
+          <div class="card-header">
+            <img src="../assets/dock-icons/processed/waldenvibes.png" alt="WaldenVibes Icon" class="app-icon">
+            <div class="card-header-text">
+              <h3 class="app-name">WaldenVibes</h3>
+              <p class="app-tagline" data-i18n="waldenvibes.tagline">Meditación & Seguimiento Emocional</p>
+            </div>
+          </div>
+          <div class="card-screenshot">
+            <div class="screenshots-scroll-container">
+              <div class="screenshot-wrapper"><img src="assets/screenshots/WaldenVibes English/1.png" alt="WaldenVibes Screenshot 1" data-screenshot-en="assets/screenshots/WaldenVibes English/1.png" data-screenshot-es="assets/screenshots/WaldenVibes Spanish/1.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/WaldenVibes English/2.png" alt="WaldenVibes Screenshot 2" data-screenshot-en="assets/screenshots/WaldenVibes English/2.png" data-screenshot-es="assets/screenshots/WaldenVibes Spanish/2.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/WaldenVibes English/3.png" alt="WaldenVibes Screenshot 3" data-screenshot-en="assets/screenshots/WaldenVibes English/3.png" data-screenshot-es="assets/screenshots/WaldenVibes Spanish/3.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/WaldenVibes English/4.png" alt="WaldenVibes Screenshot 4" data-screenshot-en="assets/screenshots/WaldenVibes English/4.png" data-screenshot-es="assets/screenshots/WaldenVibes Spanish/4.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/WaldenVibes English/5.png" alt="WaldenVibes Screenshot 5" data-screenshot-en="assets/screenshots/WaldenVibes English/5.png" data-screenshot-es="assets/screenshots/WaldenVibes Spanish/5.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/WaldenVibes English/6.png" alt="WaldenVibes Screenshot 6" data-screenshot-en="assets/screenshots/WaldenVibes English/6.png" data-screenshot-es="assets/screenshots/WaldenVibes Spanish/6.png"></div>
+              <div class="screenshot-wrapper"><img src="assets/screenshots/WaldenVibes English/7.png" alt="WaldenVibes Screenshot 7" data-screenshot-en="assets/screenshots/WaldenVibes English/7.png" data-screenshot-es="assets/screenshots/WaldenVibes Spanish/7.png"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="app-description" data-i18n="waldenvibes.desc">A minimalist SwiftUI app that combines guided meditation exercises with emotion and mood tracking. Designed with a zen, calming user experience focused on mental well-being.</p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-pill">SwiftUI</span>
+            <span class="tech-pill">AVFoundation</span>
+            <span class="tech-pill">SwiftData</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://github.com/christian-arzaluz/WaldenVibes" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.github">GitHub</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS SECTION ========== -->
+  <section id="skills" class="section skills-section">
+    <div class="container">
+      <h2 class="section-title fade-in" data-i18n="skills.title">Technical Skills</h2>
+      <p class="section-subtitle fade-in" data-i18n="skills.subtitle">Core competencies across iOS development, AI integration, and software architecture.</p>
+
+      <div class="skills-grid fade-in">
+        <div class="skill-group">
+          <h3 class="skill-group-title" data-i18n="skills.languages">Languages & UI</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Swift 6</li>
+            <li class="skill-item">SwiftUI</li>
+            <li class="skill-item">UIKit</li>
+            <li class="skill-item">HTML / CSS / JS</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group-title" data-i18n="skills.architecture">Architecture</h3>
+          <ul class="skill-list">
+            <li class="skill-item">MVVM</li>
+            <li class="skill-item">Clean Architecture</li>
+            <li class="skill-item">SOLID Principles</li>
+            <li class="skill-item">Concurrency (async/await)</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group-title" data-i18n="skills.frameworks">Frameworks & APIs</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Apple Intelligence</li>
+            <li class="skill-item">HealthKit & CloudKit</li>
+            <li class="skill-item">SwiftData & CoreData</li>
+            <li class="skill-item">AVFoundation & Speech</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group-title" data-i18n="skills.tools">Tools & Services</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Xcode</li>
+            <li class="skill-item">Git & GitHub</li>
+            <li class="skill-item">Google Gemini API</li>
+            <li class="skill-item">Figma</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA & FOOTER ========== -->
+  <section id="contact" class="cta-section">
+    <div class="container fade-in">
+      <h2 class="cta-title" data-i18n="cta.title">Let's Build Something Together</h2>
+      <p class="cta-subtitle" data-i18n="cta.subtitle">I'm passionate about creating apps that make a real difference. Let's connect.</p>
+      <div class="cta-links">
+        <a href="mailto:christian.arzaluz@gmail.com" class="btn btn-primary" data-i18n="cta.email">Email Me</a>
+        <a href="https://linkedin.com/in/christianarzaluz" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="cta.linkedin">LinkedIn</a>
+        <a href="https://github.com/christian-arzaluz" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="cta.github">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container fade-in">
+      <div class="footer-copy" data-i18n="footer.copy">© 2026 Christian Arzaluz. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="../" data-i18n="footer.portfolio">Interactive Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
