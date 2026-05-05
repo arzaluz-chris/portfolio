@@ -81,7 +81,7 @@ If you'd like to run this static site locally to review the source code in actio
 I am actively looking for new opportunities where I can build impactful products and write elegant code. 
 
 - **LinkedIn:** [linkedin.com/in/christianarzaluz](https://linkedin.com/in/christianarzaluz)
-- **Portfolio:** [chrisarzaluz.dev](https://www.chrisarzaluz.dev)
+- **Portfolio:** [chrisarzaluz.dev](https://chrisarzaluz.dev)
 - **Email:** christian.arzaluz@gmail.com
 
 ---
