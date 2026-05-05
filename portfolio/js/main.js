@@ -169,15 +169,7 @@ const translations = {
 let currentLang = 'en';
 
 // --- Asset format support ---
-const supportsWebp = (() => {
-  try {
-    const canvas = document.createElement('canvas');
-    if (!canvas.getContext) return false;
-    return canvas.toDataURL('image/webp').startsWith('data:image/webp');
-  } catch (error) {
-    return false;
-  }
-})();
+const supportsWebp = false;
 
 function normalizeScreenshotPath(path) {
   if (!path) return path;

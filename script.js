@@ -257,15 +257,7 @@ function t(key) {
 }
 
 // Asset format support & fallbacks
-const supportsWebp = (() => {
-    try {
-        const canvas = document.createElement('canvas');
-        if (!canvas.getContext) return false;
-        return canvas.toDataURL('image/webp').startsWith('data:image/webp');
-    } catch (error) {
-        return false;
-    }
-})();
+const supportsWebp = false;
 
 function resolveWebpFallback(path, fallbackExt) {
     if (!path) return path;
@@ -676,8 +668,8 @@ function initWallpaper() {
         applyWallpaper(savedId, false);
     } else {
         applyWallpaper('monterey', false);  // default start
-        startWallpaperRotation();
     }
+    startWallpaperRotation();
 }
 
 // Simulated File System
@@ -750,7 +742,8 @@ class WindowManager {
     setupDockMagnification() {
         const canHover = window.matchMedia('(hover: hover)').matches;
         const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
-        if (!canHover || !hasFinePointer) return;
+        const isTouchViewport = window.matchMedia('(max-width: 1024px)').matches;
+        if (!canHover || !hasFinePointer || isTouchViewport) return;
         const dock = document.getElementById('dock');
         const BASE_SIZE = 55;
         const MAX_SCALE = 1.3;
@@ -949,23 +942,12 @@ class WindowManager {
         // If the app has a direct URL, navigate to it instead of opening a window
         if (appConfig.url) {
             const dockItem = $(`#dock-${appId}`);
-            if (!dockItem.hasClass('bouncing')) {
-                dockItem.addClass('bouncing');
-                let timeoutId;
-                const stopBounce = () => {
-                    dockItem.removeClass('bouncing');
-                    document.removeEventListener('visibilitychange', handleVisibilityChange);
-                };
-                function handleVisibilityChange() {
-                    if (document.hidden) {
-                        clearTimeout(timeoutId);
-                        stopBounce();
-                    }
-                }
-                document.addEventListener('visibilitychange', handleVisibilityChange);
-                timeoutId = setTimeout(stopBounce, 600);
-            }
-            window.open(appConfig.url, '_blank');
+            if (dockItem.hasClass('bouncing')) return;
+
+            dockItem.removeClass('active').addClass('bouncing');
+            setTimeout(() => dockItem.removeClass('bouncing'), 650);
+
+            window.open(appConfig.url, '_blank', 'noopener');
             return;
         }
 
@@ -2398,9 +2380,15 @@ function setupMobileTouchEnhancements() {
 // Initial appearance + wallpaper (must run after window.setAppearance is defined)
 setAppearance(currentAppearance);
 initWallpaper();
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+const colorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+const handleColorSchemeChange = () => {
     if (currentAppearance === 'auto') setAppearance('auto');
-});
+};
+if (typeof colorSchemeMedia.addEventListener === 'function') {
+    colorSchemeMedia.addEventListener('change', handleColorSchemeChange);
+} else if (typeof colorSchemeMedia.addListener === 'function') {
+    colorSchemeMedia.addListener(handleColorSchemeChange);
+}
 
 // Boot Sequence
 $(window).on('load', () => {
