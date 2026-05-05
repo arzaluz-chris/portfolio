@@ -181,26 +181,30 @@ const supportsWebp = (() => {
 
 function normalizeScreenshotPath(path) {
   if (!path) return path;
-  const normalized = supportsWebp
+  return supportsWebp
     ? path
     : path.replace('screenshots-webp/', 'screenshots/').replace(/\.webp$/i, '.png');
-  return sanitizeImagePath(normalized);
 }
 
 function normalizeWebpImage(path) {
   if (!path) return path;
-  const normalized = !supportsWebp && path.endsWith('.webp')
+  return !supportsWebp && path.endsWith('.webp')
     ? path.replace(/\.webp$/i, '.png')
     : path;
-  return sanitizeImagePath(normalized);
 }
 
-function sanitizeImagePath(path) {
-  if (!path) return path;
-  const trimmed = path.trim();
-  if (/^https?:/i.test(trimmed)) return trimmed;
-  if (trimmed.startsWith('/') || trimmed.startsWith('./') || trimmed.startsWith('../') || trimmed.startsWith('assets/')) {
-    return trimmed;
+function safeImageUrl(path) {
+  if (!path) return '';
+  const base = window.location.origin && window.location.origin !== 'null'
+    ? window.location.origin
+    : window.location.href;
+  try {
+    const url = new URL(path, base);
+    if (url.protocol === 'http:' || url.protocol === 'https:' || url.protocol === 'file:') {
+      return url.href;
+    }
+  } catch (error) {
+    return '';
   }
   return '';
 }
@@ -261,7 +265,9 @@ function updateScreenshots() {
   document.querySelectorAll('[data-screenshot-en]').forEach(img => {
     const enSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-en'));
     const esSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-es'));
-    img.src = currentLang === 'es' && esSrc ? esSrc : enSrc;
+    const next = currentLang === 'es' && esSrc ? esSrc : enSrc;
+    const safeSrc = safeImageUrl(next);
+    if (safeSrc) img.src = safeSrc;
   });
 }
 
@@ -273,7 +279,8 @@ function applyWebpFallbacks() {
     const next = src.includes('screenshots-webp/')
       ? normalizeScreenshotPath(src)
       : normalizeWebpImage(src);
-    if (next !== src) img.setAttribute('src', next);
+    const safeSrc = safeImageUrl(next);
+    if (safeSrc && safeSrc !== img.src) img.setAttribute('src', safeSrc);
   });
 }
 
