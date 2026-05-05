@@ -2,46 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://chrisarzaluz.dev/</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://chrisarzaluz.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://chrisarzaluz.dev/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://chrisarzaluz.dev/"/>
+    <loc>https://www.chrisarzaluz.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.chrisarzaluz.dev/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.chrisarzaluz.dev/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.chrisarzaluz.dev/"/>
     <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://chrisarzaluz.dev/pomo/</loc>
+    <loc>https://www.chrisarzaluz.dev/pomo/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chrisarzaluz.dev/vorth/</loc>
+    <loc>https://www.chrisarzaluz.dev/vorth/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chrisarzaluz.dev/alba/</loc>
+    <loc>https://www.chrisarzaluz.dev/alba/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chrisarzaluz.dev/teddyfeels/</loc>
+    <loc>https://www.chrisarzaluz.dev/teddyfeels/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chrisarzaluz.dev/lumina/</loc>
+    <loc>https://www.chrisarzaluz.dev/lumina/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chrisarzaluz.dev/cordis/</loc>
+    <loc>https://www.chrisarzaluz.dev/cordis/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
