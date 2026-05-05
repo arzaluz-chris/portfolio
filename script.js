@@ -927,7 +927,7 @@ class WindowManager {
             const dockItem = $(`#dock-${appId}`);
             if (!dockItem.hasClass('bouncing')) {
                 dockItem.addClass('bouncing');
-                let timeoutId;
+                let timeoutId = null;
                 const stopBounce = () => {
                     dockItem.removeClass('bouncing');
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
