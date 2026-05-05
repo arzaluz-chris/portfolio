@@ -938,7 +938,7 @@ class WindowManager {
                         stopBounce();
                     }
                 };
-                document.addEventListener('visibilitychange', handleVisibilityChange, { once: true });
+                document.addEventListener('visibilitychange', handleVisibilityChange);
                 timeoutId = setTimeout(stopBounce, 600);
             }
             window.open(appConfig.url, '_blank');
