@@ -188,8 +188,9 @@ function normalizeScreenshotPath(path) {
 
 function normalizeWebpImage(path) {
   if (!path) return path;
-  return !supportsWebp && path.endsWith('.webp')
-    ? path.replace(/\.webp$/i, '.png')
+  const webpPattern = /\.webp$/i;
+  return !supportsWebp && webpPattern.test(path)
+    ? path.replace(webpPattern, '.png')
     : path;
 }
 
@@ -200,13 +201,12 @@ function safeImageUrl(path) {
     : window.location.href;
   try {
     const url = new URL(path, base);
-    if (url.protocol === 'http:' || url.protocol === 'https:' || url.protocol === 'file:') {
-      return url.href;
-    }
+    return (url.protocol === 'http:' || url.protocol === 'https:' || url.protocol === 'file:')
+      ? url.href
+      : '';
   } catch (error) {
     return '';
   }
-  return '';
 }
 
 // --- Initialize ---
@@ -273,9 +273,9 @@ function updateScreenshots() {
 
 function applyWebpFallbacks() {
   if (supportsWebp) return;
-  document.querySelectorAll('img[src$=".webp"]').forEach(img => {
+  document.querySelectorAll('img').forEach(img => {
     const src = img.getAttribute('src');
-    if (!src) return;
+    if (!src || !/\.webp$/i.test(src)) return;
     const next = src.includes('screenshots-webp/')
       ? normalizeScreenshotPath(src)
       : normalizeWebpImage(src);

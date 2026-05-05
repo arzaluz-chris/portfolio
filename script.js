@@ -269,7 +269,8 @@ const supportsWebp = (() => {
 
 function resolveWebpFallback(path, fallbackExt) {
     if (!path || supportsWebp) return path;
-    return path.endsWith('.webp') ? path.replace(/\.webp$/i, fallbackExt) : path;
+    const webpPattern = /\.webp$/i;
+    return webpPattern.test(path) ? path.replace(webpPattern, fallbackExt) : path;
 }
 
 function resolveDockIcon(path) {
