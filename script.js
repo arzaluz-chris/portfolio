@@ -927,7 +927,19 @@ class WindowManager {
             const dockItem = $(`#dock-${appId}`);
             if (!dockItem.hasClass('bouncing')) {
                 dockItem.addClass('bouncing');
-                setTimeout(() => dockItem.removeClass('bouncing'), 600);
+                let timeoutId;
+                const stopBounce = () => {
+                    dockItem.removeClass('bouncing');
+                    document.removeEventListener('visibilitychange', handleVisibilityChange);
+                };
+                function handleVisibilityChange() {
+                    if (document.hidden) {
+                        clearTimeout(timeoutId);
+                        stopBounce();
+                    }
+                }
+                document.addEventListener('visibilitychange', handleVisibilityChange);
+                timeoutId = setTimeout(stopBounce, 600);
             }
             window.open(appConfig.url, '_blank');
             return;
