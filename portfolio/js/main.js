@@ -168,6 +168,27 @@ const translations = {
 // --- State ---
 let currentLang = 'en';
 
+// --- Asset format support ---
+const supportsWebp = (() => {
+  try {
+    const canvas = document.createElement('canvas');
+    if (!canvas.getContext) return false;
+    return canvas.toDataURL('image/webp').startsWith('data:image/webp');
+  } catch (error) {
+    return false;
+  }
+})();
+
+function normalizeScreenshotPath(path) {
+  if (!path || supportsWebp) return path;
+  return path.replace('screenshots-webp/', 'screenshots/').replace(/\.webp$/i, '.png');
+}
+
+function normalizeWebpImage(path) {
+  if (!path || supportsWebp) return path;
+  return path.endsWith('.webp') ? path.replace(/\.webp$/i, '.png') : path;
+}
+
 // --- Initialize ---
 document.addEventListener('DOMContentLoaded', () => {
   initLanguage();
@@ -176,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initScrollAnimations();
   updateScreenshots();
+  applyWebpFallbacks();
 });
 
 // --- Language ---
@@ -221,9 +243,21 @@ function toggleLanguage(lang) {
 // --- Update Screenshots Based on Language ---
 function updateScreenshots() {
   document.querySelectorAll('[data-screenshot-en]').forEach(img => {
-    const enSrc = img.getAttribute('data-screenshot-en');
-    const esSrc = img.getAttribute('data-screenshot-es');
+    const enSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-en'));
+    const esSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-es'));
     img.src = currentLang === 'es' && esSrc ? esSrc : enSrc;
+  });
+}
+
+function applyWebpFallbacks() {
+  if (supportsWebp) return;
+  document.querySelectorAll('img[src$=".webp"]').forEach(img => {
+    const src = img.getAttribute('src');
+    if (!src) return;
+    const next = src.includes('screenshots-webp/')
+      ? normalizeScreenshotPath(src)
+      : normalizeWebpImage(src);
+    if (next !== src) img.setAttribute('src', next);
   });
 }
 
