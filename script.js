@@ -268,9 +268,17 @@ const supportsWebp = (() => {
 })();
 
 function resolveWebpFallback(path, fallbackExt) {
-    if (!path || supportsWebp) return path;
+    if (!path) return path;
     const webpPattern = /\.webp$/i;
-    return webpPattern.test(path) ? path.replace(webpPattern, fallbackExt) : path;
+    const prefersFallback = !supportsWebp;
+    return prefersFallback && webpPattern.test(path) ? path.replace(webpPattern, fallbackExt) : path;
+}
+
+function fallbackCandidates(path, fallbackExt) {
+    if (!path) return [];
+    const webpPattern = /\.webp$/i;
+    if (!webpPattern.test(path)) return [path];
+    return [path, path.replace(webpPattern, fallbackExt)];
 }
 
 function resolveDockIcon(path) {
@@ -617,12 +625,21 @@ function applyWallpaper(id, persist) {
     const w = wallpapers.find(x => x.id === id);
     if (!w) return;
     currentWallpaperId = id;
-    const url = wallpaperUrl(w, getEffectiveAppearance());
+    const [url, fallbackUrl] = fallbackCandidates(wallpaperUrl(w, getEffectiveAppearance()), '.jpg');
     const layers = $('#wallpaper .wallpaper-layer');
     const incoming = layers.eq(wallpaperLayerIdx);
     const outgoing = layers.eq(1 - wallpaperLayerIdx);
     // Preload, then crossfade.
     const img = new Image();
+    img.onerror = () => {
+        if (!fallbackUrl || fallbackUrl === url) return;
+        incoming.css('background-image', `url('${fallbackUrl}')`);
+        incoming.addClass('active');
+        outgoing.removeClass('active');
+        wallpaperLayerIdx = 1 - wallpaperLayerIdx;
+        document.body.classList.add('wallpaper-active');
+        if (persist) localStorage.setItem('wallpaper', id);
+    };
     img.onload = () => {
         incoming.css('background-image', `url('${url}')`);
         incoming.css('opacity', 1);
@@ -731,7 +748,9 @@ class WindowManager {
     }
 
     setupDockMagnification() {
-        if (!window.matchMedia('(hover: hover)').matches) return;
+        const canHover = window.matchMedia('(hover: hover)').matches;
+        const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+        if (!canHover || !hasFinePointer) return;
         const dock = document.getElementById('dock');
         const BASE_SIZE = 55;
         const MAX_SCALE = 1.3;
@@ -859,17 +878,22 @@ class WindowManager {
             if(app.separator) dock.append('<div style="width:1px; height:40px; background:rgba(255,255,255,0.2); margin: 0 5px;"></div>');
 
             const label = appDisplayName(app);
-            const iconSrc = resolveDockIcon(app.icon);
+            const [iconSrc, iconFallbackSrc] = fallbackCandidates(app.icon, '.png');
             let el = $(`
                 <div class="dock-item" id="dock-${app.id}" aria-label="${label}">
                     <div class="dock-icon-svg">
-                        <img class="dock-icon-img" src="${iconSrc}" alt="${label}" draggable="false">
+                        <img class="dock-icon-img" src="${iconSrc}" ${iconFallbackSrc ? `data-fallback-src="${iconFallbackSrc}"` : ''} alt="${label}" draggable="false">
                     </div>
                     <div class="dock-dot"></div>
                 </div>
             `);
             el.on('click', () => this.openApp(app.id));
             dock.append(el);
+        });
+        dock.find('.dock-icon-img').on('error', function() {
+            const fallbackSrc = this.dataset.fallbackSrc;
+            if (!fallbackSrc || this.src.endsWith(fallbackSrc)) return;
+            this.src = fallbackSrc;
         });
         this.updateTrashIcon();
     }
