@@ -942,23 +942,12 @@ class WindowManager {
         // If the app has a direct URL, navigate to it instead of opening a window
         if (appConfig.url) {
             const dockItem = $(`#dock-${appId}`);
-            if (!dockItem.hasClass('bouncing')) {
-                dockItem.addClass('bouncing');
-                let timeoutId;
-                const stopBounce = () => {
-                    dockItem.removeClass('bouncing');
-                    document.removeEventListener('visibilitychange', handleVisibilityChange);
-                };
-                function handleVisibilityChange() {
-                    if (document.hidden) {
-                        clearTimeout(timeoutId);
-                        stopBounce();
-                    }
-                }
-                document.addEventListener('visibilitychange', handleVisibilityChange);
-                timeoutId = setTimeout(stopBounce, 600);
-            }
-            window.open(appConfig.url, '_blank');
+            if (dockItem.hasClass('bouncing')) return;
+
+            dockItem.removeClass('active').addClass('bouncing');
+            setTimeout(() => dockItem.removeClass('bouncing'), 650);
+
+            window.open(appConfig.url, '_blank', 'noopener');
             return;
         }
 
