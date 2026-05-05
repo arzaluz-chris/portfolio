@@ -256,6 +256,31 @@ function t(key) {
     return translations[currentLang][key] || translations['es'][key] || key;
 }
 
+// Asset format support & fallbacks
+const supportsWebp = (() => {
+    try {
+        const canvas = document.createElement('canvas');
+        if (!canvas.getContext) return false;
+        return canvas.toDataURL('image/webp').startsWith('data:image/webp');
+    } catch (error) {
+        return false;
+    }
+})();
+
+function resolveWebpFallback(path, fallbackExt) {
+    if (!path || supportsWebp) return path;
+    const webpPattern = /\.webp$/i;
+    return webpPattern.test(path) ? path.replace(webpPattern, fallbackExt) : path;
+}
+
+function resolveDockIcon(path) {
+    return resolveWebpFallback(path, '.png');
+}
+
+function resolveWallpaperAsset(path) {
+    return resolveWebpFallback(path, '.jpg');
+}
+
 // Function to update all UI text when language changes
 function updateLanguage(lang) {
     currentLang = lang;
@@ -579,7 +604,10 @@ function getEffectiveAppearance() {
     }
     return currentAppearance;
 }
-function wallpaperUrl(w, mode) { return w[mode] || w.light || w.dark; }
+function wallpaperUrl(w, mode) {
+    const base = w[mode] || w.light || w.dark;
+    return base ? resolveWallpaperAsset(base) : '';
+}
 function wallpaperThumbUrl(w, mode) {
     const url = wallpaperUrl(w, mode);
     return url ? url.replace('/full/', '/thumbs/') : '';
@@ -831,10 +859,11 @@ class WindowManager {
             if(app.separator) dock.append('<div style="width:1px; height:40px; background:rgba(255,255,255,0.2); margin: 0 5px;"></div>');
 
             const label = appDisplayName(app);
+            const iconSrc = resolveDockIcon(app.icon);
             let el = $(`
                 <div class="dock-item" id="dock-${app.id}" aria-label="${label}">
                     <div class="dock-icon-svg">
-                        <img class="dock-icon-img" src="${app.icon}" alt="${label}" draggable="false">
+                        <img class="dock-icon-img" src="${iconSrc}" alt="${label}" draggable="false">
                     </div>
                     <div class="dock-dot"></div>
                 </div>

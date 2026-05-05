@@ -168,6 +168,45 @@ const translations = {
 // --- State ---
 let currentLang = 'en';
 
+// --- Asset format support ---
+const supportsWebp = (() => {
+  try {
+    const canvas = document.createElement('canvas');
+    if (!canvas.getContext) return false;
+    return canvas.toDataURL('image/webp').startsWith('data:image/webp');
+  } catch (error) {
+    return false;
+  }
+})();
+
+function normalizeScreenshotPath(path) {
+  if (!path) return path;
+  return supportsWebp
+    ? path
+    : path.replace('screenshots-webp/', 'screenshots/').replace(/\.webp$/i, '.png');
+}
+
+function normalizeWebpImage(path) {
+  if (!path) return path;
+  const webpPattern = /\.webp$/i;
+  return !supportsWebp && webpPattern.test(path)
+    ? path.replace(webpPattern, '.png')
+    : path;
+}
+
+function safeImageUrl(path) {
+  if (!path) return '';
+  const base = document.baseURI || window.location.href;
+  try {
+    const url = new URL(path, base);
+    return (url.protocol === 'http:' || url.protocol === 'https:' || url.protocol === 'file:')
+      ? url.href
+      : '';
+  } catch (error) {
+    return '';
+  }
+}
+
 // --- Initialize ---
 document.addEventListener('DOMContentLoaded', () => {
   initLanguage();
@@ -176,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initScrollAnimations();
   updateScreenshots();
+  applyWebpFallbacks();
 });
 
 // --- Language ---
@@ -221,9 +261,24 @@ function toggleLanguage(lang) {
 // --- Update Screenshots Based on Language ---
 function updateScreenshots() {
   document.querySelectorAll('[data-screenshot-en]').forEach(img => {
-    const enSrc = img.getAttribute('data-screenshot-en');
-    const esSrc = img.getAttribute('data-screenshot-es');
-    img.src = currentLang === 'es' && esSrc ? esSrc : enSrc;
+    const enSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-en'));
+    const esSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-es'));
+    const next = currentLang === 'es' && esSrc ? esSrc : enSrc;
+    const safeSrc = safeImageUrl(next);
+    if (safeSrc) img.src = safeSrc;
+  });
+}
+
+function applyWebpFallbacks() {
+  if (supportsWebp) return;
+  document.querySelectorAll('img').forEach(img => {
+    const src = img.getAttribute('src');
+    if (!src || !/\.webp$/i.test(src)) return;
+    const next = src.includes('screenshots-webp/')
+      ? normalizeScreenshotPath(src)
+      : normalizeWebpImage(src);
+    const safeSrc = safeImageUrl(next);
+    if (safeSrc && safeSrc !== img.src) img.setAttribute('src', safeSrc);
   });
 }
 
