@@ -180,13 +180,29 @@ const supportsWebp = (() => {
 })();
 
 function normalizeScreenshotPath(path) {
-  if (!path || supportsWebp) return path;
-  return path.replace('screenshots-webp/', 'screenshots/').replace(/\.webp$/i, '.png');
+  if (!path) return path;
+  const normalized = supportsWebp
+    ? path
+    : path.replace('screenshots-webp/', 'screenshots/').replace(/\.webp$/i, '.png');
+  return sanitizeImagePath(normalized);
 }
 
 function normalizeWebpImage(path) {
-  if (!path || supportsWebp) return path;
-  return path.endsWith('.webp') ? path.replace(/\.webp$/i, '.png') : path;
+  if (!path) return path;
+  const normalized = !supportsWebp && path.endsWith('.webp')
+    ? path.replace(/\.webp$/i, '.png')
+    : path;
+  return sanitizeImagePath(normalized);
+}
+
+function sanitizeImagePath(path) {
+  if (!path) return path;
+  const trimmed = path.trim();
+  if (/^https?:/i.test(trimmed)) return trimmed;
+  if (trimmed.startsWith('/') || trimmed.startsWith('./') || trimmed.startsWith('../') || trimmed.startsWith('assets/')) {
+    return trimmed;
+  }
+  return '';
 }
 
 // --- Initialize ---
