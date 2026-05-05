@@ -196,9 +196,7 @@ function normalizeWebpImage(path) {
 
 function safeImageUrl(path) {
   if (!path) return '';
-  const base = window.location.origin && window.location.origin !== 'null'
-    ? window.location.origin
-    : window.location.href;
+  const base = document.baseURI || window.location.href;
   try {
     const url = new URL(path, base);
     return (url.protocol === 'http:' || url.protocol === 'https:' || url.protocol === 'file:')
