@@ -927,15 +927,19 @@ class WindowManager {
             const dockItem = $(`#dock-${appId}`);
             if (!dockItem.hasClass('bouncing')) {
                 dockItem.addClass('bouncing');
-                const stopBounce = () => dockItem.removeClass('bouncing');
-                const timeoutId = setTimeout(stopBounce, 600);
+                let timeoutId;
+                const stopBounce = () => {
+                    dockItem.removeClass('bouncing');
+                    document.removeEventListener('visibilitychange', handleVisibilityChange);
+                };
                 const handleVisibilityChange = () => {
                     if (document.hidden) {
                         clearTimeout(timeoutId);
                         stopBounce();
                     }
                 };
-                document.addEventListener('visibilitychange', handleVisibilityChange, { once: true });
+                timeoutId = setTimeout(stopBounce, 600);
+                document.addEventListener('visibilitychange', handleVisibilityChange);
             }
             window.open(appConfig.url, '_blank');
             return;
