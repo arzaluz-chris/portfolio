@@ -582,16 +582,27 @@ function appDisplayName(app) {
     return app.nameKey ? t(app.nameKey) : app.name;
 }
 
-// WALLPAPERS — dynamic, with light/dark variants
+// WALLPAPERS — dynamic, random rotation (no light/dark variants)
 const wallpapers = [
-    { id: 'tahoe',        name: 'Tahoe',        light: 'assets/wallpapers/full/tahoe-light.webp',        dark: 'assets/wallpapers/full/tahoe-dark.webp' },
-    { id: 'sequoia',      name: 'Sequoia',      light: 'assets/wallpapers/full/sequoia-light.webp',      dark: 'assets/wallpapers/full/sequoia-dark.webp' },
-    { id: 'sonoma',       name: 'Sonoma',       light: 'assets/wallpapers/full/sonoma-light.webp' },
-    { id: 'monterey',     name: 'Monterey',     light: 'assets/wallpapers/full/monterey-light.webp',     dark: 'assets/wallpapers/full/monterey-dark.webp' },
-    { id: 'lion',         name: 'Lion',         light: 'assets/wallpapers/full/lion-light.webp' },
-    { id: 'mountain',     name: 'Mountain',     dark:  'assets/wallpapers/full/mountain-dark.webp' },
-    { id: 'snow-leopard', name: 'Snow Leopard', light: 'assets/wallpapers/full/snow-leopard-light.webp', dark: 'assets/wallpapers/full/snow-leopard-dark.webp' },
-    { id: 'tiger',        name: 'Tiger',        light: 'assets/wallpapers/full/tiger.webp' }
+    { id: 'tahoe-light',     name: 'Tahoe Light',     src: 'assets/wallpapers/full/tahoe-light.jpg' },
+    { id: 'tahoe-dark',      name: 'Tahoe Dark',      src: 'assets/wallpapers/full/tahoe-dark.jpg' },
+    { id: 'sequoia-light',   name: 'Sequoia Light',   src: 'assets/wallpapers/full/sequoia-light.jpg' },
+    { id: 'sequoia-dark',    name: 'Sequoia Dark',    src: 'assets/wallpapers/full/sequoia-dark.jpg' },
+    { id: 'sonoma',          name: 'Sonoma',          src: 'assets/wallpapers/full/sonoma.jpg' },
+    { id: 'monterey-light',  name: 'Monterey Light',  src: 'assets/wallpapers/full/monterey-light.jpg' },
+    { id: 'monterey-dark',   name: 'Monterey Dark',   src: 'assets/wallpapers/full/monterey-dark.jpg' },
+    { id: 'monterrey-dark',  name: 'Monterrey Dark',  src: 'assets/wallpapers/full/monterrey-dark.jpg' },
+    { id: 'big-sur-light',   name: 'Big Sur Light',   src: 'assets/wallpapers/full/big-sur-light.jpg' },
+    { id: 'big-sur-dark',    name: 'Big Sur Dark',    src: 'assets/wallpapers/full/big-sur-dark.jpg' },
+    { id: 'catalina',        name: 'Catalina',        src: 'assets/wallpapers/full/catalina.jpg' },
+    { id: 'yosemite',        name: 'Yosemite',        src: 'assets/wallpapers/full/yosemite.jpg' },
+    { id: 'lion',            name: 'Lion',            src: 'assets/wallpapers/full/lion.jpg' },
+    { id: 'mountain-lion',   name: 'Mountain Lion',   src: 'assets/wallpapers/full/mountain-lion.jpg' },
+    { id: 'leopard',         name: 'Leopard',         src: 'assets/wallpapers/full/leopard.jpg' },
+    { id: 'leopard-aurora',  name: 'Leopard Aurora',  src: 'assets/wallpapers/full/leopard-aurora.jpg' },
+    { id: 'snow-leopard-1',  name: 'Snow Leopard',    src: 'assets/wallpapers/full/snow-leopard-1.jpg' },
+    { id: 'snow-leopard-2',  name: 'Snow Leopard II', src: 'assets/wallpapers/full/snow-leopard-2.jpg' },
+    { id: 'snow-leopard-3',  name: 'Snow Leopard III',src: 'assets/wallpapers/full/snow-leopard-3.jpg' }
 ];
 const WALLPAPER_ROTATION_MS = 10 * 1000;
 let currentWallpaperId = null;
@@ -604,12 +615,11 @@ function getEffectiveAppearance() {
     }
     return currentAppearance;
 }
-function wallpaperUrl(w, mode) {
-    const base = w[mode] || w.light || w.dark;
-    return base ? resolveWallpaperAsset(base) : '';
+function wallpaperUrl(w) {
+    return w.src || '';
 }
-function wallpaperThumbUrl(w, mode) {
-    const url = wallpaperUrl(w, mode);
+function wallpaperThumbUrl(w) {
+    const url = wallpaperUrl(w);
     return url ? url.replace('/full/', '/thumbs/') : '';
 }
 let wallpaperLayerIdx = 0;
@@ -617,20 +627,14 @@ function applyWallpaper(id, persist) {
     const w = wallpapers.find(x => x.id === id);
     if (!w) return;
     currentWallpaperId = id;
-    const [url, fallbackUrl] = fallbackCandidates(wallpaperUrl(w, getEffectiveAppearance()), '.jpg');
+    const url = wallpaperUrl(w);
     const layers = $('#wallpaper .wallpaper-layer');
     const incoming = layers.eq(wallpaperLayerIdx);
     const outgoing = layers.eq(1 - wallpaperLayerIdx);
     // Preload, then crossfade.
     const img = new Image();
     img.onerror = () => {
-        if (!fallbackUrl || fallbackUrl === url) return;
-        incoming.css('background-image', `url('${fallbackUrl}')`);
-        incoming.addClass('active');
-        outgoing.removeClass('active');
-        wallpaperLayerIdx = 1 - wallpaperLayerIdx;
-        document.body.classList.add('wallpaper-active');
-        if (persist) localStorage.setItem('wallpaper', id);
+        // Nothing to fall back to — image simply failed.
     };
     img.onload = () => {
         incoming.css('background-image', `url('${url}')`);
@@ -648,13 +652,12 @@ function applyWallpaper(id, persist) {
 function startWallpaperRotation() {
     clearInterval(wallpaperRotationTimer);
     wallpaperRotationTimer = setInterval(() => {
-        // Only rotate through wallpapers that have a variant for the
-        // current mode — keeps rotation visually consistent in dark/light.
-        const mode = getEffectiveAppearance();
-        const eligible = wallpapers.filter(w => w[mode]);
-        if (eligible.length === 0) return;
-        const idx = eligible.findIndex(w => w.id === currentWallpaperId);
-        const next = eligible[(idx + 1) % eligible.length];
+        // Rotate randomly through all wallpapers.
+        if (wallpapers.length <= 1) return;
+        let next;
+        do {
+            next = wallpapers[Math.floor(Math.random() * wallpapers.length)];
+        } while (next.id === currentWallpaperId);
         applyWallpaper(next.id, false);
     }, WALLPAPER_ROTATION_MS);
 }
@@ -667,7 +670,9 @@ function initWallpaper() {
     if (savedId && wallpapers.find(w => w.id === savedId)) {
         applyWallpaper(savedId, false);
     } else {
-        applyWallpaper('monterey', false);  // default start
+        // Start with a random wallpaper
+        const start = wallpapers[Math.floor(Math.random() * wallpapers.length)];
+        applyWallpaper(start.id, false);
     }
     startWallpaperRotation();
 }
@@ -2014,7 +2019,7 @@ function renderSettings(container) {
             <div style="align-self:flex-start; font-weight:600; margin-bottom: 10px;">${t('wallpapers')}</div>
             <div class="wall-grid" style="margin-bottom: 20px;">
                 ${wallpapers.map(w => {
-                    const thumb = wallpaperThumbUrl(w, getEffectiveAppearance());
+                    const thumb = wallpaperThumbUrl(w);
                     const selected = w.id === currentWallpaperId ? 'selected' : '';
                     return `<div class="wall-thumb ${selected}" data-wall-id="${w.id}" title="${w.name}" style="background-image: url('${thumb}'); background-size: cover; background-position: center;" onclick="changeWall('${w.id}')"></div>`;
                 }).join('')}
