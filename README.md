@@ -49,6 +49,8 @@ As an iOS Developer, I specialize in integrating **Artificial Intelligence** (on
 
 | App | Description | Key Technologies |
 |-----|-------------|------------------|
+| **[MemoMed](https://memomed.mx)** | Gamified ENARM (Mexico's medical residency exam) prep: 8,800+ clinical cases, guideline-cited feedback, server-side spaced repetition. iPhone, Android & web. | SwiftUI, Supabase, StoreKit 2, WidgetKit, Live Activities |
+| **WaldenEats** | Cafeteria pre-ordering for Colegio Walden Dos, with a web dashboard for Cashier/Kitchen and an immutable money ledger in Postgres. | SwiftUI, Supabase, Postgres RLS, APNs, React |
 | **[Lumina](https://github.com/arzaluz-chris/Lumina)** | Character-strengths app with on-device AI analysis and interactive evolution charts. Zero data collected. | SwiftUI, Apple Intelligence, SwiftData, Charts |
 | **[Alba](https://github.com/arzaluz-chris/Alba)** | AI-powered friendship advisor grounded in positive psychology, with an encrypted journal. | Gemini AI, FaceID, Apple Music API |
 | **[TeddyFeels](https://github.com/arzaluz-chris/TeddyFeels)** | Emotional well-being companion for kids 6-12 featuring voice journaling. 100% offline. | AVFoundation, Lottie, SwiftData |

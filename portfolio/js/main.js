@@ -15,12 +15,12 @@ const translations = {
     'hero.eyebrow': 'iOS Developer Portfolio',
     'hero.title.1': 'Apps That Improve',
     'hero.title.2': 'People\'s Lives',
-    'hero.subtitle': '7 published iOS apps built with Swift, SwiftUI, and AI. From on-device Apple Intelligence to Gemini-powered coaching — designed, developed, and shipped to the App Store.',
+    'hero.subtitle': '9 published apps built with Swift, SwiftUI, and AI. From on-device Apple Intelligence to full-stack platforms on iPhone, Android and web — designed, developed, and shipped.',
 
     // Stats
     'stat.apps': 'Published Apps',
     'stat.ai': 'AI-Powered',
-    'stat.platforms': 'iPhone & iPad',
+    'stat.platforms': 'Platforms',
     'stat.live': 'App Store Live',
 
     // Apps Section
@@ -29,6 +29,14 @@ const translations = {
 
     // Featured badge
     'featured.badge': 'Latest Release',
+
+    // App: MemoMed
+    'memomed.tagline': 'Gamified ENARM Exam Prep for Doctors',
+    'memomed.desc': 'Prepares physicians for Mexico\'s national residency exam (ENARM) with a daily Duolingo-style path: 8,800+ clinical cases, 8,900 flashcards and lessons, each answer citing its clinical guideline. Server-side spaced repetition (SM-2 / FSRS), timed mock exams, leagues and streaks. Live on iPhone, Android and web.',
+
+    // App: WaldenEats
+    'waldeneats.tagline': 'School Cafeteria Pre-Ordering',
+    'waldeneats.desc': 'Pre-ordering system for the Colegio Walden Dos cafeteria: students and teachers order for their break from iPad or iPhone, while Cashier and Kitchen work from a web dashboard. Money rules live in Postgres — immutable ledger, idempotent writes, and a server-enforced 20-minute cutoff.',
 
     // App: Lumina
     'lumina.tagline': 'Discover Your 24 Character Strengths',
@@ -95,12 +103,12 @@ const translations = {
     'hero.eyebrow': 'Portafolio iOS Developer',
     'hero.title.1': 'Apps Que Mejoran',
     'hero.title.2': 'La Vida de las Personas',
-    'hero.subtitle': '7 apps iOS publicadas construidas con Swift, SwiftUI e IA. Desde Apple Intelligence on-device hasta coaching con Gemini AI — diseñadas, desarrolladas y publicadas en el App Store.',
+    'hero.subtitle': '9 apps publicadas construidas con Swift, SwiftUI e IA. Desde Apple Intelligence on-device hasta plataformas completas en iPhone, Android y web — diseñadas, desarrolladas y publicadas.',
 
     // Stats
     'stat.apps': 'Apps Publicadas',
     'stat.ai': 'Con IA',
-    'stat.platforms': 'iPhone & iPad',
+    'stat.platforms': 'Plataformas',
     'stat.live': 'En App Store',
 
     // Apps Section
@@ -109,6 +117,14 @@ const translations = {
 
     // Featured badge
     'featured.badge': 'Último Lanzamiento',
+
+    // App: MemoMed
+    'memomed.tagline': 'Prepara el ENARM Como un Juego',
+    'memomed.desc': 'Prepara a médicos para el ENARM con una ruta diaria estilo Duolingo: más de 8,800 casos clínicos, 8,900 flashcards y lecciones, cada respuesta citada a su GPC o NOM. Repaso espaciado calculado en el servidor (SM-2 / FSRS), simulacros con reloj, ligas y rachas. Disponible en iPhone, Android y web.',
+
+    // App: WaldenEats
+    'waldeneats.tagline': 'Pedidos Anticipados para la Cafetería',
+    'waldeneats.desc': 'Sistema de pedidos anticipados para la cafetería del Colegio Walden Dos: alumnos y profesores piden para su receso desde iPad o iPhone, mientras Caja y Cocina trabajan desde un panel web. Las reglas de dinero viven en Postgres — ledger inmutable, escrituras idempotentes y corte de 20 minutos validado en el servidor.',
 
     // App: Lumina
     'lumina.tagline': 'Descubre Tus 24 Fortalezas de Carácter',
@@ -169,7 +185,9 @@ const translations = {
 let currentLang = 'en';
 
 // --- Asset format support ---
-const supportsWebp = false;
+// WebP is supported by every current browser (Safari 14+), and the WebP
+// screenshots are ~50x lighter than the PNG copies (1.9 MB vs 107 MB).
+const supportsWebp = true;
 
 function normalizeScreenshotPath(path) {
   if (!path) return path;

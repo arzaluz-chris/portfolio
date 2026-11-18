@@ -19,9 +19,11 @@ OPAQUE_THRESHOLD = 128  # Ignore soft halo/shadow when cropping macOS icons.
 IOS_APPS = {
     "Alba.png":        "alba.png",
     "Lumina.png":      "lumina.png",
+    "MemoMed.png":     "memomed.png",
     "Pomo.png":        "pomo.png",
     "TeddyFeels.png":  "teddyfeels.png",
     "Vorth.png":       "vorth.png",
+    "WaldenEats.png":  "waldeneats.png",
     "WaldenVibes.png": "waldenvibes.png",
 }
 

@@ -358,7 +358,7 @@ function detectLanguage() {
 const projects = {
     'pomo': {
         name: 'Pomo',
-        icon: 'f2f2',
+        icon: 'clock',
         description: {
             es: 'Una aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso. Pomo te ayuda a mantener el enfoque y gestionar tu tiempo de manera efectiva con una interfaz elegante y funcional.',
             en: 'A minimalist Pomodoro timer app designed to boost your productivity through structured work and break sessions. Pomo helps you stay focused and manage your time effectively with an elegant, functional interface.'
@@ -391,7 +391,7 @@ const projects = {
     },
     'waldenvibes': {
         name: 'WaldenVibes',
-        icon: 'f06c',
+        icon: 'leaf',
         description: {
             es: 'Una aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional. WaldenVibes te ayuda a mantener un equilibrio mental y emocional a través de prácticas de mindfulness y registro de estados de ánimo.',
             en: 'A minimalist SwiftUI app that combines meditation and mood tracking. WaldenVibes helps you maintain mental and emotional balance through mindfulness practices and mood logging.'
@@ -420,7 +420,7 @@ const projects = {
     },
     'vorth': {
         name: 'VORTH',
-        icon: 'f14e',
+        icon: 'compass',
         description: {
             es: 'VORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.',
             en: 'VORTH uses AI coaching, the PERMA well-being model, and an intelligent journal to help you discover what truly matters and build a life of purpose.'
@@ -449,7 +449,7 @@ const projects = {
     },
     'teddyfeels': {
         name: 'TeddyFeels',
-        icon: 'f1b0',
+        icon: 'paw',
         description: {
             es: 'Una app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche, un diario privado protegido con PIN y actividades guiadas.',
             en: 'An emotional well-being app for kids aged 6 to 12. TeddyFeels helps children identify, express, and manage their emotions through a teddy bear companion, a PIN-protected private journal, and guided activities.'
@@ -480,7 +480,7 @@ const projects = {
     },
     'alba': {
         name: 'Alba',
-        icon: 'f4be',
+        icon: 'hand-holding-heart',
         description: {
             es: 'Alba es tu guía para mejorar tus amistades. Basada en psicología positiva, Alba te ayuda a evaluar, entender y fortalecer tus relaciones a través de consejos personalizados con IA, un test científico y un diario privado.',
             en: 'Alba is your guide to better friendships. Grounded in positive psychology, Alba helps you assess, understand, and strengthen your relationships through AI-personalized advice, a scientific test, and a private journal.'
@@ -512,7 +512,7 @@ const projects = {
     },
     'lumina': {
         name: 'Lumina',
-        icon: '185',
+        icon: 'sun',
         description: {
             es: 'Lumina es la app de fortalezas de carácter del Colegio Walden Dos de México. Basada en la clasificación VIA Character Strengths, combina un test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias de carácter y Buddy, un compañero conversacional. Cero datos recolectados, todo procesado en tu dispositivo.',
             en: 'Lumina is the character-strengths app for Colegio Walden Dos in Mexico. Based on the VIA Character Strengths classification, it combines a 96-question test, personalized analysis with on-device Apple Intelligence, character stories, and Buddy, a conversational companion. Zero data collected — everything runs on your device.'
@@ -545,6 +545,69 @@ const projects = {
         url: 'https://github.com/arzaluz-chris/Lumina',
         appStoreUrl: 'https://apps.apple.com/us/app/lumina-via/id6762521594',
         websiteUrl: '/lumina/'
+    },
+    'memomed': {
+        name: 'MemoMed',
+        icon: 'stethoscope',
+        description: {
+            es: 'MemoMed es una plataforma para preparar el ENARM (Examen Nacional de Aspirantes a Residencias Médicas) como si fuera un juego: el temario completo se recorre como un camino de sesiones cortas con lecciones, casos clínicos con retroalimentación inmediata citada a su guía, y un repaso que vuelve justo antes de que se olvide. Disponible en iPhone, Android y web.',
+            en: 'MemoMed is a platform to prepare for the ENARM (Mexico\'s national medical residency exam) like a game: the full syllabus becomes a path of short sessions with lessons, clinical cases with instant guideline-cited feedback, and reviews that come back right before you forget. Available on iPhone, Android, and web.'
+        },
+        features: {
+            es: [
+                '174 temas de 5 especialidades: más de 8,800 casos clínicos y 8,900 flashcards',
+                'Cada respuesta cita la página de su GPC o NOM',
+                'Repetición espaciada en el servidor: SM-2 para casos y FSRS para flashcards',
+                'Simulacro completo del ENARM (280 reactivos en 6 h) y simulacros personalizados',
+                'Mi plan: meta diaria y calendario hasta la fecha del examen',
+                'Gamificación: XP, rachas, vidas, ligas por división e insignias',
+                'Widgets, Live Activities / Dynamic Island y notificaciones push',
+                'Suscripción Pro con StoreKit 2 y RevenueCat'
+            ],
+            en: [
+                '174 topics across 5 specialties: 8,800+ clinical cases and 8,900 flashcards',
+                'Every answer cites the exact page of its clinical guideline',
+                'Server-side spaced repetition: SM-2 for cases and FSRS for flashcards',
+                'Full ENARM mock exam (280 items in 6 h) plus custom mock exams',
+                'My Plan: daily goal and schedule up to exam day',
+                'Gamification: XP, streaks, lives, division leagues, and badges',
+                'Widgets, Live Activities / Dynamic Island, and push notifications',
+                'Pro subscription with StoreKit 2 and RevenueCat'
+            ]
+        },
+        stack: ['Swift', 'SwiftUI', 'MVVM', 'Supabase', 'StoreKit 2', 'WidgetKit', 'ActivityKit', 'Next.js', 'Jetpack Compose'],
+        appStoreUrl: 'https://apps.apple.com/mx/app/id6807920602',
+        websiteUrl: 'https://memomed.mx'
+    },
+    'waldeneats': {
+        name: 'WaldenEats',
+        icon: 'utensils',
+        description: {
+            es: 'WaldenEats es el sistema de pedidos anticipados para la cafetería del Colegio Walden Dos: una app de iPad/iPhone para alumnos y profesores, un panel web para Caja, Cocina y Administración, y un backend que garantiza que el dinero siempre cuadre.',
+            en: 'WaldenEats is the pre-ordering system for the Colegio Walden Dos cafeteria: an iPad/iPhone app for students and teachers, a web dashboard for Cashier, Kitchen, and Admin, and a backend that guarantees the money always adds up.'
+        },
+        features: {
+            es: [
+                'Menú del día, especiales y personalización de cada platillo',
+                'Pedido por receso con cuenta regresiva y corte de 20 minutos validado en el servidor',
+                'Monedero con saldo, movimientos y código de recolección',
+                'Panel web para Caja, Cocina y Administración',
+                'Ledger inmutable en centavos con claves de idempotencia y conciliación nocturna',
+                'Acceso solo con cuenta institucional de Google',
+                'Notificaciones push vía APNs'
+            ],
+            en: [
+                'Daily menu, specials, and per-dish customization',
+                'Order per break with a countdown and a server-enforced 20-minute cutoff',
+                'Wallet with balance, transaction history, and pickup code',
+                'Web dashboard for Cashier, Kitchen, and Admin',
+                'Immutable ledger in cents with idempotency keys and nightly reconciliation',
+                'Sign-in restricted to the school Google Workspace',
+                'Push notifications via APNs'
+            ]
+        },
+        stack: ['Swift', 'SwiftUI', 'Supabase', 'PostgreSQL', 'Row Level Security', 'APNs', 'React', 'TypeScript'],
+        appStoreUrl: 'https://apps.apple.com/mx/app/id6821167108'
     }
 };
 
@@ -573,6 +636,8 @@ const apps = [
     { id: 'teddyfeels',  name: 'TeddyFeels',     icon: 'assets/dock-icons/processed/teddyfeels.png' },
     { id: 'alba',        name: 'Alba',           icon: 'assets/dock-icons/processed/alba.png' },
     { id: 'lumina',      name: 'Lumina',         icon: 'assets/dock-icons/processed/lumina.png' },
+    { id: 'memomed',     name: 'MemoMed',        icon: 'assets/dock-icons/processed/memomed.png' },
+    { id: 'waldeneats',  name: 'WaldenEats',     icon: 'assets/dock-icons/processed/waldeneats.png' },
     { id: 'mail',        nameKey: 'mail',        icon: 'assets/dock-icons/processed/mail.png' },
     { id: 'trash',       nameKey: 'bin',         icon: 'assets/dock-icons/processed/trash-empty.png', separator: true }
 ];
@@ -709,6 +774,14 @@ const fileSystem = {
             'Lumina.txt': { type: 'text', content: {
                 es: 'Lumina - Descubre tus 24 fortalezas\n\nApp de fortalezas de carácter para el Colegio Walden Dos de México, basada en la clasificación VIA Character Strengths. Combina test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias y Buddy (compañero conversacional). Cero datos recolectados.\n\nCaracterísticas:\n• Test VIA con 24 fortalezas agrupadas en 6 virtudes\n• Análisis personalizado con Apple Intelligence (Foundation Models on-device)\n• Buddy: compañero conversacional con IA, 100% en el dispositivo\n• Historias: bitácora de carácter con fotos y recordatorios de aniversario\n• Evolución: gráficas interactivas del cambio de fortalezas en el tiempo\n• Accesibilidad: lectura en voz alta\n• Quick Actions + Review prompt inteligente\n• Privacy manifest: 0 tracking, 0 datos recolectados\n\nStack: Swift 6, SwiftUI, iOS 26, Foundation Models, Apple Intelligence, SwiftData, UserNotifications, AVFoundation, PhotosPicker\n\nGitHub: https://github.com/arzaluz-chris/Lumina\nApp Store: https://apps.apple.com/us/app/lumina-via/id6762521594\nSitio: https://chrisarzaluz.dev/lumina/',
                 en: 'Lumina - Discover Your 24 Strengths\n\nCharacter-strengths app for Colegio Walden Dos in Mexico, based on the VIA Character Strengths classification. It combines a 96-question test, personalized analysis with on-device Apple Intelligence, stories, and Buddy (conversational companion). Zero data collected.\n\nFeatures:\n• VIA test with 24 strengths grouped into 6 virtues\n• Personalized analysis with Apple Intelligence (on-device Foundation Models)\n• Buddy: conversational AI companion, 100% on-device\n• Stories: character log with photos and anniversary reminders\n• Evolution: interactive charts of how strengths change over time\n• Accessibility: read-aloud support\n• Quick Actions + smart review prompt\n• Privacy manifest: 0 tracking, 0 data collected\n\nStack: Swift 6, SwiftUI, iOS 26, Foundation Models, Apple Intelligence, SwiftData, UserNotifications, AVFoundation, PhotosPicker\n\nGitHub: https://github.com/arzaluz-chris/Lumina\nApp Store: https://apps.apple.com/us/app/lumina-via/id6762521594\nWebsite: https://chrisarzaluz.dev/lumina/'
+            }},
+            'MemoMed.txt': { type: 'text', content: {
+                es: 'MemoMed - Prepara el ENARM como si fuera un juego\n\nCasos clínicos, lecciones y repaso espaciado en una ruta diaria estilo Duolingo, en iPhone, Android y web.\n\nCaracterísticas:\n• 174 temas, más de 8,800 casos clínicos y 8,900 flashcards\n• Cada respuesta cita su GPC o NOM\n• Repetición espaciada SM-2 / FSRS calculada en el servidor\n• Simulacro completo del ENARM y simulacros personalizados\n• XP, rachas, ligas e insignias\n• Widgets y Live Activities\n\nStack: Swift, SwiftUI, Supabase, StoreKit 2, WidgetKit, ActivityKit, Next.js, Jetpack Compose\n\nApp Store: https://apps.apple.com/mx/app/id6807920602\nSitio: https://memomed.mx',
+                en: 'MemoMed - Prep for the ENARM like a game\n\nClinical cases, lessons, and spaced repetition in a Duolingo-style daily path, on iPhone, Android, and web.\n\nFeatures:\n• 174 topics, 8,800+ clinical cases, and 8,900 flashcards\n• Every answer cites its clinical guideline\n• Server-side SM-2 / FSRS spaced repetition\n• Full ENARM mock exam and custom mock exams\n• XP, streaks, leagues, and badges\n• Widgets and Live Activities\n\nStack: Swift, SwiftUI, Supabase, StoreKit 2, WidgetKit, ActivityKit, Next.js, Jetpack Compose\n\nApp Store: https://apps.apple.com/mx/app/id6807920602\nWebsite: https://memomed.mx'
+            }},
+            'WaldenEats.txt': { type: 'text', content: {
+                es: 'WaldenEats - Pedidos anticipados para la cafetería\n\nApp de iPad/iPhone para alumnos y profesores del Colegio Walden Dos, con panel web para Caja, Cocina y Administración.\n\nCaracterísticas:\n• Menú del día y personalización de platillos\n• Pedido por receso con corte de 20 minutos validado en el servidor\n• Monedero con saldo y código de recolección\n• Ledger inmutable con claves de idempotencia\n• Acceso con cuenta institucional de Google\n\nStack: Swift, SwiftUI, Supabase, PostgreSQL, RLS, APNs, React, TypeScript\n\nApp Store: https://apps.apple.com/mx/app/id6821167108',
+                en: 'WaldenEats - Cafeteria pre-ordering\n\niPad/iPhone app for Colegio Walden Dos students and teachers, with a web dashboard for Cashier, Kitchen, and Admin.\n\nFeatures:\n• Daily menu and dish customization\n• Order per break with a server-enforced 20-minute cutoff\n• Wallet with balance and pickup code\n• Immutable ledger with idempotency keys\n• Sign-in with the school Google account\n\nStack: Swift, SwiftUI, Supabase, PostgreSQL, RLS, APNs, React, TypeScript\n\nApp Store: https://apps.apple.com/mx/app/id6821167108'
             }}
         } },
         'MyPhoto.jpg': { type: 'img', src: 'assets/profile.png'}
@@ -722,8 +795,8 @@ const fileSystem = {
     }},
     'Downloads': { type: 'folder', children: {
         'README.txt': { type: 'text', content: {
-            es: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, VORTH)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHospedado en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\nDesarrollador iOS | Estudiante de Ingeniería en Sistemas\ncontact: christian.arzaluz@gmail.com',
-            en: '# macOS Portfolio - Christian Arzaluz\n\n## Description\nAn interactive macOS simulator built entirely with vanilla HTML, CSS, and JavaScript. This portfolio presents a full macOS desktop experience, including the dock, draggable and resizable windows, and multiple working applications.\n\n## Technologies Used\n• HTML5 - Semantic structure\n• CSS3 - Styling and animations (glassmorphism, gradients)\n• JavaScript (ES6+) - App logic\n• jQuery & jQuery UI - Drag & drop window system\n• Font Awesome - Iconography\n• Google Fonts (Inter) - System typography\n\n## Main Features\n✓ Full window system (minimize, maximize, close)\n✓ Animated dock with hover effects\n✓ Finder with folder navigation\n✓ Working Terminal with real commands\n✓ Full Calculator\n✓ Embedded Safari browser (iframe)\n✓ Rich-text editor\n✓ Drawing / Sketch app\n✓ Settings app\n✓ iOS project apps (Pomo, WaldenVibes, VORTH)\n✓ Responsive design for mobile and tablets\n✓ Multi-language support (Spanish/English)\n\n## Project Structure\n/portfolio/\n├── index.html          # Main document\n├── script.js           # App logic\n├── styles.css          # Styling and responsive design\n├── assets/             # Media resources\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Custom domain configuration\n\n## Deployment\nHosted on GitHub Pages\nDomain: chrisarzaluz.dev\n\n## Built by\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'
+            es: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, VORTH, TeddyFeels, Alba, Lumina, MemoMed, WaldenEats)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHospedado en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\nDesarrollador iOS | Estudiante de Ingeniería en Sistemas\ncontact: christian.arzaluz@gmail.com',
+            en: '# macOS Portfolio - Christian Arzaluz\n\n## Description\nAn interactive macOS simulator built entirely with vanilla HTML, CSS, and JavaScript. This portfolio presents a full macOS desktop experience, including the dock, draggable and resizable windows, and multiple working applications.\n\n## Technologies Used\n• HTML5 - Semantic structure\n• CSS3 - Styling and animations (glassmorphism, gradients)\n• JavaScript (ES6+) - App logic\n• jQuery & jQuery UI - Drag & drop window system\n• Font Awesome - Iconography\n• Google Fonts (Inter) - System typography\n\n## Main Features\n✓ Full window system (minimize, maximize, close)\n✓ Animated dock with hover effects\n✓ Finder with folder navigation\n✓ Working Terminal with real commands\n✓ Full Calculator\n✓ Embedded Safari browser (iframe)\n✓ Rich-text editor\n✓ Drawing / Sketch app\n✓ Settings app\n✓ iOS project apps (Pomo, WaldenVibes, VORTH, TeddyFeels, Alba, Lumina, MemoMed, WaldenEats)\n✓ Responsive design for mobile and tablets\n✓ Multi-language support (Spanish/English)\n\n## Project Structure\n/portfolio/\n├── index.html          # Main document\n├── script.js           # App logic\n├── styles.css          # Styling and responsive design\n├── assets/             # Media resources\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Custom domain configuration\n\n## Deployment\nHosted on GitHub Pages\nDomain: chrisarzaluz.dev\n\n## Built by\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'
         }},
         'Screenshot.jpg': { type: 'img', src: 'assets/screenshot.jpg'}
     }}
@@ -1319,7 +1392,7 @@ function renderTerminal(container) {
         switch(args[0].toLowerCase()) {
             case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
-            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels<span class="Apple-converted-space">  </span>Alba<span class="Apple-converted-space">  </span>Lumina'; break;
+            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels<span class="Apple-converted-space">  </span>Alba<span class="Apple-converted-space">  </span>Lumina<span class="Apple-converted-space">  </span>MemoMed<span class="Apple-converted-space">  </span>WaldenEats'; break;
             case 'whoami': response = `Christian Arzaluz - ${t('iosDeveloperTitle')}`; break;
             case 'date': response = new Date().toString(); break;
             case 'echo': response = args.slice(1).join(' '); break;
