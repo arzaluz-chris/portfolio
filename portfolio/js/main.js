@@ -32,7 +32,7 @@ const translations = {
 
     // App: MemoMed
     'memomed.tagline': 'Gamified ENARM Exam Prep for Doctors',
-    'memomed.desc': 'Prepares physicians for Mexico\'s national residency exam (ENARM) with a daily Duolingo-style path: 8,800+ clinical cases, 8,900 flashcards and lessons, each answer citing its clinical guideline. Server-side spaced repetition (SM-2 / FSRS), timed mock exams, leagues and streaks. Live on iPhone, Android and web.',
+    'memomed.desc': 'Prepares physicians for Mexico\'s national residency exam (ENARM) with a daily Duolingo-style path: 8,800+ clinical cases, interactive clinical stories, 8,900 flashcards and lessons, each answer citing its clinical guideline. Server-side spaced repetition (SM-2 / FSRS), timed mock exams, leagues and streaks. Live on iPhone, Android and web.',
 
     // App: WaldenEats
     'waldeneats.tagline': 'School Cafeteria Pre-Ordering',
@@ -120,7 +120,7 @@ const translations = {
 
     // App: MemoMed
     'memomed.tagline': 'Prepara el ENARM Como un Juego',
-    'memomed.desc': 'Prepara a médicos para el ENARM con una ruta diaria estilo Duolingo: más de 8,800 casos clínicos, 8,900 flashcards y lecciones, cada respuesta citada a su GPC o NOM. Repaso espaciado calculado en el servidor (SM-2 / FSRS), simulacros con reloj, ligas y rachas. Disponible en iPhone, Android y web.',
+    'memomed.desc': 'Prepara a médicos para el ENARM con una ruta diaria estilo Duolingo: más de 8,800 casos clínicos, historias clínicas interactivas, 8,900 flashcards y lecciones, cada respuesta citada a su GPC o NOM. Repaso espaciado calculado en el servidor (SM-2 / FSRS), simulacros con reloj, ligas y rachas. Disponible en iPhone, Android y web.',
 
     // App: WaldenEats
     'waldeneats.tagline': 'Pedidos Anticipados para la Cafetería',

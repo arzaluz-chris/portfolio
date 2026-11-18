@@ -557,6 +557,7 @@ const projects = {
             es: [
                 '174 temas de 5 especialidades: más de 8,800 casos clínicos y 8,900 flashcards',
                 'Cada respuesta cita la página de su GPC o NOM',
+                'Historias clínicas interactivas con hoja de laboratorio, de la valoración inicial a la decisión',
                 'Repetición espaciada en el servidor: SM-2 para casos y FSRS para flashcards',
                 'Simulacro completo del ENARM (280 reactivos en 6 h) y simulacros personalizados',
                 'Mi plan: meta diaria y calendario hasta la fecha del examen',
@@ -567,6 +568,7 @@ const projects = {
             en: [
                 '174 topics across 5 specialties: 8,800+ clinical cases and 8,900 flashcards',
                 'Every answer cites the exact page of its clinical guideline',
+                'Interactive clinical stories with lab sheets, from first assessment to final decision',
                 'Server-side spaced repetition: SM-2 for cases and FSRS for flashcards',
                 'Full ENARM mock exam (280 items in 6 h) plus custom mock exams',
                 'My Plan: daily goal and schedule up to exam day',
