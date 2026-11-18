@@ -10,6 +10,7 @@ OUT = SRC / "processed"
 OUT.mkdir(parents=True, exist_ok=True)
 
 CANVAS = 1024
+OUTPUT = 256   # Shown at ~55-72 CSS px (x2-3 on Retina); 1024px files weighed ~6 MB in total.
 SAFE = 824
 SQUIRCLE_N = 5.0  # Superellipse exponent — ≈iOS/macOS icon shape
 IOS_SAFE = 810    # iOS apps as solid squircles read slightly bigger optically
@@ -18,10 +19,13 @@ OPAQUE_THRESHOLD = 128  # Ignore soft halo/shadow when cropping macOS icons.
 
 IOS_APPS = {
     "Alba.png":        "alba.png",
+    "Cordis.png":      "cordis.png",
     "Lumina.png":      "lumina.png",
+    "MemoMed.png":     "memomed.png",
     "Pomo.png":        "pomo.png",
     "TeddyFeels.png":  "teddyfeels.png",
     "Vorth.png":       "vorth.png",
+    "WaldenEats.png":  "waldeneats.png",
     "WaldenVibes.png": "waldenvibes.png",
 }
 
@@ -37,6 +41,7 @@ MAC_ICONS = {
     "mail.png":             "mail.png",
     "trash bin empty.png":  "trash-empty.png",
     "trash bin full.png":   "trash-full.png",
+    "xcode.png":            "xcode.png",
 }
 
 # Per-icon scale overrides. For icons with protruding elements (pen on
@@ -44,6 +49,7 @@ MAC_ICONS = {
 # Over-scale so the body matches others; the protrusion goes into the margin.
 MAC_SCALE_OVERRIDES = {
     "textedit.webp": 1.18,  # pen protrudes above notebook
+    "xcode.png": 1.16,      # hammer protrudes past the blue body
 }
 
 
@@ -88,7 +94,7 @@ def process_ios(src_name: str, out_name: str) -> None:
     img.putalpha(squircle_mask(IOS_SAFE))
     canvas = Image.new("RGBA", (CANVAS, CANVAS), (0, 0, 0, 0))
     paste_centered(canvas, img)
-    canvas.save(OUT / out_name, "PNG", optimize=True)
+    canvas.resize((OUTPUT, OUTPUT), Image.LANCZOS).save(OUT / out_name, "PNG", optimize=True)
     print(f"  ios    {src_name:30s} -> {out_name}  ({IOS_SAFE}x{IOS_SAFE})")
 
 
@@ -102,7 +108,7 @@ def process_mac(src_name: str, out_name: str) -> None:
     img = fit_preserving_aspect(img, target)
     canvas = Image.new("RGBA", (CANVAS, CANVAS), (0, 0, 0, 0))
     paste_centered(canvas, img)
-    canvas.save(OUT / out_name, "PNG", optimize=True)
+    canvas.resize((OUTPUT, OUTPUT), Image.LANCZOS).save(OUT / out_name, "PNG", optimize=True)
     note = f"  (scaled x{scale_factor})" if scale_factor != 1.0 else ""
     print(f"  mac    {src_name:30s} -> {out_name}  ({img.width}x{img.height}){note}")
 

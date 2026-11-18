@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Christian Arzaluz — iOS Developer | Swift & SwiftUI Portfolio</title>
-  <meta name="description" content="Interactive macOS-style portfolio by Christian Arzaluz. iOS developer specializing in Swift, SwiftUI, and AI-powered mobile apps. Creator of VORTH, Pomo, and WaldenVibes.">
-  <meta name="keywords" content="iOS developer, Swift, SwiftUI, mobile developer, Christian Arzaluz, VORTH, Pomo, WaldenVibes, portfolio, Mexico, app developer">
+  <meta name="description" content="Interactive macOS-style portfolio by Christian Arzaluz. iOS developer specializing in Swift, SwiftUI, and AI-powered mobile apps. Creator of MemoMed, Lumina, Alba, VORTH, and more.">
+  <meta name="keywords" content="iOS developer, Swift, SwiftUI, mobile developer, Christian Arzaluz, MemoMed, ENARM, WaldenEats, Lumina, Alba, VORTH, Pomo, WaldenVibes, portfolio, Mexico, app developer">
   <meta name="author" content="Christian Arzaluz">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#5823d6">
@@ -130,6 +130,24 @@
         "operatingSystem": "iOS",
         "applicationCategory": "EducationApplication",
         "url": "https://chrisarzaluz.dev/lumina/",
+        "downloadUrl": "https://apps.apple.com/us/app/lumina-via/id6762521594",
+        "author": { "@type": "Person", "name": "Christian Arzaluz" }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "MemoMed",
+        "operatingSystem": "iOS, Android, Web",
+        "applicationCategory": "EducationalApplication",
+        "url": "https://memomed.mx",
+        "downloadUrl": "https://apps.apple.com/mx/app/id6807920602",
+        "author": { "@type": "Person", "name": "Christian Arzaluz" }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "WaldenEats",
+        "operatingSystem": "iOS",
+        "applicationCategory": "FoodAndDrinkApplication",
+        "downloadUrl": "https://apps.apple.com/mx/app/id6821167108",
         "author": { "@type": "Person", "name": "Christian Arzaluz" }
       }
     ]
@@ -143,6 +161,7 @@
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="features.css?v=5">
 </head>
 <body>
 
@@ -157,6 +176,8 @@
 
             <h2 style="font-size:20px;margin-top:24px;">Apps</h2>
             <ul>
+                <li><a href="https://memomed.mx" style="color:#6e9fff;">MemoMed</a> — Gamified ENARM exam prep (iPhone, Android &amp; web)</li>
+                <li><a href="https://apps.apple.com/mx/app/id6821167108" style="color:#6e9fff;">WaldenEats</a> — School cafeteria pre-ordering</li>
                 <li><a href="/pomo/" style="color:#6e9fff;">Pomo</a> — Pomodoro timer for iPhone &amp; Apple Watch</li>
                 <li><a href="/vorth/" style="color:#6e9fff;">VORTH</a> — AI Life Purpose Coach &amp; PERMA Journal</li>
                 <li><a href="/alba/" style="color:#6e9fff;">Alba</a> — AI Friendship Advisor</li>
@@ -191,14 +212,16 @@
 
         <div id="menubar">
             <div class="menu-left">
-                <div class="menu-item"><i class="fab fa-apple apple-icon"></i></div>
-                <div class="menu-item" id="active-app-name">Finder</div>
-                <div class="menu-item" data-i18n="menuFile">Archivo</div>
-                <div class="menu-item" data-i18n="menuEdit">Editar</div>
-                <div class="menu-item" data-i18n="menuView">Ver</div>
-                <div class="menu-item" data-i18n="menuWindow">Ventana</div>
+                <div class="menu-item" data-menu="apple" aria-label="Apple"><i class="fab fa-apple apple-icon"></i></div>
+                <div class="menu-item" data-menu="app" id="active-app-name">Finder</div>
+                <div class="menu-item" data-menu="file" data-i18n="menuFile">Archivo</div>
+                <div class="menu-item" data-menu="edit" data-i18n="menuEdit">Editar</div>
+                <div class="menu-item" data-menu="view" data-i18n="menuView">Ver</div>
+                <div class="menu-item" data-menu="window" data-i18n="menuWindow">Ventana</div>
+                <div class="menu-item" data-menu="help" data-i18n="menuHelp">Ayuda</div>
             </div>
             <div class="menu-right">
+                <div class="menu-item" id="spotlight-btn" role="button" aria-label="Spotlight"><i class="fas fa-magnifying-glass"></i></div>
                 <div class="menu-item"><i class="fas fa-battery-three-quarters"></i> <span id="battery-level">100%</span></div>
                 <div class="menu-item"><i class="fas fa-wifi"></i></div>
                 <div class="menu-item" id="clock">Cargando...</div>
@@ -229,7 +252,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
 <!-- Custom JavaScript -->
-<script src="script.js?v=7"></script>
+<script src="script.js?v=10"></script>
+<script src="features.js?v=5"></script>
 
 </body>
 </html>

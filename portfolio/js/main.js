@@ -15,12 +15,12 @@ const translations = {
     'hero.eyebrow': 'iOS Developer Portfolio',
     'hero.title.1': 'Apps That Improve',
     'hero.title.2': 'People\'s Lives',
-    'hero.subtitle': '7 published iOS apps built with Swift, SwiftUI, and AI. From on-device Apple Intelligence to Gemini-powered coaching — designed, developed, and shipped to the App Store.',
+    'hero.subtitle': '9 published apps built with Swift, SwiftUI, and AI. From on-device Apple Intelligence to full-stack platforms on iPhone, Android and web — designed, developed, and shipped.',
 
     // Stats
     'stat.apps': 'Published Apps',
     'stat.ai': 'AI-Powered',
-    'stat.platforms': 'iPhone & iPad',
+    'stat.platforms': 'Platforms',
     'stat.live': 'App Store Live',
 
     // Apps Section
@@ -29,6 +29,14 @@ const translations = {
 
     // Featured badge
     'featured.badge': 'Latest Release',
+
+    // App: MemoMed
+    'memomed.tagline': 'Gamified ENARM Exam Prep for Doctors',
+    'memomed.desc': 'Prepares physicians for Mexico\'s national residency exam (ENARM) with a daily Duolingo-style path: 8,800+ clinical cases, interactive clinical stories, 8,900 flashcards and lessons, each answer citing its clinical guideline. Server-side spaced repetition (SM-2 / FSRS), timed mock exams, leagues and streaks. Live on iPhone, Android and web.',
+
+    // App: WaldenEats
+    'waldeneats.tagline': 'School Cafeteria Pre-Ordering',
+    'waldeneats.desc': 'Pre-ordering system for the Colegio Walden Dos cafeteria: students and teachers order for their break from iPad or iPhone, while Cashier and Kitchen work from a web dashboard. Money rules live in Postgres — immutable ledger, idempotent writes, and a server-enforced 20-minute cutoff.',
 
     // App: Lumina
     'lumina.tagline': 'Discover Your 24 Character Strengths',
@@ -63,6 +71,7 @@ const translations = {
     'btn.github': 'GitHub',
     'btn.website': 'Website',
     'btn.details': 'Details',
+    'btn.caseStudy': 'Case study',
 
     // Skills
     'skills.title': 'Technical Skills',
@@ -95,12 +104,12 @@ const translations = {
     'hero.eyebrow': 'Portafolio iOS Developer',
     'hero.title.1': 'Apps Que Mejoran',
     'hero.title.2': 'La Vida de las Personas',
-    'hero.subtitle': '7 apps iOS publicadas construidas con Swift, SwiftUI e IA. Desde Apple Intelligence on-device hasta coaching con Gemini AI — diseñadas, desarrolladas y publicadas en el App Store.',
+    'hero.subtitle': '9 apps publicadas construidas con Swift, SwiftUI e IA. Desde Apple Intelligence on-device hasta plataformas completas en iPhone, Android y web — diseñadas, desarrolladas y publicadas.',
 
     // Stats
     'stat.apps': 'Apps Publicadas',
     'stat.ai': 'Con IA',
-    'stat.platforms': 'iPhone & iPad',
+    'stat.platforms': 'Plataformas',
     'stat.live': 'En App Store',
 
     // Apps Section
@@ -109,6 +118,14 @@ const translations = {
 
     // Featured badge
     'featured.badge': 'Último Lanzamiento',
+
+    // App: MemoMed
+    'memomed.tagline': 'Prepara el ENARM Como un Juego',
+    'memomed.desc': 'Prepara a médicos para el ENARM con una ruta diaria estilo Duolingo: más de 8,800 casos clínicos, historias clínicas interactivas, 8,900 flashcards y lecciones, cada respuesta citada a su GPC o NOM. Repaso espaciado calculado en el servidor (SM-2 / FSRS), simulacros con reloj, ligas y rachas. Disponible en iPhone, Android y web.',
+
+    // App: WaldenEats
+    'waldeneats.tagline': 'Pedidos Anticipados para la Cafetería',
+    'waldeneats.desc': 'Sistema de pedidos anticipados para la cafetería del Colegio Walden Dos: alumnos y profesores piden para su receso desde iPad o iPhone, mientras Caja y Cocina trabajan desde un panel web. Las reglas de dinero viven en Postgres — ledger inmutable, escrituras idempotentes y corte de 20 minutos validado en el servidor.',
 
     // App: Lumina
     'lumina.tagline': 'Descubre Tus 24 Fortalezas de Carácter',
@@ -143,6 +160,7 @@ const translations = {
     'btn.github': 'GitHub',
     'btn.website': 'Sitio Web',
     'btn.details': 'Detalles',
+    'btn.caseStudy': 'Caso de estudio',
 
     // Skills
     'skills.title': 'Habilidades Técnicas',
@@ -168,23 +186,10 @@ const translations = {
 // --- State ---
 let currentLang = 'en';
 
-// --- Asset format support ---
-const supportsWebp = false;
-
-function normalizeScreenshotPath(path) {
-  if (!path) return path;
-  return supportsWebp
-    ? path
-    : path.replace('screenshots-webp/', 'screenshots/').replace(/\.webp$/i, '.png');
-}
-
-function normalizeWebpImage(path) {
-  if (!path) return path;
-  const webpPattern = /\.webp$/i;
-  return !supportsWebp && webpPattern.test(path)
-    ? path.replace(webpPattern, '.png')
-    : path;
-}
+// --- Images ---
+// Screenshots are 460px-wide JPEGs (portfolio/assets/screenshots-jpg). No WebP on
+// purpose: in May 2026 Safari showed blank images with WebP (PRs #3 and #6), and
+// JPEG renders everywhere at ~50 KB per screenshot.
 
 function safeImageUrl(path) {
   if (!path) return '';
@@ -207,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initScrollAnimations();
   updateScreenshots();
-  applyWebpFallbacks();
 });
 
 // --- Language ---
@@ -253,24 +257,11 @@ function toggleLanguage(lang) {
 // --- Update Screenshots Based on Language ---
 function updateScreenshots() {
   document.querySelectorAll('[data-screenshot-en]').forEach(img => {
-    const enSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-en'));
-    const esSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-es'));
+    const enSrc = img.getAttribute('data-screenshot-en');
+    const esSrc = img.getAttribute('data-screenshot-es');
     const next = currentLang === 'es' && esSrc ? esSrc : enSrc;
     const safeSrc = safeImageUrl(next);
     if (safeSrc) img.src = safeSrc;
-  });
-}
-
-function applyWebpFallbacks() {
-  if (supportsWebp) return;
-  document.querySelectorAll('img').forEach(img => {
-    const src = img.getAttribute('src');
-    if (!src || !/\.webp$/i.test(src)) return;
-    const next = src.includes('screenshots-webp/')
-      ? normalizeScreenshotPath(src)
-      : normalizeWebpImage(src);
-    const safeSrc = safeImageUrl(next);
-    if (safeSrc && safeSrc !== img.src) img.setAttribute('src', safeSrc);
   });
 }
 

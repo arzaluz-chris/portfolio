@@ -34,12 +34,20 @@ I built this portfolio from scratch without relying on heavy frameworks like Rea
    - A fully functional, responsive macOS desktop environment in the browser.
    - Interactive dock, draggable windows, top menu bar, and a working clock.
    - Built purely with Vanilla JavaScript, HTML, and CSS (Glassmorphism).
+   - Spotlight (`⌘K` or `/`), working menu bar menus, notifications, and *About This Mac*.
+   - App Store-style window for every app, with a screenshot gallery and Quick Look.
+   - Xcode with unmodified Swift excerpts from MemoMed and WaldenEats ("Run" opens the app).
+   - A Terminal with `ls`, `cd`, `cat`, `open`, `neofetch`, Tab completion, and history.
+   - On phones, an iOS home screen replaces the desktop (with a "View on Mac" switch).
+   - Apps come from one data source (`PROJECT_ORDER`/`PROJECT_META` in `script.js`); new features live in `features.js`/`features.css`.
 
 2. **App Store Showcase (`/portfolio/`):** 
    - A dedicated landing page showcasing my published iOS apps.
    - Features automatic Light/Dark mode switching based on the user's OS preference (`prefers-color-scheme`).
    - Implements native horizontal swipe galleries (`scroll-snap`) mimicking the App Store.
    - Full i18n support (English/Spanish) toggled dynamically without reloading.
+
+3. **Case studies (`/memomed/`, `/waldeneats/`):** architecture, key decisions, and numbers behind the two most recent apps.
 
 ---
 
@@ -49,6 +57,8 @@ As an iOS Developer, I specialize in integrating **Artificial Intelligence** (on
 
 | App | Description | Key Technologies |
 |-----|-------------|------------------|
+| **[MemoMed](https://memomed.mx)** | Gamified ENARM (Mexico's medical residency exam) prep: 8,800+ clinical cases, guideline-cited feedback, server-side spaced repetition. iPhone, Android & web. | SwiftUI, Supabase, StoreKit 2, WidgetKit, Live Activities |
+| **WaldenEats** | Cafeteria pre-ordering for Colegio Walden Dos, with a web dashboard for Cashier/Kitchen and an immutable money ledger in Postgres. | SwiftUI, Supabase, Postgres RLS, APNs, React |
 | **[Lumina](https://github.com/arzaluz-chris/Lumina)** | Character-strengths app with on-device AI analysis and interactive evolution charts. Zero data collected. | SwiftUI, Apple Intelligence, SwiftData, Charts |
 | **[Alba](https://github.com/arzaluz-chris/Alba)** | AI-powered friendship advisor grounded in positive psychology, with an encrypted journal. | Gemini AI, FaceID, Apple Music API |
 | **[TeddyFeels](https://github.com/arzaluz-chris/TeddyFeels)** | Emotional well-being companion for kids 6-12 featuring voice journaling. 100% offline. | AVFoundation, Lottie, SwiftData |
@@ -80,7 +90,7 @@ If you'd like to run this static site locally to review the source code in actio
 
 I am actively looking for new opportunities where I can build impactful products and write elegant code. 
 
-- **LinkedIn:** [linkedin.com/in/christianarzaluz](https://linkedin.com/in/christianarzaluz)
+- **LinkedIn:** [linkedin.com/in/christian-arzaluz](https://www.linkedin.com/in/christian-arzaluz)
 - **Portfolio:** [chrisarzaluz.dev](https://chrisarzaluz.dev)
 - **Email:** christian.arzaluz@gmail.com
 

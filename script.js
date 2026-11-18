@@ -38,6 +38,15 @@ const translations = {
         portfolioIntro2: 'Como médico general, combino mi experiencia clínica con el desarrollo de software para crear aplicaciones que resuelven problemas reales en salud y bienestar. Me encanta construir apps minimalistas, funcionales y con excelente experiencia de usuario.',
         languagesFrameworks: 'Lenguajes & Frameworks',
         architecturePatterns: 'Arquitectura & Patrones',
+        backendWeb: 'Backend, Web & Android',
+        latestRelease: 'Último lanzamiento',
+        caseStudy: 'Caso de estudio',
+        aiPowered: 'Con IA',
+        website: 'Sitio web',
+        previous: 'Anterior',
+        next: 'Siguiente',
+        screenshots: 'Capturas de pantalla',
+        close: 'Cerrar',
 
         // Finder
         favorites: 'Favoritos',
@@ -157,6 +166,15 @@ const translations = {
         portfolioIntro2: 'As a general physician, I combine my clinical experience with software development to create applications that solve real problems in health and wellness. I love building minimalist, functional apps with excellent user experience.',
         languagesFrameworks: 'Languages & Frameworks',
         architecturePatterns: 'Architecture & Patterns',
+        backendWeb: 'Backend, Web & Android',
+        latestRelease: 'Latest release',
+        caseStudy: 'Case study',
+        aiPowered: 'AI-powered',
+        website: 'Website',
+        previous: 'Previous',
+        next: 'Next',
+        screenshots: 'Screenshots',
+        close: 'Close',
 
         // Finder
         favorites: 'Favorites',
@@ -309,7 +327,9 @@ function updateLanguage(lang) {
             const config = wm.windows[winId];
 
             // For non-project apps, recompute the localized name.
-            if (!config.isProject) {
+            if (config.titleKey) {
+                config.name = t(config.titleKey);
+            } else if (!config.isProject) {
                 const appConfig = apps.find(a => a.id === config.id);
                 if (appConfig) config.name = appDisplayName(appConfig);
             }
@@ -358,7 +378,7 @@ function detectLanguage() {
 const projects = {
     'pomo': {
         name: 'Pomo',
-        icon: 'f2f2',
+        icon: 'clock',
         description: {
             es: 'Una aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso. Pomo te ayuda a mantener el enfoque y gestionar tu tiempo de manera efectiva con una interfaz elegante y funcional.',
             en: 'A minimalist Pomodoro timer app designed to boost your productivity through structured work and break sessions. Pomo helps you stay focused and manage your time effectively with an elegant, functional interface.'
@@ -391,7 +411,7 @@ const projects = {
     },
     'waldenvibes': {
         name: 'WaldenVibes',
-        icon: 'f06c',
+        icon: 'leaf',
         description: {
             es: 'Una aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional. WaldenVibes te ayuda a mantener un equilibrio mental y emocional a través de prácticas de mindfulness y registro de estados de ánimo.',
             en: 'A minimalist SwiftUI app that combines meditation and mood tracking. WaldenVibes helps you maintain mental and emotional balance through mindfulness practices and mood logging.'
@@ -420,7 +440,7 @@ const projects = {
     },
     'vorth': {
         name: 'VORTH',
-        icon: 'f14e',
+        icon: 'compass',
         description: {
             es: 'VORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.',
             en: 'VORTH uses AI coaching, the PERMA well-being model, and an intelligent journal to help you discover what truly matters and build a life of purpose.'
@@ -449,7 +469,7 @@ const projects = {
     },
     'teddyfeels': {
         name: 'TeddyFeels',
-        icon: 'f1b0',
+        icon: 'paw',
         description: {
             es: 'Una app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche, un diario privado protegido con PIN y actividades guiadas.',
             en: 'An emotional well-being app for kids aged 6 to 12. TeddyFeels helps children identify, express, and manage their emotions through a teddy bear companion, a PIN-protected private journal, and guided activities.'
@@ -480,7 +500,7 @@ const projects = {
     },
     'alba': {
         name: 'Alba',
-        icon: 'f4be',
+        icon: 'hand-holding-heart',
         description: {
             es: 'Alba es tu guía para mejorar tus amistades. Basada en psicología positiva, Alba te ayuda a evaluar, entender y fortalecer tus relaciones a través de consejos personalizados con IA, un test científico y un diario privado.',
             en: 'Alba is your guide to better friendships. Grounded in positive psychology, Alba helps you assess, understand, and strengthen your relationships through AI-personalized advice, a scientific test, and a private journal.'
@@ -512,7 +532,7 @@ const projects = {
     },
     'lumina': {
         name: 'Lumina',
-        icon: '185',
+        icon: 'sun',
         description: {
             es: 'Lumina es la app de fortalezas de carácter del Colegio Walden Dos de México. Basada en la clasificación VIA Character Strengths, combina un test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias de carácter y Buddy, un compañero conversacional. Cero datos recolectados, todo procesado en tu dispositivo.',
             en: 'Lumina is the character-strengths app for Colegio Walden Dos in Mexico. Based on the VIA Character Strengths classification, it combines a 96-question test, personalized analysis with on-device Apple Intelligence, character stories, and Buddy, a conversational companion. Zero data collected — everything runs on your device.'
@@ -545,8 +565,197 @@ const projects = {
         url: 'https://github.com/arzaluz-chris/Lumina',
         appStoreUrl: 'https://apps.apple.com/us/app/lumina-via/id6762521594',
         websiteUrl: '/lumina/'
+    },
+    'memomed': {
+        name: 'MemoMed',
+        icon: 'stethoscope',
+        description: {
+            es: 'MemoMed es una plataforma para preparar el ENARM (Examen Nacional de Aspirantes a Residencias Médicas) como si fuera un juego: el temario completo se recorre como un camino de sesiones cortas con lecciones, casos clínicos con retroalimentación inmediata citada a su guía, y un repaso que vuelve justo antes de que se olvide. Disponible en iPhone, Android y web.',
+            en: 'MemoMed is a platform to prepare for the ENARM (Mexico\'s national medical residency exam) like a game: the full syllabus becomes a path of short sessions with lessons, clinical cases with instant guideline-cited feedback, and reviews that come back right before you forget. Available on iPhone, Android, and web.'
+        },
+        features: {
+            es: [
+                '174 temas de 5 especialidades: más de 8,800 casos clínicos y 8,900 flashcards',
+                'Cada respuesta cita la página de su GPC o NOM',
+                'Historias clínicas interactivas con hoja de laboratorio, de la valoración inicial a la decisión',
+                'Repetición espaciada en el servidor: SM-2 para casos y FSRS para flashcards',
+                'Simulacro completo del ENARM (280 reactivos en 6 h) y simulacros personalizados',
+                'Mi plan: meta diaria y calendario hasta la fecha del examen',
+                'Gamificación: XP, rachas, vidas, ligas por división e insignias',
+                'Widgets, Live Activities / Dynamic Island y notificaciones push',
+                'Suscripción Pro con StoreKit 2 y RevenueCat'
+            ],
+            en: [
+                '174 topics across 5 specialties: 8,800+ clinical cases and 8,900 flashcards',
+                'Every answer cites the exact page of its clinical guideline',
+                'Interactive clinical stories with lab sheets, from first assessment to final decision',
+                'Server-side spaced repetition: SM-2 for cases and FSRS for flashcards',
+                'Full ENARM mock exam (280 items in 6 h) plus custom mock exams',
+                'My Plan: daily goal and schedule up to exam day',
+                'Gamification: XP, streaks, lives, division leagues, and badges',
+                'Widgets, Live Activities / Dynamic Island, and push notifications',
+                'Pro subscription with StoreKit 2 and RevenueCat'
+            ]
+        },
+        stack: ['Swift', 'SwiftUI', 'MVVM', 'Supabase', 'StoreKit 2', 'WidgetKit', 'ActivityKit', 'Next.js', 'Jetpack Compose'],
+        appStoreUrl: 'https://apps.apple.com/mx/app/id6807920602',
+        websiteUrl: 'https://memomed.mx'
+    },
+    'waldeneats': {
+        name: 'WaldenEats',
+        icon: 'utensils',
+        description: {
+            es: 'WaldenEats es el sistema de pedidos anticipados para la cafetería del Colegio Walden Dos: una app de iPad/iPhone para alumnos y profesores, un panel web para Caja, Cocina y Administración, y un backend que garantiza que el dinero siempre cuadre.',
+            en: 'WaldenEats is the pre-ordering system for the Colegio Walden Dos cafeteria: an iPad/iPhone app for students and teachers, a web dashboard for Cashier, Kitchen, and Admin, and a backend that guarantees the money always adds up.'
+        },
+        features: {
+            es: [
+                'Menú del día, especiales y personalización de cada platillo',
+                'Pedido por receso con cuenta regresiva y corte de 20 minutos validado en el servidor',
+                'Monedero con saldo, movimientos y código de recolección',
+                'Panel web para Caja, Cocina y Administración',
+                'Ledger inmutable en centavos con claves de idempotencia y conciliación nocturna',
+                'Acceso solo con cuenta institucional de Google',
+                'Notificaciones push vía APNs'
+            ],
+            en: [
+                'Daily menu, specials, and per-dish customization',
+                'Order per break with a countdown and a server-enforced 20-minute cutoff',
+                'Wallet with balance, transaction history, and pickup code',
+                'Web dashboard for Cashier, Kitchen, and Admin',
+                'Immutable ledger in cents with idempotency keys and nightly reconciliation',
+                'Sign-in restricted to the school Google Workspace',
+                'Push notifications via APNs'
+            ]
+        },
+        stack: ['Swift', 'SwiftUI', 'Supabase', 'PostgreSQL', 'Row Level Security', 'APNs', 'React', 'TypeScript'],
+        appStoreUrl: 'https://apps.apple.com/mx/app/id6821167108'
+    },
+    'cordis': {
+        name: 'Cordis',
+        icon: 'heart-pulse',
+        description: {
+            es: 'Cordis te ayuda a registrar tu frecuencia cardíaca, entender tus niveles de estrés y encontrar calma con meditaciones guiadas y ejercicios de respiración. Se integra con Apple Health y todos los datos se quedan en tu dispositivo.',
+            en: 'Cordis helps you track your heart rate, understand your stress levels, and find calm with guided meditations and breathing exercises. It integrates with Apple Health and all data stays on your device.'
+        },
+        features: {
+            es: [
+                'Registro de BPM manual o sincronizado desde Apple Health',
+                'Medición manual guiada de 15 segundos',
+                'Estadísticas y gráficas de tendencia (promedio, mínimo y máximo)',
+                'Asistente con respuestas a más de 50 preguntas de salud cardíaca',
+                'Respiración 4-7-8 con guía visual',
+                'Meditaciones guiadas con háptica y visualización de audio'
+            ],
+            en: [
+                'BPM logging, manual or synced from Apple Health',
+                'Guided 15-second manual measurement',
+                'Trend statistics and charts (average, minimum, and maximum)',
+                'Assistant answering 50+ heart-health questions',
+                '4-7-8 breathing with visual guidance',
+                'Guided meditations with haptics and audio visualization'
+            ]
+        },
+        stack: ['Swift', 'SwiftUI', 'HealthKit', 'SwiftData', 'Charts', 'AVFoundation'],
+        url: 'https://github.com/ubaldoorozco/cordis.code.font',
+        appStoreUrl: 'https://apps.apple.com/us/app/cordis-cord/id6759006467',
+        websiteUrl: '/cordis/'
     }
 };
+
+// ---------------------------------------------------------------------------
+// Single source of truth for the published apps. The Dock, Finder › Projects,
+// the App Store-style windows, Spotlight, the Terminal and the iOS home screen
+// all read from here: adding an app means adding it to `projects` and below.
+// ---------------------------------------------------------------------------
+const SHOTS_DIR = 'portfolio/assets/screenshots-jpg/';
+const shotRange = (folder, n) => Array.from({ length: n }, (_, i) => `${SHOTS_DIR}${folder}/${i + 1}.jpg`);
+const shotNames = (folder, names) => names.map(n => `${SHOTS_DIR}${folder}/${n}.jpg`);
+
+// App Store release order (by app ID).
+const PROJECT_ORDER = ['pomo', 'waldenvibes', 'cordis', 'vorth', 'teddyfeels', 'alba', 'lumina', 'memomed', 'waldeneats'];
+const LATEST_PROJECT = 'memomed';
+
+const PROJECT_META = {
+    pomo: {
+        tagline: { es: 'Temporizador Pomodoro minimalista', en: 'Minimalist Pomodoro timer' },
+        shots: { en: shotRange('Pomo English', 5), es: shotRange('Pomo Spanish', 5) },
+        websiteUrl: '/pomo/'
+    },
+    waldenvibes: {
+        tagline: { es: 'Meditación y seguimiento emocional', en: 'Meditation & mood tracking' },
+        shots: { en: shotRange('WaldenVibes English', 7), es: shotRange('WaldenVibes Spanish', 7) }
+    },
+    cordis: {
+        tagline: { es: 'Monitoreo cardíaco y meditación', en: 'Heart rate monitoring & meditation' },
+        shots: { en: shotRange('Cordis English', 7), es: shotRange('Cordis Spanish', 7) }
+    },
+    vorth: {
+        tagline: { es: 'Descubre tu propósito de vida', en: 'Discover your life purpose' },
+        shots: { en: shotRange('VORTH English', 6), es: shotRange('VORTH Spanish', 6) },
+        websiteUrl: '/vorth/', ai: true
+    },
+    teddyfeels: {
+        tagline: { es: 'Bienestar emocional para niños', en: 'Emotional well-being for kids' },
+        shots: { es: shotRange('TeddyFeels Spanish', 7) },
+        websiteUrl: '/teddyfeels/'
+    },
+    alba: {
+        tagline: { es: 'Asesora de amistades con IA', en: 'AI-powered friendship advisor' },
+        shots: { en: shotRange('Alba English', 7), es: shotRange('Alba Spanish', 7) },
+        ai: true
+    },
+    lumina: {
+        tagline: { es: 'Descubre tus 24 fortalezas de carácter', en: 'Discover your 24 character strengths' },
+        shots: { es: shotNames('Lumina Spanish', ['01_MisFortalezas (1)', '02_AnalisisPersonalizado (1)', '03_Evolucion (1)', '04_Historias (1)', '05_HistoriaDetalle (1)', '06_Buddy (1)', '07_Conversaciones (1)', '08_Ajustes (1)', '09_Test (1)']) },
+        ai: true
+    },
+    memomed: {
+        tagline: { es: 'Prepara el ENARM como un juego', en: 'Gamified ENARM exam prep' },
+        shots: { es: shotRange('MemoMed Spanish', 10) },
+        platforms: 'iOS · Android · Web',
+        caseStudyUrl: '/memomed/'
+    },
+    waldeneats: {
+        tagline: { es: 'Pedidos anticipados para la cafetería', en: 'School cafeteria pre-ordering' },
+        shots: { es: shotRange('WaldenEats Spanish', 6) },
+        caseStudyUrl: '/waldeneats/'
+    }
+};
+
+PROJECT_ORDER.forEach(id => {
+    const meta = PROJECT_META[id];
+    projects[id] = {
+        ...projects[id],
+        ...meta,
+        id,
+        websiteUrl: projects[id].websiteUrl || meta.websiteUrl,
+        dockIcon: `assets/dock-icons/processed/${id}.png`
+    };
+});
+
+const orderedProjects = () => PROJECT_ORDER.map(id => projects[id]);
+const projectShots = p => (p.shots && (p.shots[currentLang] || p.shots.es || p.shots.en)) || [];
+
+// Plain-text summary used by Finder › Projects (and `cat` in the Terminal).
+function projectText(p, lang) {
+    const L = lang === 'en';
+    const features = (p.features[lang] || p.features.es).map(f => `• ${f}`).join('\n');
+    const links = [
+        p.url ? `GitHub: ${p.url}` : '',
+        p.appStoreUrl ? `App Store: ${p.appStoreUrl}` : '',
+        p.websiteUrl ? `${L ? 'Website' : 'Sitio'}: ${p.websiteUrl.startsWith('/') ? 'https://chrisarzaluz.dev' + p.websiteUrl : p.websiteUrl}` : ''
+    ].filter(Boolean).join('\n');
+    return `${p.name} - ${p.tagline[lang]}\n\n${p.description[lang]}\n\n${L ? 'Features' : 'Características'}:\n${features}\n\nStack: ${p.stack.join(', ')}\n\n${links}`;
+}
+
+function buildProjectFiles() {
+    const files = {};
+    orderedProjects().forEach(p => {
+        files[`${p.name}.txt`] = { type: 'text', content: { es: projectText(p, 'es'), en: projectText(p, 'en') } };
+    });
+    return files;
+}
 
 // Helper: pick localized field (string or { es, en }) for the current language.
 function localized(field) {
@@ -555,24 +764,23 @@ function localized(field) {
     return field[currentLang] || field['es'] || field['en'] || '';
 }
 
+// Public contact address (also shown in the Mail app and the Terminal `mail` command).
+const CONTACT_EMAIL = 'christian.arzaluz@gmail.com';
+
 // APPS DEL DOCK. Use nameKey for apps whose label depends on language;
 // proper nouns keep a fixed name.
 const apps = [
     { id: 'finder',      nameKey: 'finder',      icon: 'assets/dock-icons/processed/finder.png' },
     { id: 'aboutme',     nameKey: 'aboutMeApp',  icon: 'assets/dock-icons/processed/contacts.png' },
-    { id: 'appspage',    nameKey: 'appsPage',    icon: 'assets/dock-icons/processed/apps.webp', url: 'https://chrisarzaluz.dev/portfolio/#apps' },
+    { id: 'appspage',    nameKey: 'appsPage',    icon: 'assets/dock-icons/processed/apps.png', url: 'https://chrisarzaluz.dev/portfolio/#apps' },
     { id: 'safari',      nameKey: 'safari',      icon: 'assets/dock-icons/processed/safari.png' },
     { id: 'terminal',    nameKey: 'terminal',    icon: 'assets/dock-icons/processed/terminal.png' },
+    { id: 'xcode',       name: 'Xcode',          icon: 'assets/dock-icons/processed/xcode.png' },
     { id: 'textedit',    nameKey: 'textEdit',    icon: 'assets/dock-icons/processed/textedit.png' },
     { id: 'paint',       nameKey: 'sketch',      icon: 'assets/dock-icons/processed/paint.png' },
     { id: 'calculator',  nameKey: 'calculator',  icon: 'assets/dock-icons/processed/calculator.png' },
     { id: 'settings',    nameKey: 'settings',    icon: 'assets/dock-icons/processed/settings.png' },
-    { id: 'pomo',        name: 'Pomo',           icon: 'assets/dock-icons/processed/pomo.png' },
-    { id: 'waldenvibes', name: 'WaldenVibes',    icon: 'assets/dock-icons/processed/waldenvibes.png' },
-    { id: 'vorth',       name: 'VORTH',          icon: 'assets/dock-icons/processed/vorth.png' },
-    { id: 'teddyfeels',  name: 'TeddyFeels',     icon: 'assets/dock-icons/processed/teddyfeels.png' },
-    { id: 'alba',        name: 'Alba',           icon: 'assets/dock-icons/processed/alba.png' },
-    { id: 'lumina',      name: 'Lumina',         icon: 'assets/dock-icons/processed/lumina.png' },
+    ...PROJECT_ORDER.map(id => ({ id, name: projects[id].name, icon: projects[id].dockIcon })),
     { id: 'mail',        nameKey: 'mail',        icon: 'assets/dock-icons/processed/mail.png' },
     { id: 'trash',       nameKey: 'bin',         icon: 'assets/dock-icons/processed/trash-empty.png', separator: true }
 ];
@@ -685,32 +893,7 @@ const fileSystem = {
             es: '¡Bienvenido a mi portafolio! Esta página web es una simulación de macOS construida con HTML, CSS y JavaScript. Siéntete libre de interactuar con todas las aplicaciones. Puedes usar la línea de comandos, navegar por el Finder y en internet, hacer operaciones con calculadora e incluso hacer un bonito dibujo. También puedes revisar las aplicaciones que he creado para iOS.',
             en: 'Welcome to my portfolio! This website is a macOS simulation built with HTML, CSS, and JavaScript. Feel free to interact with every app. You can use the command line, browse the Finder and the internet, run calculations, and even make a nice drawing. You can also check out the apps I have built for iOS.'
         }},
-        'Projects': { type: 'folder', children: {
-            'Pomo.txt': { type: 'text', content: {
-                es: 'Pomo - Temporizador Pomodoro\n\nUna aplicación minimalista de temporizador Pomodoro diseñada para aumentar tu productividad a través de sesiones estructuradas de trabajo y descanso.\n\nCaracterísticas:\n• Temporizadores personalizables (10-60 min para trabajo, 3-15 min para descansos)\n• Flujo automático entre sesiones de trabajo y descanso\n• Soporte para temporizador en segundo plano\n• Notificaciones push y alertas de sonido\n• Seguimiento de productividad diario y semanal con gráficas\n• Contador de rachas para mantener la motivación\n• Modo claro y oscuro automático\n• Soporte para español e inglés\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo',
-                en: 'Pomo - Pomodoro Timer\n\nA minimalist Pomodoro timer app designed to boost your productivity through structured work and break sessions.\n\nFeatures:\n• Customizable timers (10-60 min for work, 3-15 min for breaks)\n• Automatic flow between work and break sessions\n• Background timer support\n• Push notifications and sound alerts\n• Daily and weekly productivity tracking with charts\n• Streak counter to keep you motivated\n• Automatic light and dark mode\n• Spanish and English support\n\nStack: Swift 5.0, SwiftUI, MVVM, SwiftData, Combine, UserNotifications, AVFoundation, Charts\n\nGitHub: https://github.com/arzaluz-chris/Pomo'
-            }},
-            'WaldenVibes.txt': { type: 'text', content: {
-                es: 'WaldenVibes - Meditación y Bienestar\n\nUna aplicación minimalista desarrollada con SwiftUI que combina meditación y seguimiento emocional.\n\nCaracterísticas:\n• Interfaz minimalista y zen con SwiftUI\n• Seguimiento de emociones y estados de ánimo\n• Ejercicios de meditación guiada\n• Registro diario de bienestar personal\n• Diseño enfocado en el bienestar mental\n• Experiencia de usuario serena y relajante\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes',
-                en: 'WaldenVibes - Meditation & Well-being\n\nA minimalist SwiftUI app that combines meditation and mood tracking.\n\nFeatures:\n• Minimalist, zen SwiftUI interface\n• Emotion and mood tracking\n• Guided meditation exercises\n• Daily personal well-being log\n• Design focused on mental well-being\n• Calm, relaxing user experience\n\nStack: Swift, SwiftUI, iOS, Xcode\n\nGitHub: https://github.com/arzaluz-chris/WaldenVibes'
-            }},
-            'VORTH.txt': { type: 'text', content: {
-                es: 'VORTH - Descubre Tu Propósito de Vida\n\nVORTH usa coaching con IA, el modelo de bienestar PERMA y un diario inteligente para ayudarte a descubrir lo que realmente importa y construir una vida con propósito.\n\nCaracterísticas:\n• Coach de voz en vivo con Gemini AI\n• Diario PERMA para seguimiento de bienestar\n• Metas inteligentes sugeridas por IA\n• Asistente IA consciente de tu propósito\n• Alquimia emocional con ejercicios guiados\n• Sincronización entre iPhone y iPad via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391',
-                en: 'VORTH - Discover Your Life Purpose\n\nVORTH uses AI coaching, the PERMA well-being model, and an intelligent journal to help you discover what truly matters and build a life of purpose.\n\nFeatures:\n• Live voice coach powered by Gemini AI\n• PERMA journal for well-being tracking\n• AI-suggested smart goals\n• AI assistant aware of your purpose\n• Emotional alchemy with guided exercises\n• iPhone and iPad sync via iCloud\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, SwiftData, AVFoundation, Speech\n\nGitHub: https://github.com/arzaluz-chris/Journify\nApp Store: https://apps.apple.com/mx/app/vorth/id6759020391'
-            }},
-            'Alba.txt': { type: 'text', content: {
-                es: 'Alba - Tu Guía para Mejores Amistades\n\nAlba es tu guía para mejorar tus amistades, basada en psicología positiva.\n\nCaracterísticas:\n• Chat con IA basado en psicología positiva (Gemini)\n• Test de amistad con evaluación de confianza, apoyo, límites y asertividad\n• Diario de amistades protegido con PIN y Face ID\n• Artículos de psicología positiva (Alba Blocks)\n• Integración con Apple Music\n• Personalización del estilo de comunicación de la IA\n• Soporte para español e inglés\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, MusicKit, CryptoKit, LocalAuthentication, Combine\n\nGitHub: https://github.com/arzaluz-chris/Alba\nApp Store: https://apps.apple.com/us/app/alba-ai-relationship-advisor/id6761395418',
-                en: 'Alba - Your Guide to Better Friendships\n\nAlba is your guide to better friendships, grounded in positive psychology.\n\nFeatures:\n• AI chat grounded in positive psychology (Gemini)\n• Friendship test measuring trust, support, boundaries, and assertiveness\n• Friendship journal protected with PIN and Face ID\n• Positive psychology articles (Alba Blocks)\n• Apple Music integration\n• Customizable AI communication style\n• Spanish and English support\n\nStack: Swift, SwiftUI, MVVM, Gemini AI, MusicKit, CryptoKit, LocalAuthentication, Combine\n\nGitHub: https://github.com/arzaluz-chris/Alba\nApp Store: https://apps.apple.com/us/app/alba-ai-relationship-advisor/id6761395418'
-            }},
-            'TeddyFeels.txt': { type: 'text', content: {
-                es: 'TeddyFeels - Bienestar Emocional para Niños\n\nUna app de bienestar emocional para niños de 6 a 12 años. TeddyFeels ayuda a los niños a identificar, expresar y gestionar sus emociones a través de un compañero osito de peluche.\n\nCaracterísticas:\n• Check-in emocional con 9 emociones y oso animado\n• Diario privado protegido con PIN de 4 dígitos\n• Grabación de voz con transcripción local\n• Metas personales con celebraciones de confeti\n• Modo SOS de rescate con ejercicios de respiración\n• Dashboard de progreso con gráficas semanales\n• Todos los datos 100% locales — sin internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels\nApp Store: https://apps.apple.com/us/app/teddyfeels/id6761302473',
-                en: 'TeddyFeels - Emotional Well-being for Kids\n\nAn emotional well-being app for kids aged 6 to 12. TeddyFeels helps children identify, express, and manage their emotions through a teddy bear companion.\n\nFeatures:\n• Emotional check-in with 9 emotions and an animated bear\n• Private journal protected with a 4-digit PIN\n• Voice recording with on-device transcription\n• Personal goals with confetti celebrations\n• SOS rescue mode with breathing exercises\n• Progress dashboard with weekly charts\n• All data 100% local — no internet\n\nStack: Swift, SwiftUI, MVVM, SwiftData, Speech, AVFoundation, Vortex, Lottie\n\nGitHub: https://github.com/arzaluz-chris/TeddyFeels\nApp Store: https://apps.apple.com/us/app/teddyfeels/id6761302473'
-            }},
-            'Lumina.txt': { type: 'text', content: {
-                es: 'Lumina - Descubre tus 24 fortalezas\n\nApp de fortalezas de carácter para el Colegio Walden Dos de México, basada en la clasificación VIA Character Strengths. Combina test de 96 preguntas, análisis personalizado con Apple Intelligence on-device, historias y Buddy (compañero conversacional). Cero datos recolectados.\n\nCaracterísticas:\n• Test VIA con 24 fortalezas agrupadas en 6 virtudes\n• Análisis personalizado con Apple Intelligence (Foundation Models on-device)\n• Buddy: compañero conversacional con IA, 100% en el dispositivo\n• Historias: bitácora de carácter con fotos y recordatorios de aniversario\n• Evolución: gráficas interactivas del cambio de fortalezas en el tiempo\n• Accesibilidad: lectura en voz alta\n• Quick Actions + Review prompt inteligente\n• Privacy manifest: 0 tracking, 0 datos recolectados\n\nStack: Swift 6, SwiftUI, iOS 26, Foundation Models, Apple Intelligence, SwiftData, UserNotifications, AVFoundation, PhotosPicker\n\nGitHub: https://github.com/arzaluz-chris/Lumina\nApp Store: https://apps.apple.com/us/app/lumina-via/id6762521594\nSitio: https://chrisarzaluz.dev/lumina/',
-                en: 'Lumina - Discover Your 24 Strengths\n\nCharacter-strengths app for Colegio Walden Dos in Mexico, based on the VIA Character Strengths classification. It combines a 96-question test, personalized analysis with on-device Apple Intelligence, stories, and Buddy (conversational companion). Zero data collected.\n\nFeatures:\n• VIA test with 24 strengths grouped into 6 virtues\n• Personalized analysis with Apple Intelligence (on-device Foundation Models)\n• Buddy: conversational AI companion, 100% on-device\n• Stories: character log with photos and anniversary reminders\n• Evolution: interactive charts of how strengths change over time\n• Accessibility: read-aloud support\n• Quick Actions + smart review prompt\n• Privacy manifest: 0 tracking, 0 data collected\n\nStack: Swift 6, SwiftUI, iOS 26, Foundation Models, Apple Intelligence, SwiftData, UserNotifications, AVFoundation, PhotosPicker\n\nGitHub: https://github.com/arzaluz-chris/Lumina\nApp Store: https://apps.apple.com/us/app/lumina-via/id6762521594\nWebsite: https://chrisarzaluz.dev/lumina/'
-            }}
-        } },
+        'Projects': { type: 'folder', children: buildProjectFiles() },
         'MyPhoto.jpg': { type: 'img', src: 'assets/profile.png'}
     }},
     'Documents': { type: 'folder', children: {
@@ -722,8 +905,8 @@ const fileSystem = {
     }},
     'Downloads': { type: 'folder', children: {
         'README.txt': { type: 'text', content: {
-            es: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, VORTH)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHospedado en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\nDesarrollador iOS | Estudiante de Ingeniería en Sistemas\ncontact: christian.arzaluz@gmail.com',
-            en: '# macOS Portfolio - Christian Arzaluz\n\n## Description\nAn interactive macOS simulator built entirely with vanilla HTML, CSS, and JavaScript. This portfolio presents a full macOS desktop experience, including the dock, draggable and resizable windows, and multiple working applications.\n\n## Technologies Used\n• HTML5 - Semantic structure\n• CSS3 - Styling and animations (glassmorphism, gradients)\n• JavaScript (ES6+) - App logic\n• jQuery & jQuery UI - Drag & drop window system\n• Font Awesome - Iconography\n• Google Fonts (Inter) - System typography\n\n## Main Features\n✓ Full window system (minimize, maximize, close)\n✓ Animated dock with hover effects\n✓ Finder with folder navigation\n✓ Working Terminal with real commands\n✓ Full Calculator\n✓ Embedded Safari browser (iframe)\n✓ Rich-text editor\n✓ Drawing / Sketch app\n✓ Settings app\n✓ iOS project apps (Pomo, WaldenVibes, VORTH)\n✓ Responsive design for mobile and tablets\n✓ Multi-language support (Spanish/English)\n\n## Project Structure\n/portfolio/\n├── index.html          # Main document\n├── script.js           # App logic\n├── styles.css          # Styling and responsive design\n├── assets/             # Media resources\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Custom domain configuration\n\n## Deployment\nHosted on GitHub Pages\nDomain: chrisarzaluz.dev\n\n## Built by\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'
+            es: '# macOS Portfolio - Christian Arzaluz\n\n## Descripción\nSimulador interactivo de macOS construido completamente con HTML, CSS y JavaScript vanilla. Este portafolio presenta una experiencia completa del sistema operativo macOS, incluyendo el dock, ventanas arrastrables y redimensionables, y múltiples aplicaciones funcionales.\n\n## Tecnologías Utilizadas\n• HTML5 - Estructura semántica\n• CSS3 - Estilos y animaciones (glassmorphism, gradientes)\n• JavaScript (ES6+) - Lógica de la aplicación\n• jQuery & jQuery UI - Sistema de ventanas drag & drop\n• Font Awesome - Iconografía\n• Google Fonts (Inter) - Tipografía del sistema\n\n## Características Principales\n✓ Sistema de ventanas completo (minimizar, maximizar, cerrar)\n✓ Dock animado con efectos hover\n✓ Finder con navegación de carpetas\n✓ Terminal funcional con comandos reales\n✓ Calculadora completa\n✓ Navegador Safari integrado (iframe)\n✓ Editor de texto con formato\n✓ Aplicación de dibujo/sketch\n✓ Sistema de configuración (Settings)\n✓ Aplicaciones de proyectos iOS (Pomo, WaldenVibes, VORTH, TeddyFeels, Alba, Lumina, MemoMed, WaldenEats)\n✓ Diseño responsive para móviles y tablets\n✓ Soporte multiidioma (Español/Inglés)\n\n## Estructura del Proyecto\n/portfolio/\n├── index.html          # Documento principal\n├── script.js           # Lógica de la aplicación\n├── styles.css          # Estilos y responsive design\n├── assets/             # Recursos multimedia\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Configuración de dominio personalizado\n\n## Deployment\nHospedado en GitHub Pages\nDominio: chrisarzaluz.dev\n\n## Desarrollado por\nChristian Arzaluz\nDesarrollador iOS | Estudiante de Ingeniería en Sistemas\ncontact: christian.arzaluz@gmail.com',
+            en: '# macOS Portfolio - Christian Arzaluz\n\n## Description\nAn interactive macOS simulator built entirely with vanilla HTML, CSS, and JavaScript. This portfolio presents a full macOS desktop experience, including the dock, draggable and resizable windows, and multiple working applications.\n\n## Technologies Used\n• HTML5 - Semantic structure\n• CSS3 - Styling and animations (glassmorphism, gradients)\n• JavaScript (ES6+) - App logic\n• jQuery & jQuery UI - Drag & drop window system\n• Font Awesome - Iconography\n• Google Fonts (Inter) - System typography\n\n## Main Features\n✓ Full window system (minimize, maximize, close)\n✓ Animated dock with hover effects\n✓ Finder with folder navigation\n✓ Working Terminal with real commands\n✓ Full Calculator\n✓ Embedded Safari browser (iframe)\n✓ Rich-text editor\n✓ Drawing / Sketch app\n✓ Settings app\n✓ iOS project apps (Pomo, WaldenVibes, VORTH, TeddyFeels, Alba, Lumina, MemoMed, WaldenEats)\n✓ Responsive design for mobile and tablets\n✓ Multi-language support (Spanish/English)\n\n## Project Structure\n/portfolio/\n├── index.html          # Main document\n├── script.js           # App logic\n├── styles.css          # Styling and responsive design\n├── assets/             # Media resources\n│   ├── profile.png\n│   └── screenshot.jpg\n└── CNAME              # Custom domain configuration\n\n## Deployment\nHosted on GitHub Pages\nDomain: chrisarzaluz.dev\n\n## Built by\nChristian Arzaluz\niOS Developer | Computer Science Student\ncontact: christian.arzaluz@gmail.com'
         }},
         'Screenshot.jpg': { type: 'img', src: 'assets/screenshot.jpg'}
     }}
@@ -1017,7 +1200,14 @@ class WindowManager {
             if(id === 'calculator') { w = 250; h = 350; }
             if(id === 'terminal') { w = 500; h = 300; }
             if(id === 'safari') { w = 800; h = 600; }
-            if(config.isProject) { w = 600; h = 500; }
+            if(config.isProject) {
+                w = Math.min(860, window.innerWidth - 80);
+                h = Math.min(640, window.innerHeight - 150);
+            }
+            if (config.size) {
+                w = Math.min(config.size.w, window.innerWidth - 40);
+                h = Math.min(config.size.h, window.innerHeight - 140);
+            }
 
             // Random position placement for desktop
             top = 60 + (Object.keys(this.windows).length * 20);
@@ -1150,6 +1340,12 @@ class WindowManager {
             return;
         }
 
+        // Windows registered from features.js bring their own renderer.
+        if (typeof config.render === 'function') {
+            config.render(container);
+            return;
+        }
+
         switch(id) {
             case 'aboutme': renderPortfolio(container); break;
             case 'finder': renderFinder(container); break;
@@ -1161,6 +1357,7 @@ class WindowManager {
             case 'settings': renderSettings(container); break;
             case 'trash': renderTrash(container); break;
             case 'mail':
+                if (typeof window.renderMail === 'function') { window.renderMail(container); break; }
                 container.html(`
                     <div style="padding:40px; text-align:center; color:#aaa; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
                         <i class="fas fa-envelope" style="font-size: 60px; color: #3481F8;"></i>
@@ -1187,7 +1384,7 @@ function renderPortfolio(container) {
     container.html(`
         <div class="portfolio-app">
             <div class="profile-header">
-                <div class="profile-pic"><span class="initial">CA</span></div>
+                <div class="profile-pic"><img src="assets/avatar.jpg" alt="Christian Arzaluz" width="160" height="160"></div>
                 <div class="profile-info">
                     <h1>Christian Arzaluz</h1>
                     <h2>${t('portfolioTitle')}</h2>
@@ -1199,17 +1396,33 @@ function renderPortfolio(container) {
 
                 <h3><i class="fas fa-code"></i> ${t('languagesFrameworks')}</h3>
                 <ul class="skills-grid">
-                    <li>Swift 5.0+</li>
+                    <li>Swift 6</li>
                     <li>SwiftUI</li>
                     <li>UIKit</li>
+                    <li>Swift Concurrency</li>
                     <li>Combine</li>
                     <li>Objective-C</li>
-                    <li>XCode 15+</li>
-                    <li>Core Data</li>
-                    <li>AVFoundation</li>
-                    <li>UserNotifications</li>
+                    <li>Xcode 26</li>
+                    <li>SwiftData & Core Data</li>
+                    <li>Apple Intelligence</li>
+                    <li>StoreKit 2</li>
+                    <li>WidgetKit & Live Activities</li>
+                    <li>HealthKit</li>
+                    <li>AVFoundation & Speech</li>
                     <li>Charts</li>
                     <li>Git & GitHub</li>
+                </ul>
+
+                <h3><i class="fas fa-server"></i> ${t('backendWeb')}</h3>
+                <ul class="skills-grid">
+                    <li>Supabase</li>
+                    <li>PostgreSQL & RLS</li>
+                    <li>Edge Functions (Deno)</li>
+                    <li>Next.js & React</li>
+                    <li>TypeScript</li>
+                    <li>Kotlin & Jetpack Compose</li>
+                    <li>Gemini API</li>
+                    <li>RevenueCat</li>
                 </ul>
 
                 <h3><i class="fas fa-sitemap"></i> ${t('architecturePatterns')}</h3>
@@ -1225,44 +1438,97 @@ function renderPortfolio(container) {
     `);
 }
 
-// 2. GENERIC PROJECT RENDERER
+// 2. PROJECT WINDOW — an App Store-style product page
 function renderProject(container, projectId) {
     const project = projects[projectId];
     if (!project) return;
 
     const features = Array.isArray(project.features) ? project.features : (project.features[currentLang] || project.features['es'] || []);
+    const shots = projectShots(project);
+    const badges = [
+        projectId === LATEST_PROJECT ? `<span class="as-badge as-badge-new">${t('latestRelease')}</span>` : '',
+        project.ai ? `<span class="as-badge">${t('aiPowered')}</span>` : '',
+        `<span class="as-badge">${project.platforms || 'iPhone · iPad'}</span>`
+    ].join('');
+
     container.html(`
-        <div class="project-app">
-            <h2><i class="fas fa-${project.icon}" style="color: var(--accent);"></i> ${project.name}</h2>
-            <p>${localized(project.description)}</p>
+        <div class="appstore-page">
+            <header class="as-hero">
+                <img class="as-icon" src="${project.dockIcon}" alt="" width="96" height="96">
+                <div class="as-title">
+                    <h2>${project.name}</h2>
+                    <p>${localized(project.tagline)}</p>
+                    <div class="as-badges">${badges}</div>
+                </div>
+                <div class="as-actions">
+                    ${project.appStoreUrl ? `<a class="as-get" href="${project.appStoreUrl}" target="_blank" rel="noopener"><i class="fab fa-apple"></i> ${t('viewOnAppStore')}</a>` : ''}
+                    <div class="as-secondary">
+                        ${project.url ? `<a href="${project.url}" target="_blank" rel="noopener" title="${t('viewOnGitHub')}"><i class="fab fa-github"></i> GitHub</a>` : ''}
+                        ${project.websiteUrl ? `<a href="${project.websiteUrl}" target="_blank" rel="noopener" title="${t('visitWebsite')}"><i class="fas fa-globe"></i> ${t('website')}</a>` : ''}
+                        ${project.caseStudyUrl ? `<a href="${project.caseStudyUrl}" target="_blank" rel="noopener"><i class="fas fa-book-open"></i> ${t('caseStudy')}</a>` : ''}
+                    </div>
+                </div>
+            </header>
 
-            <h3><i class="fas fa-star"></i> ${t('mainFeatures')}</h3>
-            <ul>
-                ${features.map(f => `<li>${f}</li>`).join('')}
-            </ul>
+            ${shots.length ? `
+            <div class="as-gallery-wrap">
+                <button class="as-nav as-prev" aria-label="${t('previous')}"><i class="fas fa-chevron-left"></i></button>
+                <div class="as-gallery" tabindex="0" aria-label="${t('screenshots')}">
+                    ${shots.map((src, i) => `<button class="as-shot" data-index="${i}"><img loading="lazy" src="${encodeURI(src)}" alt="${project.name} ${i + 1}"></button>`).join('')}
+                </div>
+                <button class="as-nav as-next" aria-label="${t('next')}"><i class="fas fa-chevron-right"></i></button>
+            </div>` : ''}
 
-            <h3><i class="fas fa-microchip"></i> ${t('techStack')}</h3>
-            <ul class="tech-stack">
-                ${project.stack.map(t => `<li>${t}</li>`).join('')}
-            </ul>
+            <section class="as-section">
+                <p class="as-desc">${localized(project.description)}</p>
+            </section>
 
-            ${project.url ? `
-            <a href="${project.url}" target="_blank" class="github-link">
-                <i class="fab fa-github"></i> ${t('viewOnGitHub')}
-            </a>
-            ` : ''}
-            ${project.appStoreUrl ? `
-            <a href="${project.appStoreUrl}" target="_blank" class="appstore-link">
-                <i class="fab fa-apple"></i> ${t('viewOnAppStore')}
-            </a>
-            ` : ''}
-            ${project.websiteUrl ? `
-            <a href="${project.websiteUrl}" target="_blank" class="website-link">
-                <i class="fas fa-globe"></i> ${t('visitWebsite')}
-            </a>
-            ` : ''}
+            <section class="as-section">
+                <h3>${t('mainFeatures')}</h3>
+                <ul class="as-features">${features.map(f => `<li>${f}</li>`).join('')}</ul>
+            </section>
+
+            <section class="as-section">
+                <h3>${t('techStack')}</h3>
+                <div class="as-chips">${project.stack.map(s => `<span>${s}</span>`).join('')}</div>
+            </section>
         </div>
     `);
+
+    const gallery = container.find('.as-gallery')[0];
+    if (!gallery) return;
+    const page = dir => gallery.scrollBy({ left: dir * gallery.clientWidth * 0.8, behavior: 'smooth' });
+    container.find('.as-prev').on('click', () => page(-1));
+    container.find('.as-next').on('click', () => page(1));
+    container.find('.as-shot').on('click', function() { openQuickLook(shots, +this.dataset.index, project.name); });
+}
+
+// Quick Look: full-size screenshot viewer (←/→ to browse, Esc or click to close).
+function openQuickLook(srcs, index, title) {
+    $('#quicklook').remove();
+    let i = index;
+    const $ql = $(`
+        <div id="quicklook" role="dialog" aria-modal="true" aria-label="${title}">
+            <div class="ql-bar"><span class="ql-title"></span><button class="ql-close" aria-label="${t('close')}"><i class="fas fa-times"></i></button></div>
+            <button class="ql-nav ql-prev" aria-label="${t('previous')}"><i class="fas fa-chevron-left"></i></button>
+            <img class="ql-img" alt="">
+            <button class="ql-nav ql-next" aria-label="${t('next')}"><i class="fas fa-chevron-right"></i></button>
+        </div>`).appendTo('body');
+    const show = n => {
+        i = (n + srcs.length) % srcs.length;
+        $ql.find('.ql-img').attr({ src: encodeURI(srcs[i]), alt: `${title} ${i + 1}` });
+        $ql.find('.ql-title').text(`${title} — ${i + 1} / ${srcs.length}`);
+    };
+    const close = () => { $ql.remove(); $(document).off('keydown.quicklook'); };
+    $ql.on('click', e => { if (e.target === $ql[0] || $(e.target).closest('.ql-close').length) close(); });
+    $ql.find('.ql-prev').on('click', () => show(i - 1));
+    $ql.find('.ql-next').on('click', () => show(i + 1));
+    $(document).on('keydown.quicklook', e => {
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') show(i - 1);
+        if (e.key === 'ArrowRight') show(i + 1);
+    });
+    show(i);
 }
 
 // 3. TERMINAL (Modificado como en tu video)
@@ -1274,7 +1540,7 @@ function renderTerminal(container) {
             <br>
             <div id="term-history"></div>
             <div class="term-input-line">
-                <span class="term-prompt">guest@portfolio ~ %</span>
+                <span class="term-prompt" id="term-prompt">guest@portfolio ~ %</span>
                 <span id="term-input" contenteditable="true" spellcheck="false"
                       autocorrect="off" autocapitalize="off"
                       role="textbox" aria-label="Terminal command" tabindex="0"></span>
@@ -1289,14 +1555,46 @@ function renderTerminal(container) {
     container.on('click', () => input[0].focus());
     setTimeout(() => input[0].focus(), 60);
 
+    const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const shell = window.createTerminalShell ? window.createTerminalShell() : null;
+    const past = [];
+    let pastIndex = 0;
+    const setInput = (el, text) => {
+        el.textContent = text;
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    };
+
     input.on('keydown', function(e) {
         if(e.key === 'Enter') {
             e.preventDefault();
             const cmd = (this.textContent || '').trim();
-            history.append(`<div class="term-line"><span class="term-prompt">guest@portfolio ~ %</span> ${cmd}</div>`);
+            history.append(`<div class="term-line"><span class="term-prompt">${escapeHtml($('#term-prompt').text())}</span> ${escapeHtml(cmd)}</div>`);
             this.textContent = '';
+            if (cmd) { past.push(cmd); }
+            pastIndex = past.length;
             processCommand(cmd);
             output.scrollTop(output[0].scrollHeight);
+        } else if (e.key === 'ArrowUp' && past.length) {
+            e.preventDefault();
+            pastIndex = Math.max(0, pastIndex - 1);
+            setInput(this, past[pastIndex]);
+        } else if (e.key === 'ArrowDown' && past.length) {
+            e.preventDefault();
+            pastIndex = Math.min(past.length, pastIndex + 1);
+            setInput(this, past[pastIndex] || '');
+        } else if (e.key === 'Tab' && shell) {
+            e.preventDefault();
+            const { value, options } = shell.complete(this.textContent || '');
+            if (options.length > 1) {
+                history.append(`<div class="term-line">${options.map(escapeHtml).join('&nbsp;&nbsp;')}</div>`);
+                output.scrollTop(output[0].scrollHeight);
+            }
+            setInput(this, value);
         }
     });
 
@@ -1314,22 +1612,31 @@ function renderTerminal(container) {
     }, 100);
 
     function processCommand(cmd) {
+        // features.js handles most commands (ls, cd, cat, open, neofetch, ...).
+        if (shell) {
+            const handled = shell.run(cmd, {
+                print: html => history.append(`<div class="term-line">${html}</div>`),
+                clear: () => history.empty(),
+                setPrompt: text => $('#term-prompt').text(text),
+                escape: escapeHtml
+            });
+            if (handled) return;
+        }
         const args = cmd.split(' ');
         let response = '';
         switch(args[0].toLowerCase()) {
             case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
-            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels<span class="Apple-converted-space">  </span>Alba<span class="Apple-converted-space">  </span>Lumina'; break;
             case 'whoami': response = `Christian Arzaluz - ${t('iosDeveloperTitle')}`; break;
             case 'date': response = new Date().toString(); break;
-            case 'echo': response = args.slice(1).join(' '); break;
+            case 'echo': response = escapeHtml(args.slice(1).join(' ')); break;
             case 'linkedin':
                 response = t('openingLinkedIn');
                 window.open('https://www.linkedin.com/in/christian-arzaluz/', '_blank');
                 break;
             case 'mail': response = 'christian.arzaluz@gmail.com'; break;
             case '': return;
-            default: response = `${t('commandNotFound')}: ${args[0]}`;
+            default: response = `${t('commandNotFound')}: ${escapeHtml(args[0])}`;
         }
         history.append(`<div class="term-line">${response}</div>`);
     }
@@ -2408,5 +2715,7 @@ $(window).on('load', () => {
         setupMobileTouchEnhancements();
         // Auto abrir 'Sobre Mí' (que usa el id 'aboutme')
         setTimeout(() => wm.openApp('aboutme'), 600);
+        // features.js waits for this (notification, iOS home screen, ...).
+        document.dispatchEvent(new Event('desktop:ready'));
     }, 3200); // 3.2 segundos de arranque
 });
