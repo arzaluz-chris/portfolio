@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WaldenEats — Caso de estudio | Christian Arzaluz</title>
+  <meta name="title-es" content="WaldenEats — Caso de estudio | Christian Arzaluz">
+  <meta name="title-en" content="WaldenEats — Case study | Christian Arzaluz">
+  <meta name="description" content="Caso de estudio de WaldenEats: pedidos anticipados para la cafetería del Colegio Walden Dos, con app para iPad/iPhone, panel web para Caja y Cocina, y un ledger inmutable en Postgres.">
+  <meta name="author" content="Christian Arzaluz">
+  <meta name="theme-color" content="#0b3a8f">
+  <link rel="canonical" href="https://chrisarzaluz.dev/waldeneats/">
+  <link rel="icon" type="image/png" href="../assets/dock-icons/processed/waldeneats.png">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://chrisarzaluz.dev/waldeneats/">
+  <meta property="og:title" content="WaldenEats — Caso de estudio">
+  <meta property="og:description" content="Pedidos anticipados para una cafetería escolar: iPad, panel web y un backend donde el dinero siempre cuadra.">
+  <meta property="og:image" content="https://chrisarzaluz.dev/portfolio/assets/screenshots-jpg/WaldenEats%20Spanish/1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/case-study.css">
+  <style>:root { --brand: #1d4ed8; }</style>
+</head>
+<body>
+  <nav class="cs-nav">
+    <div class="wrap">
+      <a class="back" href="../portfolio/">‹ <span data-lang="es">Mis apps</span><span data-lang="en">My apps</span></a>
+      <span class="spacer"></span>
+      <a href="../"><span data-lang="es">Portafolio interactivo</span><span data-lang="en">Interactive portfolio</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language"><button data-set="es">ES</button><button data-set="en">EN</button></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <img class="icon" src="../assets/dock-icons/processed/waldeneats.png" alt="WaldenEats" width="120" height="120">
+      <p class="eyebrow"><span data-lang="es">Caso de estudio</span><span data-lang="en">Case study</span></p>
+      <h1>WaldenEats</h1>
+      <p class="lede">
+        <span data-lang="es">Pedidos anticipados para la cafetería del Colegio Walden Dos: una app de iPad e iPhone para alumnos y profesores, un panel web para Caja, Cocina y Administración, y un backend que garantiza que el dinero siempre cuadre.</span>
+        <span data-lang="en">Pre-ordering for the Colegio Walden Dos cafeteria: an iPad and iPhone app for students and teachers, a web dashboard for Cashier, Kitchen, and Admin, and a backend that guarantees the money always adds up.</span>
+      </p>
+      <div class="ctas">
+        <a class="btn primary" href="https://apps.apple.com/mx/app/id6821167108" target="_blank" rel="noopener">App Store</a>
+      </div>
+      <p class="sub" style="margin:14px auto 0;color:var(--muted);font-size:14px">
+        <span data-lang="es">Uso interno: solo se entra con cuenta del colegio.</span>
+        <span data-lang="en">Internal use: sign-in requires a school account.</span>
+      </p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <h2><span data-lang="es">El reto</span><span data-lang="en">The challenge</span></h2>
+      <p class="sub">
+        <span data-lang="es">En el receso hay filas largas y poco tiempo. Con pedidos anticipados, cada alumno elige su comida antes y la recoge con un código. Pero en cuanto hay saldo de por medio, el sistema tiene que ser correcto aunque dos pedidos lleguen al mismo tiempo, se caiga la red o el reloj del iPad esté mal.</span>
+        <span data-lang="en">Breaks are short and lines are long. With pre-orders, each student picks their food ahead of time and picks it up with a code. But once there's a balance involved, the system has to be correct even when two orders arrive at once, the network drops, or the iPad's clock is wrong.</span>
+      </p>
+      <div class="stats">
+        <div class="stat"><b>3</b><span data-lang="es">roles de operación: Caja, Cocina y Admin</span><span data-lang="en">operating roles: Cashier, Kitchen, Admin</span></div>
+        <div class="stat"><b>152</b><span data-lang="es">aserciones pgTAP sobre las reglas críticas</span><span data-lang="en">pgTAP assertions on the critical rules</span></div>
+        <div class="stat"><b>20 min</b><span data-lang="es">de corte antes de cada receso, validado en el servidor</span><span data-lang="en">cutoff before each break, enforced server-side</span></div>
+        <div class="stat"><b>0</b><span data-lang="es">acceso directo de los clientes a las tablas</span><span data-lang="en">direct table access from clients</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span data-lang="es">Arquitectura</span><span data-lang="en">Architecture</span></h2>
+      <p class="sub">
+        <span data-lang="es">Toda regla crítica vive en Postgres. Los clientes no tocan tablas: solo llaman funciones que validan rol, cuenta, horario y saldo dentro de una transacción.</span>
+        <span data-lang="en">Every critical rule lives in Postgres. Clients never touch tables: they only call functions that validate role, account, schedule, and balance inside a transaction.</span>
+      </p>
+      <div class="arch">
+        <div class="col">
+          <div class="box"><b>iPad · iPhone</b><small>SwiftUI · @Observable · XcodeGen</small></div>
+          <div class="box"><b><span data-lang="es">Panel web</span><span data-lang="en">Web dashboard</span></b><small>React · Vite · TypeScript</small></div>
+        </div>
+        <div class="arrow" aria-hidden="true">⇄</div>
+        <div class="col">
+          <div class="box core"><b>Supabase · Postgres</b><small><span data-lang="es">RPC SECURITY DEFINER · ledger inmutable · conciliación nocturna</span><span data-lang="en">SECURITY DEFINER RPCs · immutable ledger · nightly reconciliation</span></small></div>
+          <div class="box"><b>Auth</b><small><span data-lang="es">Google del colegio + lista de personas autorizadas</span><span data-lang="en">School Google accounts + allow-list of people</span></small></div>
+          <div class="box"><b>Edge Function</b><small><span data-lang="es">notificaciones push con APNs</span><span data-lang="en">push notifications via APNs</span></small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span data-lang="es">Decisiones que importan</span><span data-lang="en">Decisions that matter</span></h2>
+      <div class="cards">
+        <div class="card">
+          <h3><span data-lang="es">Dinero en centavos y sin borrar</span><span data-lang="en">Money in cents, never deleted</span></h3>
+          <p><span data-lang="es">Montos como enteros en centavos, un ledger inmutable (sin UPDATE ni DELETE) y un saldo con <code>CHECK (balance_cents &gt;= 0)</code>.</span><span data-lang="en">Amounts as integer cents, an immutable ledger (no UPDATE or DELETE), and a balance with <code>CHECK (balance_cents &gt;= 0)</code>.</span></p>
+          <p class="why"><span data-lang="es">Un saldo negativo es imposible por diseño, no por buena suerte.</span><span data-lang="en">A negative balance is impossible by design, not by luck.</span></p>
+        </div>
+        <div class="card">
+          <h3><span data-lang="es">Reintentos sin cobrar doble</span><span data-lang="en">Retries without double charges</span></h3>
+          <p><span data-lang="es">Cada escritura lleva una clave de idempotencia, y una prueba lanza carreras reales con conexiones en paralelo.</span><span data-lang="en">Every write carries an idempotency key, and a test fires real races over parallel connections.</span></p>
+          <p class="why"><span data-lang="es">En el wifi de un colegio, tocar “Pedir” dos veces es lo normal.</span><span data-lang="en">On school wifi, tapping “Order” twice is the norm.</span></p>
+        </div>
+        <div class="card">
+          <h3><span data-lang="es">La hora la pone el servidor</span><span data-lang="en">The server owns the clock</span></h3>
+          <p><span data-lang="es">El corte de 20 minutos se evalúa con la hora del servidor en la zona del colegio; el iPad solo la usa para la cuenta regresiva, con un margen de seguridad.</span><span data-lang="en">The 20-minute cutoff uses server time in the school's time zone; the iPad only uses it for the countdown, with a safety margin.</span></p>
+          <p class="why"><span data-lang="es">Cambiar la hora del iPad no debería servir para pedir tarde.</span><span data-lang="en">Changing the iPad's clock shouldn't let anyone order late.</span></p>
+        </div>
+        <div class="card">
+          <h3><span data-lang="es">Acceso con lista, no con dominio</span><span data-lang="en">Allow-list, not just a domain</span></h3>
+          <p><span data-lang="es">Hay que tener cuenta del dominio del colegio, el claim de Google correcto y estar activo en la lista de personas; hooks de Auth bloquean el resto.</span><span data-lang="en">You need a school-domain account, the right Google claim, and an active entry in the people list; Auth hooks reject everyone else.</span></p>
+          <p class="why"><span data-lang="es">Con datos de menores, tener un correo del colegio no basta: hay que seguir en la lista.</span><span data-lang="en">With minors' data, a school email isn't enough: you have to still be on the list.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span data-lang="es">La app</span><span data-lang="en">The app</span></h2>
+      <p class="sub"><span data-lang="es">Capturas de la ficha del App Store, con datos ficticios.</span><span data-lang="en">Screenshots from the App Store listing, with fictional data.</span></p>
+      <div class="shots">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/WaldenEats%20Spanish/1.jpg" alt="Menú">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/WaldenEats%20Spanish/2.jpg" alt="Personalizar platillo">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/WaldenEats%20Spanish/3.jpg" alt="Carrito">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/WaldenEats%20Spanish/4.jpg" alt="Pedido recibido">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/WaldenEats%20Spanish/5.jpg" alt="Mis pedidos">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/WaldenEats%20Spanish/6.jpg" alt="Saldo">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Stack</h2>
+      <div class="stack">
+        <span>Swift</span><span>SwiftUI</span><span>XcodeGen</span><span>React</span><span>Vite</span><span>TypeScript</span>
+        <span>Supabase</span><span>PostgreSQL</span><span>Row Level Security</span><span>pgTAP</span><span>Edge Functions (Deno)</span><span>APNs</span>
+      </div>
+      <p class="sub" style="margin-top:22px">
+        <span data-lang="es">¿Quieres ver código? En <a href="../">el portafolio interactivo</a>, Xcode muestra <code>Money.swift</code> y <code>ServerClock.swift</code> sin modificar.</span>
+        <span data-lang="en">Want to see code? In <a href="../">the interactive portfolio</a>, Xcode shows <code>Money.swift</code> and <code>ServerClock.swift</code> unmodified.</span>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© 2026 Christian Arzaluz · <a href="../portfolio/">chrisarzaluz.dev</a></div>
+  </footer>
+  <script src="../assets/case-study.js"></script>
+</body>
+</html>

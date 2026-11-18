@@ -40,6 +40,7 @@ const translations = {
         architecturePatterns: 'Arquitectura & Patrones',
         backendWeb: 'Backend, Web & Android',
         latestRelease: 'Último lanzamiento',
+        caseStudy: 'Caso de estudio',
         aiPowered: 'Con IA',
         website: 'Sitio web',
         previous: 'Anterior',
@@ -167,6 +168,7 @@ const translations = {
         architecturePatterns: 'Architecture & Patterns',
         backendWeb: 'Backend, Web & Android',
         latestRelease: 'Latest release',
+        caseStudy: 'Case study',
         aiPowered: 'AI-powered',
         website: 'Website',
         previous: 'Previous',
@@ -711,11 +713,13 @@ const PROJECT_META = {
     memomed: {
         tagline: { es: 'Prepara el ENARM como un juego', en: 'Gamified ENARM exam prep' },
         shots: { es: shotRange('MemoMed Spanish', 10) },
-        platforms: 'iOS · Android · Web'
+        platforms: 'iOS · Android · Web',
+        caseStudyUrl: '/memomed/'
     },
     waldeneats: {
         tagline: { es: 'Pedidos anticipados para la cafetería', en: 'School cafeteria pre-ordering' },
-        shots: { es: shotRange('WaldenEats Spanish', 6) }
+        shots: { es: shotRange('WaldenEats Spanish', 6) },
+        caseStudyUrl: '/waldeneats/'
     }
 };
 
@@ -1461,6 +1465,7 @@ function renderProject(container, projectId) {
                     <div class="as-secondary">
                         ${project.url ? `<a href="${project.url}" target="_blank" rel="noopener" title="${t('viewOnGitHub')}"><i class="fab fa-github"></i> GitHub</a>` : ''}
                         ${project.websiteUrl ? `<a href="${project.websiteUrl}" target="_blank" rel="noopener" title="${t('visitWebsite')}"><i class="fas fa-globe"></i> ${t('website')}</a>` : ''}
+                        ${project.caseStudyUrl ? `<a href="${project.caseStudyUrl}" target="_blank" rel="noopener"><i class="fas fa-book-open"></i> ${t('caseStudy')}</a>` : ''}
                     </div>
                 </div>
             </header>

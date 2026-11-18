@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MemoMed — Caso de estudio | Christian Arzaluz</title>
+  <meta name="title-es" content="MemoMed — Caso de estudio | Christian Arzaluz">
+  <meta name="title-en" content="MemoMed — Case study | Christian Arzaluz">
+  <meta name="description" content="Caso de estudio de MemoMed: preparación gamificada para el ENARM en iPhone, Android y web, con toda la lógica de negocio en Postgres y repaso espaciado calculado en el servidor.">
+  <meta name="author" content="Christian Arzaluz">
+  <meta name="theme-color" content="#7c3aed">
+  <meta name="apple-itunes-app" content="app-id=6807920602">
+  <link rel="canonical" href="https://chrisarzaluz.dev/memomed/">
+  <link rel="icon" type="image/png" href="../assets/dock-icons/processed/memomed.png">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://chrisarzaluz.dev/memomed/">
+  <meta property="og:title" content="MemoMed — Caso de estudio">
+  <meta property="og:description" content="Preparación gamificada para el ENARM en iPhone, Android y web. Arquitectura, decisiones y números.">
+  <meta property="og:image" content="https://chrisarzaluz.dev/portfolio/assets/screenshots-jpg/MemoMed%20Spanish/1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "MemoMed",
+    "operatingSystem": "iOS, Android, Web",
+    "applicationCategory": "EducationalApplication",
+    "url": "https://memomed.mx",
+    "downloadUrl": "https://apps.apple.com/mx/app/id6807920602",
+    "author": { "@type": "Person", "name": "Christian Arzaluz", "url": "https://chrisarzaluz.dev" }
+  }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/case-study.css">
+  <style>:root { --brand: #7c3aed; }</style>
+</head>
+<body>
+  <nav class="cs-nav">
+    <div class="wrap">
+      <a class="back" href="../portfolio/">‹ <span data-lang="es">Mis apps</span><span data-lang="en">My apps</span></a>
+      <span class="spacer"></span>
+      <a href="../"><span data-lang="es">Portafolio interactivo</span><span data-lang="en">Interactive portfolio</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language"><button data-set="es">ES</button><button data-set="en">EN</button></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <img class="icon" src="../assets/dock-icons/processed/memomed.png" alt="MemoMed" width="120" height="120">
+      <p class="eyebrow"><span data-lang="es">Caso de estudio · Último lanzamiento</span><span data-lang="en">Case study · Latest release</span></p>
+      <h1>MemoMed</h1>
+      <p class="lede">
+        <span data-lang="es">Preparación para el ENARM —el examen de residencias médicas de México— como si fuera un juego. Una ruta diaria de lecciones, casos clínicos y repaso espaciado en iPhone, Android y web.</span>
+        <span data-lang="en">Prep for the ENARM —Mexico's national medical residency exam— like a game. A daily path of lessons, clinical cases, and spaced repetition on iPhone, Android, and web.</span>
+      </p>
+      <div class="ctas">
+        <a class="btn primary" href="https://apps.apple.com/mx/app/id6807920602" target="_blank" rel="noopener">App Store</a>
+        <a class="btn secondary" href="https://play.google.com/store/apps/details?id=mx.memomed.app" target="_blank" rel="noopener">Google Play</a>
+        <a class="btn secondary" href="https://memomed.mx" target="_blank" rel="noopener">memomed.mx</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <h2><span data-lang="es">El reto</span><span data-lang="en">The challenge</span></h2>
+      <p class="sub">
+        <span data-lang="es">Como médico general, sé que preparar el ENARM es estudiar meses un temario enorme con material disperso. La meta: convertirlo en sesiones cortas y diarias, con casos tipo examen cuya retroalimentación cite la guía clínica exacta, y con un repaso que vuelva justo antes de olvidar.</span>
+        <span data-lang="en">As a general physician, I know ENARM prep means months of studying a huge syllabus from scattered material. The goal: turn it into short daily sessions, with exam-style cases whose feedback cites the exact clinical guideline, and reviews that come back right before you forget.</span>
+      </p>
+      <div class="stats">
+        <div class="stat"><b>174</b><span data-lang="es">temas de 5 especialidades</span><span data-lang="en">topics across 5 specialties</span></div>
+        <div class="stat"><b>8,873</b><span data-lang="es">casos clínicos (20,876 preguntas)</span><span data-lang="en">clinical cases (20,876 questions)</span></div>
+        <div class="stat"><b>8,910</b><span data-lang="es">flashcards</span><span data-lang="en">flashcards</span></div>
+        <div class="stat"><b>3</b><span data-lang="es">clientes nativos: iOS, Android y web</span><span data-lang="en">native clients: iOS, Android, and web</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span data-lang="es">Arquitectura</span><span data-lang="en">Architecture</span></h2>
+      <p class="sub">
+        <span data-lang="es">Una sola fuente de lógica de negocio. Todo lo que afecta el puntaje —XP, rachas, ligas, repaso espaciado, vidas— vive en Postgres o en Edge Functions. Los clientes consumen; nunca recalculan.</span>
+        <span data-lang="en">One source of business logic. Everything that affects scoring —XP, streaks, leagues, spaced repetition, lives— lives in Postgres or Edge Functions. Clients consume; they never recalculate.</span>
+      </p>
+      <div class="arch">
+        <div class="col">
+          <div class="box"><b>iOS</b><small>SwiftUI · MVVM · WidgetKit · ActivityKit · StoreKit 2</small></div>
+          <div class="box"><b>Android</b><small>Kotlin · Jetpack Compose · Play Billing</small></div>
+          <div class="box"><b>Web</b><small>Next.js · React · Tailwind</small></div>
+          <div class="box"><b>Admin</b><small><span data-lang="es">Panel de contenido</span><span data-lang="en">Content panel</span></small></div>
+        </div>
+        <div class="arrow" aria-hidden="true">⇄</div>
+        <div class="col">
+          <div class="box core"><b>Supabase · Postgres</b><small><span data-lang="es">RLS en cada tabla · RPC transaccionales · 267 migraciones</span><span data-lang="en">RLS on every table · transactional RPCs · 267 migrations</span></small></div>
+          <div class="box"><b>Edge Functions (Deno)</b><small>push (APNs · FCM) · webhooks · media</small></div>
+          <div class="box"><b>RevenueCat</b><small>Stripe · StoreKit 2 · Play Billing</small></div>
+          <div class="box"><b><span data-lang="es">Pipeline de contenido</span><span data-lang="en">Content pipeline</span></b><small><span data-lang="es">GPC/NOM → casos, con revisión antes de publicar</span><span data-lang="en">Guidelines → cases, reviewed before publishing</span></small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span data-lang="es">Decisiones que importan</span><span data-lang="en">Decisions that matter</span></h2>
+      <div class="cards">
+        <div class="card">
+          <h3><span data-lang="es">El servidor manda</span><span data-lang="en">The server decides</span></h3>
+          <p><span data-lang="es">Repetición espaciada calculada en el servidor: SM-2 para casos y FSRS para flashcards.</span><span data-lang="en">Server-side spaced repetition: SM-2 for cases, FSRS for flashcards.</span></p>
+          <p class="why"><span data-lang="es">Un estudiante cambia de la computadora al teléfono a mitad del día; tres clientes calculando rachas o intervalos acabarían en tres respuestas distintas.</span><span data-lang="en">Students switch from laptop to phone mid-day; three clients computing streaks or intervals would give three different answers.</span></p>
+        </div>
+        <div class="card">
+          <h3><span data-lang="es">Seguridad desde la migración</span><span data-lang="en">Security from the migration</span></h3>
+          <p><span data-lang="es">Cada tabla nace con Row Level Security en la misma migración que la crea, con 2,175 aserciones pgTAP.</span><span data-lang="en">Every table is born with Row Level Security in the same migration that creates it, backed by 2,175 pgTAP assertions.</span></p>
+          <p class="why"><span data-lang="es">Con clientes públicos y pagos, una tabla sin RLS es una fuga, no un pendiente.</span><span data-lang="en">With public clients and payments, a table without RLS is a leak, not a to-do.</span></p>
+        </div>
+        <div class="card">
+          <h3><span data-lang="es">Contenido médico con trazabilidad</span><span data-lang="en">Traceable medical content</span></h3>
+          <p><span data-lang="es">Cada respuesta cita la página de su Guía de Práctica Clínica o NOM, y nada se publica sin pasar por borrador → revisión → publicado.</span><span data-lang="en">Every answer cites the page of its clinical guideline, and nothing is published without going draft → review → published.</span></p>
+          <p class="why"><span data-lang="es">En medicina, una explicación sin fuente no sirve para estudiar.</span><span data-lang="en">In medicine, an explanation without a source is useless for studying.</span></p>
+        </div>
+        <div class="card">
+          <h3><span data-lang="es">Ports 1:1 con las mismas pruebas</span><span data-lang="en">1:1 ports with the same tests</span></h3>
+          <p><span data-lang="es">La lógica que sí vive en el cliente (como el estado del plan de estudio) es un port exacto entre web y Swift, con los mismos casos de prueba.</span><span data-lang="en">The logic that does live on the client (like the study-plan status) is an exact port between web and Swift, with the same test cases.</span></p>
+          <p class="why"><span data-lang="es">Un <code>&gt;=</code> al revés le dice “vas bien” a quien no llega, y nadie lo nota.</span><span data-lang="en">A flipped <code>&gt;=</code> tells someone who won't make it that they're on track, and nobody notices.</span></p>
+        </div>
+        <div class="card">
+          <h3><span data-lang="es">Un solo sistema de pagos</span><span data-lang="en">One payments system</span></h3>
+          <p><span data-lang="es">RevenueCat unifica StoreKit 2, Play Billing y Stripe en un solo estado de suscripción.</span><span data-lang="en">RevenueCat unifies StoreKit 2, Play Billing, and Stripe into a single subscription state.</span></p>
+          <p class="why"><span data-lang="es">Quien paga en la web tiene Pro en el iPhone sin reconciliar nada a mano.</span><span data-lang="en">Someone who pays on the web has Pro on their iPhone without any manual reconciliation.</span></p>
+        </div>
+        <div class="card">
+          <h3><span data-lang="es">Lo nativo, nativo</span><span data-lang="en">Native where it counts</span></h3>
+          <p><span data-lang="es">Widgets, Live Activities en la Dynamic Island, push, háptica y un sistema de sonido propio.</span><span data-lang="en">Widgets, Live Activities on the Dynamic Island, push, haptics, and a custom sound system.</span></p>
+          <p class="why"><span data-lang="es">La racha en riesgo aparece en la pantalla de bloqueo, que es donde se decide si estudias hoy.</span><span data-lang="en">A streak at risk shows up on the Lock Screen, which is where you decide whether to study today.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2><span data-lang="es">La app</span><span data-lang="en">The app</span></h2>
+      <p class="sub"><span data-lang="es">Capturas de la ficha actual del App Store (versión 1.3.1).</span><span data-lang="en">Screenshots from the current App Store listing (version 1.3.1).</span></p>
+      <div class="shots">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/1.jpg" alt="Inicio">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/2.jpg" alt="Cita de la guía clínica">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/3.jpg" alt="Historia clínica interactiva">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/4.jpg" alt="Simulacro">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/5.jpg" alt="Caso clínico">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/6.jpg" alt="Lección con tabla">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/7.jpg" alt="Laboratorios">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/8.jpg" alt="Flashcard">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/9.jpg" alt="Liga">
+        <img loading="lazy" src="../portfolio/assets/screenshots-jpg/MemoMed%20Spanish/10.jpg" alt="Plan de estudio">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Stack</h2>
+      <div class="stack">
+        <span>Swift</span><span>SwiftUI</span><span>WidgetKit</span><span>ActivityKit</span><span>StoreKit 2</span>
+        <span>Kotlin</span><span>Jetpack Compose</span><span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span>
+        <span>Supabase</span><span>PostgreSQL</span><span>Edge Functions (Deno)</span><span>pgTAP</span><span>RevenueCat</span><span>Vercel</span><span>GitHub Actions</span>
+      </div>
+      <p class="sub" style="margin-top:22px">
+        <span data-lang="es">¿Quieres ver código? Abre <a href="../">el portafolio interactivo</a> y entra a Xcode en el Dock: ahí está la lógica del plan de estudio, sin modificar.</span>
+        <span data-lang="en">Want to see code? Open <a href="../">the interactive portfolio</a> and launch Xcode from the Dock: the study-plan logic is there, unmodified.</span>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© 2026 Christian Arzaluz · <a href="../portfolio/">chrisarzaluz.dev</a></div>
+  </footer>
+  <script src="../assets/case-study.js"></script>
+</body>
+</html>

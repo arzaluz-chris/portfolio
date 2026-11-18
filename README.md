@@ -34,12 +34,20 @@ I built this portfolio from scratch without relying on heavy frameworks like Rea
    - A fully functional, responsive macOS desktop environment in the browser.
    - Interactive dock, draggable windows, top menu bar, and a working clock.
    - Built purely with Vanilla JavaScript, HTML, and CSS (Glassmorphism).
+   - Spotlight (`⌘K` or `/`), working menu bar menus, notifications, and *About This Mac*.
+   - App Store-style window for every app, with a screenshot gallery and Quick Look.
+   - Xcode with unmodified Swift excerpts from MemoMed and WaldenEats ("Run" opens the app).
+   - A Terminal with `ls`, `cd`, `cat`, `open`, `neofetch`, Tab completion, and history.
+   - On phones, an iOS home screen replaces the desktop (with a "View on Mac" switch).
+   - Apps come from one data source (`PROJECT_ORDER`/`PROJECT_META` in `script.js`); new features live in `features.js`/`features.css`.
 
 2. **App Store Showcase (`/portfolio/`):** 
    - A dedicated landing page showcasing my published iOS apps.
    - Features automatic Light/Dark mode switching based on the user's OS preference (`prefers-color-scheme`).
    - Implements native horizontal swipe galleries (`scroll-snap`) mimicking the App Store.
    - Full i18n support (English/Spanish) toggled dynamically without reloading.
+
+3. **Case studies (`/memomed/`, `/waldeneats/`):** architecture, key decisions, and numbers behind the two most recent apps.
 
 ---
 

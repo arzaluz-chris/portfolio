@@ -71,6 +71,7 @@ const translations = {
     'btn.github': 'GitHub',
     'btn.website': 'Website',
     'btn.details': 'Details',
+    'btn.caseStudy': 'Case study',
 
     // Skills
     'skills.title': 'Technical Skills',
@@ -159,6 +160,7 @@ const translations = {
     'btn.github': 'GitHub',
     'btn.website': 'Sitio Web',
     'btn.details': 'Detalles',
+    'btn.caseStudy': 'Caso de estudio',
 
     // Skills
     'skills.title': 'Habilidades Técnicas',
