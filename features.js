@@ -462,6 +462,508 @@
         }
     });
 
+    // --- Strings for the Terminal, Safari, Mail and Xcode ------------------
+    Object.assign(translations.es, {
+        shHelp: 'Comandos:',
+        shHelpRows: [
+            ['ls [carpeta]', 'lista archivos'], ['cd <carpeta>', 'cambia de carpeta'], ['cat <archivo>', 'muestra un archivo'],
+            ['open <app|archivo>', 'abre una app o archivo'], ['apps', 'mis apps publicadas'], ['neofetch', 'resumen del sistema'],
+            ['xcode', 'abre Xcode con código real'], ['cv', 'descarga mi CV'], ['whoami · date · echo', ''], ['linkedin · github · mail', 'contacto'],
+            ['clear · exit', '']
+        ],
+        shHelpTip: 'Tip: Tab autocompleta y ↑/↓ recorren el historial.',
+        shNoSuchDir: 'no existe la carpeta',
+        shNoSuchFile: 'no existe el archivo',
+        shIsDir: 'es una carpeta',
+        shBinary: 'es un archivo binario; prueba con',
+        shOpenUsage: 'uso: open <app|archivo>',
+        shSudo: 'guest no está en el archivo sudoers. Este incidente será reportado.',
+        shRmRoot: 'rm: /: Operación no permitida. (Buen intento.)',
+        shApps: 'Apps publicadas',
+        sadMacTitle: 'Tu Mac se reinició por un problema.',
+        sadMacBody: 'Alguien ejecutó sudo rm -rf / en el portafolio. Haz clic para continuar.',
+        sfFavorites: 'Favoritos',
+        sfSearch: 'Buscar o escribir un sitio',
+        sfMyApps: 'Mis apps',
+        sfBlockedTitle: 'Este sitio no se puede mostrar aquí',
+        sfBlockedBody: 'muchos sitios no permiten abrirse dentro de otra página.',
+        sfOpenTab: 'Abrir en una pestaña nueva',
+        mailTo: 'Para',
+        mailSubject: 'Asunto',
+        mailSubjectPh: 'Oportunidad / colaboración',
+        mailBodyPh: 'Hola Christian,',
+        mailSend: 'Enviar',
+        mailCopy: 'Copiar dirección',
+        mailCopied: 'Dirección copiada',
+        mailHint: 'Se abrirá tu app de correo con el mensaje listo.',
+        xcRun: 'Ejecutar',
+        xcStop: 'Detener',
+        xcReady: 'Listo',
+        xcBuilding: 'Compilando',
+        xcSucceeded: 'Compilación exitosa',
+        xcExcerpt: 'Fragmento',
+        xcNote: 'Código real de mis apps, sin modificar.',
+        xcLaunching: 'Abriendo'
+    });
+    Object.assign(translations.en, {
+        shHelp: 'Commands:',
+        shHelpRows: [
+            ['ls [folder]', 'list files'], ['cd <folder>', 'change folder'], ['cat <file>', 'print a file'],
+            ['open <app|file>', 'open an app or file'], ['apps', 'my published apps'], ['neofetch', 'system summary'],
+            ['xcode', 'open Xcode with real code'], ['cv', 'download my CV'], ['whoami · date · echo', ''], ['linkedin · github · mail', 'contact'],
+            ['clear · exit', '']
+        ],
+        shHelpTip: 'Tip: Tab completes and ↑/↓ walk the history.',
+        shNoSuchDir: 'no such folder',
+        shNoSuchFile: 'no such file',
+        shIsDir: 'is a folder',
+        shBinary: 'is a binary file; try',
+        shOpenUsage: 'usage: open <app|file>',
+        shSudo: 'guest is not in the sudoers file. This incident will be reported.',
+        shRmRoot: 'rm: /: Operation not permitted. (Nice try.)',
+        shApps: 'Published apps',
+        sadMacTitle: 'Your Mac restarted because of a problem.',
+        sadMacBody: 'Someone ran sudo rm -rf / on the portfolio. Click to continue.',
+        sfFavorites: 'Favorites',
+        sfSearch: 'Search or enter website name',
+        sfMyApps: 'My apps',
+        sfBlockedTitle: 'This site can’t be shown here',
+        sfBlockedBody: 'many sites don’t allow being embedded in another page.',
+        sfOpenTab: 'Open in a new tab',
+        mailTo: 'To',
+        mailSubject: 'Subject',
+        mailSubjectPh: 'Opportunity / collaboration',
+        mailBodyPh: 'Hi Christian,',
+        mailSend: 'Send',
+        mailCopy: 'Copy address',
+        mailCopied: 'Address copied',
+        mailHint: 'Your mail app will open with the message ready.',
+        xcRun: 'Run',
+        xcStop: 'Stop',
+        xcReady: 'Ready',
+        xcBuilding: 'Building',
+        xcSucceeded: 'Build Succeeded',
+        xcExcerpt: 'Excerpt',
+        xcNote: 'Real code from my apps, unmodified.',
+        xcLaunching: 'Launching'
+    });
+
+    // --- Easter egg: Sad Mac --------------------------------------------------
+    function sadMac() {
+        $('#sad-mac').remove();
+        $(`<div id="sad-mac" role="alertdialog" tabindex="0">
+              <img src="assets/sad_mac.png" alt="">
+              <p class="sm-title">${esc(t('sadMacTitle'))}</p>
+              <p class="sm-body">${esc(t('sadMacBody'))}</p>
+           </div>`)
+            .appendTo('body')
+            .on('click keydown', function () { $(this).fadeOut(400, function () { $(this).remove(); }); })
+            .trigger('focus');
+    }
+    window.sadMac = sadMac;
+
+    // --- Terminal shell ---------------------------------------------------
+    // Returned object is used by renderTerminal() in script.js.
+    window.createTerminalShell = function () {
+        let cwd = [];
+        const root = () => ({ type: 'folder', children: fileSystem });
+        const findKey = (children, name) => Object.keys(children || {}).find(k => k.toLowerCase() === String(name).toLowerCase());
+        const nodeAt = segs => {
+            let node = root();
+            for (const s of segs) {
+                const k = findKey(node.children, s);
+                if (!k || node.children[k].type !== 'folder') return null;
+                node = node.children[k];
+            }
+            return node;
+        };
+        const resolve = arg => {
+            let segs = arg.startsWith('/') || arg.startsWith('~') ? [] : [...cwd];
+            arg.replace(/^~\/?|^\//, '').split('/').filter(Boolean).forEach(p => {
+                if (p === '..') segs.pop();
+                else if (p !== '.') {
+                    const parent = nodeAt(segs);
+                    segs.push((parent && findKey(parent.children, p)) || p);
+                }
+            });
+            return segs;
+        };
+        const lookup = arg => {
+            const segs = resolve(arg);
+            const name = segs.pop();
+            const parent = nodeAt(segs);
+            if (name === undefined) return { node: root(), name: '~' };
+            const key = parent && findKey(parent.children, name);
+            return key ? { node: parent.children[key], name: key, parentSegs: segs } : null;
+        };
+        const prompt = () => `guest@portfolio ${cwd.length ? cwd[cwd.length - 1] : '~'} %`;
+        const findApp = name => {
+            const q = String(name).toLowerCase().replace(/\.app$/, '');
+            return apps.find(a => a.id === q || appDisplayName(a).toLowerCase() === q);
+        };
+        const COMMANDS = ['help', 'ls', 'cd', 'pwd', 'cat', 'open', 'apps', 'neofetch', 'xcode', 'cv', 'whoami', 'date', 'echo', 'linkedin', 'github', 'mail', 'clear', 'exit', 'sudo'];
+
+        function openNode(found) {
+            const { node, name } = found;
+            if (node.type === 'folder') { wm.openApp('finder'); return; }
+            if (node.type === 'text') {
+                wm.openApp('textedit');
+                setTimeout(() => $('#text-area').val(localized(node.content)), 200);
+            } else if (typeof openPreview === 'function') {
+                openPreview(name, node.src, node.type);
+            }
+        }
+
+        function run(line, io) {
+            const parts = line.trim().split(/\s+/);
+            const cmd = (parts[0] || '').toLowerCase();
+            const arg = parts.slice(1).join(' ');
+            const e = io.escape;
+            switch (cmd) {
+                case 'help': {
+                    const rows = t('shHelpRows').map(([c, d]) => `  <span class="term-cmd">${e(c.padEnd(22, ' '))}</span>${e(d)}`).join('\n');
+                    io.print(`<pre class="term-pre">${e(t('shHelp'))}\n${rows}\n\n${e(t('shHelpTip'))}</pre>`);
+                    return true;
+                }
+                case 'pwd':
+                    io.print(e('/Users/guest' + (cwd.length ? '/' + cwd.join('/') : '')));
+                    return true;
+                case 'ls': {
+                    const target = arg ? lookup(arg) : { node: nodeAt(cwd) };
+                    if (!target || !target.node) { io.print(`ls: ${e(arg)}: ${e(t('shNoSuchDir'))}`); return true; }
+                    if (target.node.type !== 'folder') { io.print(e(target.name)); return true; }
+                    const items = Object.entries(target.node.children).map(([k, v]) =>
+                        v.type === 'folder' ? `<span class="term-dir">${e(k)}/</span>` : `<span class="term-file">${e(k)}</span>`);
+                    io.print(items.join('&nbsp;&nbsp;&nbsp;'));
+                    return true;
+                }
+                case 'cd': {
+                    if (!arg || arg === '~') { cwd = []; io.setPrompt(prompt()); return true; }
+                    const segs = resolve(arg);
+                    if (!nodeAt(segs)) { io.print(`cd: ${e(arg)}: ${e(t('shNoSuchDir'))}`); return true; }
+                    cwd = segs;
+                    io.setPrompt(prompt());
+                    return true;
+                }
+                case 'cat': {
+                    const found = arg && lookup(arg);
+                    if (!found) { io.print(`cat: ${e(arg)}: ${e(t('shNoSuchFile'))}`); return true; }
+                    if (found.node.type === 'folder') { io.print(`cat: ${e(arg)}: ${e(t('shIsDir'))}`); return true; }
+                    if (found.node.type !== 'text') { io.print(`cat: ${e(found.name)} ${e(t('shBinary'))} <span class="term-cmd">open ${e(found.name)}</span>`); return true; }
+                    io.print(`<pre class="term-pre">${e(localized(found.node.content))}</pre>`);
+                    return true;
+                }
+                case 'open': {
+                    if (!arg) { io.print(e(t('shOpenUsage'))); return true; }
+                    if (/^https?:\/\//i.test(arg)) { window.open(arg, '_blank', 'noopener'); return true; }
+                    if (arg === '.') { wm.openApp('finder'); return true; }
+                    const appFound = findApp(arg.replace(/^-a\s+/, ''));
+                    if (appFound) { wm.openApp(appFound.id); return true; }
+                    const found = lookup(arg);
+                    if (!found) { io.print(`open: ${e(arg)}: ${e(t('shNoSuchFile'))}`); return true; }
+                    openNode(found);
+                    return true;
+                }
+                case 'apps': {
+                    const rows = orderedProjects().map(p => `  <span class="term-cmd">${e(p.name.padEnd(13, ' '))}</span>${e(p.tagline[currentLang])}`).join('\n');
+                    io.print(`<pre class="term-pre">${e(t('shApps'))} (${PROJECT_ORDER.length}):\n${rows}\n\n→ open ${e(projects[LATEST_PROJECT].name.toLowerCase())}</pre>`);
+                    return true;
+                }
+                case 'neofetch': {
+                    const logo = ['        .:\'', '    __ :\'__', ' .\'`__`-\'__``.', ':__________.-\'', ':_________:', ' :_________`-;', '  `.__.-.__.\''];
+                    const info = [
+                        '<b>guest</b>@<b>chrisarzaluz.dev</b>', '-------------------------',
+                        `<b>OS</b>: Portfolio OS 2026 (macOS-like, vanilla JS)`,
+                        `<b>Host</b>: Christian Arzaluz — ${e(t('amSubtitle'))}`,
+                        `<b>Apps</b>: ${PROJECT_ORDER.length} ${e(t('amAppsValue'))}`,
+                        `<b>Latest</b>: ${e(projects[LATEST_PROJECT].name)}`,
+                        '<b>Languages</b>: Swift 6, TypeScript, Kotlin, SQL',
+                        '<b>UI</b>: SwiftUI, UIKit, React, Jetpack Compose',
+                        '<b>Backend</b>: Supabase, PostgreSQL, Edge Functions',
+                        '<b>AI</b>: Apple Intelligence, Gemini'
+                    ];
+                    const out = info.map((l, i) => `<span class="term-logo">${e((logo[i] || '').padEnd(17, ' '))}</span>${l}`).join('\n');
+                    io.print(`<pre class="term-pre">${out}</pre>`);
+                    return true;
+                }
+                case 'xcode': case 'xed':
+                    window.openXcode();
+                    return true;
+                case 'cv':
+                    downloadCV();
+                    return true;
+                case 'github':
+                    window.open('https://github.com/arzaluz-chris', '_blank', 'noopener');
+                    io.print('github.com/arzaluz-chris');
+                    return true;
+                case 'swift':
+                    io.print(e('Swift version 6 · target: arm64-apple-portfolio'));
+                    return true;
+                case 'exit':
+                    if (wm.windows.terminal) wm.closeWindow('terminal');
+                    return true;
+                case 'sudo':
+                    if (/^rm\s+-rf\s+\/\s*$/.test(arg)) { io.print(e('Deleting /System… /Users… /Portfolio…')); setTimeout(sadMac, 900); return true; }
+                    io.print(e(t('shSudo')));
+                    return true;
+                case 'rm':
+                    if (/^-rf\s+\/\s*$/.test(arg)) { io.print(e(t('shRmRoot'))); return true; }
+                    io.print(`rm: ${e(arg || '')}: Permission denied`);
+                    return true;
+                case '':
+                    io.setPrompt(prompt());
+                    return true;
+                default:
+                    return false; // whoami, date, echo, linkedin, mail, clear → script.js
+            }
+        }
+
+        function complete(text) {
+            const parts = text.replace(/ /g, ' ').split(' ');
+            const last = parts[parts.length - 1];
+            let pool;
+            if (parts.length === 1) {
+                pool = COMMANDS;
+            } else {
+                const slash = last.lastIndexOf('/');
+                const dir = slash >= 0 ? last.slice(0, slash + 1) : '';
+                const node = nodeAt(resolve(dir || '.'));
+                const files = node ? Object.entries(node.children).map(([k, v]) => dir + k + (v.type === 'folder' ? '/' : '')) : [];
+                const appNames = parts[0] === 'open' && !dir ? apps.map(a => appDisplayName(a)) : [];
+                pool = [...files, ...appNames];
+            }
+            const options = [...new Set(pool.filter(o => o.toLowerCase().startsWith(last.toLowerCase())))];
+            if (!options.length) return { value: text, options };
+            let common = options[0];
+            options.forEach(o => { while (!o.toLowerCase().startsWith(common.toLowerCase())) common = common.slice(0, -1); });
+            const completed = options.length === 1 ? options[0] + (options[0].endsWith('/') ? '' : ' ') : (common.length > last.length ? common : last);
+            parts[parts.length - 1] = completed;
+            return { value: parts.join(' '), options: options.length > 1 ? options : [] };
+        }
+
+        return { run, complete };
+    };
+
+    // --- Safari: Favorites start page -------------------------------------
+    const EMBEDDABLE_HOSTS = [location.host, 'chrisarzaluz.dev', 'www.chrisarzaluz.dev', 'en.wikipedia.org', 'es.wikipedia.org'];
+    function safariFavorites() {
+        const own = orderedProjects()
+            .filter(p => p.websiteUrl)
+            .map(p => ({ title: p.name, url: p.websiteUrl.replace(/^\//, ''), icon: p.dockIcon }));
+        return [
+            { title: t('sfMyApps'), url: APPS_PAGE_URL, icon: 'assets/dock-icons/processed/apps.png' },
+            ...own,
+            { title: 'GitHub', url: 'https://github.com/arzaluz-chris', fa: 'fab fa-github', color: '#24292f' },
+            { title: 'LinkedIn', url: 'https://www.linkedin.com/in/christian-arzaluz', fa: 'fab fa-linkedin-in', color: '#0a66c2' },
+            { title: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/MacOS', fa: 'fab fa-wikipedia-w', color: '#555' }
+        ];
+    }
+    window.renderSafari = function (container) {
+        const favs = safariFavorites();
+        container.html(`
+            <div class="safari-app">
+                <div class="safari-bar">
+                    <button class="sf-btn sf-back" aria-label="Back"><i class="fas fa-chevron-left"></i></button>
+                    <button class="sf-btn sf-fwd" aria-label="Forward"><i class="fas fa-chevron-right"></i></button>
+                    <button class="sf-btn sf-home" aria-label="${esc(t('sfFavorites'))}"><i class="fas fa-table-cells-large"></i></button>
+                    <input type="text" class="url-bar" id="safari-url" placeholder="${esc(t('sfSearch'))}" spellcheck="false" autocomplete="off">
+                    <button class="sf-btn sf-ext" aria-label="${esc(t('sfOpenTab'))}"><i class="fas fa-arrow-up-right-from-square"></i></button>
+                </div>
+                <div class="safari-view">
+                    <div class="sf-start">
+                        <h2>${esc(t('sfFavorites'))}</h2>
+                        <div class="sf-grid">
+                            ${favs.map((f, i) => `
+                                <button class="sf-fav" data-i="${i}">
+                                    ${f.icon ? `<img src="${esc(f.icon)}" alt="">` : `<span class="sf-fa" style="background:${f.color}"><i class="${f.fa}"></i></span>`}
+                                    <span>${esc(f.title)}</span>
+                                </button>`).join('')}
+                        </div>
+                    </div>
+                    <div class="sf-blocked" hidden>
+                        <i class="fas fa-shield-halved"></i>
+                        <h3>${esc(t('sfBlockedTitle'))}</h3>
+                        <p><span class="sf-host"></span> — ${esc(t('sfBlockedBody'))}</p>
+                        <button class="am-btn sf-open-tab">${esc(t('sfOpenTab'))}</button>
+                    </div>
+                    <iframe class="safari-frame" id="safari-frame" hidden title="Safari" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+                </div>
+            </div>`);
+
+        const $url = container.find('#safari-url');
+        const $frame = container.find('#safari-frame');
+        const $start = container.find('.sf-start');
+        const $blocked = container.find('.sf-blocked');
+        const stack = [null];
+        let pos = 0;
+
+        function show(url) {
+            $start.prop('hidden', !!url);
+            $frame.prop('hidden', true);
+            $blocked.prop('hidden', true);
+            $url.val(url ? new URL(url, location.href).href : '');
+            if (!url) return;
+            const abs = new URL(url, location.href);
+            if (EMBEDDABLE_HOSTS.includes(abs.host)) {
+                $frame.attr('src', abs.href).prop('hidden', false);
+            } else {
+                $blocked.find('.sf-host').text(abs.host);
+                $blocked.prop('hidden', false);
+            }
+        }
+        function go(url) {
+            stack.splice(pos + 1);
+            stack.push(url);
+            pos = stack.length - 1;
+            show(url);
+        }
+        container.find('.sf-fav').on('click', function () {
+            const f = favs[+this.dataset.i];
+            if (/^https?:/.test(f.url) && !EMBEDDABLE_HOSTS.includes(new URL(f.url).host)) window.open(f.url, '_blank', 'noopener');
+            else go(f.url);
+        });
+        container.find('.sf-back').on('click', () => { if (pos > 0) show(stack[--pos]); });
+        container.find('.sf-fwd').on('click', () => { if (pos < stack.length - 1) show(stack[++pos]); });
+        container.find('.sf-home').on('click', () => go(null));
+        container.find('.sf-ext, .sf-open-tab').on('click', () => { if (stack[pos]) window.open(new URL(stack[pos], location.href).href, '_blank', 'noopener'); });
+        $url.on('keydown', e => {
+            if (e.key !== 'Enter') return;
+            let v = $url.val().trim();
+            if (!v) return;
+            if (!/^https?:\/\//i.test(v)) v = /\s/.test(v) || !v.includes('.') ? `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(v)}` : `https://${v}`;
+            go(v);
+        });
+    };
+
+    // --- Mail: compose form -----------------------------------------------
+    window.renderMail = function (container) {
+        container.html(`
+            <form class="mail-app" novalidate>
+                <div class="mail-row"><label>${esc(t('mailTo'))}:</label><span class="mail-chip">Christian Arzaluz &lt;${esc(CONTACT_EMAIL)}&gt;</span></div>
+                <div class="mail-row"><label for="mail-subject">${esc(t('mailSubject'))}:</label><input id="mail-subject" type="text" placeholder="${esc(t('mailSubjectPh'))}"></div>
+                <textarea id="mail-body" placeholder="${esc(t('mailBodyPh'))}"></textarea>
+                <div class="mail-actions">
+                    <span class="mail-hint">${esc(t('mailHint'))}</span>
+                    <button type="button" class="am-btn am-secondary mail-copy"><i class="far fa-copy"></i> ${esc(t('mailCopy'))}</button>
+                    <button type="submit" class="am-btn"><i class="fas fa-paper-plane"></i> ${esc(t('mailSend'))}</button>
+                </div>
+            </form>`);
+        container.find('form').on('submit', e => {
+            e.preventDefault();
+            const subject = container.find('#mail-subject').val();
+            const body = container.find('#mail-body').val();
+            window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+        container.find('.mail-copy').on('click', () => {
+            const done = () => notify({ icon: 'assets/dock-icons/processed/mail.png', app: 'Mail', title: t('mailCopied'), body: CONTACT_EMAIL, timeout: 3500 });
+            if (navigator.clipboard) navigator.clipboard.writeText(CONTACT_EMAIL).then(done, done); else done();
+        });
+    };
+
+    // --- Xcode --------------------------------------------------------------
+    const SWIFT_KEYWORDS = new Set(('import public private fileprivate internal open static final class struct enum protocol extension func var let init deinit ' +
+        'return if else guard switch case default for in while repeat break continue throw throws rethrows try async await some any where self Self nil true false ' +
+        'inout typealias associatedtype nonisolated isolated mutating override convenience required lazy weak unowned defer do catch as is get set').split(' '));
+    function highlightSwift(code) {
+        const re = /(\/\/[^\n]*)|("(?:\\.|[^"\\\n])*")|(@\w+)|(\b\d+(?:\.\d+)?\b)|(\b[A-Za-z_]\w*\b)|([\s\S])/g;
+        let out = '', m;
+        while ((m = re.exec(code))) {
+            const [tok, com, str, attr, num, ident] = m;
+            if (com) out += `<span class="sw-c">${esc(com)}</span>`;
+            else if (str) out += `<span class="sw-s">${esc(str)}</span>`;
+            else if (attr) out += `<span class="sw-a">${esc(attr)}</span>`;
+            else if (num) out += `<span class="sw-n">${esc(num)}</span>`;
+            else if (ident) out += SWIFT_KEYWORDS.has(ident) ? `<span class="sw-k">${ident}</span>` : /^[A-Z]/.test(ident) ? `<span class="sw-t">${ident}</span>` : ident;
+            else out += esc(tok);
+        }
+        return out;
+    }
+
+    let xcodeData = null;
+    function renderXcode(container) {
+        container.html(`<div class="xcode-app"><div class="xc-loading"><i class="fas fa-spinner fa-spin"></i></div></div>`);
+        const load = xcodeData ? Promise.resolve(xcodeData) : fetch('assets/xcode/snippets.json').then(r => r.json()).then(d => (xcodeData = d));
+        load.then(data => {
+            const files = data.projects.flatMap(p => p.files.map(f => ({ ...f, app: p.app, project: p.name })));
+            let current = 0;
+            container.html(`
+                <div class="xcode-app">
+                    <div class="xc-toolbar">
+                        <button class="xc-run" title="${esc(t('xcRun'))}" aria-label="${esc(t('xcRun'))}"><i class="fas fa-play"></i></button>
+                        <button class="xc-stop" title="${esc(t('xcStop'))}" aria-label="${esc(t('xcStop'))}" disabled><i class="fas fa-stop"></i></button>
+                        <div class="xc-scheme"><span class="xc-scheme-app"></span> <i class="fas fa-chevron-right"></i> iPhone 17 Pro</div>
+                        <div class="xc-status">${esc(t('xcReady'))}</div>
+                    </div>
+                    <div class="xc-body">
+                        <nav class="xc-nav" aria-label="Project navigator">
+                            ${data.projects.map(p => `
+                                <div class="xc-proj"><i class="fas fa-folder"></i> ${esc(p.name)}</div>
+                                ${p.files.map(f => {
+                                    const i = files.findIndex(x => x.path === f.path);
+                                    return `<button class="xc-file" data-i="${i}"><i class="fab fa-swift"></i> ${esc(f.path.split('/').pop())}</button>`;
+                                }).join('')}`).join('')}
+                            <p class="xc-note">${esc(t('xcNote'))}</p>
+                        </nav>
+                        <div class="xc-main">
+                            <div class="xc-tab"><i class="fab fa-swift"></i> <span class="xc-path"></span></div>
+                            <div class="xc-editor" tabindex="0"><div class="xc-gutter"></div><pre class="xc-code"></pre></div>
+                            <div class="xc-console" hidden></div>
+                        </div>
+                    </div>
+                </div>`);
+
+            const $status = container.find('.xc-status');
+            const $console = container.find('.xc-console');
+            let timers = [];
+            const stop = () => { timers.forEach(clearTimeout); timers = []; container.find('.xc-run').prop('disabled', false); container.find('.xc-stop').prop('disabled', true); };
+
+            function openFile(i) {
+                current = i;
+                const f = files[i];
+                const lines = highlightSwift(f.code).split('\n');
+                container.find('.xc-file').removeClass('active').filter(`[data-i="${i}"]`).addClass('active');
+                container.find('.xc-path').text(`${f.project} › ${f.path}${f.excerpt ? ` (${t('xcExcerpt')})` : ''}`);
+                container.find('.xc-scheme-app').text(f.project);
+                container.find('.xc-gutter').html(lines.map((_, n) => n + 1).join('\n'));
+                container.find('.xc-code').html(lines.join('\n'));
+            }
+            function runBuild() {
+                const f = files[current];
+                const p = projects[f.app];
+                stop();
+                container.find('.xc-run').prop('disabled', true);
+                container.find('.xc-stop').prop('disabled', false);
+                $console.prop('hidden', false).empty();
+                const steps = [
+                    `${t('xcBuilding')} ${f.project} (Debug, iPhone 17 Pro)…`,
+                    `CompileSwift ${f.path.split('/').pop()}`,
+                    'CompileSwiftSources normal arm64',
+                    `Ld ${f.project}.app/${f.project}`,
+                    `CodeSign ${f.project}.app`,
+                    `** ${t('xcSucceeded').toUpperCase()} **`
+                ];
+                $status.text(`${t('xcBuilding')} ${f.project}…`);
+                steps.forEach((s, n) => timers.push(setTimeout(() => {
+                    $console.append(`<div class="${n === steps.length - 1 ? 'xc-ok' : ''}">${esc(s)}</div>`);
+                    $console.scrollTop($console[0].scrollHeight);
+                }, 250 + n * 320)));
+                timers.push(setTimeout(() => {
+                    $status.html(`<i class="fas fa-circle-check"></i> ${esc(t('xcSucceeded'))}`);
+                    $console.append(`<div>${esc(t('xcLaunching'))} ${esc(p ? p.name : f.project)}…</div>`);
+                }, 250 + steps.length * 320));
+                timers.push(setTimeout(() => { stop(); if (p) wm.openApp(f.app); }, 900 + steps.length * 320));
+            }
+
+            container.find('.xc-file').on('click', function () { openFile(+this.dataset.i); });
+            container.find('.xc-run').on('click', runBuild);
+            container.find('.xc-stop').on('click', () => { stop(); $status.text(t('xcReady')); });
+            openFile(0);
+        }).catch(() => container.find('.xc-loading').text('Could not load the code samples.'));
+    }
+    const xcodeApp = apps.find(a => a.id === 'xcode');
+    if (xcodeApp) Object.assign(xcodeApp, { render: renderXcode, size: { w: 1000, h: 640 } });
+    window.openXcode = () => wm.openApp('xcode');
+
     // --- Boot hooks -------------------------------------------------------
     document.addEventListener('desktop:ready', () => {
         if (!isPhone()) setTimeout(announceLatestRelease, 2500);

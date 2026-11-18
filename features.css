@@ -125,3 +125,79 @@
 .am-btn { border: 0; border-radius: 7px; padding: 6px 14px; font: 500 13px var(--system-font); background: var(--accent); color: #fff; cursor: pointer; }
 .am-btn.am-secondary { background: rgba(128,128,128,0.25); color: var(--text-color); }
 .am-foot { margin-top: auto; padding-top: 16px; font-size: 11px; opacity: 0.45; }
+
+/* --- Terminal extras ----------------------------------------------------- */
+.term-pre { margin: 0; font: inherit; white-space: pre-wrap; word-break: break-word; }
+.term-cmd { color: #ffd866; }
+.term-dir { color: #00bfff; font-weight: bold; }
+.term-file { color: #e6e6e6; }
+.term-logo { color: #33ff00; }
+
+/* --- Safari start page --------------------------------------------------- */
+.sf-btn { background: none; border: 0; color: #666; width: 26px; height: 26px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.sf-btn:hover { background: rgba(0,0,0,0.07); color: #222; }
+.safari-view { flex: 1; position: relative; display: flex; min-height: 0; }
+.safari-view > [hidden] { display: none !important; }
+.sf-start { flex: 1; overflow-y: auto; padding: 32px 36px; background: linear-gradient(#f6f6f8, #ececf0); color: #1d1d1f; }
+.sf-start h2 { margin: 0 0 18px; font-size: 20px; font-weight: 700; }
+.sf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 18px 12px; }
+.sf-fav { display: flex; flex-direction: column; align-items: center; gap: 7px; background: none; border: 0; cursor: pointer; font: 12px var(--system-font); color: #1d1d1f; padding: 4px; border-radius: 10px; }
+.sf-fav:hover { background: rgba(0,0,0,0.05); }
+.sf-fav img, .sf-fa { width: 58px; height: 58px; border-radius: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.sf-fa { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 28px; }
+.sf-blocked { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 30px; text-align: center; color: #444; background: #f6f6f8; }
+.sf-blocked i { font-size: 38px; color: #999; }
+.sf-blocked h3 { margin: 8px 0 0; color: #1d1d1f; }
+.sf-blocked p { margin: 0 0 10px; max-width: 360px; font-size: 13px; }
+
+/* --- Mail compose -------------------------------------------------------- */
+.mail-app { display: flex; flex-direction: column; height: 100%; box-sizing: border-box; color: var(--text-color); font-size: 13px; }
+.mail-row { display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-bottom: 1px solid rgba(128,128,128,0.25); }
+.mail-row label { opacity: 0.55; min-width: 56px; }
+.mail-row input { flex: 1; background: none; border: 0; outline: none; color: inherit; font: inherit; }
+.mail-chip { background: rgba(10,132,255,0.18); color: var(--accent); padding: 2px 8px; border-radius: 10px; }
+#mail-body { flex: 1; resize: none; border: 0; outline: none; padding: 14px 16px; background: none; color: inherit; font: 14px/1.5 var(--system-font); }
+.mail-actions { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-top: 1px solid rgba(128,128,128,0.25); }
+.mail-hint { flex: 1; opacity: 0.5; font-size: 12px; }
+
+/* --- Xcode --------------------------------------------------------------- */
+.xcode-app { display: flex; flex-direction: column; height: 100%; background: #1f1f24; color: #dfdfe0; font-size: 12px; }
+.xc-loading { margin: auto; font-size: 22px; opacity: 0.6; }
+.xc-toolbar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #2b2b30; border-bottom: 1px solid #111; }
+.xc-run, .xc-stop { width: 30px; height: 26px; border-radius: 6px; border: 0; background: none; color: #dfdfe0; cursor: pointer; font-size: 13px; }
+.xc-run:not(:disabled):hover, .xc-stop:not(:disabled):hover { background: rgba(255,255,255,0.1); }
+.xc-run:disabled, .xc-stop:disabled { opacity: 0.35; cursor: default; }
+.xc-scheme { background: rgba(255,255,255,0.08); padding: 4px 10px; border-radius: 6px; }
+.xc-scheme i { font-size: 9px; opacity: 0.6; margin: 0 4px; }
+.xc-status { flex: 1; text-align: center; background: rgba(0,0,0,0.25); padding: 4px 10px; border-radius: 6px; opacity: 0.85; margin-left: 12px; }
+.xc-status .fa-circle-check { color: #32d74b; }
+.xc-body { flex: 1; display: flex; min-height: 0; }
+.xc-nav { width: 220px; flex-shrink: 0; background: #26262b; border-right: 1px solid #111; padding: 10px 6px; overflow-y: auto; }
+.xc-proj { font-weight: 600; padding: 6px 8px 4px; opacity: 0.9; }
+.xc-proj i { color: #64a8ff; margin-right: 4px; }
+.xc-file { display: block; width: 100%; text-align: left; background: none; border: 0; color: inherit; font: inherit; padding: 4px 8px 4px 24px; border-radius: 5px; cursor: pointer; }
+.xc-file i, .xc-tab i { color: #f05138; margin-right: 4px; }
+.xc-file:hover { background: rgba(255,255,255,0.06); }
+.xc-file.active { background: #0a5fd8; color: #fff; }
+.xc-file.active i { color: #fff; }
+.xc-note { font-size: 11px; opacity: 0.5; padding: 10px 8px; margin: 0; }
+.xc-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.xc-tab { padding: 6px 12px; background: #2b2b30; border-bottom: 1px solid #111; font-size: 11.5px; opacity: 0.9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.xc-editor { flex: 1; display: flex; overflow: auto; font: 12.5px/1.6 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; outline: none; }
+.xc-gutter { white-space: pre; text-align: right; padding: 12px 10px 12px 14px; color: #6c6c72; user-select: none; position: sticky; left: 0; background: #1f1f24; }
+.xc-code { margin: 0; padding: 12px 16px 12px 4px; font: inherit; color: #dfdfe0; white-space: pre; tab-size: 4; }
+.sw-k { color: #fc5fa3; font-weight: 600; }
+.sw-t { color: #5dd8ff; }
+.sw-s { color: #fc6a5d; }
+.sw-n { color: #d0bf69; }
+.sw-c { color: #6c7986; }
+.sw-a { color: #fd8f3f; }
+.xc-console { height: 130px; flex-shrink: 0; overflow-y: auto; background: #18181c; border-top: 1px solid #111; padding: 8px 12px; font: 11.5px/1.6 Menlo, Consolas, monospace; color: #b8b8bd; }
+.xc-console .xc-ok { color: #32d74b; font-weight: 600; }
+@media (max-width: 768px) { .xc-nav { width: 140px; } .xc-scheme { display: none; } }
+
+/* --- Sad Mac easter egg -------------------------------------------------- */
+#sad-mac { position: fixed; inset: 0; z-index: 100001; background: #000; color: #ddd; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; padding: 24px; cursor: pointer; animation: fxFadeIn 0.6s; outline: none; }
+#sad-mac img { width: 120px; image-rendering: pixelated; margin-bottom: 18px; }
+#sad-mac .sm-title { font-size: 18px; margin: 0; }
+#sad-mac .sm-body { font-size: 13px; opacity: 0.6; margin: 0; }

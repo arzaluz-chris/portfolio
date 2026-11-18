@@ -760,6 +760,9 @@ function localized(field) {
     return field[currentLang] || field['es'] || field['en'] || '';
 }
 
+// Public contact address (also shown in the Mail app and the Terminal `mail` command).
+const CONTACT_EMAIL = 'christian.arzaluz@gmail.com';
+
 // APPS DEL DOCK. Use nameKey for apps whose label depends on language;
 // proper nouns keep a fixed name.
 const apps = [
@@ -768,6 +771,7 @@ const apps = [
     { id: 'appspage',    nameKey: 'appsPage',    icon: 'assets/dock-icons/processed/apps.png', url: 'https://chrisarzaluz.dev/portfolio/#apps' },
     { id: 'safari',      nameKey: 'safari',      icon: 'assets/dock-icons/processed/safari.png' },
     { id: 'terminal',    nameKey: 'terminal',    icon: 'assets/dock-icons/processed/terminal.png' },
+    { id: 'xcode',       name: 'Xcode',          icon: 'assets/dock-icons/processed/xcode.png' },
     { id: 'textedit',    nameKey: 'textEdit',    icon: 'assets/dock-icons/processed/textedit.png' },
     { id: 'paint',       nameKey: 'sketch',      icon: 'assets/dock-icons/processed/paint.png' },
     { id: 'calculator',  nameKey: 'calculator',  icon: 'assets/dock-icons/processed/calculator.png' },
@@ -1349,6 +1353,7 @@ class WindowManager {
             case 'settings': renderSettings(container); break;
             case 'trash': renderTrash(container); break;
             case 'mail':
+                if (typeof window.renderMail === 'function') { window.renderMail(container); break; }
                 container.html(`
                     <div style="padding:40px; text-align:center; color:#aaa; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
                         <i class="fas fa-envelope" style="font-size: 60px; color: #3481F8;"></i>
@@ -1530,7 +1535,7 @@ function renderTerminal(container) {
             <br>
             <div id="term-history"></div>
             <div class="term-input-line">
-                <span class="term-prompt">guest@portfolio ~ %</span>
+                <span class="term-prompt" id="term-prompt">guest@portfolio ~ %</span>
                 <span id="term-input" contenteditable="true" spellcheck="false"
                       autocorrect="off" autocapitalize="off"
                       role="textbox" aria-label="Terminal command" tabindex="0"></span>
@@ -1545,14 +1550,46 @@ function renderTerminal(container) {
     container.on('click', () => input[0].focus());
     setTimeout(() => input[0].focus(), 60);
 
+    const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const shell = window.createTerminalShell ? window.createTerminalShell() : null;
+    const past = [];
+    let pastIndex = 0;
+    const setInput = (el, text) => {
+        el.textContent = text;
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    };
+
     input.on('keydown', function(e) {
         if(e.key === 'Enter') {
             e.preventDefault();
             const cmd = (this.textContent || '').trim();
-            history.append(`<div class="term-line"><span class="term-prompt">guest@portfolio ~ %</span> ${cmd}</div>`);
+            history.append(`<div class="term-line"><span class="term-prompt">${escapeHtml($('#term-prompt').text())}</span> ${escapeHtml(cmd)}</div>`);
             this.textContent = '';
+            if (cmd) { past.push(cmd); }
+            pastIndex = past.length;
             processCommand(cmd);
             output.scrollTop(output[0].scrollHeight);
+        } else if (e.key === 'ArrowUp' && past.length) {
+            e.preventDefault();
+            pastIndex = Math.max(0, pastIndex - 1);
+            setInput(this, past[pastIndex]);
+        } else if (e.key === 'ArrowDown' && past.length) {
+            e.preventDefault();
+            pastIndex = Math.min(past.length, pastIndex + 1);
+            setInput(this, past[pastIndex] || '');
+        } else if (e.key === 'Tab' && shell) {
+            e.preventDefault();
+            const { value, options } = shell.complete(this.textContent || '');
+            if (options.length > 1) {
+                history.append(`<div class="term-line">${options.map(escapeHtml).join('&nbsp;&nbsp;')}</div>`);
+                output.scrollTop(output[0].scrollHeight);
+            }
+            setInput(this, value);
         }
     });
 
@@ -1570,22 +1607,31 @@ function renderTerminal(container) {
     }, 100);
 
     function processCommand(cmd) {
+        // features.js handles most commands (ls, cd, cat, open, neofetch, ...).
+        if (shell) {
+            const handled = shell.run(cmd, {
+                print: html => history.append(`<div class="term-line">${html}</div>`),
+                clear: () => history.empty(),
+                setPrompt: text => $('#term-prompt').text(text),
+                escape: escapeHtml
+            });
+            if (handled) return;
+        }
         const args = cmd.split(' ');
         let response = '';
         switch(args[0].toLowerCase()) {
             case 'help': response = t('availableCommands'); break;
             case 'clear': history.empty(); return;
-            case 'ls': response = 'Pomo<span class="Apple-converted-space">  </span>WaldenVibes<span class="Apple-converted-space">  </span>VORTH<span class="Apple-converted-space">  </span>TeddyFeels<span class="Apple-converted-space">  </span>Alba<span class="Apple-converted-space">  </span>Lumina<span class="Apple-converted-space">  </span>MemoMed<span class="Apple-converted-space">  </span>WaldenEats'; break;
             case 'whoami': response = `Christian Arzaluz - ${t('iosDeveloperTitle')}`; break;
             case 'date': response = new Date().toString(); break;
-            case 'echo': response = args.slice(1).join(' '); break;
+            case 'echo': response = escapeHtml(args.slice(1).join(' ')); break;
             case 'linkedin':
                 response = t('openingLinkedIn');
                 window.open('https://www.linkedin.com/in/christian-arzaluz/', '_blank');
                 break;
             case 'mail': response = 'christian.arzaluz@gmail.com'; break;
             case '': return;
-            default: response = `${t('commandNotFound')}: ${args[0]}`;
+            default: response = `${t('commandNotFound')}: ${escapeHtml(args[0])}`;
         }
         history.append(`<div class="term-line">${response}</div>`);
     }

@@ -1,0 +1,29 @@
+{
+ "projects": [
+  {
+   "app": "memomed",
+   "name": "MemoMed",
+   "files": [
+    {
+     "path": "MemoMedKit/Sources/MemoDomain/StudyPlan.swift",
+     "excerpt": true,
+     "code": "import Foundation\n\n/// El plan de estudio contra la fecha del ENARM (`0092`, `get_study_plan`).\n///\n/// **Port 1:1 de `apps/web/lib/study-plan.ts`.** No es una reimplementación: es la misma lógica\n/// con los mismos casos de prueba. Si uno falla, o el port está mal o hay una divergencia real\n/// con la web — en ningún caso se ajusta el test.\n///\n/// El cálculo entero vive en Postgres: el presupuesto, el orden y el reparto semanal. Aquí solo\n/// se le da forma al jsonb y se derivan las tres decisiones que la pantalla necesita y que se\n/// pueden equivocar **en silencio** — un `>=` al revés le dice \"vas bien\" a quien no llega.\npublic enum StudyPlan {\n\n    // …\n\n    /// La única decisión de la pantalla: qué frase dice la tarjeta del presupuesto.\n    public enum Status: Sendable, Equatable {\n        /// Sin fecha de examen: hay temario, no hay plan.\n        case sinFecha\n        /// La meta diaria cubre lo que falta.\n        case alDia(requiredDailyMinutes: Int, daysToExam: Int)\n        /// No alcanza: faltan `deficitMinutes` diarios sobre la meta.\n        case atrasado(requiredDailyMinutes: Int, daysToExam: Int, deficitMinutes: Int)\n        /// El examen ya pasó (o es hoy) y todavía queda temario.\n        case sinTiempo\n    }\n\n    /// Se separa de la vista porque es la parte que puede estar mal sin que se note.\n    public static func status(_ plan: Plan?) -> Status {\n        guard let plan, let days = plan.daysToExam, let required = plan.requiredDailyMinutes\n        else { return .sinFecha }\n        if days <= 0 { return .sinTiempo }\n\n        let deficit = required - plan.dailyGoalMinutes\n        return deficit > 0\n            ? .atrasado(\n                requiredDailyMinutes: required, daysToExam: days, deficitMinutes: deficit)\n            : .alDia(requiredDailyMinutes: required, daysToExam: days)\n    }\n\n\n    // …\n}"
+    }
+   ]
+  },
+  {
+   "app": "waldeneats",
+   "name": "WaldenEats",
+   "files": [
+    {
+     "path": "WaldenEats/Core/Money.swift",
+     "code": "import Foundation\n\n/// Dinero en centavos enteros (igual que el backend). Nunca Double para montos.\nstruct Money: Hashable, Comparable, Sendable, Codable {\n    var cents: Int\n\n    init(cents: Int) { self.cents = cents }\n\n    init(from decoder: Decoder) throws {\n        cents = try decoder.singleValueContainer().decode(Int.self)\n    }\n\n    func encode(to encoder: Encoder) throws {\n        var c = encoder.singleValueContainer()\n        try c.encode(cents)\n    }\n\n    static let zero = Money(cents: 0)\n    static func + (a: Money, b: Money) -> Money { Money(cents: a.cents + b.cents) }\n    static func * (a: Money, n: Int) -> Money { Money(cents: a.cents * n) }\n    static func < (a: Money, b: Money) -> Bool { a.cents < b.cents }\n\n    private static let formatter: NumberFormatter = {\n        let f = NumberFormatter()\n        f.numberStyle = .currency\n        f.currencyCode = \"MXN\"\n        f.locale = Locale(identifier: \"es_MX\")\n        return f\n    }()\n\n    var formatted: String {\n        let decimal = Decimal(cents) / 100\n        return Money.formatter.string(from: decimal as NSDecimalNumber) ?? \"$\\(decimal)\"\n    }\n}"
+    },
+    {
+     "path": "WaldenEats/Core/ServerClock.swift",
+     "code": "import Foundation\n\n/// Estima la hora del servidor a partir de `server_now` en las respuestas.\n/// Solo se usa para mostrar cuentas regresivas: la regla de cierre siempre la aplica el backend.\n@MainActor\n@Observable\nfinal class ServerClock {\n    private(set) var offset: TimeInterval = 0\n    private let localNow: () -> Date\n\n    init(localNow: @escaping () -> Date = Date.init) {\n        self.localNow = localNow\n    }\n\n    func sync(serverNow: Date) {\n        offset = serverNow.timeIntervalSince(localNow())\n    }\n\n    var now: Date { localNow().addingTimeInterval(offset) }\n\n    /// Margen de seguridad: la UI deja de ofrecer un receso unos segundos antes del cierre real.\n    nonisolated static let uiSafetyMargin: TimeInterval = 30\n\n    func isOpen(until cutoff: Date) -> Bool {\n        now.addingTimeInterval(ServerClock.uiSafetyMargin) < cutoff\n    }\n\n    nonisolated static let schoolTimeZone = TimeZone(identifier: \"America/Mexico_City\")!\n}\n\nextension Date {\n    var schoolTime: String {\n        formatted(Date.FormatStyle(date: .omitted, time: .shortened, timeZone: ServerClock.schoolTimeZone)\n            .locale(Locale(identifier: \"es_MX\")))\n    }\n\n    var schoolDateTime: String {\n        formatted(Date.FormatStyle(date: .abbreviated, time: .shortened, timeZone: ServerClock.schoolTimeZone)\n            .locale(Locale(identifier: \"es_MX\")))\n    }\n}"
+    }
+   ]
+  }
+ ]
+}
