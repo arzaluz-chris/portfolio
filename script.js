@@ -625,7 +625,7 @@ function localized(field) {
 const apps = [
     { id: 'finder',      nameKey: 'finder',      icon: 'assets/dock-icons/processed/finder.png' },
     { id: 'aboutme',     nameKey: 'aboutMeApp',  icon: 'assets/dock-icons/processed/contacts.png' },
-    { id: 'appspage',    nameKey: 'appsPage',    icon: 'assets/dock-icons/processed/apps.webp', url: 'https://chrisarzaluz.dev/portfolio/#apps' },
+    { id: 'appspage',    nameKey: 'appsPage',    icon: 'assets/dock-icons/processed/apps.png', url: 'https://chrisarzaluz.dev/portfolio/#apps' },
     { id: 'safari',      nameKey: 'safari',      icon: 'assets/dock-icons/processed/safari.png' },
     { id: 'terminal',    nameKey: 'terminal',    icon: 'assets/dock-icons/processed/terminal.png' },
     { id: 'textedit',    nameKey: 'textEdit',    icon: 'assets/dock-icons/processed/textedit.png' },

@@ -10,6 +10,7 @@ OUT = SRC / "processed"
 OUT.mkdir(parents=True, exist_ok=True)
 
 CANVAS = 1024
+OUTPUT = 256   # Shown at ~55-72 CSS px (x2-3 on Retina); 1024px files weighed ~6 MB in total.
 SAFE = 824
 SQUIRCLE_N = 5.0  # Superellipse exponent — ≈iOS/macOS icon shape
 IOS_SAFE = 810    # iOS apps as solid squircles read slightly bigger optically
@@ -90,7 +91,7 @@ def process_ios(src_name: str, out_name: str) -> None:
     img.putalpha(squircle_mask(IOS_SAFE))
     canvas = Image.new("RGBA", (CANVAS, CANVAS), (0, 0, 0, 0))
     paste_centered(canvas, img)
-    canvas.save(OUT / out_name, "PNG", optimize=True)
+    canvas.resize((OUTPUT, OUTPUT), Image.LANCZOS).save(OUT / out_name, "PNG", optimize=True)
     print(f"  ios    {src_name:30s} -> {out_name}  ({IOS_SAFE}x{IOS_SAFE})")
 
 
@@ -104,7 +105,7 @@ def process_mac(src_name: str, out_name: str) -> None:
     img = fit_preserving_aspect(img, target)
     canvas = Image.new("RGBA", (CANVAS, CANVAS), (0, 0, 0, 0))
     paste_centered(canvas, img)
-    canvas.save(OUT / out_name, "PNG", optimize=True)
+    canvas.resize((OUTPUT, OUTPUT), Image.LANCZOS).save(OUT / out_name, "PNG", optimize=True)
     note = f"  (scaled x{scale_factor})" if scale_factor != 1.0 else ""
     print(f"  mac    {src_name:30s} -> {out_name}  ({img.width}x{img.height}){note}")
 

@@ -184,25 +184,10 @@ const translations = {
 // --- State ---
 let currentLang = 'en';
 
-// --- Asset format support ---
-// WebP is supported by every current browser (Safari 14+), and the WebP
-// screenshots are ~50x lighter than the PNG copies (1.9 MB vs 107 MB).
-const supportsWebp = true;
-
-function normalizeScreenshotPath(path) {
-  if (!path) return path;
-  return supportsWebp
-    ? path
-    : path.replace('screenshots-webp/', 'screenshots/').replace(/\.webp$/i, '.png');
-}
-
-function normalizeWebpImage(path) {
-  if (!path) return path;
-  const webpPattern = /\.webp$/i;
-  return !supportsWebp && webpPattern.test(path)
-    ? path.replace(webpPattern, '.png')
-    : path;
-}
+// --- Images ---
+// Screenshots are 460px-wide JPEGs (portfolio/assets/screenshots-jpg). No WebP on
+// purpose: in May 2026 Safari showed blank images with WebP (PRs #3 and #6), and
+// JPEG renders everywhere at ~50 KB per screenshot.
 
 function safeImageUrl(path) {
   if (!path) return '';
@@ -225,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initScrollAnimations();
   updateScreenshots();
-  applyWebpFallbacks();
 });
 
 // --- Language ---
@@ -271,24 +255,11 @@ function toggleLanguage(lang) {
 // --- Update Screenshots Based on Language ---
 function updateScreenshots() {
   document.querySelectorAll('[data-screenshot-en]').forEach(img => {
-    const enSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-en'));
-    const esSrc = normalizeScreenshotPath(img.getAttribute('data-screenshot-es'));
+    const enSrc = img.getAttribute('data-screenshot-en');
+    const esSrc = img.getAttribute('data-screenshot-es');
     const next = currentLang === 'es' && esSrc ? esSrc : enSrc;
     const safeSrc = safeImageUrl(next);
     if (safeSrc) img.src = safeSrc;
-  });
-}
-
-function applyWebpFallbacks() {
-  if (supportsWebp) return;
-  document.querySelectorAll('img').forEach(img => {
-    const src = img.getAttribute('src');
-    if (!src || !/\.webp$/i.test(src)) return;
-    const next = src.includes('screenshots-webp/')
-      ? normalizeScreenshotPath(src)
-      : normalizeWebpImage(src);
-    const safeSrc = safeImageUrl(next);
-    if (safeSrc && safeSrc !== img.src) img.setAttribute('src', safeSrc);
   });
 }
 
