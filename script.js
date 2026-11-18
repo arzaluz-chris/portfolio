@@ -39,6 +39,13 @@ const translations = {
         languagesFrameworks: 'Lenguajes & Frameworks',
         architecturePatterns: 'Arquitectura & Patrones',
         backendWeb: 'Backend, Web & Android',
+        latestRelease: 'Último lanzamiento',
+        aiPowered: 'Con IA',
+        website: 'Sitio web',
+        previous: 'Anterior',
+        next: 'Siguiente',
+        screenshots: 'Capturas de pantalla',
+        close: 'Cerrar',
 
         // Finder
         favorites: 'Favoritos',
@@ -159,6 +166,13 @@ const translations = {
         languagesFrameworks: 'Languages & Frameworks',
         architecturePatterns: 'Architecture & Patterns',
         backendWeb: 'Backend, Web & Android',
+        latestRelease: 'Latest release',
+        aiPowered: 'AI-powered',
+        website: 'Website',
+        previous: 'Previous',
+        next: 'Next',
+        screenshots: 'Screenshots',
+        close: 'Close',
 
         // Finder
         favorites: 'Favorites',
@@ -1176,7 +1190,10 @@ class WindowManager {
             if(id === 'calculator') { w = 250; h = 350; }
             if(id === 'terminal') { w = 500; h = 300; }
             if(id === 'safari') { w = 800; h = 600; }
-            if(config.isProject) { w = 600; h = 500; }
+            if(config.isProject) {
+                w = Math.min(860, window.innerWidth - 80);
+                h = Math.min(640, window.innerHeight - 150);
+            }
 
             // Random position placement for desktop
             top = 60 + (Object.keys(this.windows).length * 20);
@@ -1400,44 +1417,96 @@ function renderPortfolio(container) {
     `);
 }
 
-// 2. GENERIC PROJECT RENDERER
+// 2. PROJECT WINDOW — an App Store-style product page
 function renderProject(container, projectId) {
     const project = projects[projectId];
     if (!project) return;
 
     const features = Array.isArray(project.features) ? project.features : (project.features[currentLang] || project.features['es'] || []);
+    const shots = projectShots(project);
+    const badges = [
+        projectId === LATEST_PROJECT ? `<span class="as-badge as-badge-new">${t('latestRelease')}</span>` : '',
+        project.ai ? `<span class="as-badge">${t('aiPowered')}</span>` : '',
+        `<span class="as-badge">${project.platforms || 'iPhone · iPad'}</span>`
+    ].join('');
+
     container.html(`
-        <div class="project-app">
-            <h2><i class="fas fa-${project.icon}" style="color: var(--accent);"></i> ${project.name}</h2>
-            <p>${localized(project.description)}</p>
+        <div class="appstore-page">
+            <header class="as-hero">
+                <img class="as-icon" src="${project.dockIcon}" alt="" width="96" height="96">
+                <div class="as-title">
+                    <h2>${project.name}</h2>
+                    <p>${localized(project.tagline)}</p>
+                    <div class="as-badges">${badges}</div>
+                </div>
+                <div class="as-actions">
+                    ${project.appStoreUrl ? `<a class="as-get" href="${project.appStoreUrl}" target="_blank" rel="noopener"><i class="fab fa-apple"></i> ${t('viewOnAppStore')}</a>` : ''}
+                    <div class="as-secondary">
+                        ${project.url ? `<a href="${project.url}" target="_blank" rel="noopener" title="${t('viewOnGitHub')}"><i class="fab fa-github"></i> GitHub</a>` : ''}
+                        ${project.websiteUrl ? `<a href="${project.websiteUrl}" target="_blank" rel="noopener" title="${t('visitWebsite')}"><i class="fas fa-globe"></i> ${t('website')}</a>` : ''}
+                    </div>
+                </div>
+            </header>
 
-            <h3><i class="fas fa-star"></i> ${t('mainFeatures')}</h3>
-            <ul>
-                ${features.map(f => `<li>${f}</li>`).join('')}
-            </ul>
+            ${shots.length ? `
+            <div class="as-gallery-wrap">
+                <button class="as-nav as-prev" aria-label="${t('previous')}"><i class="fas fa-chevron-left"></i></button>
+                <div class="as-gallery" tabindex="0" aria-label="${t('screenshots')}">
+                    ${shots.map((src, i) => `<button class="as-shot" data-index="${i}"><img loading="lazy" src="${encodeURI(src)}" alt="${project.name} ${i + 1}"></button>`).join('')}
+                </div>
+                <button class="as-nav as-next" aria-label="${t('next')}"><i class="fas fa-chevron-right"></i></button>
+            </div>` : ''}
 
-            <h3><i class="fas fa-microchip"></i> ${t('techStack')}</h3>
-            <ul class="tech-stack">
-                ${project.stack.map(t => `<li>${t}</li>`).join('')}
-            </ul>
+            <section class="as-section">
+                <p class="as-desc">${localized(project.description)}</p>
+            </section>
 
-            ${project.url ? `
-            <a href="${project.url}" target="_blank" class="github-link">
-                <i class="fab fa-github"></i> ${t('viewOnGitHub')}
-            </a>
-            ` : ''}
-            ${project.appStoreUrl ? `
-            <a href="${project.appStoreUrl}" target="_blank" class="appstore-link">
-                <i class="fab fa-apple"></i> ${t('viewOnAppStore')}
-            </a>
-            ` : ''}
-            ${project.websiteUrl ? `
-            <a href="${project.websiteUrl}" target="_blank" class="website-link">
-                <i class="fas fa-globe"></i> ${t('visitWebsite')}
-            </a>
-            ` : ''}
+            <section class="as-section">
+                <h3>${t('mainFeatures')}</h3>
+                <ul class="as-features">${features.map(f => `<li>${f}</li>`).join('')}</ul>
+            </section>
+
+            <section class="as-section">
+                <h3>${t('techStack')}</h3>
+                <div class="as-chips">${project.stack.map(s => `<span>${s}</span>`).join('')}</div>
+            </section>
         </div>
     `);
+
+    const gallery = container.find('.as-gallery')[0];
+    if (!gallery) return;
+    const page = dir => gallery.scrollBy({ left: dir * gallery.clientWidth * 0.8, behavior: 'smooth' });
+    container.find('.as-prev').on('click', () => page(-1));
+    container.find('.as-next').on('click', () => page(1));
+    container.find('.as-shot').on('click', function() { openQuickLook(shots, +this.dataset.index, project.name); });
+}
+
+// Quick Look: full-size screenshot viewer (←/→ to browse, Esc or click to close).
+function openQuickLook(srcs, index, title) {
+    $('#quicklook').remove();
+    let i = index;
+    const $ql = $(`
+        <div id="quicklook" role="dialog" aria-modal="true" aria-label="${title}">
+            <div class="ql-bar"><span class="ql-title"></span><button class="ql-close" aria-label="${t('close')}"><i class="fas fa-times"></i></button></div>
+            <button class="ql-nav ql-prev" aria-label="${t('previous')}"><i class="fas fa-chevron-left"></i></button>
+            <img class="ql-img" alt="">
+            <button class="ql-nav ql-next" aria-label="${t('next')}"><i class="fas fa-chevron-right"></i></button>
+        </div>`).appendTo('body');
+    const show = n => {
+        i = (n + srcs.length) % srcs.length;
+        $ql.find('.ql-img').attr({ src: encodeURI(srcs[i]), alt: `${title} ${i + 1}` });
+        $ql.find('.ql-title').text(`${title} — ${i + 1} / ${srcs.length}`);
+    };
+    const close = () => { $ql.remove(); $(document).off('keydown.quicklook'); };
+    $ql.on('click', e => { if (e.target === $ql[0] || $(e.target).closest('.ql-close').length) close(); });
+    $ql.find('.ql-prev').on('click', () => show(i - 1));
+    $ql.find('.ql-next').on('click', () => show(i + 1));
+    $(document).on('keydown.quicklook', e => {
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') show(i - 1);
+        if (e.key === 'ArrowRight') show(i + 1);
+    });
+    show(i);
 }
 
 // 3. TERMINAL (Modificado como en tu video)
