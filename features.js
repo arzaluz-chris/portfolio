@@ -484,6 +484,7 @@
         sadMacBody: 'Alguien ejecutó sudo rm -rf / en el portafolio. Haz clic para continuar.',
         sfFavorites: 'Favoritos',
         sfSearch: 'Buscar o escribir un sitio',
+        sfMail: 'Correo',
         sfMyApps: 'Mis apps',
         sfBlockedTitle: 'Este sitio no se puede mostrar aquí',
         sfBlockedBody: 'muchos sitios no permiten abrirse dentro de otra página.',
@@ -526,6 +527,7 @@
         sadMacBody: 'Someone ran sudo rm -rf / on the portfolio. Click to continue.',
         sfFavorites: 'Favorites',
         sfSearch: 'Search or enter website name',
+        sfMail: 'Email',
         sfMyApps: 'My apps',
         sfBlockedTitle: 'This site can’t be shown here',
         sfBlockedBody: 'many sites don’t allow being embedded in another page.',
@@ -746,6 +748,23 @@
 
     // --- Safari: Favorites start page -------------------------------------
     const EMBEDDABLE_HOSTS = [location.host, 'chrisarzaluz.dev', 'www.chrisarzaluz.dev', 'en.wikipedia.org', 'es.wikipedia.org'];
+    const wikiHome = () => `https://${currentLang === 'en' ? 'en' : 'es'}.wikipedia.org/wiki/MacOS`;
+    const LINKEDIN_URL = 'https://www.linkedin.com/in/christian-arzaluz';
+    const GITHUB_URL = 'https://github.com/arzaluz-chris';
+
+    // Bookmarks bar under the address field: my profiles first.
+    function safariBookmarks() {
+        return [
+            { title: 'LinkedIn', url: LINKEDIN_URL, fa: 'fab fa-linkedin', color: '#0a66c2' },
+            { title: 'GitHub', url: GITHUB_URL, fa: 'fab fa-github', color: 'currentColor' },
+            { title: t('sfMail'), action: () => wm.openApp('mail'), fa: 'fas fa-envelope', color: '#1e88e5' },
+            { title: 'CV', action: downloadCV, fa: 'fas fa-file-arrow-down', color: '#d93025' },
+            { title: t('sfMyApps'), url: APPS_PAGE_URL, fa: 'fas fa-mobile-screen', color: '#0071e3' },
+            { title: 'MemoMed', url: 'https://memomed.mx', img: 'assets/dock-icons/processed/memomed.png' },
+            { title: 'Wikipedia', url: wikiHome(), fa: 'fab fa-wikipedia-w', color: 'currentColor' }
+        ];
+    }
+
     function safariFavorites() {
         const own = orderedProjects()
             .filter(p => p.websiteUrl)
@@ -753,13 +772,14 @@
         return [
             { title: t('sfMyApps'), url: APPS_PAGE_URL, icon: 'assets/dock-icons/processed/apps.png' },
             ...own,
-            { title: 'GitHub', url: 'https://github.com/arzaluz-chris', fa: 'fab fa-github', color: '#24292f' },
-            { title: 'LinkedIn', url: 'https://www.linkedin.com/in/christian-arzaluz', fa: 'fab fa-linkedin-in', color: '#0a66c2' },
-            { title: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/MacOS', fa: 'fab fa-wikipedia-w', color: '#555' }
+            { title: 'LinkedIn', url: LINKEDIN_URL, fa: 'fab fa-linkedin-in', color: '#0a66c2' },
+            { title: 'GitHub', url: GITHUB_URL, fa: 'fab fa-github', color: '#24292f' },
+            { title: 'Wikipedia', url: wikiHome(), fa: 'fab fa-wikipedia-w', color: '#555' }
         ];
     }
     window.renderSafari = function (container) {
         const favs = safariFavorites();
+        const marks = safariBookmarks();
         container.html(`
             <div class="safari-app">
                 <div class="safari-bar">
@@ -769,6 +789,13 @@
                     <input type="text" class="url-bar" id="safari-url" placeholder="${esc(t('sfSearch'))}" spellcheck="false" autocomplete="off">
                     <button class="sf-btn sf-ext" aria-label="${esc(t('sfOpenTab'))}"><i class="fas fa-arrow-up-right-from-square"></i></button>
                 </div>
+                <nav class="sf-favbar" aria-label="${esc(t('sfFavorites'))}">
+                    ${marks.map((m, i) => `
+                        <button class="sf-mark" data-i="${i}" title="${esc(m.url || m.title)}">
+                            ${m.img ? `<img src="${esc(m.img)}" alt="">` : `<i class="${m.fa}" style="color:${m.color}"></i>`}
+                            <span>${esc(m.title)}</span>
+                        </button>`).join('')}
+                </nav>
                 <div class="safari-view">
                     <div class="sf-start">
                         <h2>${esc(t('sfFavorites'))}</h2>
@@ -794,7 +821,7 @@
         const $frame = container.find('#safari-frame');
         const $start = container.find('.sf-start');
         const $blocked = container.find('.sf-blocked');
-        const stack = [null];
+        const stack = [wikiHome()];
         let pos = 0;
 
         function show(url) {
@@ -817,11 +844,14 @@
             pos = stack.length - 1;
             show(url);
         }
-        container.find('.sf-fav').on('click', function () {
-            const f = favs[+this.dataset.i];
-            if (/^https?:/.test(f.url) && !EMBEDDABLE_HOSTS.includes(new URL(f.url).host)) window.open(f.url, '_blank', 'noopener');
-            else go(f.url);
-        });
+        // Sites that refuse to be framed (LinkedIn, GitHub, ...) open in a new tab.
+        function openItem(item) {
+            if (item.action) { item.action(); return; }
+            if (/^https?:/.test(item.url) && !EMBEDDABLE_HOSTS.includes(new URL(item.url).host)) window.open(item.url, '_blank', 'noopener');
+            else go(item.url);
+        }
+        container.find('.sf-fav').on('click', function () { openItem(favs[+this.dataset.i]); });
+        container.find('.sf-mark').on('click', function () { openItem(marks[+this.dataset.i]); });
         container.find('.sf-back').on('click', () => { if (pos > 0) show(stack[--pos]); });
         container.find('.sf-fwd').on('click', () => { if (pos < stack.length - 1) show(stack[++pos]); });
         container.find('.sf-home').on('click', () => go(null));
@@ -830,9 +860,10 @@
             if (e.key !== 'Enter') return;
             let v = $url.val().trim();
             if (!v) return;
-            if (!/^https?:\/\//i.test(v)) v = /\s/.test(v) || !v.includes('.') ? `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(v)}` : `https://${v}`;
+            if (!/^https?:\/\//i.test(v)) v = /\s/.test(v) || !v.includes('.') ? `${wikiHome().replace('/wiki/MacOS', '')}/wiki/Special:Search?search=${encodeURIComponent(v)}` : `https://${v}`;
             go(v);
         });
+        show(stack[0]);
     };
 
     // --- Mail: compose form -----------------------------------------------

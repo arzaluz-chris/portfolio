@@ -238,3 +238,11 @@ body.ios-mode #desktop { display: none; }
 .ios-sheet-done { position: absolute; right: 16px; border: 0; background: none; color: #0a84ff; font: 600 16px var(--system-font); }
 .ios-sheet-body { flex: 1; overflow-y: auto; min-height: 0; }
 .ios-sheet-body .appstore-page, .ios-sheet-body .mail-app { height: auto; min-height: 100%; }
+
+/* --- Safari bookmarks bar ------------------------------------------------ */
+.sf-favbar { display: flex; gap: 2px; padding: 3px 8px; background: #f0f0f0; border-bottom: 1px solid #ccc; overflow-x: auto; scrollbar-width: none; color: #333; }
+.sf-favbar::-webkit-scrollbar { display: none; }
+.sf-mark { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; border: 0; background: none; color: inherit; font: 12px var(--system-font); padding: 3px 8px; border-radius: 5px; cursor: pointer; }
+.sf-mark:hover { background: rgba(0,0,0,0.08); }
+.sf-mark i { font-size: 13px; width: 14px; text-align: center; }
+.sf-mark img { width: 18px; height: 18px; margin: -2px; }
