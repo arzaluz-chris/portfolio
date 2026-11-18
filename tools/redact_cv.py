@@ -1,64 +1,108 @@
 #!/usr/bin/env python3
-"""Redact sensitive info from cv.pdf for public portfolio hosting.
+"""Redact sensitive info from the CV before publishing it as assets/cv.pdf.
 
-Removes: phone number, full legal middle name + surname, city, ATS tracking ID.
-Keeps: public email, GitHub/LinkedIn URLs, professional content.
+Usage:  python3 tools/redact_cv.py <private-source.pdf>
+
+Removes: phone number, middle name + second surname, city (Toluca),
+and any XMP metadata. Keeps: public email, LinkedIn/GitHub/site links and
+all professional content.
 
 True redaction (text removed from the PDF content stream) via PyMuPDF,
-followed by controlled re-insertion of replacement text with the original
-font size / alignment preserved.
+then the replacement text is drawn at the original baseline in Times
+(the CV is set in Times New Roman), and the mailto link is re-created.
+The private source PDF must never be committed.
 """
 
+import sys
 from pathlib import Path
-import fitz
+
+import pymupdf as fitz
 
 PORTFOLIO = Path(__file__).resolve().parent.parent
-SRC = PORTFOLIO / "assets" / "cv.pdf"
-OUT = PORTFOLIO / "assets" / "cv-redacted.pdf"
+OUT = PORTFOLIO / "assets" / "cv.pdf"
 
-# (search_text, replacement_text, fontname, fontsize, align)
-# align: 0=left, 1=center, 2=right. replacement=None → delete only, no re-insert.
-# fontnames: 'helv' Helvetica, 'hebo' Helvetica-Bold (built-in PDF standard fonts,
-# visually very close to the original Arial/ArialMT used in the CV).
-REDACTIONS = [
-    ("CHRISTIAN DANIEL ARZALUZ TELLEZ", "CHRISTIAN ARZALUZ", "hebo", 22, 1),
-    ("Toluca Mexico | 7225123280 | ",  "",                   None,   0, 0),
-    ("Toluca México",                   "México",            "hebo", 11, 2),
-    ("Toluca, Mex",                     "Mexico",            "helv", 11, 2),
-    ("#HRJ#222e50dc-9f8f-40ed-89d8-7b17363d63d9#", "",       None,   0, 0),
-]
+FONT = {"regular": "tiro", "bold": "tibo"}  # built-in Times-Roman / Times-Bold
 
 
-def main() -> None:
-    doc = fitz.open(SRC)
-    for page in doc:
-        # Plan: collect (rect, repl, font, size, align) tuples, apply redactions
-        # to strip the original text, then draw replacements.
-        replacements = []
-        for needle, repl, font, size, align in REDACTIONS:
-            for rect in page.search_for(needle):
-                page.add_redact_annot(rect, fill=(1, 1, 1))
-                if repl:
-                    replacements.append((rect, repl, font, size, align))
-        page.apply_redactions()
-        for rect, repl, font, size, align in replacements:
-            # insert_text (point-based) avoids insert_textbox's fit-check,
-            # which silently drops text when the rect's line-height is tight.
-            text_w = fitz.get_text_length(repl, fontname=font, fontsize=size)
-            if align == 1:   # center
-                x = rect.x0 + (rect.width - text_w) / 2
-            elif align == 2: # right
-                x = rect.x1 - text_w
-            else:            # left
-                x = rect.x0
-            baseline_y = rect.y1 - 2  # rect.y1 is ~line bottom incl descender
-            page.insert_text((x, baseline_y), repl,
-                             fontname=font, fontsize=size,
-                             color=(0, 0, 0))
+def find_span(page, needle):
+    """First text span containing `needle`, with its bbox, origin and size."""
+    for block in page.get_text("dict")["blocks"]:
+        for line in block.get("lines", []):
+            for span in line["spans"]:
+                if needle in span["text"]:
+                    return span
+    raise SystemExit(f"Not found in CV: {needle!r}")
+
+
+def spans_with(page, needle):
+    out = []
+    for block in page.get_text("dict")["blocks"]:
+        for line in block.get("lines", []):
+            for span in line["spans"]:
+                if span["text"].strip() == needle:
+                    out.append(span)
+    return out
+
+
+def main(src: Path) -> None:
+    doc = fitz.open(src)
+    page = doc[0]
+    center = page.rect.width / 2
+
+    name = find_span(page, "ARZALUZ")
+    contact = find_span(page, "@")
+    email = contact["text"].split("|")[-1].strip()
+    cities = spans_with(page, "Toluca, México")
+
+    draws = []  # (text, x, baseline_y, font, size)
+
+    # Name: keep first name + first surname, centered.
+    text = "CHRISTIAN ARZALUZ"
+    w = fitz.get_text_length(text, fontname=FONT["bold"], fontsize=name["size"])
+    draws.append((text, center - w / 2, name["origin"][1], FONT["bold"], name["size"]))
+    page.add_redact_annot(fitz.Rect(name["bbox"]), fill=(1, 1, 1))
+
+    # Contact line: drop city and phone, keep the email (re-linked below).
+    text = f"México | {email}"
+    size = contact["size"]
+    w = fitz.get_text_length(text, fontname=FONT["regular"], fontsize=size)
+    x0 = center - w / 2
+    draws.append((text, x0, contact["origin"][1], FONT["regular"], size))
+    page.add_redact_annot(fitz.Rect(contact["bbox"]), fill=(1, 1, 1))
+    email_x0 = x0 + fitz.get_text_length("México | ", fontname=FONT["regular"], fontsize=size)
+    email_rect = fitz.Rect(email_x0, contact["bbox"][1], x0 + w, contact["bbox"][3])
+
+    # Right-aligned locations in the experience section.
+    for span in cities:
+        text = "México"
+        w = fitz.get_text_length(text, fontname=FONT["bold"], fontsize=span["size"])
+        draws.append((text, span["bbox"][2] - w, span["origin"][1], FONT["bold"], span["size"]))
+        page.add_redact_annot(fitz.Rect(span["bbox"]), fill=(1, 1, 1))
+
+    # Remove the old mailto/tel links on the contact line before redacting.
+    for link in page.get_links():
+        if link["from"].intersects(fitz.Rect(contact["bbox"])):
+            page.delete_link(link)
+
+    page.apply_redactions(images=fitz.PDF_REDACT_IMAGE_NONE)
+    for text, x, y, font, size in draws:
+        page.insert_text((x, y), text, fontname=font, fontsize=size, color=(0, 0, 0))
+    page.insert_link({"kind": fitz.LINK_URI, "from": email_rect, "uri": f"mailto:{email}"})
+
+    doc.set_metadata({"title": "Christian Arzaluz - iOS Engineer", "author": "Christian Arzaluz"})
+    doc.del_xml_metadata()
     doc.save(OUT, deflate=True, garbage=4)
     doc.close()
-    print(f"Redacted CV written to {OUT}")
+
+    # Verify nothing sensitive survived.
+    check = fitz.open(OUT)
+    full = "".join(p.get_text() for p in check)
+    for leaked in ("Toluca", "TELLEZ", "DANIEL", "722 512", "3280"):
+        assert leaked not in full, f"still present: {leaked}"
+    print(f"Redacted CV written to {OUT.relative_to(PORTFOLIO)}")
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) != 2:
+        raise SystemExit(__doc__)
+    main(Path(sys.argv[1]))

@@ -19,6 +19,7 @@ OPAQUE_THRESHOLD = 128  # Ignore soft halo/shadow when cropping macOS icons.
 
 IOS_APPS = {
     "Alba.png":        "alba.png",
+    "Cordis.png":      "cordis.png",
     "Lumina.png":      "lumina.png",
     "MemoMed.png":     "memomed.png",
     "Pomo.png":        "pomo.png",
@@ -40,6 +41,7 @@ MAC_ICONS = {
     "mail.png":             "mail.png",
     "trash bin empty.png":  "trash-empty.png",
     "trash bin full.png":   "trash-full.png",
+    "xcode.png":            "xcode.png",
 }
 
 # Per-icon scale overrides. For icons with protruding elements (pen on
@@ -47,6 +49,7 @@ MAC_ICONS = {
 # Over-scale so the body matches others; the protrusion goes into the margin.
 MAC_SCALE_OVERRIDES = {
     "textedit.webp": 1.18,  # pen protrudes above notebook
+    "xcode.png": 1.16,      # hammer protrudes past the blue body
 }
 
 
