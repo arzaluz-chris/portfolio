@@ -212,14 +212,16 @@
 
         <div id="menubar">
             <div class="menu-left">
-                <div class="menu-item"><i class="fab fa-apple apple-icon"></i></div>
-                <div class="menu-item" id="active-app-name">Finder</div>
-                <div class="menu-item" data-i18n="menuFile">Archivo</div>
-                <div class="menu-item" data-i18n="menuEdit">Editar</div>
-                <div class="menu-item" data-i18n="menuView">Ver</div>
-                <div class="menu-item" data-i18n="menuWindow">Ventana</div>
+                <div class="menu-item" data-menu="apple" aria-label="Apple"><i class="fab fa-apple apple-icon"></i></div>
+                <div class="menu-item" data-menu="app" id="active-app-name">Finder</div>
+                <div class="menu-item" data-menu="file" data-i18n="menuFile">Archivo</div>
+                <div class="menu-item" data-menu="edit" data-i18n="menuEdit">Editar</div>
+                <div class="menu-item" data-menu="view" data-i18n="menuView">Ver</div>
+                <div class="menu-item" data-menu="window" data-i18n="menuWindow">Ventana</div>
+                <div class="menu-item" data-menu="help" data-i18n="menuHelp">Ayuda</div>
             </div>
             <div class="menu-right">
+                <div class="menu-item" id="spotlight-btn" role="button" aria-label="Spotlight"><i class="fas fa-magnifying-glass"></i></div>
                 <div class="menu-item"><i class="fas fa-battery-three-quarters"></i> <span id="battery-level">100%</span></div>
                 <div class="menu-item"><i class="fas fa-wifi"></i></div>
                 <div class="menu-item" id="clock">Cargando...</div>
@@ -250,7 +252,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
 <!-- Custom JavaScript -->
-<script src="script.js?v=8"></script>
+<script src="script.js?v=9"></script>
+<script src="features.js?v=1"></script>
 
 </body>
 </html>

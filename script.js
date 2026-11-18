@@ -325,7 +325,9 @@ function updateLanguage(lang) {
             const config = wm.windows[winId];
 
             // For non-project apps, recompute the localized name.
-            if (!config.isProject) {
+            if (config.titleKey) {
+                config.name = t(config.titleKey);
+            } else if (!config.isProject) {
                 const appConfig = apps.find(a => a.id === config.id);
                 if (appConfig) config.name = appDisplayName(appConfig);
             }
@@ -1194,6 +1196,10 @@ class WindowManager {
                 w = Math.min(860, window.innerWidth - 80);
                 h = Math.min(640, window.innerHeight - 150);
             }
+            if (config.size) {
+                w = Math.min(config.size.w, window.innerWidth - 40);
+                h = Math.min(config.size.h, window.innerHeight - 140);
+            }
 
             // Random position placement for desktop
             top = 60 + (Object.keys(this.windows).length * 20);
@@ -1323,6 +1329,12 @@ class WindowManager {
 
         if (config.isProject) {
             renderProject(container, id.replace('proj-', ''));
+            return;
+        }
+
+        // Windows registered from features.js bring their own renderer.
+        if (typeof config.render === 'function') {
+            config.render(container);
             return;
         }
 
@@ -2652,5 +2664,7 @@ $(window).on('load', () => {
         setupMobileTouchEnhancements();
         // Auto abrir 'Sobre Mí' (que usa el id 'aboutme')
         setTimeout(() => wm.openApp('aboutme'), 600);
+        // features.js waits for this (notification, iOS home screen, ...).
+        document.dispatchEvent(new Event('desktop:ready'));
     }, 3200); // 3.2 segundos de arranque
 });
