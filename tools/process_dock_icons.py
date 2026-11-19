@@ -13,8 +13,7 @@ CANVAS = 1024
 OUTPUT = 256   # Shown at ~55-72 CSS px (x2-3 on Retina); 1024px files weighed ~6 MB in total.
 SAFE = 824
 SQUIRCLE_N = 5.0  # Superellipse exponent — ≈iOS/macOS icon shape
-IOS_SAFE = 810    # iOS apps as solid squircles read slightly bigger optically
-                  # than airier macOS icons — tiny compensation to match.
+IOS_SAFE = SAFE   # Same body size for every icon, iOS and macOS alike.
 OPAQUE_THRESHOLD = 128  # Ignore soft halo/shadow when cropping macOS icons.
 
 IOS_APPS = {
@@ -32,15 +31,13 @@ IOS_APPS = {
 MAC_ICONS = {
     "finder.png":           "finder.png",
     "contacts.png":         "contacts.png",
-    "safari.webp":          "safari.png",
-    "terminal.webp":        "terminal.png",
-    "textedit.webp":        "textedit.png",
+    "safari.png":           "safari.png",
+    "terminal.png":         "terminal.png",
+    "textedit.png":         "textedit.png",
     "paint.png":            "paint.png",
     "calculator.png":       "calculator.png",
     "settings.png":         "settings.png",
     "mail.png":             "mail.png",
-    "trash bin empty.png":  "trash-empty.png",
-    "trash bin full.png":   "trash-full.png",
     "xcode.png":            "xcode.png",
 }
 
@@ -48,7 +45,6 @@ MAC_ICONS = {
 # TextEdit) the bbox hugs the protrusion and shrinks the main body.
 # Over-scale so the body matches others; the protrusion goes into the margin.
 MAC_SCALE_OVERRIDES = {
-    "textedit.webp": 1.18,  # pen protrudes above notebook
     "xcode.png": 1.16,      # hammer protrudes past the blue body
 }
 
@@ -88,8 +84,22 @@ def opaque_bbox(img: Image.Image, threshold: int = OPAQUE_THRESHOLD):
     return (int(cols[0]), int(rows[0]), int(cols[-1]) + 1, int(rows[-1]) + 1)
 
 
+# Some App Store artworks draw their own rounded rectangle with a soft light rim
+# and white corners. Trim that border (fraction of the side) before masking so
+# every icon ends up as a flat, edge-to-edge squircle.
+IOS_INSET = {
+    "WaldenVibes.png": 0.03,
+    "Vorth.png":       0.03,
+    "Cordis.png":      0.01,
+    "MemoMed.png":     0.006,
+}
+
+
 def process_ios(src_name: str, out_name: str) -> None:
     img = Image.open(SRC / src_name).convert("RGBA")
+    inset = round(img.width * IOS_INSET.get(src_name, 0))
+    if inset:
+        img = img.crop((inset, inset, img.width - inset, img.height - inset))
     img = img.resize((IOS_SAFE, IOS_SAFE), Image.LANCZOS)
     img.putalpha(squircle_mask(IOS_SAFE))
     canvas = Image.new("RGBA", (CANVAS, CANVAS), (0, 0, 0, 0))
@@ -113,13 +123,36 @@ def process_mac(src_name: str, out_name: str) -> None:
     print(f"  mac    {src_name:30s} -> {out_name}  ({img.width}x{img.height}){note}")
 
 
+def process_trash() -> None:
+    """Empty and full Trash must show the very same bin, or the Dock icon jumps
+    when something is thrown away. Both are scaled by the bin's WIDTH (the empty
+    one fills SAFE in height) and bottom-aligned; the papers of the full one
+    simply stick out above the rim, as on macOS."""
+    empty = Image.open(SRC / "trash bin empty.png").convert("RGBA")
+    empty = empty.crop(opaque_bbox(empty))
+    full = Image.open(SRC / "trash bin full.png").convert("RGBA")
+    full = full.crop(opaque_bbox(full))
+
+    empty = fit_preserving_aspect(empty, SAFE)
+    width = empty.width
+    full = full.resize((width, round(full.height * width / full.width)), Image.LANCZOS)
+
+    bottom = (CANVAS + SAFE) // 2
+    for img, out_name in ((empty, "trash-empty.png"), (full, "trash-full.png")):
+        canvas = Image.new("RGBA", (CANVAS, CANVAS), (0, 0, 0, 0))
+        canvas.paste(img, ((CANVAS - img.width) // 2, bottom - img.height), img)
+        canvas.resize((OUTPUT, OUTPUT), Image.LANCZOS).save(OUT / out_name, "PNG", optimize=True)
+        print(f"  trash  -> {out_name}  ({img.width}x{img.height}, bottom-aligned)")
+
+
 def main() -> None:
     print(f"Writing to {OUT}")
     for src, out in IOS_APPS.items():
         process_ios(src, out)
     for src, out in MAC_ICONS.items():
         process_mac(src, out)
-    print(f"Done. {len(IOS_APPS) + len(MAC_ICONS)} icons written.")
+    process_trash()
+    print(f"Done. {len(IOS_APPS) + len(MAC_ICONS) + 2} icons written.")
 
 
 if __name__ == "__main__":

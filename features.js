@@ -1,7 +1,7 @@
 /* ==========================================================================
    features.js — desktop features layered on top of script.js
    (menu bar menus, Spotlight, notifications, About This Mac, shortcuts,
-   Xcode, and the iOS home screen on phones).
+   and Xcode).
 
    Relies on globals from script.js: wm, apps, projects, PROJECT_ORDER,
    LATEST_PROJECT, orderedProjects, projectShots, translations, t,
@@ -995,120 +995,8 @@
     if (xcodeApp) Object.assign(xcodeApp, { render: renderXcode, size: { w: 1000, h: 640 } });
     window.openXcode = () => wm.openApp('xcode');
 
-    // --- iOS home screen (phones) -----------------------------------------
-    Object.assign(translations.es, {
-        iosLatestWidget: 'Último lanzamiento',
-        iosOpen: 'Abrir',
-        iosAbout: 'Sobre mí',
-        iosAppsPage: 'Todas',
-        iosCV: 'CV',
-        iosMac: 'Ver en Mac',
-        iosMacHint: 'Versión de escritorio',
-        iosRole: 'Desarrollador iOS · Médico general',
-        iosDone: 'Listo'
-    });
-    Object.assign(translations.en, {
-        iosLatestWidget: 'Latest release',
-        iosOpen: 'Open',
-        iosAbout: 'About me',
-        iosAppsPage: 'All apps',
-        iosCV: 'CV',
-        iosMac: 'View on Mac',
-        iosMacHint: 'Desktop version',
-        iosRole: 'iOS Developer · General Physician',
-        iosDone: 'Done'
-    });
-
-    const IOS_PREF_KEY = 'iosHome';
-    const wantsIosHome = () => {
-        try { if (sessionStorage.getItem(IOS_PREF_KEY) === 'off') return false; } catch (e) { /* ignore */ }
-        return isPhone();
-    };
-
-    // Full-screen sheet that hosts the same renderers the desktop windows use.
-    function openSheet(title, render) {
-        $('#ios-sheet').remove();
-        const $sheet = $(`
-            <div id="ios-sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}">
-                <div class="ios-sheet-bar"><span class="ios-grabber"></span><span class="ios-sheet-title">${esc(title)}</span><button class="ios-sheet-done">${esc(t('iosDone'))}</button></div>
-                <div class="ios-sheet-body"></div>
-            </div>`).appendTo('#ios-home');
-        render($sheet.find('.ios-sheet-body'));
-        requestAnimationFrame(() => $sheet.addClass('open'));
-        const close = () => { $sheet.removeClass('open'); setTimeout(() => $sheet.remove(), 300); };
-        $sheet.find('.ios-sheet-done').on('click', close);
-        // Swipe down on the bar to dismiss.
-        let startY = null;
-        $sheet.find('.ios-sheet-bar').on('touchstart', e => { startY = e.originalEvent.touches[0].clientY; })
-            .on('touchend', e => { if (startY !== null && e.originalEvent.changedTouches[0].clientY - startY > 60) close(); startY = null; });
-    }
-
-    function renderIosHome() {
-        $('#ios-home').remove();
-        const latest = projects[LATEST_PROJECT];
-        const appIcons = orderedProjects().map(p => `
-            <button class="ios-app" data-app="${p.id}" aria-label="${esc(p.name)}">
-                <img src="${esc(p.dockIcon)}" alt=""><span>${esc(p.name)}</span>
-            </button>`).join('');
-        const dockItems = [
-            { id: 'about', label: t('iosAbout'), icon: 'assets/dock-icons/processed/contacts.png' },
-            { id: 'mail', label: 'Mail', icon: 'assets/dock-icons/processed/mail.png' },
-            { id: 'appsPage', label: t('iosAppsPage'), icon: 'assets/dock-icons/processed/apps.png' },
-            { id: 'cv', label: t('iosCV'), icon: 'assets/dock-icons/processed/textedit.png' }
-        ];
-        const $home = $(`
-            <div id="ios-home">
-                <div class="ios-status"><span class="ios-time"></span><span class="ios-island"></span><span class="ios-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span></div>
-                <div class="ios-scroll">
-                    <div class="ios-widgets">
-                        <button class="ios-widget ios-widget-latest" data-app="${latest.id}">
-                            <span class="iw-label">${esc(t('iosLatestWidget'))}</span>
-                            <span class="iw-row"><img src="${esc(latest.dockIcon)}" alt=""><span><b>${esc(latest.name)}</b><small>${esc(latest.tagline[currentLang])}</small></span></span>
-                            <span class="iw-cta">${esc(t('iosOpen'))}</span>
-                        </button>
-                        <button class="ios-widget ios-widget-me" data-act="about">
-                            <img src="assets/avatar.jpg" alt="">
-                            <b>Christian Arzaluz</b>
-                            <small>${esc(t('iosRole'))}</small>
-                        </button>
-                    </div>
-                    <div class="ios-grid">${appIcons}</div>
-                    <button class="ios-mac-switch"><i class="fas fa-laptop"></i> ${esc(t('iosMac'))}</button>
-                </div>
-                <div class="ios-dock">
-                    ${dockItems.map(d => `<button class="ios-app" data-act="${d.id}" aria-label="${esc(d.label)}"><img src="${d.icon}" alt=""></button>`).join('')}
-                </div>
-            </div>`).appendTo('body');
-
-        const tick = () => $home.find('.ios-time').text(new Date().toLocaleTimeString(currentLang === 'es' ? 'es-MX' : 'en-US', { hour: 'numeric', minute: '2-digit' }).replace(/\s?[ap]\.?\s?m\.?/i, ''));
-        tick();
-        const timer = setInterval(tick, 30000);
-
-        $home.on('click', '[data-app]', function () {
-            const p = projects[this.dataset.app];
-            openSheet(p.name, $c => renderProject($c, p.id));
-        });
-        $home.on('click', '[data-act]', function () {
-            switch (this.dataset.act) {
-                case 'about': openSheet(t('aboutMeApp'), $c => renderPortfolio($c)); break;
-                case 'mail': openSheet('Mail', $c => window.renderMail($c)); break;
-                case 'appsPage': window.location.href = APPS_PAGE_URL; break;
-                case 'cv': downloadCV(); break;
-            }
-        });
-        $home.find('.ios-mac-switch').on('click', () => {
-            try { sessionStorage.setItem(IOS_PREF_KEY, 'off'); } catch (e) { /* ignore */ }
-            clearInterval(timer);
-            $home.remove();
-            $('body').removeClass('ios-mode');
-        });
-        $('body').addClass('ios-mode');
-    }
-    window.renderIosHome = renderIosHome;
-
     // --- Boot hooks -------------------------------------------------------
     document.addEventListener('desktop:ready', () => {
-        if (wantsIosHome()) { renderIosHome(); return; }
         if (!isPhone()) setTimeout(announceLatestRelease, 2500);
     });
 })();

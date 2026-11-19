@@ -38,7 +38,6 @@ I built this portfolio from scratch without relying on heavy frameworks like Rea
    - App Store-style window for every app, with a screenshot gallery and Quick Look.
    - Xcode with unmodified Swift excerpts from MemoMed and WaldenEats ("Run" opens the app).
    - A Terminal with `ls`, `cd`, `cat`, `open`, `neofetch`, Tab completion, and history.
-   - On phones, an iOS home screen replaces the desktop (with a "View on Mac" switch).
    - Apps come from one data source (`PROJECT_ORDER`/`PROJECT_META` in `script.js`); new features live in `features.js`/`features.css`.
 
 2. **App Store Showcase (`/portfolio/`):** 
