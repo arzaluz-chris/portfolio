@@ -13,8 +13,7 @@ CANVAS = 1024
 OUTPUT = 256   # Shown at ~55-72 CSS px (x2-3 on Retina); 1024px files weighed ~6 MB in total.
 SAFE = 824
 SQUIRCLE_N = 5.0  # Superellipse exponent — ≈iOS/macOS icon shape
-IOS_SAFE = 810    # iOS apps as solid squircles read slightly bigger optically
-                  # than airier macOS icons — tiny compensation to match.
+IOS_SAFE = SAFE   # Same body size for every icon, iOS and macOS alike.
 OPAQUE_THRESHOLD = 128  # Ignore soft halo/shadow when cropping macOS icons.
 
 IOS_APPS = {
@@ -32,9 +31,9 @@ IOS_APPS = {
 MAC_ICONS = {
     "finder.png":           "finder.png",
     "contacts.png":         "contacts.png",
-    "safari.webp":          "safari.png",
-    "terminal.webp":        "terminal.png",
-    "textedit.webp":        "textedit.png",
+    "safari.png":           "safari.png",
+    "terminal.png":         "terminal.png",
+    "textedit.png":         "textedit.png",
     "paint.png":            "paint.png",
     "calculator.png":       "calculator.png",
     "settings.png":         "settings.png",
@@ -48,7 +47,6 @@ MAC_ICONS = {
 # TextEdit) the bbox hugs the protrusion and shrinks the main body.
 # Over-scale so the body matches others; the protrusion goes into the margin.
 MAC_SCALE_OVERRIDES = {
-    "textedit.webp": 1.18,  # pen protrudes above notebook
     "xcode.png": 1.16,      # hammer protrudes past the blue body
 }
 
@@ -88,8 +86,22 @@ def opaque_bbox(img: Image.Image, threshold: int = OPAQUE_THRESHOLD):
     return (int(cols[0]), int(rows[0]), int(cols[-1]) + 1, int(rows[-1]) + 1)
 
 
+# Some App Store artworks draw their own rounded rectangle with a soft light rim
+# and white corners. Trim that border (fraction of the side) before masking so
+# every icon ends up as a flat, edge-to-edge squircle.
+IOS_INSET = {
+    "WaldenVibes.png": 0.03,
+    "Vorth.png":       0.03,
+    "Cordis.png":      0.01,
+    "MemoMed.png":     0.006,
+}
+
+
 def process_ios(src_name: str, out_name: str) -> None:
     img = Image.open(SRC / src_name).convert("RGBA")
+    inset = round(img.width * IOS_INSET.get(src_name, 0))
+    if inset:
+        img = img.crop((inset, inset, img.width - inset, img.height - inset))
     img = img.resize((IOS_SAFE, IOS_SAFE), Image.LANCZOS)
     img.putalpha(squircle_mask(IOS_SAFE))
     canvas = Image.new("RGBA", (CANVAS, CANVAS), (0, 0, 0, 0))
