@@ -38,8 +38,6 @@ MAC_ICONS = {
     "calculator.png":       "calculator.png",
     "settings.png":         "settings.png",
     "mail.png":             "mail.png",
-    "trash bin empty.png":  "trash-empty.png",
-    "trash bin full.png":   "trash-full.png",
     "xcode.png":            "xcode.png",
 }
 
@@ -125,13 +123,36 @@ def process_mac(src_name: str, out_name: str) -> None:
     print(f"  mac    {src_name:30s} -> {out_name}  ({img.width}x{img.height}){note}")
 
 
+def process_trash() -> None:
+    """Empty and full Trash must show the very same bin, or the Dock icon jumps
+    when something is thrown away. Both are scaled by the bin's WIDTH (the empty
+    one fills SAFE in height) and bottom-aligned; the papers of the full one
+    simply stick out above the rim, as on macOS."""
+    empty = Image.open(SRC / "trash bin empty.png").convert("RGBA")
+    empty = empty.crop(opaque_bbox(empty))
+    full = Image.open(SRC / "trash bin full.png").convert("RGBA")
+    full = full.crop(opaque_bbox(full))
+
+    empty = fit_preserving_aspect(empty, SAFE)
+    width = empty.width
+    full = full.resize((width, round(full.height * width / full.width)), Image.LANCZOS)
+
+    bottom = (CANVAS + SAFE) // 2
+    for img, out_name in ((empty, "trash-empty.png"), (full, "trash-full.png")):
+        canvas = Image.new("RGBA", (CANVAS, CANVAS), (0, 0, 0, 0))
+        canvas.paste(img, ((CANVAS - img.width) // 2, bottom - img.height), img)
+        canvas.resize((OUTPUT, OUTPUT), Image.LANCZOS).save(OUT / out_name, "PNG", optimize=True)
+        print(f"  trash  -> {out_name}  ({img.width}x{img.height}, bottom-aligned)")
+
+
 def main() -> None:
     print(f"Writing to {OUT}")
     for src, out in IOS_APPS.items():
         process_ios(src, out)
     for src, out in MAC_ICONS.items():
         process_mac(src, out)
-    print(f"Done. {len(IOS_APPS) + len(MAC_ICONS)} icons written.")
+    process_trash()
+    print(f"Done. {len(IOS_APPS) + len(MAC_ICONS) + 2} icons written.")
 
 
 if __name__ == "__main__":
