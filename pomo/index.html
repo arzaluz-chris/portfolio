@@ -2,403 +2,407 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pomo — Pomodoro Timer for iPhone & Apple Watch</title>
-  <meta name="description" content="Pomo helps you stay focused and productive with customizable Pomodoro sessions, Dynamic Island support, Apple Watch companion, and detailed statistics. Built with Swift and SwiftUI.">
-  <meta name="keywords" content="Pomodoro timer, focus app, productivity, iPhone, Apple Watch, SwiftUI, iOS app, Pomo, Christian Arzaluz">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Pomo — Pomodoro timer for iPhone, Apple Watch and iPhone Duo</title>
+  <meta name="description" content="Pomo is a simple, beautiful Pomodoro timer: a kitchen timer that turns with you, Dynamic Island and Live Activity controls, Apple Watch, iPhone Duo and alarm-style alerts. Free, no ads, no accounts.">
   <meta name="author" content="Christian Arzaluz">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#e53935">
+  <meta name="theme-color" content="#c93b2b">
   <meta name="apple-itunes-app" content="app-id=6746705227">
+  <meta name="format-detection" content="telephone=no">
   <link rel="canonical" href="https://chrisarzaluz.dev/pomo/">
-
-  <!-- Language alternates -->
   <link rel="alternate" hreflang="es" href="https://chrisarzaluz.dev/pomo/">
   <link rel="alternate" hreflang="en" href="https://chrisarzaluz.dev/pomo/">
   <link rel="alternate" hreflang="x-default" href="https://chrisarzaluz.dev/pomo/">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/nunito-variable.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chrisarzaluz.dev/pomo/">
-  <meta property="og:title" content="Pomo — Pomodoro Timer for iPhone & Apple Watch">
-  <meta property="og:description" content="Stay focused with customizable Pomodoro sessions, Dynamic Island support, Apple Watch companion, and detailed statistics.">
+  <meta property="og:site_name" content="Pomo">
+  <meta property="og:title" content="Pomo — Focus for real">
+  <meta property="og:description" content="A Pomodoro timer that turns like a kitchen timer. iPhone, Apple Watch, Dynamic Island and iPhone Duo. Free, no ads, no accounts.">
   <meta property="og:image" content="https://chrisarzaluz.dev/pomo/assets/og.jpg">
-  <meta property="og:image:width" content="554">
-  <meta property="og:image:height" content="1200">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:alt" content="Pomo — Pomodoro Timer for iPhone & Apple Watch">
-  <meta property="og:site_name" content="Pomo App">
-
-  <!-- Twitter Card -->
+  <meta property="og:image:alt" content="Pomo, the Pomodoro timer, on iPhone">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pomo — Pomodoro Timer for iPhone & Apple Watch">
-  <meta name="twitter:description" content="Stay focused with customizable Pomodoro sessions, Dynamic Island support, Apple Watch companion, and detailed statistics.">
+  <meta name="twitter:title" content="Pomo — Focus for real">
+  <meta name="twitter:description" content="A Pomodoro timer that turns like a kitchen timer. iPhone, Apple Watch, Dynamic Island and iPhone Duo.">
   <meta name="twitter:image" content="https://chrisarzaluz.dev/pomo/assets/og.jpg">
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "name": "Pomo",
-    "operatingSystem": "iOS",
-    "applicationCategory": "Productivity",
-    "description": "Pomodoro timer with customizable sessions, Dynamic Island, Apple Watch companion, and productivity statistics.",
-    "url": "https://chrisarzaluz.dev/pomo/",
-    "author": { "@type": "Person", "name": "Christian Arzaluz" },
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    "@graph": [
+      {
+        "@type": "MobileApplication",
+        "name": "Pomo Simple Timer",
+        "alternateName": "Pomo",
+        "operatingSystem": "iOS 18, watchOS 11",
+        "applicationCategory": "ProductivityApplication",
+        "description": "Pomodoro timer with a kitchen-timer dial, Live Activity and Dynamic Island controls, Apple Watch app, iPhone Duo layout and optional alarm-style alerts.",
+        "url": "https://chrisarzaluz.dev/pomo/",
+        "installUrl": "https://apps.apple.com/app/id6746705227",
+        "softwareVersion": "4.0",
+        "author": { "@type": "Person", "name": "Christian Arzaluz", "url": "https://chrisarzaluz.dev/" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Pomo free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. No ads, no in-app purchases and no account." } },
+          { "@type": "Question", "name": "Will the alert sound if my iPhone is on silent?", "acceptedAnswer": { "@type": "Answer", "text": "With alarm-style alerts turned on (iOS 26 or later), yes: Pomo uses an alarm that rings even in silent mode or during a Focus." } },
+          { "@type": "Question", "name": "What does Pomo need?", "acceptedAnswer": { "@type": "Answer", "text": "iOS 18 or later on iPhone, and watchOS 11 or later on Apple Watch." } }
+        ]
+      }
+    ]
   }
   </script>
 
+  <script>
+    // Idioma y tema antes de pintar: sin parpadeo
+    (function () {
+      var d = document.documentElement, s = localStorage;
+      var lang = s.getItem('pomo-lang') || ((navigator.language || 'en').slice(0, 2) === 'es' ? 'es' : 'en');
+      d.lang = lang;
+      var t = s.getItem('pomo-theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      d.dataset.theme = t;
+      d.classList.add('reveal-ready');
+    })();
+  </script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <a class="skip" href="#main"><span data-lang="en">Skip to content</span><span data-lang="es">Ir al contenido</span></a>
 
-  <!-- ========== NAVBAR ========== -->
-  <nav class="navbar">
-    <div class="container">
-      <a href="/" class="nav-home" title="Back to Portfolio">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 18l-6-6 6-6"/>
-        </svg>
+  <nav class="nav" aria-label="Pomo">
+    <div class="wrap">
+      <a href="/" class="back" title="Christian Arzaluz — portfolio" aria-label="Portfolio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
-      <a href="index.html" class="nav-logo">POMO</a>
-
+      <a href="./" class="brand"><img src="assets/icon.svg" alt="" width="38" height="38">Pomo</a>
       <ul class="nav-links">
-        <li><a href="#features" data-i18n="nav.features">Features</a></li>
-        <li><a href="#how-it-works" data-i18n="nav.howItWorks">How It Works</a></li>
-        <li><a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a></li>
-        <li><a href="#download" data-i18n="nav.download">Download</a></li>
+        <li><a href="#features"><span data-lang="en">Features</span><span data-lang="es">Funciones</span></a></li>
+        <li><a href="#watch">Apple Watch</a></li>
+        <li><a href="#duo">iPhone Duo</a></li>
+        <li><a href="#faq"><span data-lang="en">FAQ</span><span data-lang="es">Preguntas</span></a></li>
       </ul>
-
-      <div class="nav-right">
-        <div class="lang-toggle">
-          <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
-          <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
-        </div>
-        <button class="hamburger" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
+      <div class="nav-tools">
+        <button class="icon-btn" id="lang" type="button" aria-label="Español / English"><span data-lang="en">ES</span><span data-lang="es">EN</span></button>
+        <button class="icon-btn" id="theme" type="button" aria-label="Light / dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
         </button>
+        <a class="btn btn-primary btn-sm" href="https://apps.apple.com/app/id6746705227"><span data-lang="en">Download</span><span data-lang="es">Descargar</span></a>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu">
-    <a href="/" class="mobile-home-link" data-i18n="nav.home">Portfolio</a>
-    <a href="#features" data-i18n="nav.features">Features</a>
-    <a href="#how-it-works" data-i18n="nav.howItWorks">How It Works</a>
-    <a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a>
-    <a href="#download" data-i18n="nav.download">Download</a>
-    <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
-    <a href="support.html" data-i18n="nav.support">Support</a>
-    <div class="mobile-lang-toggle">
-      <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
-      <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
-    </div>
-  </div>
-
-  <!-- ========== HERO ========== -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span>&#x1F345;</span>
-          <span data-i18n="hero.badge">Pomodoro Timer</span>
+  <main id="main">
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow"><span data-lang="en">New · Pomo 4.0</span><span data-lang="es">Nuevo · Pomo 4.0</span></span>
+          <h1>
+            <span data-lang="en">Focus <span class="hl">for real.</span></span>
+            <span data-lang="es">Enfócate <span class="hl">de verdad.</span></span>
+          </h1>
+          <p class="lead">
+            <span data-lang="en">A Pomodoro timer with the soul of a kitchen timer. Work in focused blocks, take breaks on time and watch your day add up, on iPhone, Apple Watch and iPhone Duo.</span>
+            <span data-lang="es">Un temporizador Pomodoro con alma de temporizador de cocina. Trabaja en bloques de enfoque, descansa a tiempo y mira cómo avanza tu día, en iPhone, Apple Watch e iPhone Duo.</span>
+          </p>
+          <div>
+            <div class="actions">
+              <a class="store" href="https://apps.apple.com/app/id6746705227">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <div><small><span data-lang="en">Download on the</span><span data-lang="es">Descárgalo en el</span></small><span>App Store</span></div>
+              </a>
+              <a class="btn btn-ghost" href="#features"><span data-lang="en">See how it works</span><span data-lang="es">Mira cómo funciona</span></a>
+            </div>
+            <p class="fine"><span data-lang="en">Free · No ads · No account · Your data stays on your devices</span><span data-lang="es">Gratis · Sin anuncios · Sin cuentas · Tus datos se quedan en tus dispositivos</span></p>
+          </div>
         </div>
-        <h1 class="hero-title">
-          <span data-i18n="hero.title.1">Stay Focused,</span><br>
-          <span class="gradient-text" data-i18n="hero.title.2">Stay Productive</span>
-        </h1>
-        <p class="hero-subtitle" data-i18n="hero.subtitle">
-          Pomo helps you manage your time with customizable Pomodoro sessions, smart break scheduling, and detailed focus statistics.
-        </p>
-        <a href="https://apps.apple.com/us/app/pomo-simple-timer/id6746705227" class="hero-cta">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <span data-i18n="hero.cta">Download on the App Store</span>
-        </a>
-      </div>
-      <div class="hero-device">
-        <div class="device-iphone">
-          <img
-            src="Screenshots/Pomo English/1.png"
-            alt="Pomo Timer Screen"
-            data-screenshot-num="1"
-            data-screenshot-alt="gallery.timer"
-          >
+
+        <div class="hero-stage" data-reveal="pop">
+          <span class="floater" style="left:0;top:8%;--rot:-8deg;--dur:7s" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><ellipse cx="20" cy="23.5" rx="14" ry="12.5" fill="#c93b2b"/><path d="M20 12.5c-2.5-3.5-6.5-3.5-9-1.5 2.5.2 4.5 1 5.5 2.5-2.2-.4-4.6.4-5.8 2 3-.6 6.2-.3 9.3-.3s6.3-.3 9.3.3c-1.2-1.6-3.6-2.4-5.8-2 1-1.5 3-2.3 5.5-2.5-2.5-2-6.5-2-9 1.5z" fill="#319f64"/><path d="M13 23.5h14" stroke="#fff4e6" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </span>
+          <span class="floater" style="right:0;top:16%;--rot:7deg;--dur:8s" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><path d="M9 16h18v6a9 9 0 0 1-18 0z" fill="#1b8075"/><path d="M27 18h2a3.5 3.5 0 0 1 0 7h-3" stroke="#1b8075" stroke-width="2.6"/><path d="M6 33h26" stroke="#1b8075" stroke-width="3" stroke-linecap="round"/><path d="M15 6c-1.5 2 1.5 3 0 5.5M21 6c-1.5 2 1.5 3 0 5.5" stroke="#7cc5b9" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </span>
+          <span class="floater" style="left:4%;bottom:12%;--rot:6deg;--dur:9s" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M28 27A11.5 11.5 0 1 1 17 8.5a9.5 9.5 0 0 0 11 18.5z" fill="#575cc8"/><circle cx="29" cy="11" r="2.2" fill="#f2a93b"/><circle cx="33.5" cy="18" r="1.5" fill="#f2a93b"/></svg>
+          </span>
+          <span class="floater" style="right:3%;bottom:4%;--rot:-6deg;--dur:6.5s" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M20 5c1 6 9 9 9 18a9 9 0 0 1-18 0c0-5 3-7 4-11 2 2 2 5 4 5 0-5-1-8 1-12z" fill="#f2a93b"/><path d="M20 22c3 2 4 4 4 6a4 4 0 0 1-8 0c0-2 2-3 4-6z" fill="#c93b2b"/></svg>
+          </span>
+          <div class="phone"><div class="screen" data-device="iphone" data-shots="timer adjust break" data-mode="light" data-group="hero"><img class="on" src="shots/iphone/en-light-timer.webp" alt="Pomo timer"></div></div>
+          <div class="phone"><div class="screen" data-device="iphone" data-shots="break timer adjust" data-mode="dark" data-group="hero"><img class="on" src="shots/iphone/en-dark-break.webp" alt="Pomo break"></div></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== FEATURES ========== -->
-  <section id="features" class="section section-darker">
-    <div class="container">
-      <h2 class="section-title fade-in" data-i18n="features.title">Everything You Need to Stay Focused</h2>
-      <p class="section-subtitle fade-in" data-i18n="features.subtitle">
-        Simple, powerful tools designed to help you build better focus habits and get more done.
-      </p>
+    <!-- ========== CIFRAS ========== -->
+    <section>
+      <div class="wrap figures">
+        <div class="figure" data-reveal style="--d:0ms"><b>25<small style="font-size:.5em"> min</small></b><p><span data-lang="en">focus blocks, or any length you like</span><span data-lang="es">por bloque de enfoque, o lo que tú quieras</span></p></div>
+        <div class="figure" data-reveal style="--d:90ms"><b>4</b><p><span data-lang="en">sessions per cycle before a long break</span><span data-lang="es">sesiones por ciclo antes del descanso largo</span></p></div>
+        <div class="figure" data-reveal style="--d:180ms"><b>3</b><p><span data-lang="en">screens: iPhone, Apple Watch and iPhone Duo</span><span data-lang="es">pantallas: iPhone, Apple Watch e iPhone Duo</span></p></div>
+        <div class="figure" data-reveal style="--d:270ms"><b>0</b><p><span data-lang="en">ads, accounts or tracking</span><span data-lang="es">anuncios, cuentas o rastreo</span></p></div>
+      </div>
+    </section>
 
-      <div class="features-grid">
-        <!-- Pomodoro Timer -->
-        <div class="feature-card fade-in fade-in-delay-1">
-          <div class="feature-icon">&#x23F1;</div>
-          <h3 data-i18n="feature.timer.title">Pomodoro Timer</h3>
-          <p data-i18n="feature.timer.desc">Customizable work and break sessions with a beautiful circular progress indicator. Set your ideal focus duration and get to work.</p>
-          <div class="feature-screenshot">
-            <img
-              src="Screenshots/Pomo English/1.png"
-              alt="Pomodoro Timer"
-              data-screenshot-num="1"
-              data-screenshot-alt="gallery.timer"
-            >
-          </div>
+    <!-- ========== FUNCIONES ========== -->
+    <section id="features">
+      <div class="wrap">
+        <div class="center" data-reveal>
+          <span class="tag t"><span data-lang="en">How it works</span><span data-lang="es">Cómo funciona</span></span>
+          <h2 style="margin-top:14px"><span data-lang="en">Everything a Pomodoro needs. Nothing it doesn’t.</span><span data-lang="es">Todo lo que un Pomodoro necesita. Nada más.</span></h2>
         </div>
 
-        <!-- Dynamic Island -->
-        <div class="feature-card fade-in fade-in-delay-2">
-          <div class="feature-icon">&#x1F4F1;</div>
-          <h3 data-i18n="feature.island.title">Dynamic Island</h3>
-          <p data-i18n="feature.island.desc">See your timer on the lock screen and Dynamic Island with Live Activities. Stay aware of your session without opening the app.</p>
-          <div class="feature-screenshot">
-            <img
-              src="Screenshots/Pomo English/2.png"
-              alt="Dynamic Island"
-              data-screenshot-num="2"
-              data-screenshot-alt="gallery.island"
-            >
+        <div class="rows">
+          <div class="row">
+            <div class="row-media" data-reveal="left">
+              <div class="pair">
+                <div class="phone"><div class="screen" data-device="iphone" data-shots="timer" data-mode="light"><img class="on" src="shots/iphone/en-light-timer.webp" alt="Kitchen-timer dial" loading="lazy"></div></div>
+                <div class="phone"><div class="screen" data-device="iphone" data-shots="timer" data-mode="dark"><img class="on" src="shots/iphone/en-dark-timer.webp" alt="Kitchen-timer dial, dark mode" loading="lazy"></div></div>
+              </div>
+            </div>
+            <div data-reveal="right">
+              <span class="tag t"><span data-lang="en">The dial</span><span data-lang="es">La carátula</span></span>
+              <h2><span data-lang="en">A kitchen timer that turns with you</span><span data-lang="es">Un temporizador de cocina que gira contigo</span></h2>
+              <p><span data-lang="en">The dial turns with every minute, like the tomato-shaped timer that gave the technique its name. You see what’s left, and when you’ll be done, at a glance.</span><span data-lang="es">La carátula gira con cada minuto, como el temporizador con forma de tomate que le dio nombre a la técnica. Ves cuánto falta, y a qué hora terminas, con solo mirar.</span></p>
+            </div>
           </div>
-        </div>
 
-        <!-- Apple Watch -->
-        <div class="feature-card fade-in fade-in-delay-3">
-          <div class="feature-icon">&#x231A;</div>
-          <h3 data-i18n="feature.watch.title">Apple Watch</h3>
-          <p data-i18n="feature.watch.desc">Full companion app on your wrist. Start, pause, and track sessions directly from your Apple Watch with bidirectional sync.</p>
-          <div class="feature-screenshot">
-            <img
-              src="Screenshots/Pomo English/3.png"
-              alt="Apple Watch"
-              data-screenshot-num="3"
-              data-screenshot-alt="gallery.watch"
-            >
+          <div class="row flip">
+            <div class="row-media" data-reveal="right">
+              <div class="pair">
+                <div class="phone"><div class="screen" data-device="iphone" data-shots="adjust" data-mode="dark"><img class="on" src="shots/iphone/en-dark-adjust.webp" alt="Adjusting the time" loading="lazy"></div></div>
+              </div>
+            </div>
+            <div data-reveal="left">
+              <span class="tag t"><span data-lang="en">Hold and slide</span><span data-lang="es">Mantén y desliza</span></span>
+              <h2><span data-lang="en">Set the time with one finger</span><span data-lang="es">Ajusta el tiempo con un dedo</span></h2>
+              <p><span data-lang="en">Hold the timer and slide up or down. Every minute is a haptic tick, just like the iPhone Clock app.</span><span data-lang="es">Mantén presionado el temporizador y desliza hacia arriba o hacia abajo. Cada minuto se siente con una vibración, como en el Reloj del iPhone.</span></p>
+            </div>
           </div>
-        </div>
 
-        <!-- Statistics -->
-        <div class="feature-card fade-in fade-in-delay-4">
-          <div class="feature-icon">&#x1F4CA;</div>
-          <h3 data-i18n="feature.stats.title">Statistics</h3>
-          <p data-i18n="feature.stats.desc">Track your completed sessions, daily streaks, and weekly focus time. Visualize your productivity with detailed charts and insights.</p>
-          <div class="feature-screenshot">
-            <img
-              src="Screenshots/Pomo English/4.png"
-              alt="Statistics"
-              data-screenshot-num="4"
-              data-screenshot-alt="gallery.stats"
-            >
+          <div class="row">
+            <div class="row-media" data-reveal="left">
+              <div class="pair">
+                <div class="phone"><div class="screen" data-device="iphone" data-shots="break" data-mode="light"><img class="on" src="shots/iphone/en-light-break.webp" alt="Short break" loading="lazy"></div></div>
+                <div class="phone"><div class="screen" data-device="iphone" data-shots="break" data-mode="dark"><img class="on" src="shots/iphone/en-dark-break.webp" alt="Short break, dark mode" loading="lazy"></div></div>
+              </div>
+            </div>
+            <div data-reveal="right">
+              <span class="tag g"><span data-lang="en">Breaks</span><span data-lang="es">Descansos</span></span>
+              <h2><span data-lang="en">Rest on time, in its own color</span><span data-lang="es">Descansa a tiempo, cada pausa en su color</span></h2>
+              <p><span data-lang="en">Tomato for work, teal for short breaks, indigo for the long one. You always know where you are in the cycle.</span><span data-lang="es">Tomate para trabajar, verde azulado para el descanso corto e índigo para el largo. Siempre sabes en qué parte del ciclo vas.</span></p>
+            </div>
           </div>
-        </div>
 
-        <!-- Smart Breaks -->
-        <div class="feature-card fade-in fade-in-delay-5">
-          <div class="feature-icon">&#x2615;</div>
-          <h3 data-i18n="feature.breaks.title">Smart Breaks</h3>
-          <p data-i18n="feature.breaks.desc">Automatic break scheduling with configurable long break cycles. Stay refreshed with perfectly timed rest periods between focus sessions.</p>
-          <div class="feature-screenshot">
-            <img
-              src="Screenshots/Pomo English/5.png"
-              alt="Smart Breaks"
-              data-screenshot-num="5"
-              data-screenshot-alt="gallery.breaks"
-            >
+          <div class="row flip">
+            <div class="row-media" data-reveal="right">
+              <div class="island"><img src="shots/island-work.webp" alt="Pomo in the expanded Dynamic Island: Work, 23:48, with reset, pause and skip buttons" loading="lazy" width="1240" height="485"></div>
+            </div>
+            <div data-reveal="left">
+              <span class="tag i">Live Activity</span>
+              <h2><span data-lang="en">In the Dynamic Island, even with the app closed</span><span data-lang="es">En la Dynamic Island, aunque cierres la app</span></h2>
+              <ul class="ticks">
+                <li><span data-lang="en">Pause, resume, reset or skip from the Lock Screen and the Dynamic Island.</span><span data-lang="es">Pausa, reanuda, reinicia o salta desde la pantalla de bloqueo y la Dynamic Island.</span></li>
+                <li><span data-lang="en">When a session ends, <b>Next</b> starts the following one without opening Pomo.</span><span data-lang="es">Al terminar una sesión, <b>Siguiente</b> empieza la que sigue sin abrir Pomo.</span></li>
+                <li><span data-lang="en">Time Sensitive alerts with Pomo’s own sounds, and optional alarm-style alerts that ring even on silent (iOS 26 or later).</span><span data-lang="es">Avisos urgentes con los sonidos de Pomo, y alertas tipo alarma opcionales que suenan aunque el iPhone esté en silencio (iOS 26 o posterior).</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-media" data-reveal="left">
+              <div class="pair">
+                <div class="phone"><div class="screen" data-device="iphone" data-shots="stats" data-mode="light"><img class="on" src="shots/iphone/en-light-stats.webp" alt="Statistics" loading="lazy"></div></div>
+                <div class="phone"><div class="screen" data-device="iphone" data-shots="settings" data-mode="dark"><img class="on" src="shots/iphone/en-dark-settings.webp" alt="Settings" loading="lazy"></div></div>
+              </div>
+            </div>
+            <div data-reveal="right">
+              <span class="tag g"><span data-lang="en">Progress</span><span data-lang="es">Progreso</span></span>
+              <h2><span data-lang="en">See your day add up</span><span data-lang="es">Mira cómo avanza tu día</span></h2>
+              <p><span data-lang="en">Pomodoros, focus time and your daily streak, with a chart of the week. Tune session lengths, cycles, sounds and alerts to your rhythm.</span><span data-lang="es">Pomodoros, tiempo de enfoque y racha de cada día, con la gráfica de la semana. Ajusta sesiones, ciclos, sonidos y alertas a tu ritmo.</span></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== HOW IT WORKS ========== -->
-  <section id="how-it-works" class="section section-dark">
-    <div class="container">
-      <h2 class="section-title fade-in" data-i18n="steps.title">How It Works</h2>
-      <p class="section-subtitle fade-in" data-i18n="steps.subtitle">
-        Three simple steps to boost your productivity with the Pomodoro Technique.
-      </p>
-
-      <div class="steps-grid">
-        <div class="step-card fade-in fade-in-delay-1">
-          <div class="step-number">1</div>
-          <h3 data-i18n="steps.1.name">Focus</h3>
-          <p data-i18n="steps.1.desc">Set your timer and dive into deep work. Stay focused on a single task with no distractions.</p>
+    <!-- ========== APPLE WATCH ========== -->
+    <section id="watch" class="band">
+      <div class="wrap split">
+        <div class="split-media" data-reveal="pop">
+          <div class="watch"><div class="screen" data-device="watch"><img class="on" src="shots/watch/en.webp" alt="Pomo on Apple Watch" loading="lazy"></div></div>
         </div>
-        <div class="step-card fade-in fade-in-delay-2">
-          <div class="step-number">2</div>
-          <h3 data-i18n="steps.2.name">Break</h3>
-          <p data-i18n="steps.2.desc">Take a well-deserved short break to recharge. Stretch, breathe, and reset your mind.</p>
-        </div>
-        <div class="step-card fade-in fade-in-delay-3">
-          <div class="step-number">3</div>
-          <h3 data-i18n="steps.3.name">Repeat</h3>
-          <p data-i18n="steps.3.desc">Build momentum with consecutive sessions. After a few cycles, enjoy a longer break to fully recover.</p>
+        <div data-reveal="right">
+          <span class="tag i">Apple Watch</span>
+          <h2 style="margin-top:14px"><span data-lang="en">On your wrist too</span><span data-lang="es">También en tu muñeca</span></h2>
+          <ul class="ticks">
+            <li><span data-lang="en">The same timer and dial, with its own alerts: it taps your wrist when a session ends.</span><span data-lang="es">El mismo temporizador y la misma carátula, con sus propias alertas: te toca la muñeca al terminar cada sesión.</span></li>
+            <li><span data-lang="en">Start on the Watch, pause on the iPhone: both stay in sync, and every session counts once.</span><span data-lang="es">Empieza en el reloj y pausa en el iPhone: los dos se mantienen sincronizados y cada sesión cuenta una sola vez.</span></li>
+            <li><span data-lang="en">Complications for your watch face and the Smart Stack.</span><span data-lang="es">Complicaciones para tu carátula y el Smart Stack.</span></li>
+          </ul>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== SCREENSHOT GALLERY ========== -->
-  <section id="screenshots" class="section section-darker">
-    <div class="container">
-      <h2 class="section-title fade-in" data-i18n="gallery.title">See Pomo in Action</h2>
-      <p class="section-subtitle fade-in" data-i18n="gallery.subtitle">
-        A beautiful, intuitive interface designed to keep you in the zone.
-      </p>
-
-      <!-- Device toggle -->
-      <div class="device-toggle fade-in">
-        <button class="device-btn active" data-device="iphone" onclick="toggleDevice('iphone')">iPhone</button>
-        <button class="device-btn" data-device="watch" onclick="toggleDevice('watch')">Apple Watch</button>
-      </div>
-    </div>
-
-    <!-- iPhone Gallery -->
-    <div class="gallery-wrapper" id="gallery-iphone">
-      <div class="gallery-track">
-        <div class="gallery-item">
-          <div class="device-iphone">
-            <img src="Screenshots/Pomo English/1.png" alt="Timer"
-              data-screenshot-num="1" data-screenshot-alt="gallery.timer">
-          </div>
-          <p class="gallery-label" data-i18n="gallery.timer">Timer</p>
+    <!-- ========== IPHONE DUO ========== -->
+    <section id="duo">
+      <div class="wrap split flip">
+        <div class="split-media" data-reveal="pop">
+          <div class="duo-open"><div class="screen" data-device="duo" data-shots="timer stats settings" data-mode="light" data-group="duo"><img class="on" src="shots/duo/en-light-timer.webp" alt="Pomo on the iPhone Duo inner screen" loading="lazy"></div></div>
+          <div class="dots" data-dots="duo" aria-hidden="true"></div>
         </div>
-        <div class="gallery-item">
-          <div class="device-iphone">
-            <img src="Screenshots/Pomo English/2.png" alt="Dynamic Island"
-              data-screenshot-num="2" data-screenshot-alt="gallery.island">
-          </div>
-          <p class="gallery-label" data-i18n="gallery.island">Dynamic Island</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-iphone">
-            <img src="Screenshots/Pomo English/3.png" alt="Apple Watch"
-              data-screenshot-num="3" data-screenshot-alt="gallery.watch">
-          </div>
-          <p class="gallery-label" data-i18n="gallery.watch">Apple Watch</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-iphone">
-            <img src="Screenshots/Pomo English/4.png" alt="Statistics"
-              data-screenshot-num="4" data-screenshot-alt="gallery.stats">
-          </div>
-          <p class="gallery-label" data-i18n="gallery.stats">Statistics</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-iphone">
-            <img src="Screenshots/Pomo English/5.png" alt="Settings"
-              data-screenshot-num="5" data-screenshot-alt="gallery.breaks">
-          </div>
-          <p class="gallery-label" data-i18n="gallery.breaks">Smart Breaks</p>
+        <div data-reveal="left">
+          <span class="tag t">iPhone Duo</span>
+          <h2 style="margin-top:14px"><span data-lang="en">Unfold it: timer and stats side by side</span><span data-lang="es">Ábrelo: temporizador y estadísticas lado a lado</span></h2>
+          <p><span data-lang="en">On the inner screen the timer sits next to your day. Half-fold it like a book and the timer stands up top with the controls below. Closed, the outer screen keeps the essentials.</span><span data-lang="es">En la pantalla interior el temporizador queda junto a tu día. Dóblalo a la mitad como un libro y el temporizador queda arriba con los controles abajo. Cerrado, la pantalla exterior conserva lo esencial.</span></p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Watch Gallery -->
-    <div class="gallery-wrapper gallery-hidden" id="gallery-watch">
-      <div class="gallery-track">
-        <div class="gallery-item">
-          <div class="device-watch">
-            <img src="Screenshots/Watch/1.png" alt="Watch Timer"
-              data-watch-screenshot-num="1" data-screenshot-alt="gallery.watch.timer">
-          </div>
-          <p class="gallery-label" data-i18n="gallery.watch.timer">Timer</p>
+    <!-- ========== EN TODAS PARTES ========== -->
+    <section class="band">
+      <div class="wrap center">
+        <div data-reveal>
+          <span class="tag g"><span data-lang="en">Everywhere you are</span><span data-lang="es">En todas partes</span></span>
+          <h2 style="margin-top:14px"><span data-lang="en">Start a Pomodoro from anywhere</span><span data-lang="es">Empieza un Pomodoro desde donde estés</span></h2>
         </div>
-        <div class="gallery-item">
-          <div class="device-watch">
-            <img src="Screenshots/Watch/2.png" alt="Watch Session"
-              data-watch-screenshot-num="2" data-screenshot-alt="gallery.watch.session">
+        <div class="cards">
+          <div class="card" data-reveal style="--d:0ms">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="7" width="18" height="10" rx="5"/><circle cx="16" cy="12" r="3" fill="currentColor"/></svg></span>
+            <h3><span data-lang="en">Control Center</span><span data-lang="es">Centro de control</span></h3>
+            <p><span data-lang="en">Start or pause the timer without opening any app.</span><span data-lang="es">Inicia o pausa el temporizador sin abrir ninguna app.</span></p>
           </div>
-          <p class="gallery-label" data-i18n="gallery.watch.session">Session</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-watch">
-            <img src="Screenshots/Watch/3.png" alt="Watch Break"
-              data-watch-screenshot-num="3" data-screenshot-alt="gallery.watch.break">
+          <div class="card" data-reveal style="--d:90ms">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="8" height="8" rx="2.5"/><rect x="13" y="3" width="8" height="8" rx="2.5"/><rect x="3" y="13" width="18" height="8" rx="2.5"/></svg></span>
+            <h3><span data-lang="en">Today widget</span><span data-lang="es">Widget de Hoy</span></h3>
+            <p><span data-lang="en">Today’s pomodoros, focus time and streak on your Home Screen.</span><span data-lang="es">Los pomodoros, el enfoque y la racha de hoy en tu pantalla de inicio.</span></p>
           </div>
-          <p class="gallery-label" data-i18n="gallery.watch.break">Break</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-watch">
-            <img src="Screenshots/Watch/4.png" alt="Watch Stats"
-              data-watch-screenshot-num="4" data-screenshot-alt="gallery.watch.stats">
+          <div class="card" data-reveal style="--d:180ms">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></span>
+            <h3><span data-lang="en">Siri and Shortcuts</span><span data-lang="es">Siri y Atajos</span></h3>
+            <p><span data-lang="en">Start a focus session or a break with your voice, or from your automations.</span><span data-lang="es">Empieza un bloque de enfoque o un descanso con tu voz, o desde tus automatizaciones.</span></p>
           </div>
-          <p class="gallery-label" data-i18n="gallery.watch.stats">Stats</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-watch">
-            <img src="Screenshots/Watch/5.png" alt="Watch Settings"
-              data-watch-screenshot-num="5" data-screenshot-alt="gallery.watch.settings">
+          <div class="card" data-reveal style="--d:0ms">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 2M5 4 2.5 6.5M19 4l2.5 2.5"/></svg></span>
+            <h3><span data-lang="en">Alarm-style alerts</span><span data-lang="es">Alertas tipo alarma</span></h3>
+            <p><span data-lang="en">Optional, on iOS 26 or later: the end of a session rings even on silent.</span><span data-lang="es">Opcionales, con iOS 26 o posterior: el final de la sesión suena aunque estés en silencio.</span></p>
           </div>
-          <p class="gallery-label" data-i18n="gallery.watch.settings">Settings</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-watch">
-            <img src="Screenshots/Watch/6.png" alt="Watch Complication"
-              data-watch-screenshot-num="6" data-screenshot-alt="gallery.watch.complication">
+          <div class="card" data-reveal style="--d:90ms">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5v14l-4.5-4.5H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span>
+            <h3><span data-lang="en">Its own sounds</span><span data-lang="es">Sus propios sonidos</span></h3>
+            <p><span data-lang="en">A sound for work, one for breaks and one for the long break.</span><span data-lang="es">Un sonido para el trabajo, otro para el descanso y otro para el descanso largo.</span></p>
           </div>
-          <p class="gallery-label" data-i18n="gallery.watch.complication">Complication</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-watch">
-            <img src="Screenshots/Watch/7.png" alt="Watch Notification"
-              data-watch-screenshot-num="7" data-screenshot-alt="gallery.watch.notification">
+          <div class="card" data-reveal style="--d:180ms">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></span>
+            <h3><span data-lang="en">Private by design</span><span data-lang="es">Privado de verdad</span></h3>
+            <p><span data-lang="en">No account, no analytics, no ads. Your sessions never leave your iPhone and Apple Watch.</span><span data-lang="es">Sin cuenta, sin analítica, sin anuncios. Tus sesiones nunca salen de tu iPhone y tu Apple Watch.</span></p>
           </div>
-          <p class="gallery-label" data-i18n="gallery.watch.notification">Notification</p>
-        </div>
-        <div class="gallery-item">
-          <div class="device-watch">
-            <img src="Screenshots/Watch/8.png" alt="Watch Menu"
-              data-watch-screenshot-num="8" data-screenshot-alt="gallery.watch.menu">
-          </div>
-          <p class="gallery-label" data-i18n="gallery.watch.menu">Menu</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== DOWNLOAD CTA ========== -->
-  <section id="download" class="cta-section section-dark">
-    <div class="container">
-      <h2 class="cta-title fade-in">
-        <span data-i18n="cta.title.1">Start Focusing</span><br>
-        <span class="gradient-text" data-i18n="cta.title.2">Today</span>
-      </h2>
-      <p class="cta-subtitle fade-in" data-i18n="cta.subtitle">
-        Download Pomo and take control of your productivity with the Pomodoro Technique.
-      </p>
-      <a href="https://apps.apple.com/us/app/pomo-simple-timer/id6746705227" class="cta-button fade-in">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        <span data-i18n="cta.button">Download on the App Store</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="container">
-      <span class="footer-logo">POMO</span>
-      <div class="footer-links">
-        <a href="/" data-i18n="nav.home">Portfolio</a>
-        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
-        <a href="support.html" data-i18n="nav.support">Support</a>
+    <!-- ========== PREGUNTAS ========== -->
+    <section id="faq">
+      <div class="wrap center">
+        <div data-reveal>
+          <span class="tag t"><span data-lang="en">Questions</span><span data-lang="es">Preguntas</span></span>
+          <h2 style="margin-top:14px"><span data-lang="en">Frequently asked</span><span data-lang="es">Preguntas frecuentes</span></h2>
+        </div>
+        <div class="faq" data-reveal>
+          <details>
+            <summary><span data-lang="en">What is the Pomodoro Technique?</span><span data-lang="es">¿Qué es la técnica Pomodoro?</span></summary>
+            <p><span data-lang="en">You work in focused blocks (25 minutes by default) with short breaks in between, and take a longer break after every four. Pomo runs the cycle for you.</span><span data-lang="es">Trabajas en bloques de enfoque (25 minutos de forma predeterminada) con descansos cortos entre ellos, y tomas un descanso largo cada cuatro. Pomo lleva el ciclo por ti.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang="en">Is Pomo free?</span><span data-lang="es">¿Pomo es gratis?</span></summary>
+            <p><span data-lang="en">Yes. No ads, no in-app purchases and no account.</span><span data-lang="es">Sí. Sin anuncios, sin compras dentro de la app y sin cuenta.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang="en">Will the alert sound if my iPhone is on silent?</span><span data-lang="es">¿La alerta suena si mi iPhone está en silencio?</span></summary>
+            <p><span data-lang="en">Turn on <b>Settings › Alerts › Alarm-style alert</b> (iOS 26 or later) and Pomo uses an alarm that rings even on silent or during a Focus. Otherwise you get a Time Sensitive notification.</span><span data-lang="es">Activa <b>Ajustes › Alertas › Alerta tipo alarma</b> (iOS 26 o posterior) y Pomo usa una alarma que suena aunque estés en silencio o en un modo de concentración. Si no, recibes un aviso urgente.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang="en">Do I need my iPhone to use it on Apple Watch?</span><span data-lang="es">¿Necesito el iPhone para usarlo en el Apple Watch?</span></summary>
+            <p><span data-lang="en">No. The Watch app runs on its own and alerts you on your wrist; when both are nearby they keep the same timer and the same history.</span><span data-lang="es">No. La app del reloj funciona sola y te avisa en la muñeca; cuando están cerca, ambos comparten el mismo temporizador y el mismo historial.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang="en">What does Pomo need?</span><span data-lang="es">¿Qué necesita Pomo?</span></summary>
+            <p><span data-lang="en">iOS 18 or later on iPhone and watchOS 11 or later on Apple Watch. Some features (the Liquid Glass icon, alarm-style alerts) need iOS 26.</span><span data-lang="es">iOS 18 o posterior en iPhone y watchOS 11 o posterior en Apple Watch. Algunas funciones (el ícono con Liquid Glass y las alertas tipo alarma) necesitan iOS 26.</span></p>
+          </details>
+          <details>
+            <summary><span data-lang="en">What happens to my data?</span><span data-lang="es">¿Qué pasa con mis datos?</span></summary>
+            <p><span data-lang="en">It stays on your devices. Pomo has no servers, no analytics and no tracking. Read the <a href="privacy.html">privacy policy</a>.</span><span data-lang="es">Se queda en tus dispositivos. Pomo no tiene servidores, ni analítica, ni rastreo. Lee la <a href="privacy.html">política de privacidad</a>.</span></p>
+          </details>
+        </div>
       </div>
-      <span class="footer-copy">&copy; <span data-i18n="footer.copy">2026 Pomo. All rights reserved.</span></span>
+    </section>
+
+    <!-- ========== CIERRE ========== -->
+    <section class="closing">
+      <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 120V60C240 0 480 0 720 40s480 80 720 20v60z"/></svg>
+      <div class="band-tomato">
+        <span class="bubble" style="width:220px;height:220px;left:-60px;top:20px" aria-hidden="true"></span>
+        <span class="bubble" style="width:140px;height:140px;right:8%;top:-30px" aria-hidden="true"></span>
+        <span class="bubble" style="width:90px;height:90px;right:22%;bottom:30px" aria-hidden="true"></span>
+        <div class="wrap closing-inner" data-reveal>
+          <img src="assets/icon.svg" alt="" width="104" height="104">
+          <h2><span data-lang="en">Your next pomodoro starts now</span><span data-lang="es">Tu próximo pomodoro empieza ahora</span></h2>
+          <p class="lead"><span data-lang="en">Free on the App Store, for iPhone, Apple Watch and iPhone Duo.</span><span data-lang="es">Gratis en la App Store, para iPhone, Apple Watch e iPhone Duo.</span></p>
+          <a class="btn btn-onband" href="https://apps.apple.com/app/id6746705227"><span data-lang="en">Download Pomo</span><span data-lang="es">Descarga Pomo</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <a href="./" class="brand"><img src="assets/icon.svg" alt="" width="38" height="38">Pomo</a>
+          <p><span data-lang="en">A simple, beautiful Pomodoro timer. Made in Mexico by Christian Arzaluz.</span><span data-lang="es">Un temporizador Pomodoro sencillo y bonito. Hecho en México por Christian Arzaluz.</span></p>
+        </div>
+        <div>
+          <h4>App</h4>
+          <ul>
+            <li><a href="#features"><span data-lang="en">Features</span><span data-lang="es">Funciones</span></a></li>
+            <li><a href="#watch">Apple Watch</a></li>
+            <li><a href="#duo">iPhone Duo</a></li>
+            <li><a href="https://apps.apple.com/app/id6746705227">App Store</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><span data-lang="en">Help</span><span data-lang="es">Ayuda</span></h4>
+          <ul>
+            <li><a href="support.html"><span data-lang="en">Support</span><span data-lang="es">Soporte</span></a></li>
+            <li><a href="privacy.html"><span data-lang="en">Privacy</span><span data-lang="es">Privacidad</span></a></li>
+            <li><a href="#faq"><span data-lang="en">FAQ</span><span data-lang="es">Preguntas</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><span data-lang="en">More</span><span data-lang="es">Más</span></h4>
+          <ul>
+            <li><a href="/"><span data-lang="en">Portfolio</span><span data-lang="es">Portafolio</span></a></li>
+            <li><a href="mailto:christian.arzaluz@gmail.com"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="legal">© 2026 Christian Arzaluz. <span data-lang="en">Apple, iPhone, Apple Watch and App Store are trademarks of Apple Inc.</span><span data-lang="es">Apple, iPhone, Apple Watch y App Store son marcas de Apple Inc.</span></p>
     </div>
   </footer>
 
