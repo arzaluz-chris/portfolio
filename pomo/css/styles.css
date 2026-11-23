@@ -145,28 +145,23 @@ section.hero { border-top: 0; padding-top: 36px }
 .ticks li::before { content: ""; flex: none; width: 22px; height: 22px; margin-top: 3px; border-radius: 7px;
   background: var(--leaf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/15px no-repeat }
 
-/* ---------- Aparatos (marcos dibujados en CSS) ---------- */
-.phone { position: relative; border-radius: 15% / 7%; padding: 3.4%; background: #141114; border: 2px solid #3b3438 }
-.phone::after { content: ""; position: absolute; left: 50%; top: 3.3%; width: 30%; height: 3.3%; transform: translateX(-50%); background: #000; border-radius: 999px; z-index: 2 }
-.screen { position: relative; width: 100%; aspect-ratio: 1320 / 2868; border-radius: 12% / 5.6%; overflow: hidden; background: #000 }
-.screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0 }
+/* ---------- Aparatos: capturas ya compuestas en los marcos oficiales de Apple (WebP transparente) ---------- */
+.phone { position: relative }
+.screen { position: relative; width: 100% }
+.screen img { width: 100%; height: auto; opacity: 0 }
+.screen img + img { position: absolute; inset: 0 }
 .screen img.on { opacity: 1 }
 @media (prefers-reduced-motion: no-preference) { .screen img { transition: opacity .7s ease-out } }
+.phone .screen { aspect-ratio: 560 / 1160 }
+.duo-open { position: relative; width: 100%; max-width: 560px }
+.duo-open .screen { aspect-ratio: 1080 / 774 }
 
-.duo-open { position: relative; width: 100%; max-width: 540px; border-radius: 7% / 10%; padding: 2.4%;
-  background: #141114; border: 2px solid #3b3438; border-bottom-width: 6px }
-.duo-open .screen { aspect-ratio: 2853 / 2007; border-radius: 5% / 7% }
-.duo-open::after { content: ""; position: absolute; top: 2.4%; bottom: 2.4%; left: 50%; width: 3%; transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .14), transparent); pointer-events: none }
-.duo-outer { width: 30%; max-width: 160px; border-radius: 12% / 8%; padding: 4%; background: #141114; border: 2px solid #3b3438; border-bottom-width: 6px }
-.duo-outer .screen { aspect-ratio: 1398 / 2034; border-radius: 9% / 6% }
-.duo-row { display: flex; align-items: flex-end; justify-content: center; gap: 5%; width: 100% }
 
 .watch { position: relative; width: 62%; max-width: 240px; border-radius: 30% / 26%; padding: 8%; background: #141114;
   border: 2px solid #3b3438; border-bottom-width: 6px }
 .watch::before { content: ""; position: absolute; right: -10px; top: 24%; width: 10px; height: 18%; border-radius: 0 6px 6px 0; background: #3b3438 }
 .watch::after { content: ""; position: absolute; right: -7px; top: 50%; width: 7px; height: 16%; border-radius: 0 4px 4px 0; background: #2b2528 }
-.watch .screen { aspect-ratio: 416 / 496; border-radius: 24% / 21% }
+.watch .screen { aspect-ratio: 416 / 496; border-radius: 24% / 21%; overflow: hidden; background: #000 }
 
 .island { width: 100%; max-width: 500px; border-radius: 30px; overflow: hidden; background: #000; border: 2px solid #3b3438; border-bottom-width: 6px }
 .island img { width: 100%; height: auto; clip-path: inset(3% 2.5% 3% 2.5% round 26px) }
