@@ -2,151 +2,123 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — POMO</title>
-  <meta name="description" content="Pomo Privacy Policy — How we collect, use, and protect your personal information.">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Privacy Policy — Pomo</title>
+  <meta name="description" content="Pomo does not collect, track or share any personal data. Your sessions and settings stay on your iPhone and Apple Watch.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#c93b2b">
   <meta name="apple-itunes-app" content="app-id=6746705227">
-
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://chrisarzaluz.dev/pomo/privacy.html">
-  <meta property="og:title" content="Privacy Policy — POMO">
-  <meta property="og:description" content="Pomo Privacy Policy — How we collect, use, and protect your personal information.">
+  <link rel="canonical" href="https://chrisarzaluz.dev/pomo/privacy.html">
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <meta property="og:title" content="Privacy Policy — Pomo">
   <meta property="og:image" content="https://chrisarzaluz.dev/pomo/assets/og.jpg">
-  <meta property="og:image:width" content="554">
-  <meta property="og:image:height" content="1200">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:alt" content="Pomo — Pomodoro Timer for iPhone & Apple Watch">
-  <meta property="og:site_name" content="Pomo App">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Privacy Policy — POMO">
-  <meta name="twitter:description" content="Pomo Privacy Policy — How we collect, use, and protect your personal information.">
-  <meta name="twitter:image" content="https://chrisarzaluz.dev/pomo/assets/og.jpg">
-
+  <script>
+    (function () {
+      var d = document.documentElement, s = localStorage;
+      d.lang = s.getItem('pomo-lang') || ((navigator.language || 'en').slice(0, 2) === 'es' ? 'es' : 'en');
+      d.dataset.theme = s.getItem('pomo-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    })();
+  </script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-  <!-- ========== NAVBAR ========== -->
-  <nav class="navbar scrolled">
-    <div class="container">
-      <a href="/" class="nav-home" title="Back to Portfolio">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 18l-6-6 6-6"/>
-        </svg>
+  <nav class="nav" aria-label="Pomo">
+    <div class="wrap">
+      <a href="./" class="back" aria-label="Pomo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
-      <a href="index.html" class="nav-logo">POMO</a>
-
-      <ul class="nav-links">
-        <li><a href="index.html#features" data-i18n="nav.features">Features</a></li>
-        <li><a href="index.html#how-it-works" data-i18n="nav.howItWorks">How It Works</a></li>
-        <li><a href="index.html#screenshots" data-i18n="nav.screenshots">Screenshots</a></li>
-        <li><a href="index.html#download" data-i18n="nav.download">Download</a></li>
-      </ul>
-
-      <div class="nav-right">
-        <div class="lang-toggle">
-          <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
-          <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
-        </div>
-        <button class="hamburger" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+      <a href="./" class="brand"><img src="assets/icon.svg" alt="" width="38" height="38">Pomo</a>
+      <div class="nav-tools">
+        <button class="icon-btn" id="lang" type="button" aria-label="Español / English"><span data-lang="en">ES</span><span data-lang="es">EN</span></button>
+        <button class="icon-btn" id="theme" type="button" aria-label="Light / dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu">
-    <a href="/" class="mobile-home-link" data-i18n="nav.home">Portfolio</a>
-    <a href="index.html#features" data-i18n="nav.features">Features</a>
-    <a href="index.html#how-it-works" data-i18n="nav.howItWorks">How It Works</a>
-    <a href="index.html#screenshots" data-i18n="nav.screenshots">Screenshots</a>
-    <a href="index.html#download" data-i18n="nav.download">Download</a>
-    <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
-    <a href="support.html" data-i18n="nav.support">Support</a>
-    <div class="mobile-lang-toggle">
-      <button class="lang-btn active" data-lang="en" onclick="toggleLanguage('en')">EN</button>
-      <button class="lang-btn" data-lang="es" onclick="toggleLanguage('es')">ES</button>
-    </div>
-  </div>
+  <main class="doc">
+    <article data-lang="en">
+      <span class="eyebrow">Privacy</span>
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: November 22, 2026 · Applies to Pomo 4.0 for iPhone, Apple Watch and iPhone Duo.</p>
+      <p>Pomo is a Pomodoro timer. It is built so that <b>none of your data ever leaves your devices</b>. This policy explains what that means in practice.</p>
 
-  <!-- ========== PAGE HEADER ========== -->
-  <div class="page-header">
-    <div class="container">
-      <h1 data-i18n="privacy.title">Privacy Policy</h1>
-      <p data-i18n="privacy.updated">Last updated: February 2026</p>
-    </div>
-  </div>
+      <h2>1. Data we collect</h2>
+      <p>None. Pomo has no account, no servers, no analytics, no advertising and no tracking. We do not collect, store, sell or share personal information, and Pomo does not use any third-party SDK.</p>
 
-  <!-- ========== CONTENT ========== -->
-  <div class="page-content section-dark">
-    <div class="container">
-      <div class="policy-text" data-i18n-html="privacy.body">
-        <h2>Pomo Privacy Policy</h2>
-        <p>Your privacy is important to us. This Privacy Policy explains how Pomo collects, uses, and protects your personal information.</p>
+      <h2>2. Data stored on your devices</h2>
+      <p>To work, Pomo keeps the following on your iPhone and Apple Watch only:</p>
+      <ul>
+        <li>Your completed sessions (start time, length and type) for statistics and your streak.</li>
+        <li>Your settings: session lengths, cycles, sounds and alerts.</li>
+        <li>The current timer state, shared through an App Group with Pomo’s widgets, Live Activity and controls on the same device.</li>
+      </ul>
+      <p>Deleting Pomo deletes all of it. If your device backups are on, iOS may include this data in your own iCloud or computer backup, as with any app.</p>
 
-        <h2>1. Information We Collect</h2>
-        <p><strong>No Account Required:</strong> Pomo does not require you to create an account. You do not need to provide an email address, password, or any personal identification to use the app.</p>
-        <p><strong>Timer Data:</strong> Your Pomodoro session data, including completed sessions, focus time, and streak information, is stored locally on your device using UserDefaults and AppStorage.</p>
-        <p><strong>Settings:</strong> Your timer preferences (work duration, break duration, long break cycles) are stored locally on your device.</p>
+      <h2>3. iPhone and Apple Watch sync</h2>
+      <p>The timer and your sessions sync between your iPhone and your paired Apple Watch with Apple’s WatchConnectivity framework, directly between your own devices. Nothing passes through our servers, because there are none.</p>
 
-        <h2>2. How We Use Your Information</h2>
-        <p>We use your information exclusively to:</p>
-        <ul>
-          <li>Track and display your completed Pomodoro sessions and focus statistics</li>
-          <li>Maintain your daily streaks and weekly progress</li>
-          <li>Remember your timer preferences and settings</li>
-          <li>Sync timer state between your iPhone and Apple Watch via App Groups (local only)</li>
-        </ul>
+      <h2>4. Notifications and alarms</h2>
+      <p>Pomo asks permission to send notifications so it can tell you when a session ends. If you turn on alarm-style alerts (iOS 26 or later), it also asks for permission to schedule alarms with AlarmKit. Both are scheduled locally on your device; no data about them is shared.</p>
 
-        <h2>3. Data Storage and Security</h2>
-        <p>All your data is stored locally on your device using Apple's UserDefaults and AppStorage frameworks. Pomo does not transmit your session data or personal information to any external server.</p>
-        <p>iPhone-to-Apple Watch synchronization uses Apple's App Groups and WatchConnectivity frameworks. This data transfer occurs locally between your paired devices and does not pass through external servers.</p>
+      <h2>5. Siri, Shortcuts and widgets</h2>
+      <p>Siri phrases, Shortcuts actions, the Control Center control and the Today widget run on your device and only read or change Pomo’s timer. Apple handles Siri requests under its own privacy policy.</p>
 
-        <h2>4. Third-Party Services</h2>
-        <p>Pomo does not use any third-party analytics, advertising, or AI processing services. There is no external data processing of your personal information.</p>
+      <h2>6. Children</h2>
+      <p>Pomo collects no data from anyone, including children.</p>
 
-        <h2>5. Data Sharing</h2>
-        <p>We do not sell, share, or transmit your personal information to any third party. Your data stays on your device.</p>
+      <h2>7. Changes</h2>
+      <p>If this policy changes, we will update this page and the date above.</p>
 
-        <h2>6. Your Rights</h2>
-        <p>You can:</p>
-        <ul>
-          <li>Reset your session history and statistics from within the app's Settings</li>
-          <li>Delete the app to remove all locally stored data</li>
-        </ul>
+      <h2>8. Contact</h2>
+      <p>Questions about privacy: <a href="mailto:christian.arzaluz@gmail.com">christian.arzaluz@gmail.com</a>.</p>
+    </article>
 
-        <h2>7. Age Requirement</h2>
-        <p>Pomo is intended for users aged 13 and older. The app is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you are under 13, please do not use this app.</p>
+    <article data-lang="es">
+      <span class="eyebrow">Privacidad</span>
+      <h1>Política de privacidad</h1>
+      <p class="updated">Última actualización: 22 de noviembre de 2026 · Aplica a Pomo 4.0 para iPhone, Apple Watch e iPhone Duo.</p>
+      <p>Pomo es un temporizador Pomodoro. Está hecho para que <b>ninguno de tus datos salga nunca de tus dispositivos</b>. Esta política explica qué significa eso en la práctica.</p>
 
-        <h2>8. Changes to This Policy</h2>
-        <p>We may update this policy from time to time. We will notify you of significant changes through the app.</p>
+      <h2>1. Datos que recopilamos</h2>
+      <p>Ninguno. Pomo no tiene cuenta, ni servidores, ni analítica, ni publicidad, ni rastreo. No recopilamos, guardamos, vendemos ni compartimos información personal, y Pomo no usa ningún SDK de terceros.</p>
 
-        <h2>9. Contact Us</h2>
-        <p>If you have questions about this privacy policy, please contact us at <a href="mailto:christian.arzaluz@gmail.com">christian.arzaluz@gmail.com</a>.</p>
-      </div>
-    </div>
-  </div>
+      <h2>2. Datos guardados en tus dispositivos</h2>
+      <p>Para funcionar, Pomo guarda lo siguiente solo en tu iPhone y tu Apple Watch:</p>
+      <ul>
+        <li>Tus sesiones completadas (hora de inicio, duración y tipo) para las estadísticas y tu racha.</li>
+        <li>Tus ajustes: duración de las sesiones, ciclos, sonidos y alertas.</li>
+        <li>El estado actual del temporizador, compartido mediante un App Group con los widgets, la Live Activity y los controles de Pomo en el mismo dispositivo.</li>
+      </ul>
+      <p>Si borras Pomo, se borra todo. Si tienes activados los respaldos, iOS puede incluir estos datos en tu propio respaldo de iCloud o de tu computadora, como con cualquier app.</p>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="container">
-      <span class="footer-logo">POMO</span>
-      <div class="footer-links">
-        <a href="/" data-i18n="nav.home">Portfolio</a>
-        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
-        <a href="support.html" data-i18n="nav.support">Support</a>
-      </div>
-      <span class="footer-copy">&copy; <span data-i18n="footer.copy">2026 Pomo. All rights reserved.</span></span>
+      <h2>3. Sincronización entre iPhone y Apple Watch</h2>
+      <p>El temporizador y tus sesiones se sincronizan entre tu iPhone y tu Apple Watch enlazado con el framework WatchConnectivity de Apple, directamente entre tus dispositivos. Nada pasa por nuestros servidores, porque no tenemos.</p>
+
+      <h2>4. Notificaciones y alarmas</h2>
+      <p>Pomo pide permiso para enviar notificaciones y avisarte cuando termina una sesión. Si activas las alertas tipo alarma (iOS 26 o posterior), también pide permiso para programar alarmas con AlarmKit. Ambas se programan localmente en tu dispositivo; no se comparte ningún dato sobre ellas.</p>
+
+      <h2>5. Siri, Atajos y widgets</h2>
+      <p>Las frases de Siri, las acciones de Atajos, el control del Centro de control y el widget de Hoy se ejecutan en tu dispositivo y solo leen o cambian el temporizador de Pomo. Apple maneja las solicitudes a Siri según su propia política de privacidad.</p>
+
+      <h2>6. Menores</h2>
+      <p>Pomo no recopila datos de nadie, incluidos los menores.</p>
+
+      <h2>7. Cambios</h2>
+      <p>Si esta política cambia, actualizaremos esta página y la fecha de arriba.</p>
+
+      <h2>8. Contacto</h2>
+      <p>Preguntas sobre privacidad: <a href="mailto:christian.arzaluz@gmail.com">christian.arzaluz@gmail.com</a>.</p>
+    </article>
+  </main>
+
+  <footer class="doc-foot">
+    <div class="wrap">
+      <span>© 2026 Christian Arzaluz</span>
+      <span><a href="./">Pomo</a> · <a href="support.html"><span data-lang="en">Support</span><span data-lang="es">Soporte</span></a> · <a href="/"><span data-lang="en">Portfolio</span><span data-lang="es">Portafolio</span></a></span>
     </div>
   </footer>
-
   <script src="js/main.js"></script>
 </body>
 </html>
